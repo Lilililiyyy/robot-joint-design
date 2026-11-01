@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=77", "wheel>=0.45"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robot-joint-design"
+version = "0.1.0"
+description = "单级NGW机器人关节模组参数化设计与准静态校核计算内核"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "AGPL-3.0-only"
+license-files = ["LICENSE"]
+dependencies = ["numpy>=1.24", "scipy>=1.10"]
+
+[project.optional-dependencies]
+plots = ["matplotlib>=3.6"]
+
+[project.scripts]
+robot-joint = "robot_joint.__main__:main"
+
+[tool.setuptools]
+packages = ["robot_joint", "gear_contact"]

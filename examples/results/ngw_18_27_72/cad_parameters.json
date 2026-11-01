@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "case_id": "ngw_18_27_72",
+  "units": {
+    "length": "m",
+    "angle": "rad",
+    "force": "N",
+    "torque": "N m",
+    "pressure": "Pa",
+    "stiffness": "N/m"
+  },
+  "stage": {
+    "sun_teeth": 18,
+    "planet_teeth": 27,
+    "ring_teeth": 72,
+    "planet_count": 3,
+    "module_m": 0.0015,
+    "face_width_m": 0.012,
+    "pressure_angle_rad": 0.3490658503988659
+  },
+  "geometry": {
+    "ratio": 5.0,
+    "sun_radius_m": 0.0135,
+    "planet_radius_m": 0.02025,
+    "ring_radius_m": 0.054,
+    "carrier_radius_m": 0.03375,
+    "planet_angles_rad": [
+      0.0,
+      2.0943951023931953,
+      4.1887902047863905
+    ],
+    "planet_centres_xy_m": [
+      [
+        0.03375,
+        0.0
+      ],
+      [
+        -0.016874999999999994,
+        0.02922835737772481
+      ],
+      [
+        -0.016875000000000015,
+        -0.0292283573777248
+      ]
+    ],
+    "assembly_index": 30,
+    "adjacent_tip_clearance_m": 0.014956714755449609,
+    "geometry_scope": "零变位直齿参考几何、均布装配及邻接齿顶圆检查；未检查刀具根切和完整齿廓干涉"
+  },
+  "gear_radii_m": {
+    "sun": {
+      "reference_radius_m": 0.0135,
+      "base_radius_m": 0.012685850380609764,
+      "tip_radius_m": 0.015,
+      "root_radius_m": 0.011625
+    },
+    "planet": {
+      "reference_radius_m": 0.02025,
+      "base_radius_m": 0.019028775570914647,
+      "tip_radius_m": 0.021750000000000002,
+      "root_radius_m": 0.018375
+    },
+    "ring": {
+      "reference_radius_m": 0.054,
+      "base_radius_m": 0.05074340152243906,
+      "tip_radius_m": 0.0525,
+      "root_radius_m": 0.055875
+    }
+  },
+  "face_width_m": 0.012,
+  "bearings": {
+    "spacing_m": 0.045,
+    "centre_z_m": [
+      -0.0225,
+      0.0225
+    ],
+    "load_offset_m": 0.012,
+    "geometry_status": "仅定义双支承轴向中心位置，未提供轴承直径、宽度或安装配合"
+  },
+  "coordinate_system": "x/y为齿轮平面，z为旋转轴；原点为双支承轴向中点",
+  "solid_constructed": false,
+  "manufacturing_tooth_profile_constructed": false,
+  "scope": "参数级布局与CAD接入参数；未构造实体、真实齿面、根部过渡、孔位公差或装配工艺"
+}
