@@ -14,7 +14,7 @@ from robot_joint.analysis import analyze_joint
 def _example_path():
     """按示例标记向上寻找独立项目根，不依赖启动目录。"""
     for directory in Path(__file__).resolve().parents:
-        candidate = directory / "examples" / "ngw_18_27_72.json"
+        candidate = directory / "examples" / "dfki_pendulum_case.json"
         if candidate.is_file():
             return candidate
     raise FileNotFoundError("未找到NGW集成验证示例")
@@ -30,6 +30,8 @@ class JointAnalysisTests(unittest.TestCase):
         cls.small_config["duty_segments"] = [cls.small_config["duty_segments"][0]]
         cls.small_config["mesh"]["phases"] = 4
         cls.small_config["mesh"]["strips"] = 5
+        # 平面摆台本身没有Mx/My；本分支另加给定倾覆矩以实际激活失准接口。
+        cls.small_config["duty_segments"][0]["output_wrench"][3:5] = [2.0, -1.0]
         # 独立给定非对角SPD支承，用于核验六分量位移到齿宽失准的接入。
         stiffness = np.asarray(cls.small_config["support"]["stiffness_matrix"], dtype=float)
         stiffness[3, 4] = stiffness[4, 3] = 0.2*math.sqrt(stiffness[3, 3]*stiffness[4, 4])

@@ -1,0 +1,69 @@
+{
+  "case_identity": {
+    "zh": "DFKI实物摆台需求驱动的6:1关节传动再设计",
+    "en": "A 6:1 joint redesign driven by the DFKI physical pendulum testbed",
+    "scope_zh": "真实需求参照与新设计模型；不是AK80-6或DFKI样机的内部结构恢复、实测回放或产品认证。",
+    "scope_en": "A source-grounded redesign, not a reconstruction of AK80-6 internals, a replay of measured data, or a product certification."
+  },
+  "sources": [
+    {
+      "id": "dfki",
+      "url": "https://github.com/dfki-ric-underactuated-lab/torque_limited_simple_pendulum/blob/11a946d4e6db58d001fdeff89be269eb61461757/hardware/testbench_description.md",
+      "accessed": "2026-11-02",
+      "kind": "公开实物台架资料，固定提交"
+    },
+    {
+      "id": "mjbots",
+      "url": "https://mjbots.com/products/m05-6x-planetary-gearset",
+      "accessed": "2026-11-02",
+      "kind": "公开在售钢齿轮组几何"
+    }
+  ],
+  "pendulum": {
+    "point_mass_kg": 0.546,
+    "rod_mass_kg": 0.13,
+    "length_m": 0.5,
+    "published_com_m": 0.45,
+    "gravity_m_per_s2": 9.81
+  },
+  "motion_design": {
+    "amplitude_rad": 1.0471975511965976,
+    "move_duration_s": 0.5,
+    "hold_duration_s": 0.4,
+    "samples_per_move": 16,
+    "viscous_damping_n_m_s_per_rad": 0.02
+  },
+  "source_parameters": {
+    "ratio": 6,
+    "output_rated_torque_n_m": 6,
+    "output_peak_torque_n_m": 12,
+    "motor_kt_n_m_per_a": 0.091,
+    "motor_km_n_m_per_sqrt_w": 0.2206,
+    "motor_inertia_kg_m2": 6.0719e-05,
+    "output_backlash_rad": 0.002617993877991494,
+    "motor_encoder_counts": 4096,
+    "gear_sun_planet_ring": [
+      20,
+      40,
+      100
+    ],
+    "module_m": 0.0005,
+    "planet_count": 3,
+    "effective_face_width_m": 0.005,
+    "published_sun_tooth_width_m": 0.006,
+    "published_ring_outer_diameter_m": 0.055
+  },
+  "assumptions": {
+    "pressure_angle_rad": 0.3490658503988659,
+    "uniform_rod": true,
+    "hotspot_stress_per_torque_pa_per_n_m": 12000000.0,
+    "unidentified_zh": "工作轨迹、阻尼、压力角、修形、支承/失准映射、外部评级因子/应力限、轴承参数、效率、热参数、S-N及制动器均为新增设计假设；未获DFKI或mjbots标定。",
+    "unidentified_en": "Motion, damping, pressure angle, modifications, support/alignment, rating factors/limits, bearing coefficients, efficiencies, thermal/S-N data and brake are design assumptions, not calibrated DFKI or mjbots parameters."
+  },
+  "source_conflicts": {
+    "mjbots_published_center_distance_m": 0.03,
+    "adopted_sun_planet_center_distance_m": 0.015,
+    "zh": "供应页的30mm中心距表述与m=0.5mm、20/40齿的零变位关系不一致。采用a=m(zs+zp)/2=15mm，30mm仅保留为待确认信息，不能用其重定义模型。",
+    "en": "The supplier calls 30 mm a center distance; the zero-shift 20/40 pair at module 0.5 mm gives a=15 mm. This model uses the derived 15 mm; the 30 mm statement remains unresolved."
+  }
+}

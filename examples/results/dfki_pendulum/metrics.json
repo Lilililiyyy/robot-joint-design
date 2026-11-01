@@ -1,0 +1,440 @@
+{
+  "case_id": "dfki_pendulum_baseline",
+  "derived": {
+    "total_mass_kg": 0.676,
+    "inertia_kg_m2": 0.14733333333333334,
+    "derived_com_m": 0.45192307692307687,
+    "gravity_first_moment_n_m": 2.9969550000000003,
+    "period_s": 1.7999999999999998,
+    "states": [
+      {
+        "time_s": 0.015625,
+        "theta_rad": -1.0465879785902137,
+        "speed_rad_s": 0.11516840134047665,
+        "acceleration_rad_s2": 14.266021327336462
+      },
+      {
+        "time_s": 0.046875,
+        "theta_rad": -1.0322760676683438,
+        "speed_rad_s": 0.9070859830864388,
+        "acceleration_rad_s2": 34.698645421973204
+      },
+      {
+        "time_s": 0.078125,
+        "theta_rad": -0.9848577354454264,
+        "speed_rad_s": 2.184124989001235,
+        "acceleration_rad_s2": 45.55922940020354
+      },
+      {
+        "time_s": 0.109375,
+        "theta_rad": -0.8936071006311673,
+        "speed_rad_s": 3.67016887726545,
+        "acceleration_rad_s2": 48.320394818397695
+      },
+      {
+        "time_s": 0.140625,
+        "theta_rad": -0.7557078703728077,
+        "speed_rad_s": 5.135120529696237,
+        "acceleration_rad_s2": 44.45476323292588
+      },
+      {
+        "time_s": 0.171875,
+        "theta_rad": -0.5748152332664815,
+        "speed_rad_s": 6.39490225174732,
+        "acceleration_rad_s2": 35.43495620015831
+      },
+      {
+        "time_s": 0.203125,
+        "theta_rad": -0.3596177523685722,
+        "speed_rad_s": 7.311455772508991,
+        "acceleration_rad_s2": 22.733595276465202
+      },
+      {
+        "time_s": 0.234375,
+        "theta_rad": -0.1223992582070701,
+        "speed_rad_s": 7.79274224470811,
+        "acceleration_rad_s2": 7.823302018216769
+      },
+      {
+        "time_s": 0.265625,
+        "theta_rad": 0.1223992582070701,
+        "speed_rad_s": 7.79274224470811,
+        "acceleration_rad_s2": -7.823302018216769
+      },
+      {
+        "time_s": 0.296875,
+        "theta_rad": 0.3596177523685722,
+        "speed_rad_s": 7.311455772508991,
+        "acceleration_rad_s2": -22.733595276465202
+      },
+      {
+        "time_s": 0.328125,
+        "theta_rad": 0.5748152332664815,
+        "speed_rad_s": 6.39490225174732,
+        "acceleration_rad_s2": -35.43495620015831
+      },
+      {
+        "time_s": 0.359375,
+        "theta_rad": 0.7557078703728077,
+        "speed_rad_s": 5.135120529696237,
+        "acceleration_rad_s2": -44.45476323292588
+      },
+      {
+        "time_s": 0.390625,
+        "theta_rad": 0.8936071006311674,
+        "speed_rad_s": 3.67016887726545,
+        "acceleration_rad_s2": -48.320394818397695
+      },
+      {
+        "time_s": 0.421875,
+        "theta_rad": 0.9848577354454264,
+        "speed_rad_s": 2.184124989001235,
+        "acceleration_rad_s2": -45.55922940020354
+      },
+      {
+        "time_s": 0.453125,
+        "theta_rad": 1.032276067668344,
+        "speed_rad_s": 0.9070859830864388,
+        "acceleration_rad_s2": -34.698645421973204
+      },
+      {
+        "time_s": 0.484375,
+        "theta_rad": 1.0465879785902137,
+        "speed_rad_s": 0.11516840134047665,
+        "acceleration_rad_s2": -14.266021327336462
+      },
+      {
+        "time_s": 0.7,
+        "theta_rad": 1.0471975511965976,
+        "speed_rad_s": 0,
+        "acceleration_rad_s2": 0
+      },
+      {
+        "time_s": 0.915625,
+        "theta_rad": 1.0465879785902137,
+        "speed_rad_s": -0.11516840134047665,
+        "acceleration_rad_s2": -14.266021327336462
+      },
+      {
+        "time_s": 0.946875,
+        "theta_rad": 1.0322760676683438,
+        "speed_rad_s": -0.9070859830864388,
+        "acceleration_rad_s2": -34.698645421973204
+      },
+      {
+        "time_s": 0.978125,
+        "theta_rad": 0.9848577354454264,
+        "speed_rad_s": -2.184124989001235,
+        "acceleration_rad_s2": -45.55922940020354
+      },
+      {
+        "time_s": 1.009375,
+        "theta_rad": 0.8936071006311673,
+        "speed_rad_s": -3.67016887726545,
+        "acceleration_rad_s2": -48.320394818397695
+      },
+      {
+        "time_s": 1.040625,
+        "theta_rad": 0.7557078703728077,
+        "speed_rad_s": -5.135120529696237,
+        "acceleration_rad_s2": -44.45476323292588
+      },
+      {
+        "time_s": 1.071875,
+        "theta_rad": 0.5748152332664815,
+        "speed_rad_s": -6.39490225174732,
+        "acceleration_rad_s2": -35.43495620015831
+      },
+      {
+        "time_s": 1.103125,
+        "theta_rad": 0.3596177523685722,
+        "speed_rad_s": -7.311455772508991,
+        "acceleration_rad_s2": -22.733595276465202
+      },
+      {
+        "time_s": 1.134375,
+        "theta_rad": 0.1223992582070701,
+        "speed_rad_s": -7.79274224470811,
+        "acceleration_rad_s2": -7.823302018216769
+      },
+      {
+        "time_s": 1.165625,
+        "theta_rad": -0.1223992582070701,
+        "speed_rad_s": -7.79274224470811,
+        "acceleration_rad_s2": 7.823302018216769
+      },
+      {
+        "time_s": 1.196875,
+        "theta_rad": -0.3596177523685722,
+        "speed_rad_s": -7.311455772508991,
+        "acceleration_rad_s2": 22.733595276465202
+      },
+      {
+        "time_s": 1.228125,
+        "theta_rad": -0.5748152332664815,
+        "speed_rad_s": -6.39490225174732,
+        "acceleration_rad_s2": 35.43495620015831
+      },
+      {
+        "time_s": 1.259375,
+        "theta_rad": -0.7557078703728077,
+        "speed_rad_s": -5.135120529696237,
+        "acceleration_rad_s2": 44.45476323292588
+      },
+      {
+        "time_s": 1.290625,
+        "theta_rad": -0.8936071006311674,
+        "speed_rad_s": -3.67016887726545,
+        "acceleration_rad_s2": 48.320394818397695
+      },
+      {
+        "time_s": 1.321875,
+        "theta_rad": -0.9848577354454264,
+        "speed_rad_s": -2.184124989001235,
+        "acceleration_rad_s2": 45.55922940020354
+      },
+      {
+        "time_s": 1.353125,
+        "theta_rad": -1.032276067668344,
+        "speed_rad_s": -0.9070859830864388,
+        "acceleration_rad_s2": 34.698645421973204
+      },
+      {
+        "time_s": 1.384375,
+        "theta_rad": -1.0465879785902137,
+        "speed_rad_s": -0.11516840134047665,
+        "acceleration_rad_s2": 14.266021327336462
+      },
+      {
+        "time_s": 1.5999999999999999,
+        "theta_rad": -1.0471975511965976,
+        "speed_rad_s": 0,
+        "acceleration_rad_s2": 0
+      }
+    ]
+  },
+  "summary": {
+    "case_id": "dfki_pendulum_baseline",
+    "ratio": 6.0,
+    "maximum_load_share_factor": 1.8504911345096582,
+    "maximum_contact_pressure_pa": 827427106.5727332,
+    "minimum_output_torsional_stiffness_n_m_per_rad": 23786.442796846768,
+    "maximum_angle_budget_rad": 0.0017404313501405287,
+    "maximum_motor_temperature_k": 302.0944054354601,
+    "maximum_gear_temperature_k": 300.78769106900677,
+    "thermal_mode": "periodic_steady",
+    "minimum_contact_safety_factor": 1.4235301661113078,
+    "minimum_bending_safety_factor": 2.326100004987442,
+    "minimum_bearing_static_safety_factor": 59.56250619838511,
+    "minimum_bearing_life_hours": 2337677949.339132,
+    "all_couplings_converged": true,
+    "checks": {
+      "motor_speed": true,
+      "motor_peak_torque": true,
+      "motor_continuous_screen": true,
+      "brake_static_screen": true,
+      "contact_pressure_pa": true,
+      "angle_budget_rad": true,
+      "motor_temperature_k": true,
+      "gear_temperature_k": true,
+      "minimum_contact_safety_factor": true,
+      "minimum_bending_safety_factor": true,
+      "minimum_bearing_static_safety_factor": true
+    },
+    "physical_validation": false,
+    "vendor_system_validation": false,
+    "implementation": "新写NGW降阶系统实现，复用公开齿轮内核；非厂商整机等价重建",
+    "scope": "固定环零变位直齿单级NGW、准静态、小变形、周期平均协调；不含RV/谐波、完整FE、同步动力学、控制、润滑预测或实物认证",
+    "configured_checks_pass": true,
+    "check_scope": "仅对已配置约束的数值初筛；未配置强度/寿命/温升限值不自动视为已校核"
+  },
+  "peak_case_index": 20,
+  "midpoint_peak_torque_n_m": 4.856970175951614,
+  "dense_peak_torque_n_m": 4.8664391302890095,
+  "torque_peak_discretization_relative_difference": 0.001945766521245579,
+  "motor_rms_current_a": 5.534712235680336,
+  "fatigue_damage_per_input_history": 2.8112133239961853e-07,
+  "thermal_periodic_residual_k": 0.0,
+  "maximum_path_residual_m": 1.5013237611151546e-09,
+  "minimum_active_planets": 3,
+  "candidate_comparison": [
+    {
+      "candidate": "baseline",
+      "case_id": "dfki_pendulum_baseline",
+      "ratio": 6.0,
+      "maximum_load_share_factor": 1.8504911345096582,
+      "maximum_contact_pressure_pa": 827427106.5727332,
+      "minimum_output_torsional_stiffness_n_m_per_rad": 23786.442796846768,
+      "maximum_angle_budget_rad": 0.0017404313501405287,
+      "maximum_motor_temperature_k": 302.0944054354601,
+      "maximum_gear_temperature_k": 300.78769106900677,
+      "thermal_mode": "periodic_steady",
+      "minimum_contact_safety_factor": 1.4235301661113078,
+      "minimum_bending_safety_factor": 2.326100004987442,
+      "minimum_bearing_static_safety_factor": 59.56250619838511,
+      "minimum_bearing_life_hours": 2337677949.339132,
+      "all_couplings_converged": true,
+      "checks": {
+        "motor_speed": true,
+        "motor_peak_torque": true,
+        "motor_continuous_screen": true,
+        "brake_static_screen": true,
+        "contact_pressure_pa": true,
+        "angle_budget_rad": true,
+        "motor_temperature_k": true,
+        "gear_temperature_k": true,
+        "minimum_contact_safety_factor": true,
+        "minimum_bending_safety_factor": true,
+        "minimum_bearing_static_safety_factor": true
+      },
+      "physical_validation": false,
+      "vendor_system_validation": false,
+      "implementation": "新写NGW降阶系统实现，复用公开齿轮内核；非厂商整机等价重建",
+      "scope": "固定环零变位直齿单级NGW、准静态、小变形、周期平均协调；不含RV/谐波、完整FE、同步动力学、控制、润滑预测或实物认证",
+      "configured_checks_pass": true,
+      "check_scope": "仅对已配置约束的数值初筛；未配置强度/寿命/温升限值不自动视为已校核",
+      "pareto_nondominated": true
+    },
+    {
+      "candidate": "larger_errors",
+      "case_id": "dfki_pendulum_larger_errors",
+      "ratio": 6.0,
+      "maximum_load_share_factor": 2.9812261584543402,
+      "maximum_contact_pressure_pa": 892035856.9486357,
+      "minimum_output_torsional_stiffness_n_m_per_rad": 8546.442779243762,
+      "maximum_angle_budget_rad": 0.0017624313828430442,
+      "maximum_motor_temperature_k": 302.0944054354601,
+      "maximum_gear_temperature_k": 300.78769106900677,
+      "thermal_mode": "periodic_steady",
+      "minimum_contact_safety_factor": 1.30727358762286,
+      "minimum_bending_safety_factor": 1.9616792855908687,
+      "minimum_bearing_static_safety_factor": 59.56250619838511,
+      "minimum_bearing_life_hours": 2337677949.339132,
+      "all_couplings_converged": true,
+      "checks": {
+        "motor_speed": true,
+        "motor_peak_torque": true,
+        "motor_continuous_screen": true,
+        "brake_static_screen": true,
+        "contact_pressure_pa": true,
+        "angle_budget_rad": true,
+        "motor_temperature_k": true,
+        "gear_temperature_k": true,
+        "minimum_contact_safety_factor": true,
+        "minimum_bending_safety_factor": true,
+        "minimum_bearing_static_safety_factor": true
+      },
+      "physical_validation": false,
+      "vendor_system_validation": false,
+      "implementation": "新写NGW降阶系统实现，复用公开齿轮内核；非厂商整机等价重建",
+      "scope": "固定环零变位直齿单级NGW、准静态、小变形、周期平均协调；不含RV/谐波、完整FE、同步动力学、控制、润滑预测或实物认证",
+      "configured_checks_pass": true,
+      "check_scope": "仅对已配置约束的数值初筛；未配置强度/寿命/温升限值不自动视为已校核",
+      "pareto_nondominated": false
+    },
+    {
+      "candidate": "flexible_pins",
+      "case_id": "dfki_pendulum_flexible_pins",
+      "ratio": 6.0,
+      "maximum_load_share_factor": 1.7273741089195611,
+      "maximum_contact_pressure_pa": 821667579.3065628,
+      "minimum_output_torsional_stiffness_n_m_per_rad": 19206.419534539815,
+      "maximum_angle_budget_rad": 0.0017964064063650087,
+      "maximum_motor_temperature_k": 302.0944054354601,
+      "maximum_gear_temperature_k": 300.78769106900677,
+      "thermal_mode": "periodic_steady",
+      "minimum_contact_safety_factor": 1.4349337240501723,
+      "minimum_bending_safety_factor": 2.363516931977433,
+      "minimum_bearing_static_safety_factor": 59.56250619838511,
+      "minimum_bearing_life_hours": 2337677949.339132,
+      "all_couplings_converged": true,
+      "checks": {
+        "motor_speed": true,
+        "motor_peak_torque": true,
+        "motor_continuous_screen": true,
+        "brake_static_screen": true,
+        "contact_pressure_pa": true,
+        "angle_budget_rad": true,
+        "motor_temperature_k": true,
+        "gear_temperature_k": true,
+        "minimum_contact_safety_factor": true,
+        "minimum_bending_safety_factor": true,
+        "minimum_bearing_static_safety_factor": true
+      },
+      "physical_validation": false,
+      "vendor_system_validation": false,
+      "implementation": "新写NGW降阶系统实现，复用公开齿轮内核；非厂商整机等价重建",
+      "scope": "固定环零变位直齿单级NGW、准静态、小变形、周期平均协调；不含RV/谐波、完整FE、同步动力学、控制、润滑预测或实物认证",
+      "configured_checks_pass": true,
+      "check_scope": "仅对已配置约束的数值初筛；未配置强度/寿命/温升限值不自动视为已校核",
+      "pareto_nondominated": true
+    }
+  ],
+  "figures": [
+    "01_design",
+    "02_duty",
+    "03_load_sharing",
+    "04_contact",
+    "05_strength_support",
+    "06_precision",
+    "07_motor_thermal",
+    "08_fatigue",
+    "09_comparison"
+  ],
+  "languages": [
+    "zh",
+    "en"
+  ],
+  "representative_meshes": {
+    "sun_planet": {
+      "torque_n_m": 0.29739899815774584,
+      "normal_force_n": 63.297080679215576,
+      "mean_normal_approach_m": 1.2642673915629026e-06,
+      "te_peak_to_peak_m": 8.370186043353307e-07,
+      "te_rms_ac_m": 3.8796850669641273e-07,
+      "angular_te_peak_to_peak_rad": 0.00017814731877649384,
+      "max_pressure_pa": 827427106.5727332,
+      "max_line_load_n_per_m": 13912.326194918234,
+      "mean_mesh_stiffness_n_per_m": 63806122.76294397,
+      "mesh_stiffness_fluctuation_n_per_m": 37811035.71137421,
+      "max_line_load_concentration_factor": 1.1979412076561267,
+      "max_abs_load_centroid_offset_m": 6.851514546019286e-20,
+      "mean_contact_fraction": 1.0,
+      "max_force_residual_n": 0.0,
+      "max_gap_residual_m": 6.352747104407253e-22,
+      "all_converged": true,
+      "elastic_mode": "iso",
+      "local_contact": false,
+      "extended_contact": false,
+      "transverse_contact_ratio": 1.635185963571462,
+      "overlap_ratio": 0.0,
+      "model_scope": "ISO综合齿对刚度、可选Love条带影响；无摩擦、准静态，压力采用局部线接触近似"
+    },
+    "planet_ring": {
+      "torque_n_m": 0.5947979963154917,
+      "normal_force_n": 63.297080679215576,
+      "mean_normal_approach_m": 8.287892113435672e-07,
+      "te_peak_to_peak_m": 0.0,
+      "te_rms_ac_m": 0.0,
+      "angular_te_peak_to_peak_rad": 0.0,
+      "max_pressure_pa": 334562473.28100383,
+      "max_line_load_n_per_m": 7534.69686477366,
+      "mean_mesh_stiffness_n_per_m": 90912101.1910738,
+      "mesh_stiffness_fluctuation_n_per_m": 0.0,
+      "max_line_load_concentration_factor": 1.190370358936281,
+      "max_abs_load_centroid_offset_m": 6.851514546019286e-20,
+      "mean_contact_fraction": 1.0,
+      "max_force_residual_n": 7.105427357601002e-15,
+      "max_gap_residual_m": 3.1763735522036263e-22,
+      "all_converged": true,
+      "elastic_mode": "iso",
+      "local_contact": false,
+      "extended_contact": false,
+      "transverse_contact_ratio": 1.9382147356339863,
+      "overlap_ratio": 0.0,
+      "model_scope": "ISO综合齿对刚度、可选Love条带影响；无摩擦、准静态，压力采用局部线接触近似"
+    }
+  },
+  "model_scope_zh": "真实需求参照与新设计模型；不是AK80-6或DFKI样机的内部结构恢复、实测回放或产品认证。",
+  "model_scope_en": "A source-grounded redesign, not a reconstruction of AK80-6 internals, a replay of measured data, or a product certification."
+}

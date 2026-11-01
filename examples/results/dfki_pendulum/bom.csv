@@ -1,0 +1,10 @@
+﻿item_id,part_name,quantity,specification,procurement_model,note
+sun,太阳轮,1,"{""module_m"":0.0005,""face_width_m"":0.005,""pressure_angle_rad"":0.3490658503988659,""elastic_material_parameters"":{""youngs_modulus_pa"":210000000000.0,""poisson_ratio"":0.3},""teeth"":20,""internal"":false}",,弹性材料参数不等同完整材料牌号、热处理及制造规范
+planet,行星轮,3,"{""module_m"":0.0005,""face_width_m"":0.005,""pressure_angle_rad"":0.3490658503988659,""elastic_material_parameters"":{""youngs_modulus_pa"":210000000000.0,""poisson_ratio"":0.3},""teeth"":40,""internal"":false}",,各轮同名义几何，制造误差由载荷分配输入另行描述
+ring,内齿圈,1,"{""module_m"":0.0005,""face_width_m"":0.005,""pressure_angle_rad"":0.3490658503988659,""elastic_material_parameters"":{""youngs_modulus_pa"":210000000000.0,""poisson_ratio"":0.3},""teeth"":100,""internal"":true}",,固定内齿圈，未提供轮缘和壳体实体尺寸
+carrier,行星架,1,"{""planet_count"":3}",,仅已知行星数量与计算布局，未提供架板厚度、销孔尺寸及连接结构
+planet_pin,行星销,3,"{""tangential_stiffness_n_per_m"":[300000000.0,300000000.0,300000000.0]}",,仅有等效支承刚度，未提供销径、长度或材料牌号
+output_bearing,输出支承,2,"{""spacing_m"":0.024,""load_offset_m"":0.012,""axial_share"":0.5,""ratings"":[{""dynamic_capacity_n"":3000,""static_capacity_n"":1500,""exponent"":3.0,""radial_factor"":1,""axial_factor"":1,""static_radial_factor"":1,""static_axial_factor"":1},{""dynamic_capacity_n"":3000,""static_capacity_n"":1500,""exponent"":3.0,""radial_factor"":1,""axial_factor"":1,""static_radial_factor"":1,""static_axial_factor"":1}]}",,两组评级参数按负z、正z支承顺序给定；未指定采购型号
+motor,电机,1,"{""torque_constant_n_m_per_a"":0.091,""resistance_ohm"":0.1701655996297907,""continuous_torque_n_m"":1.092,""peak_torque_n_m"":2.184,""base_speed_rad_s"":180,""maximum_speed_rad_s"":229.2,""rotor_inertia_kg_m2"":6.0719e-05,""no_load_loss_w"":0.5,""speed_loss_w_per_rad_s_squared"":0.0001}",,仅有计算输入的机电参数，未指定采购型号或安装包络
+brake,制动器,1,"{""brake_torque_n_m"":3,""brake_safety_factor"":1.5}",,输入侧静态制动能力参数，未指定采购型号或动态制动认证
+encoder,编码器,1,"{""encoder_counts_per_revolution"":4096,""encoder_on_output"":false}",,每转计数及安装侧来自输入，未指定精度等级、接口或采购型号

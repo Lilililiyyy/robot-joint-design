@@ -1,5 +1,7 @@
 # 接口与数据契约
 
+[中文](api.md) · [English](api.en.md)
+
 ## 调用流程
 
 `analyze_joint(config) -> JointResult`：解析JSON兼容的命名配置，计算所有工况。原配置不修改。`export_joint(result, output_dir, plots=False)`：导出输入、诊断、全数组与报告。`compare_joint_designs(configs)`：重算每个完整候选；`results`保留原结果对象，`candidates`给出可序列化比较表，只在已配置约束通过的候选内判定Pareto非支配。
@@ -25,7 +27,7 @@
 |`fatigue`|可选；`stress_history_pa`、S-N参考应力/循环数/斜率及可选抗拉强度|
 |`design_limits`|可选的压力/角度/温度上限，及强度安全系数、轴承静安全/小时寿命下限|
 
-完整可编辑字段示例见`examples/ngw_18_27_72.json`。嵌套工作面、修形和载荷分配中的未知字段报错，防止拼写错误静默失效。
+完整可编辑字段示例见`examples/dfki_pendulum_case.json`，需求与来源见`examples/dfki_pendulum_requirements.json`。嵌套工作面、修形和载荷分配中的未知字段报错，防止拼写错误静默失效。
 
 ## 单位、坐标和分支
 

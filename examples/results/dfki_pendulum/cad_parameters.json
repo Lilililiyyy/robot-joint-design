@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "case_id": "ngw_18_27_72",
+  "case_id": "dfki_pendulum_baseline",
   "units": {
     "length": "m",
     "angle": "rad",
@@ -10,20 +10,20 @@
     "stiffness": "N/m"
   },
   "stage": {
-    "sun_teeth": 18,
-    "planet_teeth": 27,
-    "ring_teeth": 72,
+    "sun_teeth": 20,
+    "planet_teeth": 40,
+    "ring_teeth": 100,
     "planet_count": 3,
-    "module_m": 0.0015,
-    "face_width_m": 0.012,
+    "module_m": 0.0005,
+    "face_width_m": 0.005,
     "pressure_angle_rad": 0.3490658503988659
   },
   "geometry": {
-    "ratio": 5.0,
-    "sun_radius_m": 0.0135,
-    "planet_radius_m": 0.02025,
-    "ring_radius_m": 0.054,
-    "carrier_radius_m": 0.03375,
+    "ratio": 6.0,
+    "sun_radius_m": 0.005,
+    "planet_radius_m": 0.01,
+    "ring_radius_m": 0.025,
+    "carrier_radius_m": 0.015,
     "planet_angles_rad": [
       0.0,
       2.0943951023931953,
@@ -31,48 +31,48 @@
     ],
     "planet_centres_xy_m": [
       [
-        0.03375,
+        0.015,
         0.0
       ],
       [
-        -0.016874999999999994,
-        0.02922835737772481
+        -0.007499999999999996,
+        0.01299038105676658
       ],
       [
-        -0.016875000000000015,
-        -0.0292283573777248
+        -0.007500000000000007,
+        -0.012990381056766576
       ]
     ],
-    "assembly_index": 30,
-    "adjacent_tip_clearance_m": 0.014956714755449609,
+    "assembly_index": 40,
+    "adjacent_tip_clearance_m": 0.004980762113533155,
     "geometry_scope": "零变位直齿参考几何、均布装配及邻接齿顶圆检查；未检查刀具根切和完整齿廓干涉"
   },
   "gear_radii_m": {
     "sun": {
-      "reference_radius_m": 0.0135,
-      "base_radius_m": 0.012685850380609764,
-      "tip_radius_m": 0.015,
-      "root_radius_m": 0.011625
+      "reference_radius_m": 0.005,
+      "base_radius_m": 0.004698463103929542,
+      "tip_radius_m": 0.0055,
+      "root_radius_m": 0.004375
     },
     "planet": {
-      "reference_radius_m": 0.02025,
-      "base_radius_m": 0.019028775570914647,
-      "tip_radius_m": 0.021750000000000002,
-      "root_radius_m": 0.018375
+      "reference_radius_m": 0.01,
+      "base_radius_m": 0.009396926207859084,
+      "tip_radius_m": 0.0105,
+      "root_radius_m": 0.009375
     },
     "ring": {
-      "reference_radius_m": 0.054,
-      "base_radius_m": 0.05074340152243906,
-      "tip_radius_m": 0.0525,
-      "root_radius_m": 0.055875
+      "reference_radius_m": 0.025,
+      "base_radius_m": 0.023492315519647713,
+      "tip_radius_m": 0.0245,
+      "root_radius_m": 0.025625000000000002
     }
   },
-  "face_width_m": 0.012,
+  "face_width_m": 0.005,
   "bearings": {
-    "spacing_m": 0.045,
+    "spacing_m": 0.024,
     "centre_z_m": [
-      -0.0225,
-      0.0225
+      -0.012,
+      0.012
     ],
     "load_offset_m": 0.012,
     "geometry_status": "仅定义双支承轴向中心位置，未提供轴承直径、宽度或安装配合"

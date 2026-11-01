@@ -9,4 +9,4 @@ from .electromechanical import motor_duty
 from .precision import precision_budget, reversal_curve
 from .io import export_joint
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
