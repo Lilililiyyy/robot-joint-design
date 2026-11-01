@@ -11,7 +11,7 @@ import numpy as np
 from robot_joint import analyze_joint, thermal_response, reversal_curve, sn_damage
 from robot_joint.io import export_joint
 from gear_contact.io import write_json
-from .pendulum_case import pendulum_duty, candidate_configs
+from .pendulum_case import pendulum_duty, candidate_configs, validate_saved_duty
 
 COLORS = ['#155f78','#de8d35','#7482a4','#318a6e']
 FIGURES = ['01_design','02_duty','03_load_sharing','04_contact','05_strength_support',
@@ -256,7 +256,7 @@ def main():
     base=json.loads((root/'examples/dfki_pendulum_case.json').read_text(encoding='utf-8'))
     requirements=json.loads((root/'examples/dfki_pendulum_requirements.json').read_text(encoding='utf-8'))
     generated,_=pendulum_duty(requirements)
-    if generated!=base['duty_segments']:raise ValueError('保存工况与需求公式生成结果不一致')
+    validate_saved_duty(generated,base['duty_segments'])
     results=[analyze_joint(c) for c in candidate_configs(base)]
     data=prepare_data(base,requirements,results)
     args.output.mkdir(parents=True,exist_ok=True)

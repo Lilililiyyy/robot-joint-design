@@ -5,7 +5,7 @@ import math
 from pathlib import Path
 import unittest
 import numpy as np
-from examples.pendulum_case import pendulum_duty,candidate_configs
+from examples.pendulum_case import pendulum_duty,candidate_configs,validate_saved_duty
 from examples.build_showcase import dense_motion,FIGURES
 
 
@@ -19,13 +19,28 @@ class PendulumCaseTests(unittest.TestCase):
         cls.base=json.loads((root()/'examples/dfki_pendulum_case.json').read_text(encoding='utf-8'))
         cls.req=json.loads((root()/'examples/dfki_pendulum_requirements.json').read_text(encoding='utf-8'))
 
-    def test_generated_states_exactly_match_saved_solver_input(self):
+    def test_generated_states_match_saved_solver_input_with_declared_tolerance(self):
         segments,derived=pendulum_duty(self.req)
-        self.assertEqual(segments,self.base['duty_segments'])
+        validate_saved_duty(segments,self.base['duty_segments'])
         self.assertEqual(len(segments),34)
         self.assertAlmostEqual(derived['total_mass_kg'],.676)
         self.assertAlmostEqual(derived['inertia_kg_m2'],(.546+.13/3)*.5**2)
         self.assertAlmostEqual(derived['period_s'],1.8)
+
+    def test_last_bit_math_library_difference_is_accepted(self):
+        saved=deepcopy(self.base['duty_segments'])
+        saved[3]['output_torque_n_m']=float(np.nextafter(saved[3]['output_torque_n_m'],math.inf))
+        saved[3]['output_wrench'][5]=saved[3]['output_torque_n_m']
+        validate_saved_duty(pendulum_duty(self.req)[0],saved)
+
+    def test_actual_input_label_or_layout_changes_are_rejected(self):
+        for key in ('torque','label','layout'):
+            saved=deepcopy(self.base['duty_segments'])
+            if key=='torque':saved[3]['output_torque_n_m']+=1e-6
+            elif key=='label':saved[3]['label']='changed'
+            else:saved[3]['output_wrench']=saved[3]['output_wrench'][:5]
+            with self.subTest(key=key),self.assertRaises(ValueError):
+                validate_saved_duty(pendulum_duty(self.req)[0],saved)
 
     def test_dense_trajectory_is_periodic_and_stops_during_holds(self):
         t,q,w,a,torque=dense_motion(self.req)

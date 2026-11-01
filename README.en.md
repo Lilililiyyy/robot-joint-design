@@ -4,7 +4,7 @@
 
 **Follow a 6:1 robot-joint transmission design from published physical-testbed requirements to engineering checks.**
 
-This parameterized NGW calculation kernel connects loads, geometry, materials, tooth modifications, support, motor and thermal inputs. It exports raw contact arrays, engineering results, a Chinese calculation report and CAD/BOM parameters. Version **0.1.1** runs without commercial software or vendor DLLs.
+This parameterized NGW calculation kernel connects loads, geometry, materials, tooth modifications, support, motor and thermal inputs. It exports raw contact arrays, engineering results, a Chinese calculation report and CAD/BOM parameters. Version **0.1.2** runs without commercial software or vendor DLLs.
 
 ## Case: redesigning the joint transmission for a physical DFKI pendulum
 
@@ -128,4 +128,4 @@ Shared chart data are in [metrics.json](examples/results/dfki_pendulum/metrics.j
 
 The model covers a fixed-ring, sun-input, carrier-output, zero-shift spur NGW stage with small deformation, quasi-static response and cycle-mean coupling. New system modules have analytical/equation and numerical checks, but no vendor whole-system benchmark or hardware validation. RV/harmonic drives, full FE, measured hysteresis, control, electromagnetic and lubrication prediction are outside this release. Existing single-mesh comparisons do not certify the whole joint.
 
-See the [model](docs/model.en.md) and [API contract](docs/api.en.md). The license is [AGPL-3.0-only](LICENSE); see [source and license notices](THIRD_PARTY_NOTICES.md). Version 0.1.1 adds a physical-requirement-based case, bilingual documentation and nine paired figure sets. Next priorities are measured compliance, friction/thermal calibration, multistage interfaces and hardware validation.
+See the [model](docs/model.en.md) and [API contract](docs/api.en.md). The license is [AGPL-3.0-only](LICENSE); see [source and license notices](THIRD_PARTY_NOTICES.md). Version 0.1.2 adds a physical-requirement-based case, bilingual documentation and nine paired figure sets. Next priorities are measured compliance, friction/thermal calibration, multistage interfaces and hardware validation.

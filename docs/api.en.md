@@ -28,6 +28,8 @@ The complete current example is [dfki_pendulum_case.json](../examples/dfki_pendu
 
 SI units are m, rad, N, N·m, Pa, s and K. Unknown fields and unsupported branches raise errors.
 
+Saved duty values are checked against the generated finite SI values with rtol=2e-12 and atol=2e-12, allowing last-bit differences between system math libraries. Fields, labels, state order and six-component layouts must match exactly. Actual input changes beyond these tolerances raise errors.
+
 ## Coordinates, signs and units
 
 The wrench order is `[Fx,Fy,Fz,Mx,My,Mz]`; displacement is `[x,y,z,θx,θy,θz]`. Mixed stiffness blocks carry their corresponding force/displacement units and must satisfy energy reciprocity. `output_wrench.Mz` and `output_torque_n_m` express the same signed load demand. Torque selects the tooth flank; `T·ω` selects motoring or backdriving.

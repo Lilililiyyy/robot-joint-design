@@ -3,6 +3,29 @@ from copy import deepcopy
 import math
 
 
+def validate_saved_duty(generated,saved):
+    """按明确数值容差校验保存工况，避免跨平台libm末位差异误报。
+
+    标签、字段集合、顺序和六分量布局必须一致。有限SI数值采用
+    rtol=2e-12、atol=2e-12；实际输入变更不能借此静默通过。
+    """
+    if len(generated)!=len(saved):raise ValueError('保存工况数量与需求不一致')
+    for index,(actual,expected) in enumerate(zip(generated,saved)):
+        if set(actual)!=set(expected):raise ValueError(f'工况{index}字段集合不一致')
+        for key,value in actual.items():
+            reference=expected[key]
+            if key=='label':
+                if value!=reference:raise ValueError(f'工况{index}标签不一致')
+                continue
+            a,b=(value,reference) if key=='output_wrench' else ([value],[reference])
+            if key=='output_wrench' and (len(a)!=6 or len(b)!=6):
+                raise ValueError('输出载荷必须为六分量')
+            for x,y in zip(a,b):
+                if (isinstance(x,bool) or isinstance(y,bool) or not math.isfinite(x) or not math.isfinite(y)
+                        or not math.isclose(x,y,rel_tol=2e-12,abs_tol=2e-12)):
+                    raise ValueError(f'工况{index}字段{key}与需求公式不一致')
+
+
 def pendulum_duty(requirements):
     """按平面刚体逆动力学生成往返五次轨迹和两端保持段。
 
