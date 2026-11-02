@@ -9,10 +9,10 @@ import numpy as np
 
 
 def contact_pressure_colormap():
-    """本项目统一采用蓝红色带；采用材料坐标和局部峰压显示。"""
+    """非负接触压力采用蓝—青—绿—黄—红色阶；不改变压力或归一化范围。"""
     from matplotlib.colors import LinearSegmentedColormap
     cmap = LinearSegmentedColormap.from_list('pressure_blue_to_red',
-        ['#2166ac', '#92c5de', '#f4d3d2', '#b2182b'], N=256)
+        ['#0000ff', '#00ffff', '#00ff00', '#ffff00', '#ff0000'], N=1024)
     cmap.set_bad('#e5e9ee')
     return cmap
 

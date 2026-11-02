@@ -2,7 +2,7 @@
 
 [中文](figures.md) · [English](figures.en.md)
 
-Figures use white backgrounds, fine axes, blue `#2166ac` and red `#b2182b`, supported by line and marker styles. Nonnegative pressure increases from blue to red. Figures are 183 mm wide and no more than 170 mm high, with 300 dpi PNG and editable-text SVG/PDF exports. Both languages use identical numerical results.
+Figures use white backgrounds and fine axes. Line plots use blue `#2166ac` and red `#b2182b`, supported by line and marker styles. Nonnegative contact pressure uses a blue→cyan→green→yellow→red scale with black contours, starting at zero; grey denotes unsupported regions. Figures are 183 mm wide and no more than 170 mm high, with 300 dpi PNG and editable-text SVG/PDF exports. Both languages use identical numerical results.
 
 |Figure group|Design meaning|
 |---|---|

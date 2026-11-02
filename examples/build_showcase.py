@@ -13,6 +13,7 @@ from robot_joint.io import export_joint
 from gear_contact.io import write_json
 from .pendulum_case import pendulum_duty, candidate_configs, validate_saved_duty
 from robot_joint.figure_style import COLORS, publication_settings, save_publication_figure
+from robot_joint.contact_display import contact_pressure_colormap
 
 FIGURES = ['01_design','02_duty','03_load_sharing','04_contact','05_strength_support',
            '06_precision','07_motor_thermal','08_fatigue','09_comparison']
@@ -85,14 +86,39 @@ def prepare_data(base, requirements, results):
                 peak=peak,contacts=contacts,cycles=cycles,cold=cold,metrics=metrics,dense=(t,q,w,a,tau))
 
 
+def render_contact_figure(contacts, maximum_pressure_pa, output, language):
+    """用相同压力色阶单独绘制周期TE及原接触节点，便于直接重绘已存结果。"""
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    L=lambda zh,en:zh if language=='zh' else en
+    with plt.rc_context(publication_settings(language)):
+        fig,axes=plt.subplots(2,2,figsize=(12,8),layout='constrained')
+        for col,(key,contact) in enumerate(contacts.items()):
+            label=L('太阳轮—行星轮','Sun–planet') if key=='sun_planet' else L('行星轮—内齿圈','Planet–ring')
+            ax=axes[0,col];ax.plot(contact.phase,contact.normal_approach_m*1e6,'o-',color=COLORS[col],ms=4)
+            ax.set(title=label,xlabel=L('啮合周期相位','Mesh-cycle phase'),ylabel=L('法向传动误差 / μm','Normal transmission error / μm'))
+            rotation=max(contact.rotations,key=lambda z:float(np.max(z.pressure_pa)))
+            ax=axes[1,col];loaded=rotation.solution.active_mask
+            sc=ax.scatter(rotation.grid.face_coordinate_m[loaded]*1e3,rotation.grid.roll_pinion_m[loaded]*1e3,
+                c=rotation.pressure_pa[loaded]/1e6,cmap=contact_pressure_colormap(),s=65,marker='s',vmin=0,vmax=maximum_pressure_pa/1e6)
+            ax.set(xlabel=L('齿宽位置 / mm','Face position / mm'),ylabel=L('小轮展长 / mm','Pinion roll length / mm'),
+                title=L('峰压相位：原始接触节点','Peak-pressure phase: raw contact nodes'))
+            fig.colorbar(sc,ax=ax,label=L('Hertz峰压 / MPa','Hertz peak pressure / MPa'),shrink=.8)
+        for ax in axes.flat:ax.grid(alpha=.14)
+        save_publication_figure(fig,Path(output)/language/FIGURES[3],language=language,
+            title=L('逐行星LTCA：传动误差与局部接触压力','Per-planet LTCA: transmission error and local contact pressure'),
+            footnote=L('公开台架需求参照；新设计模型计算，非样机实测。',
+                'Published testbed requirements; redesign-model results, not measurements.'))
+        plt.close(fig)
+
+
 def render_figures(data, output, language):
     """分别渲染中文和英文标注，不在英文图中嵌入中文工况名称。"""
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
     from matplotlib.patches import Circle
-    from matplotlib.colors import LinearSegmentedColormap
-    pressure_map=LinearSegmentedColormap.from_list('pressure_blue_red',['#2166ac','#a8cce3','#f3e5e4','#b2182b'])
     L=lambda zh,en:zh if language=='zh' else en
     base,req,r=data['base'],data['requirements'],data['result']
     time=data['time']; count=len(r.cases); n=base['stage']['planet_count']
@@ -150,19 +176,7 @@ def render_figures(data, output, language):
         for ax in axes:style(ax)
         save(fig,FIGURES[2],L('误差与共享柔度决定各行星的实际载荷','Errors and shared compliance determine individual planet loads'))
 
-        fig,axes=plt.subplots(2,2,figsize=(12,8),layout='constrained')
-        for col,(key,contact) in enumerate(data['contacts'].items()):
-            label=L('太阳轮—行星轮','Sun–planet') if key=='sun_planet' else L('行星轮—内齿圈','Planet–ring')
-            ax=axes[0,col];ax.plot(contact.phase,contact.normal_approach_m*1e6,'o-',color=COLORS[col],ms=4)
-            ax.set(title=label,xlabel=L('啮合周期相位','Mesh-cycle phase'),ylabel=L('法向传动误差 / μm','Normal transmission error / μm'));style(ax)
-            rotation=max(contact.rotations,key=lambda z:float(np.max(z.pressure_pa)))
-            ax=axes[1,col];loaded=rotation.solution.active_mask
-            sc=ax.scatter(rotation.grid.face_coordinate_m[loaded]*1e3,rotation.grid.roll_pinion_m[loaded]*1e3,
-                 c=rotation.pressure_pa[loaded]/1e6,cmap=pressure_map,s=65,marker='s',vmin=0,vmax=r.summary['maximum_contact_pressure_pa']/1e6)
-            ax.set(xlabel=L('齿宽位置 / mm','Face position / mm'),ylabel=L('小轮展长 / mm','Pinion roll length / mm'),
-                   title=L('峰压相位：原始接触节点','Peak-pressure phase: raw contact nodes'))
-            fig.colorbar(sc,ax=ax,label=L('Hertz峰压 / MPa','Hertz peak pressure / MPa'),shrink=.8);style(ax)
-        save(fig,FIGURES[3],L('逐行星LTCA：传动误差与局部接触压力','Per-planet LTCA: transmission error and local contact pressure'))
+        render_contact_figure(data['contacts'],r.summary['maximum_contact_pressure_pa'],output,language)
 
         fig,axes=plt.subplots(2,2,figsize=(12,8),layout='constrained')
         stress=[];labels=[]

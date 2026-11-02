@@ -10,7 +10,7 @@ Contact analysis connects individual planet loads, modifications and misalignmen
 
 The horizontal coordinate starts at the member's left face edge. The vertical coordinate is that member's involute roll; both use mm. Local peak-pressure samples from one base-pitch cycle form a complete passage under identical-tooth, fixed-load and periodic-boundary assumptions.
 
-Endpoint models use independent endpoint pressures. Centre models use strip-centre pressures, extending the first and last values to their original integration-cell edges as display support. Coincident material samples take the maximum; linear triangular interpolation and pressure contours form the display. Ordinary-flank maps exclude tip-extension samples. Regions outside the support hull remain NaN and appear grey; zero pressure is at the blue end of the scale.
+Endpoint models use independent endpoint pressures. Centre models use strip-centre pressures, extending the first and last values to their original integration-cell edges as display support. Coincident material samples take the maximum; linear triangular interpolation and pressure contours form the display. Ordinary-flank maps exclude tip-extension samples. Regions outside the support hull remain NaN and appear grey. Pressure follows a blue→cyan→green→yellow→red scale, with zero in blue and higher values toward red.
 
 Interpolation is for display. Coloured area is not the simultaneously loaded area, and the hull is not an independently solved contact boundary. Each member uses the proper internal/external conjugate mapping, including face widths and axial offset.
 

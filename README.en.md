@@ -2,7 +2,7 @@
 
 [中文](README.md) · [English](README.en.md)
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE) [![Version](https://img.shields.io/badge/version-0.3.3-blue)](https://github.com/Lilililiyyy/robot-joint-design/tree/v0.3.3)
 
 An independently developed robot joint design project for single-stage NGW planetary actuators. It connects task loads, gear contact, structural support, motor sizing, precision and thermal performance through parameterized calculations. Complete Python source, bilingual worked examples and engineering data exports support standalone use and integration into a design workflow.
 
@@ -13,6 +13,8 @@ An independently developed robot joint design project for single-stage NGW plane
 - [Design example](#design-example)
 - [Result benchmarks](#result-benchmarks)
 - [Engineering scope](#engineering-scope)
+- [Version history](#version-history)
+- [Roadmap](#roadmap)
 - [Documentation and structure](#documentation-and-structure)
 
 ## Design capabilities
@@ -26,7 +28,7 @@ An independently developed robot joint design project for single-stage NGW plane
 |Motor and energy|Driving/backdriving efficiency, rotor inertia, torque–speed envelopes, RMS current, braking and regenerative-bus screening|
 |Precision and thermal|Loaded angle, backlash/encoder budgets, segmented temperature response and periodic thermal equilibrium|
 |Life and selection|Rainflow cycles, cumulative damage with supplied S-N curves, constraint screening and finite-candidate Pareto comparison|
-|Engineering outputs|Reports, JSON/CSV/NPZ, parameter-level CAD dimensions and BOM, bilingual blue/red publication-style PNG/SVG/PDF figures|
+|Engineering outputs|Reports, JSON/CSV/NPZ, parameter-level CAD dimensions and BOM, bilingual publication-style PNG/SVG/PDF figures|
 
 Modules share SI units and callable interfaces. See the [model](docs/model.en.md) and [API](docs/api.en.md) for equations and input/output definitions.
 
@@ -109,6 +111,30 @@ On the same 30×30 display grid, pressure MAE is 0.040641 MPa, RMSE is 0.140090 
 The system models a fixed-ring, sun-input, carrier-output NGW stage with zero-shift spur gears, small deformation, linear elasticity and quasi-static cycle-averaged response. Additional stiffness, rating factors, allowable stresses, motor and thermal parameters are supplied inputs.
 
 Outputs support design calculation and candidate selection. Manufacturing requires detailed housing/rim/carrier structures, fits and preload, tolerances, lubrication and oscillating-bearing design, followed by torsional, thermal and endurance validation. CAD/BOM outputs are currently parameter-level.
+
+## Version history
+
+|Version|Main updates|
+|---|---|
+|**0.3.3**|Unified contact-pressure colour scale and figure style; version badge, bilingual history and roadmap|
+|0.3.2|Refined standalone project documentation and focused public presentation on design capabilities and results|
+|0.3.1|Completed tooth-passage and instantaneous contact maps and added a single-mesh pressure benchmark|
+|0.3.0|Added planet-pin, planet-bearing and regenerative-bus checks to the integrated design workflow|
+|0.2.0|Added design constraints, assessment coverage, strength benchmarks and bilingual publication-style figures|
+|0.1.2|Added the complete bilingual design example driven by published pendulum requirements|
+|0.1.0|Established NGW transmission, support, motor, precision, fatigue, thermal and parameter-level engineering outputs|
+
+## Roadmap
+
+The following are planned directions rather than fully implemented capabilities.
+
+|Direction|Planned work|
+|---|---|
+|Contact and modification|Parameterized modification search and multi-objective selection using pressure, TE and stiffness|
+|Structure and assembly|Condensed rim, carrier and housing compliance; fits, preload and tolerance-chain analysis|
+|Engineering calibration|Measured bidirectional stiffness, backlash, friction, efficiency and thermal-parameter inputs|
+|Drive and service|Finite-source, absorption and protection boundaries; actual oscillating-bearing duty assessment|
+|Model extensions|Helical gears, multi-stage transmissions and broader system coupling after appropriate verification|
 
 ## Documentation and structure
 
