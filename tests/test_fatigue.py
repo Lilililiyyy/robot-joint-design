@@ -8,13 +8,13 @@ from robot_joint.fatigue import rainflow_cycles, sn_damage
 
 
 class RainflowTests(unittest.TestCase):
-    def test_mathworks_nine_reversal_example(self):
+    def test_nine_reversal_example(self):
         result = rainflow_cycles([-2, 1, -3, 5, -1, 3, -4, 4, -2])
         expected = [(3, -0.5, 0.5), (4, -1, 0.5), (4, 1, 1), (8, 1, 0.5),
                     (9, 0.5, 0.5), (8, 0, 0.5), (6, 1, 0.5)]
         self.assertEqual([(r["range"], r["mean"], r["count"]) for r in result], expected)
 
-    def test_mathworks_fourteen_reversal_table(self):
+    def test_fourteen_reversal_table(self):
         result = rainflow_cycles([-2, 1, -3, 5, -1, 3, -4, 4, -3, 1, -2, 3, 2, 6])
         expected = [(3, -0.5, 0.5), (4, -1, 0.5), (4, 1, 1), (8, 1, 0.5),
                     (3, -0.5, 1), (1, 2.5, 1), (7, 0.5, 1), (9, 0.5, 0.5), (10, 1, 0.5)]

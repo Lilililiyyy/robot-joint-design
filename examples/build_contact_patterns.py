@@ -106,7 +106,7 @@ def calculate(bundle, output, *, phases=512, strips=41, profile_points=1601, raw
         'surface_patterns':len(rows),'patterns':rows,'display_schema_version':2,
         'interpolated_display':True,'raw_pressure_modified':False,
         'system_load_sharing_was_recomputed':False,'physical_validation':False,
-        'scope':'原峰压按材料坐标拼接并作源项目三角线性显示；瞬时带独立坐标；旧有限带包络仅兼容保留。非二维/FE接触或实测；局部加密未反馈系统协调解'}
+        'scope':'原峰压按材料坐标拼接并作材料坐标三角线性显示；瞬时带独立坐标；旧有限带包络仅兼容保留。非二维/FE接触或实测；局部加密未反馈系统协调解'}
     write_json(output/'summary.json',summary)
     return patterns,summary
 
@@ -222,9 +222,7 @@ def main():
         patterns,summary=calculate(bundle,args.output,phases=args.phases,strips=args.strips,
             profile_points=args.profile_points,raw_output=args.raw_output)
     plot_patterns(patterns,summary,args.output,('zh','en') if args.language=='both' else (args.language,))
-    from examples.compare_contact_models import build_comparisons
-    build_comparisons(args.output, languages=('zh','en') if args.language=='both' else (args.language,), replot=args.replot)
-    print(json.dumps({'solved_meshes':summary['solved_meshes'],'surface_patterns':summary['surface_patterns'],'figures_per_language':8},ensure_ascii=False))
+    print(json.dumps({'solved_meshes':summary['solved_meshes'],'surface_patterns':summary['surface_patterns'],'figures_per_language':6},ensure_ascii=False))
 
 
 if __name__=='__main__':main()

@@ -1,4 +1,4 @@
-"""从圆柱LTCA项目适配的接触后处理；出处见THIRD_PARTY_NOTICES.md。
+"""齿面接触后处理：材料坐标压力显示与瞬时局部接触带。
 
 本模块不求解载荷、修改压力或补造独立端点。中心模型只将首尾单元的
 常值显示支撑扩到该单元真实边界；实际啮合域、原始采样与显示网格分开保存。
@@ -9,7 +9,7 @@ import numpy as np
 
 
 def contact_pressure_colormap():
-    """本项目统一采用蓝红色带；材料坐标与压力显示算法沿用源工程。"""
+    """本项目统一采用蓝红色带；采用材料坐标和局部峰压显示。"""
     from matplotlib.colors import LinearSegmentedColormap
     cmap = LinearSegmentedColormap.from_list('pressure_blue_to_red',
         ['#2166ac', '#92c5de', '#f4d3d2', '#b2182b'], N=256)
@@ -95,7 +95,7 @@ def contact_pass_data(result, *, samples=(201, 241), face_coordinate_m=None, rol
 
 
 def draw_contact_pass(ax, data, *, maximum_pa, title=None, language="zh", member="pinion"):
-    """源工程单图、参照对比和候选比较共用的填色、等压线、坐标和背景。"""
+    """接触分析单图、参照对比和候选比较共用的填色、等压线、坐标和背景。"""
     cmap = contact_pressure_colormap()
     maximum = max(float(maximum_pa)*1e-6, 1.)
     if data['interpolated']:
@@ -153,7 +153,7 @@ def plot_contact_pass_comparison(results, output):
     files = _save(fig, output, '07_contact_pass_comparison')
     plt.close(fig)
     np.savez_compressed(output/'contact_pass_comparison_data.npz', **arrays)
-    record = {'implementation': '源工程统一接触后处理', 'shared_maximum_pa': maximum,
+    record = {'implementation': '接触分析统一接触后处理', 'shared_maximum_pa': maximum,
               'raw_results_modified': False, 'records': records, 'files': [Path(p).name for p in files]}
     write_json(output/'contact_pass_comparison.json', record)
     return record
@@ -225,7 +225,7 @@ def _project_line_samples(rotation, pair_index, cosine):
     """整理本项目同齿中心与可选端点；延伸曲线按真实累计线长定位。
 
     普通域仍使用中心face/cos坐标。延伸域只用普通端点锚定累计width，
-    不把整条非直接触曲线误当作face/cos，也不从MASTA坐标反标长度。
+    不把整条非直接触曲线误当作face/cos，也不从参照压力反标长度。
     """
     grid = rotation.grid
     mask = np.asarray(grid.tooth_pair_index) == pair_index

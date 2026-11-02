@@ -42,7 +42,7 @@
 
 平均挠度`δavg=F(Cb,avg+Cs,avg)`与总载荷功共轭，因此`kpin=1/(Cb,avg+Cs,avg)`用于和系统中的销切向刚度比较；不能用中心最大挠度倒数代替这一广义刚度。输出还保留中心位移、弯剪柔度分量、应变能及有符号二维位移。
 
-公式通过分段Gauss积分的独立应变能与单位载荷虚功测试；全跨均布、集中力极限、直径尺度律与载荷反转分别验证。基本梁边界与常见全跨载荷的公式可参照[Purdue材料力学公开课程表](https://www.purdue.edu/freeform/me323/wp-content/uploads/sites/2/2018/10/ME323_F18_Hw7_final.pdf)，中央局部载荷公式由上述能量积分得到。
+挠度与功共轭刚度由分段应变能及单位载荷虚功积分得到。基本梁边界与常见全跨载荷的公式可参照[Purdue材料力学公开课程表](https://www.purdue.edu/freeform/me323/wp-content/uploads/sites/2/2018/10/ME323_F18_Hw7_final.pdf)，中央局部载荷公式由上述能量积分得到。
 
 短粗销虽已计横剪柔度，仍不等于真实三维销孔/支承结构。`L/d<10`触发本项目保守提示，**它不是标准验收界限**。销孔压陷、支承板弯曲、间隙/过盈、边缘接触、局部应力集中和销疲劳尚未计算。
 
@@ -59,10 +59,9 @@
 ```bash
 python -m examples.check_planet_support --results output/pendulum --output output/planet_support
 python -m examples.check_planet_support --input examples/dfki_pendulum_case.json --output output/planet_support
-python -m unittest discover -s tests -p test_planet_support.py -v
 ```
 
-第一条命令复用`export_joint`的完整目录，核对输入/销反力/转速的SHA-256后直接计算；第二条先重新运行关节分析。`--assumptions custom.json`允许替换`candidates`中的全部显式设计参数。源码和函数可直接复制到其他程序，不依赖REA目录或厂商组件。
+第一条命令复用`export_joint`的完整目录，核对输入/销反力/转速的SHA-256后直接计算；第二条先重新运行关节分析。`--assumptions custom.json`允许替换`candidates`中的全部显式设计参数。源码和函数可直接接入设计流程。
 
 ## 同一分载下的两组新设计假设
 

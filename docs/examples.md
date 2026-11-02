@@ -6,7 +6,7 @@
 
 [返回项目主页](../README.md)。以下命令均在项目根目录运行。
 
-本项目是单级NGW关节的参数化计算内核：把载荷、几何、材料、修形、支承、电机和热参数连接成可复算的设计流程，输出原始接触数组、性能指标、中文计算报告和CAD/BOM参数。当前版本 **0.3.1**，运行不依赖商业软件或厂商DLL。
+本项目是单级NGW关节的参数化计算内核：把载荷、几何、材料、修形、支承、电机和热参数连接成可复算的设计流程，输出原始接触数组、性能指标、中文计算报告和CAD/BOM参数。各计算模块可独立运行和接入设计流程。
 
 ## 案例：DFKI实物摆台的关节传动再设计
 
@@ -107,7 +107,6 @@ python -m pip install ".[plots]"
 python -m robot_joint examples/dfki_pendulum_case.json --output output/pendulum
 python -m examples.build_showcase --output output/showcase --raw-output output/raw
 python -m examples.compare_designs --output output/comparison.json
-python -m unittest discover -s tests -v
 ```
 
 也可直接复制`robot_joint/`与`gear_contact/`两个源码目录及许可证后调用：
@@ -133,24 +132,13 @@ export_joint(result, "output/pendulum")
 详细公式与接口见[模型说明](../docs/model.md)、[接口说明](../docs/api.md)。许可证为[AGPL-3.0-only](../LICENSE)，复用源码见[来源与许可证](../THIRD_PARTY_NOTICES.md)。本页完整介绍真实需求参照案例与9组双语图表。单副专业软件对标与独立公开参考核验见[验证说明](validation.md)；后续实测标定计划见[项目主页](../README.md#更新记录与后续计划)。
 
 
-## 本轮离散修正与设计约束
+## 完整接触结果与集成设计
 
-原16×13采样未捕捉内齿副短暂的双齿接触分支，导致该工况TE峰峰值显示为零。独立比较7种真实求解网格后，完整案例改用64×26；峰压代表工况相对256×26的内齿副平均TE差0.932%、输出刚度差0.343%，仍需对其余关键工况扩展检查。见[离散研究及原数据](validation.md#ngw案例的离散敏感性)，这不是全域收敛或样机精度认证。
+[接触分析](contact_patterns.md)覆盖三行星、两副、正反工作面及各构件材料坐标；局部瞬时带采用沿线mm、垂线μm。
 
-本例新增假定设计要求为输出刚度≥20 kN·m/rad、Kγ≤2、给定热点谱D≤1；它们不是原产品规格。重算后基准通过，路径误差×3因刚度和均载未通过，行星销刚度×0.3因刚度未通过。网纹表示未通过已配置约束的候选；仅在可行候选内判断Pareto。完整实际值、限值、方向和未配置项保存在`summary.check_details`，未建模失效模式见`summary.assessment_coverage`及[设计审查](design_review.md)。
+![完整齿通过程压力](../examples/results/contact_patterns/zh/01_contact_overview.png)
 
-
-## 接触显示复核与继续设计
-
-0.3.1的[接触显示](contact_patterns.md)按圆柱齿轮LTCA源项目方法，以`contact_pass_data`将原局部峰压按材料坐标线性插值并叠加等压线，覆盖三行星、两副、正反/低载及各构件坐标。`instantaneous_contact_data`另以沿接触线mm、垂线μm显示一对齿瞬时带。原单相位节点图保持原采样含义；旧有限带包络保留为兼容诊断，不能用来替代新通过程定义。
-
-![完整齿通过程压力与等压线](../examples/results/contact_patterns/zh/01_contact_overview.png)
-
-[局部瞬时带](../examples/results/contact_patterns/zh/06_instantaneous_contact.png)、[ISO控制基准/仅Love/显式修形+Love诊断](../examples/results/contact_patterns/zh/07_model_comparison.png)及[相同18/77原网格显示复现](../examples/results/contact_patterns/zh/08_reference_reproduction.png)分别核对坐标、模型影响和显示链路。诊断将各轮齿廓鼓形替换为3 μm，并记录来源及ISO/`local_contact=False`/128×21控制设置；它不修改默认案例512×41主流程，也未验证样机。NaN凸包不是求解出的接触边界；端点局部显示不保证与中心条带合力严格相等，积分差另报。数据和新接口见[接触说明](contact_patterns.md)及[接口文档](api.md)。
-
-新增[行星销/轴承](planet_support.md)和[DC母线](dc_bus.md)校核；它们可直接调用，也可在`analyze_joint`顶层配置后参与方案判定。
-
-[集成设计输入](../examples/dfki_with_screens.json)使用新假定6mm销的功共轭弯剪刚度明确更新系统kpin，再重新协调全部34工况，同时加入行星轴承静安全和4700μF母线。它与前述固定300MN/m的独立一致性比较分别报告；新的几何、许用值和电气参数均不是DFKI原产品规格。
+[集成输入](../examples/dfki_with_screens.json)采用假定6 mm销的计算刚度，同时评价行星轴承静安全和4700 μF母线。零件几何、许用值和电气参数均为本例明确的设计假设。
 
 ```bash
 python -m robot_joint examples/dfki_with_screens.json --output output/integrated --plots

@@ -6,7 +6,7 @@
 
 [Back to the project](../README.en.md). Run all commands below from the project root.
 
-This parameterized NGW calculation kernel connects loads, geometry, materials, tooth modifications, support, motor and thermal inputs. It exports raw contact arrays, engineering results, a Chinese calculation report and CAD/BOM parameters. Version **0.3.1** runs without commercial software or vendor DLLs.
+This parameterized NGW calculation kernel connects loads, geometry, materials, tooth modifications, support, motor and thermal inputs. It exports raw contact arrays, engineering results, a Chinese calculation report and CAD/BOM parameters. The calculation modules run as a self-contained project.
 
 ## Case: redesigning the joint transmission for a physical DFKI pendulum
 
@@ -107,7 +107,6 @@ python -m pip install ".[plots]"
 python -m robot_joint examples/dfki_pendulum_case.json --output output/pendulum
 python -m examples.build_showcase --output output/showcase --raw-output output/raw
 python -m examples.compare_designs --output output/comparison.json
-python -m unittest discover -s tests -v
 ```
 
 Alternatively, copy `robot_joint/`, `gear_contact/` and the license into your application:
@@ -133,24 +132,13 @@ The model covers a fixed-ring, sun-input, carrier-output, zero-shift spur NGW st
 See the [model](../docs/model.en.md) and [API contract](../docs/api.en.md). The license is [AGPL-3.0-only](../LICENSE); see [source and license notices](../THIRD_PARTY_NOTICES.md). This page provides the complete physical-requirement-based walkthrough and nine paired figure sets. See the [validation record](validation.en.md) for single-mesh software comparisons and public references, and the [project roadmap](../README.en.md#release-history-and-next-steps) for calibration priorities.
 
 
-## Resolution correction and design constraints
+## Contact results and integrated design
 
-The original 16×13 sampling missed the ring mesh's short double-contact branch, giving zero TE peak-to-peak at this state. After seven independently solved resolution variants, the full case uses 64×26. At the selected peak-pressure state, its ring-mesh mean TE differs by 0.932% and output stiffness by 0.343% from 256×26. Other critical states still need study. See [the resolution study and source data](validation.en.md#ngw-case-discretization-sensitivity); this is not proof of global convergence or prototype accuracy.
+[Contact analysis](contact_patterns.en.md) covers all planets, both meshes, loaded flanks and member material coordinates. Local instantaneous bands use mm along the line and μm normal to it.
 
-New assumed design requirements are output stiffness ≥20 kN·m/rad, Kγ≤2, and supplied-hotspot damage D≤1; these are not original product specifications. After recomputation, the baseline passes; errors ×3 fails stiffness and load sharing, while pin stiffness ×0.3 fails stiffness. Hatching marks candidates that fail configured constraints, and Pareto membership is evaluated only among feasible candidates. Actual values, thresholds, directions and missing constraints are in `summary.check_details`; unmodelled failure modes are in `summary.assessment_coverage` and the [design review](design_review.en.md).
+![Tooth-passage contact pressure](../examples/results/contact_patterns/en/01_contact_overview.png)
 
-
-## Contact-display checks and further design
-
-The 0.3.1 [contact-display workflow](contact_patterns.en.md) follows the cylindrical-LTCA source method. `contact_pass_data` linearly interpolates raw local peak pressures in material coordinates and draws contours for all planets, both meshes, positive/negative and low-load states, and each member. `instantaneous_contact_data` separately displays one pair's instantaneous band in mm along the line and μm normal to it. The original node plot retains its raw-sample meaning; legacy finite-band envelopes remain diagnostics rather than the new passage definition.
-
-![Full tooth-passage pressure and contours](../examples/results/contact_patterns/en/01_contact_overview.png)
-
-[Local instantaneous bands](../examples/results/contact_patterns/en/06_instantaneous_contact.png), the [ISO-control/Love/explicit-crown+Love diagnostic](../examples/results/contact_patterns/en/07_model_comparison.png) and [matching 18/77 original-grid reproduction](../examples/results/contact_patterns/en/08_reference_reproduction.png) separately examine coordinates, model effects and the display chain. The diagnostic replaces each member's profile crown with 3 μm and records source input plus ISO/`local_contact=False`/128×21 controls. It neither changes the default-case 512×41 main workflow nor validates hardware. A NaN convex hull is not a solved contact boundary; local endpoint displays need not integrate to original centre-strip forces, and differences are reported separately. See [contact documentation](contact_patterns.en.md) and [the API](api.en.md) for data and new functions.
-
-New [planet-pin/bearing](planet_support.en.md) and [DC-bus](dc_bus.en.md) checks can be called directly or configured at the top level of `analyze_joint` to participate in screening.
-
-The [integrated design input](../examples/dfki_with_screens.json) explicitly updates system kpin to the new assumed 6mm pin's load-conjugate bending/shear stiffness, then recouples all 34 states and checks planet-bearing static safety and a 4700μF bus. It is reported separately from the fixed-300MN/m consistency comparison. New geometry, allowables and electrical inputs are not original DFKI product specifications.
+The [integrated input](../examples/dfki_with_screens.json) uses the assumed 6 mm pin's calculated stiffness, planet-bearing static safety and a 4700 μF bus. Geometry, allowable stresses and electrical parameters remain explicit case assumptions.
 
 ```bash
 python -m robot_joint examples/dfki_with_screens.json --output output/integrated --plots

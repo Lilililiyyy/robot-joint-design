@@ -59,7 +59,6 @@ Each planet's pin-load magnitude and relative speed feed the existing `bearing_d
 ```bash
 python -m examples.check_planet_support --results output/pendulum --output output/planet_support
 python -m examples.check_planet_support --input examples/dfki_pendulum_case.json --output output/planet_support
-python -m unittest discover -s tests -p test_planet_support.py -v
 ```
 
 The first command directly reuses a full `export_joint` directory after checking input, pin-load and speed SHA-256 values. The second reruns the joint analysis first. `--assumptions custom.json` replaces the candidate pin and bearing parameters. Source modules/functions are directly reusable without the REA workspace or vendor components.

@@ -102,7 +102,7 @@ result = analyze_joint(config)
 |`minimum_planet_bearing_static_safety_factor`|实际值≥限值|行星轴承显式评级参数下的基本静安全；配置行星支承后缺省要求1|
 |`minimum_planet_bearing_basic_l10_hours`|实际值≥限值|行星相对行星架转速的基本L10小时数，仅在明确指定下限时判定|
 
-当前案例选择刚度≥20000 N·m/rad、均载系数≤2、给定谱损伤≤1，均是**本例新增设计假设，不是DFKI实物规格**。生产示例采用64相位×26条带；普通接口测试使用小型求解，完整案例和离散研究由相应复算入口承担。
+当前案例选择刚度≥20000 N·m/rad、均载系数≤2、给定谱损伤≤1，均是**本例新增设计假设，不是DFKI实物规格**。案例系统采用64相位×26条带，局部接触分析可独立加密。
 
 ## 输出与诊断
 
@@ -125,7 +125,7 @@ result = analyze_joint(config)
 
 ## 接触压力显示接口
 
-0.3.1的通过程显示使用`robot_joint.contact_display`，直接读取原`AnalysisResult`，不回写载荷或刚度：
+通过程显示使用`robot_joint.contact_display`，直接读取原`AnalysisResult`，不回写载荷或刚度：
 
 ```python
 from robot_joint.contact_display import contact_pass_data, instantaneous_contact_data
@@ -143,6 +143,4 @@ instant = instantaneous_contact_data(contact, normal_points=301)
 
 批量结果`pattern.npz`保留原字段，追加`pass_face_coordinate_m`、`pass_roll_distance_m`、`pass_pressure_pa_x_y`、`pass_samples`、`pass_ordinary_samples`、`pass_boundary_display_samples`及`local_s_edges_m`、`local_normal_edges_m`、`local_pressure_pa_s_n`。`--replot`先校验SHA清单再重绘；显示插值不增加求解点或接触边界求解。
 
-0.3.0的`interior_snapshot`、`build_contact_pattern`及`export_contact_pattern`保留为有限Hertz带包络的兼容工具。其`sweep_pressure_pa`属于旧包络定义，不是本版源项目方法的通过程显示。原始压力、显示支撑、插值和模型边界分别解释于[接触说明](contact_patterns.md)。
-
-诊断比较输出`source_analysis_input`、`baseline_changes_from_source`与`candidate_profile_rule`。ISO控制基准显式强制`elastic_mode="iso"`、`local_contact=False`和128×21；`replace_each_member_with_3um`将各轮齿廓鼓形替换为3 μm，非累加规则。`kind!="parameters"`的组合修形明确报错。该诊断不改写默认512×41主流程；自定义来源的控制基准变动须读取记录，不能假定与来源输入完全相同。
+`interior_snapshot`、`build_contact_pattern`与`export_contact_pattern`提供附加的有限Hertz带分析，包络字段`sweep_pressure_pa`与材料坐标峰压显示属于不同的量，见[接触分析](contact_patterns.md)。

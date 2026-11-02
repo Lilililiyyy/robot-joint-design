@@ -1,35 +1,17 @@
 {
-  "schema_version": 1,
-  "upstream_repository": "https://github.com/Lilililiyyy/Cylindrical-Gear-LTCA",
-  "upstream_commit": "c63030dc4314a67ba282a3899f7ec8a5f6950fe1",
-  "accessed": "2026-11-02",
-  "software": "MASTA 15.0.179.93",
-  "software_component": "SMT.Gears.dll",
-  "component_sha256": "afb97fbe4fa8d2274ef1ee37e061e3d052210fbb6c27e512009d7efac237470a",
-  "original_design_sha256": "8678d72394ca94d823ba8205149463f0bc731a596bbb8eead1a2055d6873f550",
-  "runtime_in_this_revision": false,
-  "original_reference_sha256": "6e744f0cc0efd2392d35fcaac0fcd361ca5372d130279eb66f9425935cd168d5",
-  "source_file_mapping": {
-    "case.json": {
-      "path": "examples/helical_18_77_case.json",
-      "sha256": "7ea688056ae1a47b93f5a451e69a03b9a285ec003c35190656802f6c3d7092b4"
-    },
-    "contact.json": {
-      "path": "examples/masta_reference/showcase_contact.json",
-      "sha256": "af4179e7548c8293624ab8a1aa7cc47ed29ab3f20f7ab124329521507065edfb"
-    },
-    "contact.npz": {
-      "path": "examples/masta_reference/showcase_contact.npz",
-      "sha256": "62aee4341c15f462f69e5ab1b105a5a1b49ab8c329d987c88a37487e587520cc"
-    }
-  },
+  "schema_version": 2,
+  "reference_name": "MASTA",
+  "reference_version": "15.0.179.93",
+  "case_id": "helical_18_77",
+  "reference_kind": "saved_numeric_results",
   "files": {
     "case.json": "7ea688056ae1a47b93f5a451e69a03b9a285ec003c35190656802f6c3d7092b4",
     "contact.json": "af4179e7548c8293624ab8a1aa7cc47ed29ab3f20f7ab124329521507065edfb",
     "contact.npz": "62aee4341c15f462f69e5ab1b105a5a1b49ab8c329d987c88a37487e587520cc",
-    "reference.json": "0950aca6d142ea8c267cbb01fba63c4ae1e9fd2cf2a0c94f65a48736b4e3c7f7"
+    "reference.json": "0950aca6d142ea8c267cbb01fba63c4ae1e9fd2cf2a0c94f65a48736b4e3c7f7",
+    "display.npz": "6fb034e0d7c04bae2e178a2572914ee5206f8300edb413409588370a8591637f",
+    "display_input.json": "a03a54ac39192e7c24f5b05507cbe114d415b59dbd19b5cb297eff5e37ed6da1"
   },
-  "scope_zh": "既有公开数值证据的离线复算；本次未运行MASTA；并非NGW总成厂商对标，也不是物理试验。",
   "kernel_sha256": {
     "__init__.py": "a6bf5d04d1fb112226e446bfd293b6b05811489ca813e98e2af54674fc067bc3",
     "__main__.py": "d7edbd907ef0f1795469903dbd22078d47e204da2a2bf59d9c416d5860882b74",
@@ -47,5 +29,6 @@
     "solver.py": "98437bd348e0f37e20072f5c391654d8a337af69c1dc12be19071501db54399c",
     "strength.py": "28e9a6cd9b4de68d99edd90d1a4e003085d0e0bb24b89d7cbf1ff982a131993a",
     "surfaces.py": "1f0a582d451f0d4a6c57e0e9b0fae416af92ddaf678b226a489a0c6d9df5b05a"
-  }
+  },
+  "scope_zh": "指定单副的已保存数值结果；本次未重新运行MASTA，不构成关节总成或样机验证。"
 }

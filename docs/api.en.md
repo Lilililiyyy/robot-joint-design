@@ -101,7 +101,7 @@ Positive tooth modification means material removal. Parameter, measured-curve, m
 |`maximum_load_share_factor`|Actual ≤ limit|Largest planetary load-share factor among loaded states; undefined for an entirely unloaded duty|
 |`fatigue_damage_per_input_history`|Actual ≤ limit|Miner damage for the supplied scalar hotspot record, without a mapping to target service hours|
 
-The case selects stiffness ≥20000 N·m/rad, load-share factor ≤2 and supplied-record damage ≤1. These are **new case-specific design assumptions, not DFKI hardware specifications**. The production example uses 64 phases ×26 strips; ordinary interface tests use small solves, while the dedicated workflows reproduce the full case and discretization study.
+The case selects stiffness ≥20000 N·m/rad, load-share factor ≤2 and supplied-record damage ≤1. These are **new case-specific design assumptions, not DFKI hardware specifications**. The example system uses 64 phases ×26 strips; local contact calculations may be refined separately.
 
 ## Results and checks
 
@@ -124,7 +124,7 @@ JSON uses null for undefined nonfinite statistics. NPZ contains numeric arrays w
 
 ## Contact pressure display API
 
-Version 0.3.1 uses `robot_joint.contact_display` for passage displays. It reads an original `AnalysisResult` without feeding back loads or stiffness:
+Passage display uses `robot_joint.contact_display` for passage displays. It reads an original `AnalysisResult` without feeding back loads or stiffness:
 
 ```python
 from robot_joint.contact_display import contact_pass_data, instantaneous_contact_data
@@ -137,10 +137,8 @@ instant = instantaneous_contact_data(contact, normal_points=301)
 
 `instantaneous_contact_data(result, *, phase_index=None, tooth_pair_index=None, normal_points=301)` selects one pair at one phase and returns `s_edges_m`, `normal_edges_m`, `pressure_pa_s_n` and `source_*` values. The matrix is [along-line cells, normal cells]. Functions use SI; plots convert along-line coordinates to mm and normal coordinates to μm, with different axis display scales. `normal_points` must be an integer of at least 21. Automatic selection uses `interior_snapshot` within its supported scope. With an explicit phase but no pair index, the pair containing that phase's peak-pressure node is selected. Centre-only models preserve each original strip's constants; independent endpoint models use only piecewise-linear endpoint subdivision for display. Instantaneous and passage grids cannot be compared pixelwise.
 
-The local function also returns `source_total_force_n`, `display_integrated_force_n` and `display_relative_force_error`. The latter is the signed, dimensionless `(display integral − original force) / original force`, defined as zero when original force is zero. Constant-centre analytical Hertz integrals satisfy the original strip-force identity. Independent endpoint interpolation treats pressure peaks and half-widths separately, so its displayed integral need not equal the original centre-strip force. Retaining `source_*` is not a display-force-conservation claim. The API does not renormalize pressure; see [the local 18/77 example and limits](contact_patterns.en.md).
+The local function also returns `source_total_force_n`, `display_integrated_force_n` and `display_relative_force_error`. The latter is the signed, dimensionless `(display integral − original force) / original force`, defined as zero when original force is zero. Constant-centre analytical Hertz integrals satisfy the original strip-force identity. Independent endpoint interpolation treats pressure peaks and half-widths separately, so its displayed integral need not equal the original centre-strip force. Retaining `source_*` is not a display-force-conservation claim. The API does not renormalize pressure; see [contact definitions and limits](contact_patterns.en.md).
 
 Batch `pattern.npz` files retain original fields and add `pass_face_coordinate_m`, `pass_roll_distance_m`, `pass_pressure_pa_x_y`, `pass_samples`, `pass_ordinary_samples`, `pass_boundary_display_samples`, `local_s_edges_m`, `local_normal_edges_m` and `local_pressure_pa_s_n`. `--replot` verifies SHA manifests before drawing. Display interpolation adds no solver points or contact-boundary solution.
 
-The 0.3.0 functions `interior_snapshot`, `build_contact_pattern` and `export_contact_pattern` remain compatibility tools for finite-Hertz-band envelopes. Their `sweep_pressure_pa` follows that legacy envelope definition, not the current source-style passage display. [Contact documentation](contact_patterns.en.md) distinguishes solved pressures, display support/interpolation and model limits.
-
-Diagnostic comparisons record `source_analysis_input`, `baseline_changes_from_source` and `candidate_profile_rule`. The ISO control baseline explicitly forces `elastic_mode="iso"`, `local_contact=False` and 128×21. `replace_each_member_with_3um` replaces each member's profile crown with 3 μm rather than adding it. Composite modifications with `kind!="parameters"` raise an explicit error. The diagnostic does not overwrite the default 512×41 main workflow. For custom sources, read the recorded control-baseline changes instead of assuming unchanged source input.
+`interior_snapshot`, `build_contact_pattern` and `export_contact_pattern` provide additional finite-Hertz-band analysis. Their envelope field `sweep_pressure_pa` differs from the material-coordinate peak-pressure display. See [contact analysis](contact_patterns.en.md).

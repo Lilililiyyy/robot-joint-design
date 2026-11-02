@@ -207,7 +207,7 @@ def export_engineering_parameters(result: "JointResult", output_dir) -> list[str
     """导出CAD参数、参数级BOM与布局SVG，返回三个实际输出路径。
 
     所有数量和规格来自拓扑与当前输入。采购型号留空，未知实体尺寸
-    不补默认值。输出目录由调用者决定，不依赖REA目录或当前工作目录。
+    不补默认值。输出目录由调用者决定，通过项目标记定位路径。
     """
     root = Path(output_dir)
     root.mkdir(parents=True, exist_ok=True)

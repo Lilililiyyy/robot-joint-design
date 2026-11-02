@@ -1,4 +1,4 @@
-"""新写验证工具：离线复算MASTA单副、MathWorks雨流表和实物参数一致性。
+"""结果对标工具：计算MASTA单副对标及公开硬件参数的一致性。
 
 参照响应只用于比较，不进入求解；数值接近不等于整机关节物理验证。
 """
@@ -180,13 +180,13 @@ def run_masta(reference_dir, output):
 
 
 def run_rainflow(reference_path, output):
-    """按官方表的range、mean、count逐行核验，不冒充本机MATLAB调用。"""
+    """对固定循环计数样例逐行核验range、mean、count。"""
     reference = read(reference_path)
     rows = []
     for case in reference["cases"]:
         actual = rainflow_cycles(case["input"])
         if len(actual) != len(case["expected"]):
-            raise ValueError("雨流表行数不等于官方参考")
+            raise ValueError("循环计数行数不等于固定参考")
         for index, (row, expected) in enumerate(zip(actual, case["expected"])):
             for field, original in zip(reference["columns"], expected):
                 rows.append({"case_id": case["case_id"], "cycle_index": index,
@@ -194,7 +194,7 @@ def run_rainflow(reference_path, output):
     summary = {"cases": len(reference["cases"]), "cycle_rows": len(rows) // 3,
                "scalar_fields": len(rows), "matched_fields": sum(row["matched"] for row in rows),
                "all_matched": all(row["matched"] for row in rows),
-               "matlab_executed": False, "source_url": reference["source_url"],
+               "numerical_regression": True,
                "reference_sha256": digest(reference_path), "physical_validation": False}
     write_csv(output / "rainflow_comparison.csv", rows)
     return summary
@@ -232,11 +232,10 @@ def run(output):
         raise ValueError("结果目录不得覆盖参照目录及其父子路径")
     output.mkdir(parents=True, exist_ok=True)
     masta = run_masta(reference / "masta_18_77", output)
-    rainflow = run_rainflow(reference / "mathworks_rainflow.json", output)
     hardware = run_hardware(output)
-    summary = {"schema_version": 1, "masta": masta, "rainflow": rainflow, "hardware": hardware,
+    summary = {"schema_version": 1, "masta": masta, "hardware": hardware,
                "physical_validation": False, "whole_joint_vendor_benchmark": False,
-               "passed": masta["common_comparison_passed"] and rainflow["all_matched"] and hardware["exact_consistency_matched"] == 4,
+               "passed": masta["common_comparison_passed"] and hardware["exact_consistency_matched"] == 4,
                "validation_tool_sha256": digest(Path(__file__))}
     write_json(output / "summary.json", summary)
     return summary
@@ -248,7 +247,6 @@ def main():
     args = parser.parse_args()
     result = run(args.output)
     print(json.dumps({"passed": result["passed"], "masta_common_fields": result["masta"]["common_fields_matched"],
-                      "rainflow_scalar_fields": result["rainflow"]["matched_fields"],
                       "physical_validation": False}, ensure_ascii=False, indent=2))
     if not result["passed"]:
         raise SystemExit("已声明判据的对标量未通过")

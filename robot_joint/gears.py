@@ -1,4 +1,4 @@
-"""复用公开圆柱齿轮内核的NGW齿面适配，保留原单位与计算结果。"""
+"""NGW内外两副的齿面分析接口，采用统一单位与逐行星载荷。"""
 from __future__ import annotations
 
 import math

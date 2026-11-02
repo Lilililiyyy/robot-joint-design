@@ -310,10 +310,10 @@
   {
     "group": "ltca",
     "field": "max_endpoint_pressure_pa",
-    "project": 186674381.66062358,
+    "project": 186674381.6606236,
     "reference": 186674351.8004542,
-    "absolute_error": 29.860169380903244,
-    "relative_error": 1.599586075585912e-07,
+    "absolute_error": 29.860169410705566,
+    "relative_error": 1.599586077182399e-07,
     "atol": null,
     "rtol": null,
     "matched": null

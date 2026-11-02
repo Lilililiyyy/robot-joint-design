@@ -1,4 +1,4 @@
-"""对标证据绑定、实际输入响应和公开软件表的独立回归核验。"""
+"""对标数据绑定、实际输入响应和固定循环表的回归核验。"""
 from copy import deepcopy
 import json
 from pathlib import Path
@@ -60,12 +60,12 @@ class BenchmarkTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 run(output)
 
-    def test_rainflow_official_two_tables(self):
-        result = self.result["rainflow"]
+    def test_rainflow_fixed_cycle_tables(self):
+        result = run_rainflow(PROJECT / "tests/fixtures/rainflow_cycles.json", self.output)
         self.assertEqual(result["cycle_rows"], 16)
         self.assertEqual(result["matched_fields"], 48)
         self.assertTrue(result["all_matched"])
-        self.assertFalse(result["matlab_executed"])
+        self.assertTrue(result["numerical_regression"])
 
     def test_hardware_consistency_is_separate_from_measurements(self):
         result = self.result["hardware"]

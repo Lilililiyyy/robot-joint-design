@@ -75,4 +75,4 @@ python -m examples.check_dc_bus --results output/pendulum --output output/dc_bus
 - `within_minimum_voltage_by_ideal_source_assumption`：源电压下限假设保证的数值结果，**不是有限电源、线路压降或实物欠压能力检查**。
 - `within_maximum_voltage`与`physical_validation`分别记录模型约束和实物验证状态。独立函数只返回结果；在`analyze_joint`配置顶层`dc_bus`后，最高母线电压会纳入`summary.configured_checks_pass`。理想源保证的最低电压仍标记`not_evaluated`，不能视为实物欠压通过。见[完整API](api.md)。
 
-未覆盖PWM、相电感能量、线路ESR/ESL、母线纹波、驱动器电流/电压/峰值持续时间、保护关断与电阻热容量；也未由Kt推断跨电流基准的Ke。静态机械制动器和再生母线是不同功能。9项独立测试覆盖电容解析能量、双向效率、回馈/机械功率区别、源电压及上限阈值事件、有限吸收、分段不变性、守恒和无效输入。
+未覆盖PWM、相电感能量、线路ESR/ESL、母线纹波、驱动器电流/电压/峰值持续时间、保护关断与电阻热容量；也未由Kt推断跨电流基准的Ke。静态机械制动器和再生母线是不同功能。

@@ -1,11 +1,4 @@
-"""接触图独立回归：原18/77显示网格与直齿分载因果，不对斑点外形拟合。
-
-新写测试。参考是cylindrical-gear-ltca提交cb2e1ec的本项目计算结果，
-contact_display.py SHA256为
-bad5623144a828b2230b4b5405ad635e8d117dc38069d4b12e673c3a9d6c8f32。
-冻结值含30×30普通齿廓峰压插值面、SI坐标及NaN掩码；不含MASTA压力。
-该测试只约束显示复现和分载物理关系，不构成机器人案例的实测验证。
-"""
+"""固定接触显示场回归及直齿分载关系；不对斑点外形拟合。"""
 from base64 import b64decode
 from copy import deepcopy
 from io import BytesIO
@@ -18,7 +11,7 @@ from gear_contact import analyze_config
 from robot_joint.contact_display import contact_pass_data
 
 
-# 保留上游完整输入，含实际形径、组合修形、延伸、相位与名义/LTCA扭矩。
+# 保留完整分析输入，含实际形径、组合修形、延伸、相位与名义/LTCA扭矩。
 HELICAL_REFERENCE_CONFIG = {'pair': {'pinion': {'teeth': 18,
                      'normal_module_m': 0.002,
                      'face_width_m': 0.024,
@@ -97,7 +90,7 @@ HELICAL_REFERENCE_CONFIG = {'pair': {'pinion': {'teeth': 18,
  'misalignment_m': 0.0}
 
 # 用标准NPZ冻结数值，测试可随独立项目复制；加载显式禁用pickle。
-UPSTREAM_DISPLAY_NPZ_BASE64 = (
+EXPECTED_DISPLAY_NPZ_BASE64 = (
     'UEsDBBQAAAAIAAAAIQAC+snf8QAAAHABAAAVABQAZmFjZV9jb29yZGluYXRlX20ubnB5AQAQAHABAAAAAAAA8QAAAAAAAACb7Bfq'
     'GxDJyFDGUK2eklqcXKRupaBuk2ahrqOgnpZfVFKUmBefX5SSChJ3S8wpTgWKF2ckFqQC+RrGBjqaOgq1CuQDLgYocFbac8Nbztse'
     'Qkfbb5LsfbQjLAXKz7bPmlqa/v5TAVS8xP733CWxTbvKofLV9j3LLgeLNtVB1TXY94Uzql5Z0gRV32J//bbEgrkcbVB97fYKCQbS'
@@ -236,9 +229,9 @@ class ContactDisplayReferenceTests(unittest.TestCase):
         np.testing.assert_array_equal(result.rotations[0].endpoint_pressure['pressure_pa'], before)
         self.assertIn('source_endpoint_pressure_pa', local)
 
-    def test_same_18_77_result_replays_upstream_30_by_30_grid_and_nan_mask(self):
+    def test_same_18_77_result_matches_expected_30_by_30_grid_and_nan_mask(self):
         result = analyze_config(deepcopy(HELICAL_REFERENCE_CONFIG))
-        with np.load(BytesIO(b64decode(UPSTREAM_DISPLAY_NPZ_BASE64)), allow_pickle=False) as source:
+        with np.load(BytesIO(b64decode(EXPECTED_DISPLAY_NPZ_BASE64)), allow_pickle=False) as source:
             x, y = source['face_coordinate_m'], source['roll_distance_m']
             expected = source['pressure_pa_x_y']
             actual = contact_pass_data(result, face_coordinate_m=x, roll_distance_m=y)

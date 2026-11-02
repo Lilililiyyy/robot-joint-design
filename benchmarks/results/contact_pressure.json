@@ -1,0 +1,19 @@
+{
+  "reference_name": "MASTA",
+  "case_id": "helical_18_77",
+  "grid_shape_x_y": [
+    30,
+    30
+  ],
+  "common_finite_count": 840,
+  "project_uncovered_count": 60,
+  "mae_pa": 40641.26143047146,
+  "rmse_pa": 140090.42882750867,
+  "maximum_absolute_difference_pa": 2994763.3457541466,
+  "reference_display_peak_pa": 186522329.40108263,
+  "project_display_peak_pa": 186524300.10156083,
+  "project_raw_endpoint_peak_pa": 186674381.6606236,
+  "whole_joint_benchmark": false,
+  "physical_validation": false,
+  "scope_zh": "同一单副输入的通过程压力结果对标，使用已保存参照；端点压力与显示压力分别定义。"
+}

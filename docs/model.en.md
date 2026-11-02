@@ -40,9 +40,9 @@ Preload, internal clearance, lubrication/contamination/reliability corrections, 
 
 ## Rainflow and finite-life damage
 
-The new turning-point stack retains residual half cycles for open records. Two [MathWorks reference tables](https://www.mathworks.com/help/signal/ref/rainflow.html) supply independent numerical checks without invoking MATLAB. Stress amplitude is `range/2`; the supplied S–N power law is `N=Nref(σref/σa)^m`. Miner accumulation is `Σcount/N`.
+The turning-point stack retains residual half cycles for open records. Stress amplitude is `range/2`; the supplied S-N law is `N=Nref(σref/σa)^m`. Miner accumulation is `Σcount/N`.
 
-Optional Goodman correction is `σa,eq=σa/[1−max(σmean,0)/Su]`. Giving no beneficial correction for compressive mean stress is an explicit engineering convention; see [COMSOL](https://doc.comsol.com/6.3/doc/com.comsol.help.fatigue/fatigue_ug_sme.4.28.html).
+Optional Goodman correction is `σa,eq=σa/[1−max(σmean,0)/Su]`. Compressive mean stress receives no beneficial correction under this explicit engineering convention.
 
 Inputs must be stresses in Pa. No multiaxial reduction, material database, endurance limit or actual tooth-by-tooth history generation is provided. Kinematic contact opportunities do not equal fatigue cycles. Truncated repeated records must preserve real ordering and residual-cycle handling.
 
@@ -54,7 +54,7 @@ Motor speed is `iωout`. Reflected load torque is `Tout/(iηf)` in motoring, `To
 
 The uncompensated deterministic angle bound adds absolute loaded offset, half total backlash, output-referred half-count and absolute assembly error. Two-flank static envelopes have no friction history and do not represent measured hysteresis.
 
-The two-node thermal network is `Cθdot=P−Gθ`. G contains ambient and node-to-node conductances. Constant-loss segments use exact matrix-exponential propagation. Each temperature is a sum of two real exponentials, so endpoints and internal derivative zeros are checked for peaks. Periodic mode composes `θend=Aθ0+b`, solves `(I−A)θ0=b`, then checks cycle closure and energy. [SciPy matrix exponential](https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.expm.html) supplies an independent numerical reference.
+The two-node thermal network is `Cθdot=P−Gθ`. G contains ambient and node-to-node conductances. Constant-loss segments use exact matrix-exponential propagation. Each temperature is a sum of two real exponentials, so endpoints and internal derivative zeros are checked for peaks. Periodic mode composes `θend=Aθ0+b`, solves `(I−A)θ0=b`, then checks cycle closure and energy.
 
 Thermal capacities/conductances, efficiency and loss parameters are supplied. Temperature-dependent resistance feedback, lubrication prediction and spatial temperature fields are excluded.
 
@@ -64,17 +64,10 @@ Minimum output torsional stiffness, maximum load-share factor and supplied-hotsp
 
 `summary.check_details` records each actual value, limit, comparison direction, status and scope. Missing-input items are `not_evaluated`; calculated quantities without limits are `not_configured`. Neither counts as a pass. `summary.assessment_coverage` separately identifies unmodeled items, so `configured_checks_pass=true` means only that evaluated constraints pass.
 
-Equivalent pin stiffness is not pin strength; basic L10 for the two output bearings does not cover planet bearings; power balance does not establish bus absorption or inverter current/voltage capability. Ring-rim, carrier and housing strength, preload/fits, lubrication and oscillation damage, torsional dynamics and control bandwidth require their own models or experiments. Changes, tests and priorities are recorded in the [design review](design_review.en.md).
+Equivalent pin stiffness is not pin strength; basic L10 for the two output bearings does not cover planet bearings; power balance does not establish bus absorption or inverter current/voltage capability. Ring-rim, carrier and housing strength, preload/fits, lubrication and oscillation damage, torsional dynamics and control bandwidth require their own models or experiments. Design criteria and further engineering work are described in the [design guide](design_review.en.md).
 
-## Current verification state
+## Planet support, bus and contact results
 
-The modules have analytical, equilibrium, public-reference-table, numerical and interface tests. The reused single-mesh kernel has bounded vendor comparison history; current reproducible benchmarks and discretization evidence are described in [validation](validation.en.md). Vendor numerical agreement, independent equation checks, published hardware-parameter checks and physical testing are separate levels. The new system layer has no whole-system commercial benchmark or hardware accuracy validation. The pendulum case is a reproducible source-grounded redesign, not a calibrated replica of the physical testbed.
+Optional pin/bearing and bus checks use explicit geometry, capacities and electrical inputs. Pin stiffness is fed back only through a deliberate system configuration update. [Contact maps](contact_patterns.en.md) combine local peak-pressure samples in material coordinates with linear triangular display interpolation. Instantaneous bands use separate along-line/normal coordinates. Independent endpoints, centre samples and display support retain their definitions; unsupported regions remain NaN.
 
-
-## Further design and corrected contact displays
-
-Optional [planet-pin/bearing](planet_support.en.md) and [bus-energy](dc_bus.en.md) checks participate in screening under explicit inputs. The pin model does not silently replace path stiffness: geometry feedback requires a deliberate configuration update and recomputation. Beam/shear, basic ratings and ideal-source assumptions retain separate limits.
-
-The 0.3.1 [passage pressure display](contact_patterns.en.md) follows the cylindrical-LTCA source method, assembling all pairs' local peak pressures from one period in material coordinates and applying triangular linear interpolation. Independent endpoint pressures remain distinct from centre pressures. Centre-only models extend only outer-strip values to their actual element boundaries for display support; the convex-hull exterior is NaN. The passage map is not a simultaneous pressure field, and its hull is not a solved contact boundary. A separate local single-pair Hertz band uses mm along the line and μm normal to it. `contact_pass_data` and `instantaneous_contact_data` have different coordinates and quantity definitions; see [the API](api.en.md). Legacy finite-Hertz-band envelopes remain compatibility diagnostics.
-
-The default ISO spur, zero-profile-crown main workflow is unchanged; its single-/double-pair switching can retain pressure zones. A separate selected-state study re-solves an ISO control baseline, Love only, and each member's crown replaced by 3 μm plus Love. Controls explicitly force ISO, `local_contact=False` and 128×21, recording source input and changes. Arbitrary custom sources are not described as unchanged, and improved appearance is not a physical correction. The diagnostic separates compliance/modification effects and their normal-approach/stiffness cost; non-`parameters` composite modifications raise an error. Local endpoint displays interpolate peaks and half-widths separately, without guaranteed equality between display integrals and original strip forces; original values and integral differences remain distinct. The matching 18/77 case is reproduced pointwise on its original 30×30 display grid. Agreement with the upstream display method and error against MASTA are separate metrics. These displays and local solves add no 2D/FE contact solver or hardware validation.
+The default unrelieved spur ISO model can retain single/double-pair pressure transitions. Local endpoint display integrals can differ from original centre-strip forces, with both values recorded. These calculations do not add 2D/FE contact or establish measured joint performance.
