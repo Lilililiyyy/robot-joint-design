@@ -4,8 +4,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License: AGPL-3.0-only](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE)
 
-单级NGW机器人关节模组的独立 Python 设计与准静态校核计算内核。连接载荷谱、行星均载、逐行星LTCA、齿通过程压力显示、标准强度、输出支承、机电匹配、精度预算与周期热响应，并提供可选的行星销/行星轴承及再生母线初筛。当前版本 **0.3.1**，运行不依赖商业软件或厂商DLL，函数与原始结果可直接复算。
-
+NGW机器人关节模组设计与准静态校核计算。连接载荷谱、行星均载、逐行星LTCA、齿通过程压力显示、标准强度、输出支承、机电匹配、精度预算与周期热响应，并提供可选的行星销/行星轴承及再生母线初筛。
 ## 目录
 
 - [安装与调用](#安装与调用)
@@ -161,7 +160,7 @@ python -m robot_joint examples/dfki_with_screens.json --output output/integrated
 
 接触显示另外以18/77原案例的30×30网格逐点核对，分别检查有效点压力及未覆盖区域掩码，再应用到NGW。图中MASTA保存参照与本次重算显示采用同一蓝红色标；原始端点压力、插值后压力及上游显示方法再现误差分别记录于[复现摘要](examples/results/contact_patterns/reference_reproduction.json)。上游显示再现一致不等于MASTA误差为零，也不构成关节总成对标。
 
-参照输入、原始结果、绝对/相对误差与复算入口见[验证说明](docs/validation.md)。单副对标未覆盖NGW总成，公开硬件参数核验也未验证关节的实际温升、刚度、精度或寿命。当前没有KISSsoft、精益传动或ETAGear的总成对标结果。
+参照输入、原始结果、绝对/相对误差与复算入口见[验证说明](docs/validation.md)。单副对标未覆盖NGW总成，公开硬件参数核验也未验证关节的实际温升、刚度、精度或寿命。
 
 ## 验证与复算
 
