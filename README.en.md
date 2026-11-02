@@ -4,7 +4,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License: AGPL-3.0-only](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE)
 
-An independent Python kernel for parameterized design and quasi-static assessment of a single-stage NGW robot joint. It connects duty loads, planetary sharing, per-planet LTCA, tooth-passage pressure displays, rating stresses, output support, motor matching, precision budgets and periodic temperature, with optional planet-pin/bearing and regenerative-bus screens. Version **0.3.1** provides callable functions and reproducible raw results without commercial software or vendor DLLs at runtime.
+An independent Python kernel for parameterized design and quasi-static assessment of a single-stage NGW robot joint. It connects duty loads, planetary sharing, per-planet LTCA, tooth-passage pressure displays, rating stresses, output support, motor matching, precision budgets and periodic temperature, with optional planet-pin/bearing and regenerative-bus screens.
 
 ## Contents
 
@@ -161,7 +161,7 @@ Endpoint pressure follows the reference endpoint definition and is saved separat
 
 The contact display is checked point by point on the original 18/77 case's 30×30 grid, including finite pressures and the unsupported-region mask, before application to NGW. The retained MASTA display and current recalculation share one blue/red scale. Raw endpoint pressure, interpolated pressure and upstream-display reproduction error are separate in the [reproduction summary](examples/results/contact_patterns/reference_reproduction.json). Agreement with the upstream display does not mean zero error against MASTA or validate the joint assembly.
 
-See the [validation record](docs/validation.en.md) for reference inputs, retained results, absolute/relative differences and reproduction commands. Single-mesh comparisons do not cover the NGW assembly; hardware-parameter checks do not validate actual joint temperature, stiffness, precision or life. No assembly-level KISSsoft, JYCD or ETAGear comparison is currently available.
+See the [validation record](docs/validation.en.md) for reference inputs, retained results, absolute/relative differences and reproduction commands. Single-mesh comparisons do not cover the NGW assembly; hardware-parameter checks do not validate actual joint temperature, stiffness, precision or life.
 
 ## Verification and reproduction
 
