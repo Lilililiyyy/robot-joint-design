@@ -103,7 +103,7 @@ def export_joint(result, output_dir, *, plots=False):
     if plots:
         from .plotting import plot_joint
         plot_joint(result, root)
-    manifest = {'version': '0.3.0', 'units': {'length': 'm', 'angle': 'rad', 'torque': 'N m',
+    manifest = {'version': '0.3.1', 'units': {'length': 'm', 'angle': 'rad', 'torque': 'N m',
                 'force': 'N', 'pressure': 'Pa', 'temperature': 'K', 'time': 's'},
                 'files': {p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                           for p in sorted(root.rglob('*')) if p.is_file() and p.name != 'manifest.json'}}

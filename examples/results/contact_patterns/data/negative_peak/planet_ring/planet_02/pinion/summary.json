@@ -33,5 +33,18 @@
   "physical_validation": false,
   "frozen_tangential_force_n": 59.44428144411839,
   "signed_output_torque_n_m": -4.856970175951614,
-  "loaded_flank": "negative"
+  "loaded_flank": "negative",
+  "display_schema_version": 2,
+  "passage_definition": "条带中心压力（当前模型无独立端点）",
+  "support_definition": "首尾中心值仅延拓到各自原积分单元边界；不是独立端点解",
+  "display_interpolation": "Delaunay三角线性，仅用于显示",
+  "uncovered_display_count": 201,
+  "local_phase_index": 274,
+  "local_phase": 0.53515625,
+  "local_tooth_pair_index": -1,
+  "local_definition": "原条带中心常值Hertz带",
+  "legacy_sweep_definition": "v0.3有限Hertz带最大值包络，仅兼容保留；不作为本版LTCA通过程显示",
+  "local_source_total_force_n": 31.629641506816547,
+  "local_display_integrated_force_n": 31.63076192968223,
+  "local_display_relative_force_error": 3.5423192053592955e-05
 }

@@ -1,8 +1,10 @@
-"""直齿轮完整齿通过程的接触斑点后处理；保留原压力，不拟合接触边界。
+"""v0.3有限Hertz带包络兼容工具；不作为当前LTCA通过程压力显示。
 
 新写实现。一个基节周期内各相邻齿对按材料展长拼接，等价于相同齿、
 周期稳态下一个齿的完整通过程。瞬时图只保留选定相位的一对齿。
 局部有限带采用原条带Hertz半椭圆，不新增二维弹性接触平衡解。
+该包络与圆柱LTCA的材料坐标峰压插值面不是同一物理量；正式显示使用
+robot_joint.contact_display，瞬时图在局部沿线/垂线坐标单独呈现。
 """
 from dataclasses import dataclass
 from pathlib import Path
@@ -48,7 +50,7 @@ def interior_snapshot(result):
 
 def build_contact_pattern(result, *, member='pinion', profile_points=1601, snapshot_index=None,
                           snapshot_tooth_pair_index=None):
-    """把原条带p0、b映射到有限齿面，并求已解相位上的最大压力。
+    """兼容旧有限带算法：把p0、b映射至齿面并取包络，不等同于LTCA显示面。
 
     仅支持无延伸的直齿内/外啮合，条带须覆盖共同齿宽且等分。横向为原
     条带分片常值，不对齿宽或相位做平滑。沿齿廓采用精确渐开线弧长

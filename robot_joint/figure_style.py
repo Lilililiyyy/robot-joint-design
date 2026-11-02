@@ -56,4 +56,8 @@ def save_publication_figure(fig, stem, *, title='', footnote='', language='zh'):
     fig.savefig(path.with_suffix('.png'), dpi=300, facecolor='white')
     fig.savefig(path.with_suffix('.svg'), facecolor='white',
                 metadata={'Title': title, 'Description': 'language='+language})
+    # Matplotlib路径字符串带行末空格；清理XML空白以减少版本库噪声，图形数值不变。
+    svg_path = path.with_suffix('.svg')
+    svg_path.write_text('\n'.join(line.rstrip() for line in svg_path.read_text(encoding='utf-8').splitlines())+'\n',
+                        encoding='utf-8', newline='\n')
     fig.savefig(path.with_suffix('.pdf'), facecolor='white', metadata={'Title': title})

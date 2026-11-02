@@ -1,42 +1,94 @@
-# 完整接触斑点、原始数据与模型边界
+# 接触压力显示、源项目复现与模型边界
 
 [中文](contact_patterns.md) · [English](contact_patterns.en.md)
 
-0.3.0新增可复用的`robot_joint/contact_pattern.py`。原主页的节点图只对应一个相位，不是完整通过程；现在提供**瞬时一对齿有限接触带**、**周期等价完整单齿通过程最大压力**、三行星正反面与低载斑点，以及四个构件齿面的各自材料坐标。
+0.3.1按[圆柱齿轮LTCA项目](https://github.com/Lilililiyyy/cylindrical-gear-ltca)的实际绘图方法纠正接触显示。**整齿通过程压力图**采用齿宽—材料展长坐标；**一对齿瞬时Hertz带**采用沿接触线mm、垂直接触线μm的局部坐标。这是两种不同的量和坐标，不能互相替代。
 
-![瞬时与完整通过程](../examples/results/contact_patterns/zh/01_contact_overview.png)
+![两副完整齿通过程压力与等压线](../examples/results/contact_patterns/zh/01_contact_overview.png)
 
-## 哪些数据构成完整通过程
+## 本次纠正了什么
 
-当前几何在一个基节周期内同时求多对相邻齿。`tooth_pair_index`是当前包装相位中的相邻齿编号，不是固定物理齿的永久编号。将一个周期中**所有齿对**的同种材料展长拼接，在相同齿、恒定局部载荷与周期边界假设下，等价于一个齿从进入到退出的完整通过程。不能只跟踪固定编号，也不能把相邻齿对的瞬时接触面积相加后称一对齿斑点。
+0.3.0把瞬时微米级Hertz带画在整齿毫米级展长轴上，带宽被压成细线；又把多相位有限带的最大值包络作为与源项目相同的通过程图。这两个后处理对象并不相同，原文“没有插值”的说明也不适用于源项目的通过程显示。旧主页图及相关表述已替换。
 
-默认数据包含正向峰载`forward_04`、反向峰载`reverse_04`和低载`forward_01`，每工况3颗行星×2副，独立重算18副、36个构件齿面。系统载荷和失准来自已协调的64×26系统结果；局部接触加密到512相位×41条带。该加密结果**没有反向修改原系统分载/刚度**。完整斑点是冻结本工况载荷的一次齿通过程，不是1.8秒运动任务的最大压力场。
+本版直接沿用源项目`contact_display.py`的材料坐标采样与三角线性插值方法，先在相同18/77案例验证，再用于关节内外两副。显示适配位于`robot_joint/`；原有`gear_contact/`计算内核保持不变。既有有限带后处理仍可作诊断，但其包络和采样空隙比例不再作为源项目通过程图的定义或正确性证据。
 
-低载`forward_01`虽然角速度为正，但需求扭矩为负，因此采用negative工作面；工作面由扭矩符号决定，不能按运动方向代替。
+## 通过程压力图如何形成
 
-[正面三行星](../examples/results/contact_patterns/zh/02_positive_planets.png) · [反面三行星](../examples/results/contact_patterns/zh/03_negative_planets.png) · [低载边缘](../examples/results/contact_patterns/zh/04_low_load_planets.png) · [四构件材料坐标](../examples/results/contact_patterns/zh/05_members.png)
+源LTCA在一个基节周期内同时求解多对相邻齿。`tooth_pair_index`是包装相位内的相邻齿编号，不是固定物理齿的永久身份。把一个周期中所有齿对的压力样本放到相同材料坐标，在相同齿、固定局部载荷及周期边界假设下，得到一次周期等价的完整齿通过程。固定编号的一对齿不能独自覆盖整个过程。
 
-## 有限Hertz带及力的核对
+显示遵循以下步骤：
 
-每个原条带保留`Fi`、实际条带长度`wi`、峰压`p0`与半宽`b`。直齿接触线沿齿宽，横向以原条带分片常值展开；齿廓沿渐开线材料弧长` s=ρ²/(2rb) `映射，`ρ`为本轮正渐开线展长、`rb`为本轮基圆半径。局部线接触压力为：
+1. 保留原始相位、齿对、齿宽/展长坐标及局部峰压。存在独立端点压力时使用原端点，并排除标记为齿顶延伸的分支，显示普通齿廓。
+2. 只有条带中心压力时使用中心值，并把首末中心值延至原条带的实际外边界，作为显示支撑；这不是新增求得的独立端点压力。
+3. 重合材料坐标按源方法取最大峰压，再用三角线性插值投到显示网格，叠加等压线。插值只定义图面，不改变LTCA原始解。
+4. 支撑点凸包外保留`NaN`并显示为灰色。零压力位于蓝红色标的蓝端；灰色不等于求解得到的零压或脱开。
 
-`p(s)=p0·sqrt(max(0,1−((s−s0)/b)²))`，只在`|s−s0|≤b`内非零。
+纵轴为所选构件自身的渐开线展长，横轴为齿宽坐标，图中均用mm；内啮合和外啮合各自保留材料坐标方向，不能把内齿圈复制为外啮合反号。四构件图分别显示太阳轮、太阳侧行星齿面、内齿侧行星齿面及内齿圈。
 
-原条带满足`Fi=wi·πp0b/2`。本案例最大条带积分绝对差为4.441e-16 N，这是原半椭圆积分恒等式的数值一致性，不是物理精度。完整图在每个材料位置取已求解相位有限带的最大值；没有Delaunay、平滑拟合或向未承载边缘补色。扫掠最大压力的面积积分没有同时受载合力的含义。
+这张图显示各材料位置经历的**局部峰压样本及其显示插值**。它不是同一时刻整个齿面的压力场，其面积积分不等于瞬时齿对合力。凸包也不是新求得的接触边界；其内部的线性插值不证明每个显示点都曾独立求解或接触。
 
-瞬时图单独选择**同一个内域相位、同一对齿**，两轮Hertz带均未越过有效形径。其窄带使用独立的自适应弧长栅格，避免全齿面像素漏掉低载窄接触；当前36份图的最大瞬时栅格积分差为0.000342%。单轮整齿图保留完整有效形径，并按各轮自身展长显示。外啮合`ρw=span−ρp`，内啮合`ρw=span+ρp`，其中`span=a·sin(αw)`；不能把内齿圈坐标照搬外啮合反号。
+## 固定工况、行星与工作面
 
-横向`face_m/face_edges_m`沿用源几何的共同轴向坐标，小轮齿宽中面为0；不暗中将大轮重置为自己的中面。样例轴向偏置为0、两轮齿宽相同。接口仅绘制共同重叠齿宽；各构件自身坐标的区别在于纵向材料展长。
+默认正向峰载`forward_04`、反向峰载`reverse_04`和低载`forward_01`各含3颗行星、内外两副，共18次局部啮合求解、36个构件显示。系统载荷与失准来自64相位×26条带协调结果；局部重算采用512相位×41条带，冻结该工况的局部载荷，**不反向修改原系统分载或刚度**。这不是1.8 s任务中全部工况的压力包络。
 
-## 空白、间隙与齿顶边缘
+低载`forward_01`角速度为正、需求扭矩为负，因此采用negative工作面。工作面由扭矩符号决定。
 
-- 灰色：理论啮合中心路径外的有效齿面；有限Hertz带可跨过该路径端点，但不能跨越实际形径后仍冒充实体压力。
-- 白色：在保存的采样相位中未记录到正压，不等价于证明连续时间永不接触。
-- 网纹：相邻两个正载材料样本的Hertz带之间、且未被任何其他已解带覆盖的空隙。这只是一项采样不足诊断，**不包含全部端部或零载过渡未知域**。
+[正工作面三行星](../examples/results/contact_patterns/zh/02_positive_planets.png) · [反工作面三行星](../examples/results/contact_patterns/zh/03_negative_planets.png) · [低载工况](../examples/results/contact_patterns/zh/04_low_load_planets.png) · [四构件齿面](../examples/results/contact_patterns/zh/05_members.png)
 
-256×41至512×41的上述最大间隙面积比例由1.6439%降至0.0755%。其分母为理论路径材料弧长×共同齿宽；不能据此宣称其他载荷、误差或所有边界均已收敛。默认峰压相位有时恰在齿顶，局部无限带被实际齿面裁掉后可能只保留约半个齿对力。接口保存原齿对力、解析裁剪后力和栅格积分，**不放大压力来补回被裁掉的合力**。内域瞬时展示避开了该边缘，但整个通过程源峰压仍属于当前局部Hertz模型，尚未得到边缘修正后的二维弹性平衡。
+## 瞬时带为何必须使用局部坐标
 
-## 复算、接入和数据布局
+![两副局部瞬时Hertz带](../examples/results/contact_patterns/zh/06_instantaneous_contact.png)
+
+在一个选定内域相位的一对齿上，沿接触线用`s / mm`，垂直接触线用`n / μm`。两轴显示比例不同，便于看清微米级半宽，不能直接按图上长宽比判断实体斑点比例。该图没有把瞬时带重新铺到整齿展长上。
+
+各原条带保留力`Fi`、实际长度`wi`、峰压`p0`和Hertz半宽`b`。局部带满足：
+
+`p(n) = p0 × sqrt(max(0, 1 − (n/b)²))`，仅在`|n| ≤ b`内非零。
+
+`Fi = wi × π × p0 × b / 2`。
+
+上述条带合力恒等式适用于保留中心值常数的分支。独立端点分支为显示而分别线性插值`p0`与`b`，其乘积积分不严格等于原中心条带力；`source_*`保存原值，不表示显示面积积分守恒。接口另报`source_total_force_n`、`display_integrated_force_n`及`display_relative_force_error`。18/77相位0、齿对0的局部显示积分约104.464 N，原条带合力约104.673 N，相对差约−0.20%；不通过重新归一化改动压力来掩盖该差异。默认关节ISO案例没有独立端点，不受这一端点插值差异影响。
+
+解析积分、显示栅格积分及原条带力应分别核对，不能据恒等式验证通过程插值或齿顶边缘物理。局部Hertz模型没有在有限齿顶边界重新求解二维弹性接触；选择内域相位只避免把该边缘裁剪作为瞬时示例。
+
+## 分区来自哪里：保留基准，显式比较修形
+
+![基准与显式齿廓鼓形诊断对照](../examples/results/contact_patterns/zh/07_model_comparison.png)
+
+关节原基准为直齿ISO条带模型，齿廓鼓形、齿顶/齿根修缘为零，原齿向修形保留。单齿区与双齿区的承载齿数发生切换，零齿廓修形下会出现明显压力分区。即使采用源项目相同的显示方法，这种分区仍可能存在；参考18/77斜齿案例带有不同的修形和柔度设置，不能要求两个不同模型具有相同椭圆外观。
+
+另选`negative_peak/sun_planet/planet02`，以128相位×21条带重新求解**ISO控制基准**、仅Love及**每轮3 μm齿廓鼓形+Love**三组。在相同载荷下分别比较柔度模型和显式修形对压力过渡、法向趋近与刚度的影响，详见[模型比较摘要](../examples/results/contact_patterns/model_comparison.json)。默认案例512×41主流程输入不变。3 μm是新增诊断假设，不是mjbots/DFKI实物修形数据，也不是优化或样机验证。
+
+诊断脚本单列`source_analysis_input`与`baseline_changes_from_source`：控制基准显式强制`elastic_mode="iso"`、`local_contact=False`及128×21离散，不把任意自定义输入称为未经修改的原基准。候选规则`candidate_profile_rule="replace_each_member_with_3um"`表示将两轮`profile_crown_m`分别替换为3 μm，而非在任意原鼓形上累加。默认来源原本为ISO、零齿廓鼓形，本次显式记录控制设置不会改变下表既有128×21诊断数值；来源离散与控制离散仍分别保存。`kind`不是`parameters`的组合修形不支持，明确报错。
+
+|诊断模型|原解峰压 / MPa|平均法向趋近 / μm|源汇总平均啮合刚度 / N·μm⁻¹|最大相邻样本齿对力差/总法向力|
+|---|---:|---:|---:|---:|
+|ISO控制基准|827.462|1.30360|62.0245|50.000%|
+|仅增加Love|820.081|1.30360|62.0245|50.000%|
+|Love + 每轮3 μm齿廓鼓形|708.122|2.77860|51.5135|2.0495%|
+
+仅Love没有消除原单/双齿切换；显式鼓形改善了该离散下的过渡，但伴随更大的法向趋近和更低的源平均刚度。趋近包含修形几何基准，不能直接理解为纯弹性变形；这里的平均啮合刚度也不是输出刚度。相邻样本力差取决于128相位离散，不是连续解导数或全边界收敛证据。三组均未重新协调系统分载。
+
+## 18/77源项目显示复现
+
+![相同18/77案例的参考与当前显示](../examples/results/contact_patterns/zh/08_reference_reproduction.png)
+
+复现按相同18/77输入、工作面及载荷重新求解，将MASTA保存显示场与本次重算端点的显示场在原30×30网格上核对每个有效压力值及`NaN`掩码，再用相同蓝红色标并列显示。同时核对上游项目显示方法的再现误差；即使该再现误差为零，也不等于MASTA对标误差为零。原端点峰压、插值后显示峰压与两类比较分别记录于[复现摘要](../examples/results/contact_patterns/reference_reproduction.json)。
+
+|核对项|本次结果|
+|---|---:|
+|与上游显示方法最大绝对差|0 Pa，NaN掩码相同|
+|MASTA共同有效点 / 本项目未覆盖点|840 / 60|
+|相对MASTA显示场MAE / RMSE|0.040641 / 0.140090 MPa|
+|相对MASTA显示场最大绝对差|2.994763 MPa|
+|MASTA / 本项目显示峰压|186.522329 / 186.524300 MPa|
+|本项目原端点峰压|186.674382 MPa|
+
+本轮使用已保存MASTA参照，没有重新运行MASTA。显示峰值接近不能代替全场误差；最大差与MAE、RMSE一起保留，不将原端点峰压与显示峰压混算。
+
+这项核验补充已有的MASTA单副TE、刚度和端点压力对标。它验证所列案例的计算/显示链路，不验证NGW总成、修形优化或样机接触。一般回归测试数量、图面连续、局部Hertz积分恒等式均不能替代这项逐点核对，更不能独自建立物理准确性。
+
+## 复算与原始数据
 
 ```bash
 python -m examples.build_contact_patterns --phases 512 --strips 41
@@ -44,27 +96,29 @@ python -m examples.build_contact_patterns --replot
 python -m examples.build_contact_patterns --joint-results output/pendulum --output output/contact
 ```
 
-只需英文时加`--language en`；`--raw-output output/contact_raw`保存额外完整LTCA原数组/诊断/CSV。默认[完整局部输入](../examples/contact_pattern_inputs.json)含各行星明确扭矩、材料、修形、失准及系统来源SHA，压力响应不作为求解输入。可传自己的`export_joint`目录，由清单绑定输入；仅单工况时直接调用函数：
+只需英文时加`--language en`；`--raw-output output/contact_raw`另存完整LTCA数组/诊断/CSV。[默认局部输入](../examples/contact_pattern_inputs.json)明确记录各行星扭矩、材料、修形、失准及系统来源SHA，压力响应不作为求解输入。自定义`export_joint`目录按其清单核验。
+
+[全局摘要](../examples/results/contact_patterns/summary.json)关联工况、行星、工作面、离散及结果位置。每份齿面输出保留`pattern.npz`、`summary.json`和SHA清单。长度m、压力Pa、力N，图中另转mm/μm/MPa。原条带的`phase_index, phase, tooth_pair_index, face_m, roll_pinion_m, roll_wheel_m, strip_width_m, force_n, pressure_pa, half_width_m`用于追溯原解；显示网格及局部瞬时网格具有各自坐标，不能逐像素相减。
+
+|新增数组|布局与含义|
+|---|---|
+|`pass_face_coordinate_m`、`pass_roll_distance_m`|通过程的一维齿宽、材料展长显示坐标|
+|`pass_pressure_pa_x_y`|[齿宽点, 展长点]；显示插值压力，凸包外NaN|
+|`pass_samples`、`pass_ordinary_samples`|原压力点、排除延伸分支后的普通齿廓点|
+|`pass_boundary_display_samples`|中心模型的边界常值显示支撑，独立端点模型不额外延拓|
+|`local_s_edges_m`、`local_normal_edges_m`|瞬时局部沿线、法向单元边界|
+|`local_pressure_pa_s_n`|[沿线单元, 法向单元]；同一相位一对齿的局部Hertz压力|
 
 ```python
-from robot_joint import build_contact_pattern, export_contact_pattern, interior_snapshot
+from robot_joint.contact_display import contact_pass_data, instantaneous_contact_data
 
-# contact为现有gear_contact.AnalysisResult，或result.cases[j]['contacts'][mesh][planet]
-phase, tooth = interior_snapshot(contact)
-pattern = build_contact_pattern(contact, member="wheel", snapshot_index=phase,
-    snapshot_tooth_pair_index=tooth, profile_points=1601)
-export_contact_pattern(pattern, "output/pattern")
+# contact为逐行星、逐副的原gear_contact.AnalysisResult。
+passage = contact_pass_data(contact, samples=(201, 241))
+instant = instantaneous_contact_data(contact, normal_points=301)
 ```
 
-每份`data/<case>/<mesh>/planet_XX/<member>/`包含`pattern.npz`、`summary.json`和SHA清单。所有长度m、压力Pa、力N；图中才转mm/MPa。原条带以`phase_index, phase, tooth_pair_index, face_m, roll_pinion_m, roll_wheel_m, strip_width_m, force_n, pressure_pa, half_width_m`保存。矩阵按[齿廓采样, 原齿宽条带]排列：
+`contact_pass_data`可传`face_coordinate_m`、`roll_distance_m`复用参照网格；返回未加`pass_`前缀的对应字段。`instantaneous_contact_data`可传`phase_index`和`tooth_pair_index`选相选齿，返回`s_edges_m`、`normal_edges_m`、`pressure_pa_s_n`及`source_*`原值，并分别记录原合力、显示积分及其相对差。完整签名和绘图函数见[接口说明](api.md)。`--replot`仍先校验SHA清单。
 
-|数组|坐标/含义|
-|---|---|
-|`sweep_pressure_pa`|`profile_roll_edges_m`×`face_edges_m`；已求解相位最大有限带压力|
-|`instant_pressure_pa`|独立` snapshot_profile_roll_edges_m `×同一`face_edges_m`；同一对齿的窄带压力|
-|`unresolved_sampling_mask`|扫掠网格中的部分采样空隙诊断|
-|`theoretical_path_mask`|一维扫掠齿廓轴是否在理论啮合中心路径中|
+显示数据与原求解值应分别读取。旧`sweep_pressure_pa`等有限带包络字段属于兼容诊断，不能据字段名推断本版主页图仍采用该算法。SVG/PDF文字与坐标可编辑，压力图层按栅格导出；更密的显示网格不增加求解样本。
 
-两种压力图使用**不同齿廓网格**，不能逐像素相减。源峰压与显示峰压分别记录。压力图层为栅格，SVG/PDF文字和坐标可编辑；NPZ可重新绘制。逐齿面256/512相位比较另见[resolution_comparison.csv](../examples/results/contact_patterns/resolution_comparison.csv)。全局索引与摘要见[summary.json](../examples/results/contact_patterns/summary.json)。
-
-当前接口只实现共同齿宽等分条带的无延伸直齿内/外啮合。斜齿、齿顶延伸、缺相位或可能含逐齿非周期差异的外部回调明确报错。此功能是既有LTCA结果的局部Hertz斑点后处理，**不是二维/三维FE齿面接触、涂色试验、润滑膜压力或样机验证**。
+当前关节案例为无齿顶延伸的直齿内/外啮合。18/77斜齿复现属于独立单副显示核验，不表示NGW系统已支持斜齿。所有上述图均不是二维/三维FE接触、涂色试验、润滑膜压力或硬件验证。

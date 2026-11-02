@@ -1,0 +1,86 @@
+{
+  "pair": {
+    "pinion": {
+      "teeth": 20,
+      "normal_module_m": 0.0005,
+      "face_width_m": 0.005,
+      "pressure_angle_rad": 0.3490658503988659,
+      "helix_angle_rad": 0.0,
+      "profile_shift": 0.0,
+      "internal": false,
+      "tip_diameter_m": null,
+      "root_diameter_m": null,
+      "root_form_diameter_m": null,
+      "tip_form_diameter_m": null
+    },
+    "wheel": {
+      "teeth": 40,
+      "normal_module_m": 0.0005,
+      "face_width_m": 0.005,
+      "pressure_angle_rad": 0.3490658503988659,
+      "helix_angle_rad": 0.0,
+      "profile_shift": 0.0,
+      "internal": false,
+      "tip_diameter_m": null,
+      "root_diameter_m": null,
+      "root_form_diameter_m": null,
+      "tip_form_diameter_m": null
+    },
+    "center_distance_m": 0.015,
+    "axial_offset_m": 0.0
+  },
+  "torque_n_m": 0.2972214072205919,
+  "misalignment_m": 0.0,
+  "phase_offset": 0.0,
+  "phases": 128,
+  "strips": 21,
+  "elastic_mode": "iso",
+  "local_contact": false,
+  "material_pinion": {
+    "youngs_modulus_pa": 210000000000.0,
+    "poisson_ratio": 0.3
+  },
+  "local_reference_depths_m": null,
+  "material_wheel": {
+    "youngs_modulus_pa": 210000000000.0,
+    "poisson_ratio": 0.3
+  },
+  "modification_pinion": {
+    "profile_crown_m": 0.0,
+    "lead_crown_m": 3e-07,
+    "profile_slope_m": 0.0,
+    "lead_slope_m": 0.0,
+    "bias_m": 0.0,
+    "tip_relief_m": 0.0,
+    "tip_start": 0.75,
+    "root_relief_m": 0.0,
+    "root_end": 0.25,
+    "end_relief_m": 0.0,
+    "end_fraction": 0.1
+  },
+  "modification_wheel": {
+    "profile_crown_m": 0.0,
+    "lead_crown_m": 2e-07,
+    "profile_slope_m": 0.0,
+    "lead_slope_m": 0.0,
+    "bias_m": 0.0,
+    "tip_relief_m": 0.0,
+    "tip_start": 0.75,
+    "root_relief_m": 0.0,
+    "root_end": 0.25,
+    "end_relief_m": 0.0,
+    "end_fraction": 0.1
+  },
+  "external_compliance_provider": false,
+  "external_boundary_gap": false,
+  "iso_settings": {
+    "nominal_pinion_torque_n_m": 0.2972214072205919,
+    "application_factor": 1.0,
+    "material_reference_youngs_modulus_pa": 207000000000.0,
+    "dedendum_coeff_pinion": null,
+    "dedendum_coeff_wheel": null,
+    "coupling_relaxation": 1.0,
+    "maximum_coupling_iterations": 500,
+    "coupling_tolerance_m": 2e-12
+  }
+}

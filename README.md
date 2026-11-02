@@ -4,7 +4,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License: AGPL-3.0-only](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE)
 
-单级NGW机器人关节模组的独立 Python 设计与准静态校核计算内核。连接载荷谱、行星均载、逐行星LTCA、完整齿通过程接触分布、标准强度、输出支承、机电匹配、精度预算与周期热响应，并提供可选的行星销/行星轴承及再生母线初筛。当前版本 **0.3.0**，运行不依赖商业软件或厂商DLL，函数与原始结果可直接复算。
+单级NGW机器人关节模组的独立 Python 设计与准静态校核计算内核。连接载荷谱、行星均载、逐行星LTCA、齿通过程压力显示、标准强度、输出支承、机电匹配、精度预算与周期热响应，并提供可选的行星销/行星轴承及再生母线初筛。当前版本 **0.3.1**，运行不依赖商业软件或厂商DLL，函数与原始结果可直接复算。
 
 ## 目录
 
@@ -48,7 +48,7 @@ export_joint(result, "output/pendulum")
 |NGW几何与运动学|齿数装配、相邻行星间隙、速比、转速与啮合载荷关系|固定内齿圈、太阳输入、行星架输出；零变位直齿|
 |行星载荷分配|双工作面路径误差、销柔度、太阳轮共享平移、非负路径力与脱开/重入|支承刚度及额外凝聚柔度由输入给定|
 |逐行星LTCA|内外两副周期TE、切线刚度、接触节点力与局部Hertz压力；位移协调迭代|准静态、周期平均耦合；保留原始接触数组|
-|完整接触斑点|单齿瞬时有限宽Hertz带、完整通过程最大压力、三行星及正反工作面扫掠图|由多相位实际解和有限Hertz带后处理生成；固定载荷、相同齿周期假设，非二维接触或FE|
+|接触压力显示|单齿瞬时Hertz带、完整齿通过程压力与等压线、三行星及正反工作面图|沿用圆柱齿轮LTCA项目的材料坐标线性插值显示；瞬时带另用局部mm/μm坐标，非二维接触或FE|
 |标准强度|ISO 6336:2006显式因子接触/齿根应力及安全系数|外部评级因子、材料限值由用户提供|
 |结构与轴承|六自由度凝聚刚度、双支承反力、转数加权基本L10与静安全|不含实际轴承接触、预紧、游隙和小角摆动损伤|
 |行星销与行星轴承|圆实销弯曲/横剪/平均孔压、弯剪挠度与刚度、逐行星基本评级|显式简支与加载宽度；使用真实销反力和行星相对转速，尺寸/许用值/容量须给定|
@@ -62,7 +62,7 @@ export_joint(result, "output/pendulum")
 
 ## 设计审查与修订
 
-已有最小输出刚度、最大均载系数与给定热点谱损伤限值，以 `passed`、`failed`、`not_configured`、`not_evaluated` 四种状态报告实际值、阈值和覆盖范围。结构参考点偏置采用保持虚功的变换，外齿轮保留标准齿条假设下的根切风险提示。0.3.0继续落实销强度、行星轴承与再生母线初筛，并补上原先未展示的完整齿通过程接触斑点；可选模块使用明确输入和判据，不暗中回写原分载刚度。
+已有最小输出刚度、最大均载系数与给定热点谱损伤限值，以 `passed`、`failed`、`not_configured`、`not_evaluated` 四种状态报告实际值、阈值和覆盖范围。结构参考点偏置采用保持虚功的变换，外齿轮保留标准齿条假设下的根切风险提示。0.3.0增加销强度、行星轴承与再生母线初筛；0.3.1针对接触图的坐标、量定义和源项目显示一致性进行纠正。可选模块使用明确输入和判据，不暗中回写原分载刚度。
 
 当前案例假定 `Kout≥20000 N·m/rad`、`Kγ≤2`、给定谱 `D≤1`，用于同任务方案筛选，不是DFKI公布的实物指标。新增零件尺寸、材料许用值、轴承容量及母线参数同样单列为设计假设。已落实与仍需实物/制造数据的工作见[设计审查](docs/design_review.md)。
 
@@ -84,13 +84,17 @@ export_joint(result, "output/pendulum")
 
 **载荷分配与完整接触斑点**
 
-34个代表工况连接三颗行星、内外两副接触与系统柔度，基准协调采用64相位×26条带。完整斑点在所选固定局部载荷下进一步计算512相位×41条带：上排为单齿瞬时有限宽Hertz带，下排为完整通过程经历的最大压力。
+34个代表工况连接三颗行星、内外两副接触与系统柔度，基准协调采用64相位×26条带。所选固定局部载荷进一步计算512相位×41条带，再按[圆柱齿轮LTCA项目](https://github.com/Lilililiyyy/cylindrical-gear-ltca)同一显示方法，将原始峰压点投到齿宽—材料展长坐标并线性插值，显示两副完整齿通过程压力及等压线。
 
-![两副瞬时单齿接触带与完整通过程最大压力](examples/results/contact_patterns/zh/01_contact_overview.png)
+![两副完整齿通过程压力与等压线](examples/results/contact_patterns/zh/01_contact_overview.png)
 
-完整通过程将相同齿、固定载荷下的周期结果折叠到齿面材料坐标，不能把彩色面积理解为同一时刻承载面积。有限Hertz带来自原条带线载荷/半宽，未将一两条线平滑扩成整面，也不是二维接触或完整FE解。[正工作面三行星](examples/results/contact_patterns/zh/02_positive_planets.png)、[反工作面三行星](examples/results/contact_patterns/zh/03_negative_planets.png)及[低载边缘](examples/results/contact_patterns/zh/04_low_load_planets.png)分别提供；原始数据、裁剪/栅格误差与复算见[接触斑点说明](docs/contact_patterns.md)。原[周期TE与接触节点图](examples/results/dfki_pendulum/zh/04_contact.png)保留作参考。
+完整通过程将相同齿、固定载荷下的周期结果折叠到齿面材料坐标，彩色面积不是同一时刻的承载面积。插值只用于显示原始局部峰压；它没有新增二维压力或接触边界求解。[正工作面三行星](examples/results/contact_patterns/zh/02_positive_planets.png)、[反工作面三行星](examples/results/contact_patterns/zh/03_negative_planets.png)、[低载边缘](examples/results/contact_patterns/zh/04_low_load_planets.png)及[四构件齿面](examples/results/contact_patterns/zh/05_members.png)分别保留工况与构件身份。原始支撑点、显示插值和模型边界见[接触斑点说明](docs/contact_patterns.md)。原[周期TE与接触节点图](examples/results/dfki_pendulum/zh/04_contact.png)仍展示独立的周期与节点量。
 
-[四个构件齿面图](examples/results/contact_patterns/zh/05_members.png)分别显示太阳轮、太阳侧行星齿面、内齿侧行星齿面和内齿圈自身的材料坐标。瞬时对照选择同相位同齿对且两轮Hertz带均在有效齿面内域；它不是峰压相位。通过程最大压力冻结该工况的局部载荷，不是1.8 s任务内所有工况的最大压力；原采样NPZ与源峰压、积分/边缘误差同时保存。
+瞬时接触另用沿接触线`s / mm`、垂直接触线`n / μm`的局部坐标，避免微米级半宽在整齿毫米坐标上被压成细线。两轴显示比例不同；所示为同一相位的一对齿，不能与通过程图按面积比较。
+
+![两副局部瞬时Hertz接触带](examples/results/contact_patterns/zh/06_instantaneous_contact.png)
+
+默认案例保留ISO直齿模型及零齿廓鼓形，单/双齿分担切换仍会在通过程图留下分区。另以ISO控制基准、仅Love及每轮鼓形替换为3 μm+Love三组[显式诊断对照](examples/results/contact_patterns/zh/07_model_comparison.png)，重新求解压力、法向趋近和刚度变化；控制设置及相对来源输入的变更单列记录，该假设不是实物修形参数或优化结论。0.3.0曾混用有限Hertz带包络与源项目通过程显示，“无插值”表述不适用于后者；这些表述及旧图已纠正，默认案例主流程未为追求椭圆外观而改写。
 
 **机电匹配与周期温升**
 
@@ -153,6 +157,10 @@ python -m robot_joint examples/dfki_with_screens.json --output output/integrated
 
 端点压力按参照的端点定义比较，与条带中心峰值分别保存。此外，2组MathWorks公开雨流表的48个标量字段全部一致；复算不运行MATLAB。
 
+![相同18/77输入的接触显示复现](examples/results/contact_patterns/zh/08_reference_reproduction.png)
+
+接触显示另外以18/77原案例的30×30网格逐点核对，分别检查有效点压力及未覆盖区域掩码，再应用到NGW。图中MASTA保存参照与本次重算显示采用同一蓝红色标；原始端点压力、插值后压力及上游显示方法再现误差分别记录于[复现摘要](examples/results/contact_patterns/reference_reproduction.json)。上游显示再现一致不等于MASTA误差为零，也不构成关节总成对标。
+
 参照输入、原始结果、绝对/相对误差与复算入口见[验证说明](docs/validation.md)。单副对标未覆盖NGW总成，公开硬件参数核验也未验证关节的实际温升、刚度、精度或寿命。当前没有KISSsoft、精益传动或ETAGear的总成对标结果。
 
 ## 验证与复算
@@ -170,7 +178,7 @@ python -m examples.plot_validation --source output/benchmarks --output output/be
 python -m unittest discover -s tests -v
 ```
 
-测试覆盖行星力矩/路径协调、反向载荷与脱开、六自由度支承、机电功率、雨流、解析热响应和接口约束。每个结果保留输入、单位及诊断；收敛性、原组件数值对标与物理试验按不同状态记录。设计限值通过表示所配置模型及阈值下的初筛结果。
+测试覆盖行星力矩/路径协调、反向载荷与脱开、六自由度支承、机电功率、雨流、解析热响应和接口约束。接触图另核对源项目显示网格、掩码及局部坐标量定义；一般回归测试通过不能代替这项校核，也不能证明斑点的物理准确性。每个结果保留输入、单位及诊断；收敛性、原组件数值对标与物理试验按不同状态记录。设计限值通过表示所配置模型及阈值下的初筛结果。
 
 离散研究在一个峰压工况比较7组实际求解网格，不证明所有工况或参数的渐近收敛。图表输出为PNG及可编辑SVG/PDF；只生成英文图时，对 `build_showcase` 和 `plot_validation` 添加 `--language en`，详见[图表说明](docs/figures.md)。
 
@@ -185,7 +193,8 @@ python -m unittest discover -s tests -v
 - **0.1.0**：建立NGW系统、支承、疲劳、热、机电、精度与参数级工程交付。
 - **0.1.2**：加入DFKI实物需求参照、完整中英案例与图表，修正跨平台案例输入比较的浮点容差。
 - **0.2.0**：重组项目级中英说明，统一蓝红论文式图表，补充专家设计审查、显式校核覆盖与可复算对标证据；默认分支统一为 `main`。
-- **0.3.0**：补齐瞬时有限宽Hertz带及完整齿通过程最大压力、三行星/正反工作面/低载接触图；增加行星销与行星轴承、再生母线初筛及相应双语数据和说明。
+- **0.3.0**：增加初版接触图、行星销与行星轴承、再生母线初筛及双语数据和说明；初版接触显示的量定义与坐标问题由0.3.1纠正。
+- **0.3.1**：按圆柱齿轮LTCA源项目重建通过程显示，补充局部mm/μm瞬时带、相同18/77网格复现及基准/显式修形诊断对照；区分原始压力、显示插值与模型变化。
 - **近期优先**：将离散研究扩大至所有关键工况，补充实测扭转刚度/回差与摩擦标定，识别热网络和效率图谱，并在实际摆动工况评价轴承适用性。
 - **后续扩展**：在独立验证后增加多级与斜齿系统、真实轮体/支承柔度、制造公差统计及样机性能比较。以上为计划。
 
@@ -194,7 +203,7 @@ python -m unittest discover -s tests -v
 - [模型与公式](docs/model.md) · [接口与单位](docs/api.md) · [完整案例](docs/examples.md) · [对标与证据边界](docs/validation.md)
 - [设计审查与后续验证](docs/design_review.md) · [蓝红图表与源数据](docs/figures.md)
 - [完整接触斑点](docs/contact_patterns.md) · [行星销与行星轴承](docs/planet_support.md) · [再生母线](docs/dc_bus.md)
-- `robot_joint/`：新写NGW系统与性能模块；`gear_contact/`：复用圆柱齿轮接触内核。
+- `robot_joint/`：NGW系统、性能模块与接触显示适配；`gear_contact/`：复用圆柱齿轮接触内核。
 - `examples/`：案例输入、运行脚本及精选结果；`benchmarks/`：离线参照与对标输出。
 - `tests/` 与 `.github/`：自动验证；`docs/`：公式、接入和工程说明。
 

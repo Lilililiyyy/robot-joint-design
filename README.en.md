@@ -4,7 +4,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License: AGPL-3.0-only](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE)
 
-An independent Python kernel for parameterized design and quasi-static assessment of a single-stage NGW robot joint. It connects duty loads, planetary sharing, per-planet LTCA, full tooth-passage contact distributions, rating stresses, output support, motor matching, precision budgets and periodic temperature, with optional planet-pin/bearing and regenerative-bus screens. Version **0.3.0** provides callable functions and reproducible raw results without commercial software or vendor DLLs at runtime.
+An independent Python kernel for parameterized design and quasi-static assessment of a single-stage NGW robot joint. It connects duty loads, planetary sharing, per-planet LTCA, tooth-passage pressure displays, rating stresses, output support, motor matching, precision budgets and periodic temperature, with optional planet-pin/bearing and regenerative-bus screens. Version **0.3.1** provides callable functions and reproducible raw results without commercial software or vendor DLLs at runtime.
 
 ## Contents
 
@@ -48,7 +48,7 @@ Interfaces use SI units: m, rad, N, N·m, Pa, s and K. Each state explicitly pro
 |NGW geometry and kinematics|Tooth assembly, adjacent-planet clearance, ratio, speeds and mesh-force relations|Fixed ring, sun input, carrier output; zero-shift spur gears|
 |Planetary load sharing|Flank-specific path errors, pin compliance, shared sun translation and nonnegative path forces with unloading/re-entry|Supplied support stiffness and additional condensed compliance|
 |Per-planet LTCA|Two-mesh cyclic TE, tangent stiffness, contact-node forces and local Hertz pressure; displacement-compatible iteration|Quasi-static, cycle-mean coupling; raw contact arrays retained|
-|Full contact patterns|Single-tooth instantaneous finite-width Hertz bands, full-passage maximum pressure, three-planet and positive/negative-flank maps|Postprocessing of actual phase solutions and finite Hertz bands; fixed-load, identical-tooth periodicity; not a 2D contact or FE solve|
+|Contact pressure displays|Single-tooth instantaneous Hertz bands, full tooth-passage pressure/contours, three-planet and positive/negative-flank maps|Material-coordinate linear display interpolation from the cylindrical-LTCA project; separate local mm/μm snapshot axes; not a 2D contact or FE solve|
 |Rating stresses|ISO 6336:2006 explicit-factor contact/bending stresses and safety factors|External rating factors and material limits supplied by the user|
 |Structure and bearings|Six-DOF condensed stiffness, two-support reactions, revolution-weighted basic L10 and static safety|No actual bearing contact, preload, clearance or small-oscillation damage|
 |Planet pins and bearings|Solid-pin bending/transverse shear/average hole pressure, bending–shear deflection/stiffness and individual basic bearing ratings|Explicit simple supports and load width; actual pin reactions and relative planet speed; dimensions, allowables and capacities must be supplied|
@@ -62,7 +62,7 @@ Rating stresses, local contact pressure, output angle budgets and controlled pos
 
 ## Design review and improvements
 
-Existing output-stiffness, load-sharing and supplied-hotspot damage limits report actual values, thresholds and coverage through `passed`, `failed`, `not_configured` and `not_evaluated`. Structural-reference offsets use work-conjugate transformations, and external gears retain the standard-rack undercut-risk screen. Version 0.3.0 advances pin strength, planet-bearing and regenerative-bus checks, and adds the previously missing full tooth-passage contact patterns. Optional modules use explicit inputs and criteria without silently replacing the original load-sharing stiffness.
+Existing output-stiffness, load-sharing and supplied-hotspot damage limits report actual values, thresholds and coverage through `passed`, `failed`, `not_configured` and `not_evaluated`. Structural-reference offsets use work-conjugate transformations, and external gears retain the standard-rack undercut-risk screen. Version 0.3.0 adds pin-strength, planet-bearing and regenerative-bus screens; 0.3.1 corrects contact-map coordinates, quantity definitions and consistency with the source project's display. Optional modules use explicit inputs and criteria without silently replacing the original load-sharing stiffness.
 
 The current case assumes `Kout≥20000 N·m/rad`, `Kγ≤2` and supplied-history `D≤1` for same-duty screening, not DFKI hardware specifications. Added dimensions, material allowables, bearing capacities and bus parameters are also recorded as design assumptions. The [design review](docs/design_review.en.md) separates implemented work from items that still require hardware or manufacturing data.
 
@@ -84,13 +84,17 @@ The supplier states a 30 mm center distance, while the listed zero-shift tooth c
 
 **Load sharing and full contact patterns**
 
-Thirty-four representative states connect three planets, both meshes and system compliance, with baseline coupling at 64 phases ×26 strips. Full patterns further resolve selected fixed local loads with 512 phases ×41 strips. The upper row shows single-tooth instantaneous finite-width Hertz bands; the lower row shows the maximum pressure experienced over a complete tooth passage.
+Thirty-four representative states connect three planets, both meshes and system compliance, with baseline coupling at 64 phases ×26 strips. Selected fixed local loads are further resolved at 512 phases ×41 strips. The same display method as the [cylindrical-gear LTCA project](https://github.com/Lilililiyyy/cylindrical-gear-ltca) maps raw peak-pressure samples to face/material-roll coordinates and applies linear interpolation to display complete tooth-passage pressure and contours for both meshes.
 
-![Instantaneous single-tooth contact bands and full-passage maximum pressure for both meshes](examples/results/contact_patterns/en/01_contact_overview.png)
+![Full tooth-passage pressure and contours for both meshes](examples/results/contact_patterns/en/01_contact_overview.png)
 
-Full-passage maps fold periodic results for identical teeth at fixed load into material coordinates. Coloured area is not the area loaded at one instant. Finite Hertz bands follow original strip line loads/half-widths; a few lines are not smoothed into a whole surface, and the result is not a 2D contact or full FE solve. Separate [positive-flank planets](examples/results/contact_patterns/en/02_positive_planets.png), [negative-flank planets](examples/results/contact_patterns/en/03_negative_planets.png) and [low-load edges](examples/results/contact_patterns/en/04_low_load_planets.png) are available. See [contact-pattern documentation](docs/contact_patterns.en.md) for raw data, clipping/grid differences and reproduction. The original [cyclic TE and contact-node plot](examples/results/dfki_pendulum/en/04_contact.png) remains a reference.
+Full-passage maps fold periodic results for identical teeth at fixed load into material coordinates. Coloured area is not the area loaded at one instant. Interpolation displays the original local peak pressures; it adds no 2D pressure or contact-boundary solve. Separate [positive-flank planets](examples/results/contact_patterns/en/02_positive_planets.png), [negative-flank planets](examples/results/contact_patterns/en/03_negative_planets.png), [low-load edges](examples/results/contact_patterns/en/04_low_load_planets.png) and [four member surfaces](examples/results/contact_patterns/en/05_members.png) retain state/member identity. See [contact-pattern documentation](docs/contact_patterns.en.md) for raw support points, display interpolation and model limits. The original [cyclic TE and contact-node plot](examples/results/dfki_pendulum/en/04_contact.png) shows the distinct cycle and node quantities.
 
-[Four member surfaces](examples/results/contact_patterns/en/05_members.png) use separate material coordinates for the sun, sun-facing planet flank, ring-facing planet flank and internal ring. The instantaneous comparison uses the same phase/tooth pair with both members' Hertz bands inside their valid flank domains, rather than the peak-pressure phase. Passage maxima freeze the local loads of that state; they are not maxima across the entire 1.8 s duty. Raw sampling NPZs and source peaks, integration and edge differences are retained.
+Instantaneous contact uses local coordinates along the contact line, `s / mm`, and normal to that line, `n / μm`, so a micrometre-scale half-width remains visible. The axes have different display scales. Each map represents one tooth pair at one phase; its coloured area cannot be compared with passage-map area.
+
+![Local instantaneous Hertz bands for both meshes](examples/results/contact_patterns/en/06_instantaneous_contact.png)
+
+The default case retains the ISO spur model and zero profile crowning; single-/double-pair load switching can still produce zones in its passage map. A separate [explicit diagnostic](examples/results/contact_patterns/en/07_model_comparison.png) compares an ISO control baseline, Love only, and each member's profile crown replaced by 3 μm plus Love, resolving pressure, normal approach and stiffness. Control settings and changes from source input are recorded separately. This assumption is neither measured hardware geometry nor an optimization result. Version 0.3.0 mixed finite-Hertz-band envelopes with the source project's passage display; its “no interpolation” description did not apply to the latter. Those descriptions and figures are corrected; the default main workflow has not been altered to obtain an elliptical appearance.
 
 **Motor matching and periodic temperature**
 
@@ -153,6 +157,10 @@ The 18/77 helical pair is recalculated with matching inputs. All 12 geometry and
 
 Endpoint pressure follows the reference endpoint definition and is saved separately from strip-centre peak pressure. In addition, all 48 scalar fields from two published MathWorks rainflow tables match; reproduction does not execute MATLAB.
 
+![Contact-display reproduction with matching 18/77 input](examples/results/contact_patterns/en/08_reference_reproduction.png)
+
+The contact display is checked point by point on the original 18/77 case's 30×30 grid, including finite pressures and the unsupported-region mask, before application to NGW. The retained MASTA display and current recalculation share one blue/red scale. Raw endpoint pressure, interpolated pressure and upstream-display reproduction error are separate in the [reproduction summary](examples/results/contact_patterns/reference_reproduction.json). Agreement with the upstream display does not mean zero error against MASTA or validate the joint assembly.
+
 See the [validation record](docs/validation.en.md) for reference inputs, retained results, absolute/relative differences and reproduction commands. Single-mesh comparisons do not cover the NGW assembly; hardware-parameter checks do not validate actual joint temperature, stiffness, precision or life. No assembly-level KISSsoft, JYCD or ETAGear comparison is currently available.
 
 ## Verification and reproduction
@@ -170,7 +178,7 @@ python -m examples.plot_validation --source output/benchmarks --output output/be
 python -m unittest discover -s tests -v
 ```
 
-Tests cover planetary torque/path compatibility, reverse loading and unloading, six-DOF support, electromechanical power, rainflow, analytical thermal response and interface constraints. Results retain input, units and diagnostics. Convergence, vendor-component numerical comparisons and physical experiments are separate verification states. Passing configured design limits is a screening result for the chosen model and thresholds.
+Tests cover planetary torque/path compatibility, reverse loading and unloading, six-DOF support, electromechanical power, rainflow, analytical thermal response and interface constraints. Contact displays separately check the source display grid, masks and local-coordinate quantity definitions. General regression tests cannot replace those checks or establish a pattern's physical accuracy. Results retain input, units and diagnostics. Convergence, vendor-component numerical comparisons and physical experiments are separate verification states. Passing configured design limits is a screening result for the chosen model and thresholds.
 
 The resolution study compares seven actual solver grids at one peak-pressure state. It does not establish asymptotic convergence across all states or parameters. Figure exports include PNG and editable SVG/PDF. Add `--language en` to `build_showcase` and `plot_validation` for English-only figures; see the [figure guide](docs/figures.en.md).
 
@@ -185,7 +193,8 @@ Full housing/shaft FE, synchronized mesh dynamics, friction-history hysteresis, 
 - **0.1.0**: NGW system, support, fatigue, thermal, electromechanical, precision and parameter-level engineering exports.
 - **0.1.2**: DFKI physical-requirement reference, complete bilingual case and figures, and a cross-platform floating-point tolerance fix for saved duty comparison.
 - **0.2.0**: Project-level bilingual documentation, blue/red publication-style figures, expert design review, explicit assessment coverage and reproducible comparison evidence; a single default branch, `main`.
-- **0.3.0**: Instantaneous finite-width Hertz bands and full tooth-passage maximum pressure, with three-planet/flank/low-load maps; planet-pin/bearing and regenerative-bus screens with bilingual data and documentation.
+- **0.3.0**: Initial contact maps, planet-pin/bearing and regenerative-bus screens with bilingual data and documentation; the initial contact-display quantity/coordinate issues are corrected in 0.3.1.
+- **0.3.1**: Passage displays aligned with the cylindrical-LTCA source project, local mm/μm instantaneous bands, matching 18/77 grid reproduction and a baseline/explicit-modification diagnostic; raw pressure, display interpolation and model changes are distinguished.
 - **Near-term priorities**: Extend the resolution study to all critical duty states, add measured torsional stiffness/backlash and friction calibration, identify thermal networks and efficiency maps, and assess bearing suitability under actual oscillatory duty.
 - **Later extensions**: Multistage/helical systems, physical gear-body/support compliance, manufacturing tolerance statistics and prototype comparisons after separate validation. These remain planned work.
 

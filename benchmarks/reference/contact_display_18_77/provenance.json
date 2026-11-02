@@ -1,0 +1,23 @@
+{
+  "upstream_repository": "https://github.com/Lilililiyyy/Cylindrical-Gear-LTCA",
+  "upstream_commit": "cb2e1ec8a8d1ac2b6137aa6a9b781b9a797c6a7f",
+  "files": {
+    "native_display.npz": {
+      "source_path": "examples/results/helical_18_77/07_contact_pass_data.npz",
+      "sha256": "944ca8e562cc0014255ef96329c38082d148c0df75c537ca78b9e295a9cb9d1b"
+    },
+    "native_display_metrics.json": {
+      "source_path": "examples/results/helical_18_77/07_native_contact_metrics.json",
+      "sha256": "8b10a25e00ed1c17f4a8668b649339044bb18fdb47063fdbe7492e2b076cc4ac"
+    },
+    "analysis_input.json": {
+      "sha256": "a03a54ac39192e7c24f5b05507cbe114d415b59dbd19b5cb297eff5e37ed6da1",
+      "source_path": "同一18/77案例的完整32相位40条带求解输入"
+    }
+  },
+  "scope_zh": "既有公开MASTA显示面与上游独立显示面的离线核对；本次不运行MASTA，不是机器人总成对标。",
+  "display_source_files": {
+    "gear_contact/contact_display.py": "bad5623144a828b2230b4b5405ad635e8d117dc38069d4b12e673c3a9d6c8f32",
+    "examples/case_contact_plotting.py": "c5332737611e6db243e4aa1e958dcc3b119e06602f96cef2fb3c0bad90df1417"
+  }
+}

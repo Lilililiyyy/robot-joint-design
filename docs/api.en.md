@@ -122,6 +122,25 @@ Missing rating produces empty per-state `ratings` and null safety summaries. Mis
 JSON uses null for undefined nonfinite statistics. NPZ contains numeric arrays without pickle/object data. `manifest.json` hashes exported files. Raw nodes, interpolated displays and aggregate metrics remain distinct.
 
 
-## Full contact-pattern API
+## Contact pressure display API
 
-`interior_snapshot(contact)->(phase_index,tooth_pair_index)` selects a loaded pair with both finite bands inside the effective flanks. `build_contact_pattern(contact,member="pinion",profile_points=1601,snapshot_index=None,snapshot_tooth_pair_index=None)->ContactPattern` uses an original `AnalysisResult`; `export_contact_pattern(pattern,path)` exports original strips and matrices without pickle. Snapshot and sweep pressures use different profile coordinates and cannot be compared pixelwise; the source object selects the flank. The automatic snapshot defaults to the source peak-pressure phase and may clip a tip; published examples explicitly call interior_snapshot first. See [contact methods](contact_patterns.en.md) for full-passage construction, arc/Hertz mapping, force/clipping/raster diagnostics and rejected branches.
+Version 0.3.1 uses `robot_joint.contact_display` for passage displays. It reads an original `AnalysisResult` without feeding back loads or stiffness:
+
+```python
+from robot_joint.contact_display import contact_pass_data, instantaneous_contact_data
+
+passage = contact_pass_data(contact, samples=(201, 241))
+instant = instantaneous_contact_data(contact, normal_points=301)
+```
+
+`contact_pass_data(result, *, samples=(201,241), face_coordinate_m=None, roll_distance_m=None)` returns a pinion-material-coordinate display dictionary. `face_coordinate_m` starts at the pinion's left edge and `roll_distance_m` is pinion roll, both 1D SI coordinates; `pressure_pa_x_y` is [face points, roll points]. Supply original reference coordinates for pointwise checks. `samples` retains original pressure points; `ordinary_samples` excludes extension branches. `boundary_display_samples` contains only outer-strip boundary display support for centre-only models, not newly solved independent endpoints. Points outside the convex hull are NaN. `member_contact_pass_data(result,member="wheel",**kwargs)` applies the exact conjugate transformation to wheel material coordinates, with same/opposite roll directions for internal/external meshes. `draw_contact_pass(ax,data,maximum_pa=...,title=None,language="zh",member="pinion")` draws pressure and contours using this definition.
+
+`instantaneous_contact_data(result, *, phase_index=None, tooth_pair_index=None, normal_points=301)` selects one pair at one phase and returns `s_edges_m`, `normal_edges_m`, `pressure_pa_s_n` and `source_*` values. The matrix is [along-line cells, normal cells]. Functions use SI; plots convert along-line coordinates to mm and normal coordinates to μm, with different axis display scales. `normal_points` must be an integer of at least 21. Automatic selection uses `interior_snapshot` within its supported scope. With an explicit phase but no pair index, the pair containing that phase's peak-pressure node is selected. Centre-only models preserve each original strip's constants; independent endpoint models use only piecewise-linear endpoint subdivision for display. Instantaneous and passage grids cannot be compared pixelwise.
+
+The local function also returns `source_total_force_n`, `display_integrated_force_n` and `display_relative_force_error`. The latter is the signed, dimensionless `(display integral − original force) / original force`, defined as zero when original force is zero. Constant-centre analytical Hertz integrals satisfy the original strip-force identity. Independent endpoint interpolation treats pressure peaks and half-widths separately, so its displayed integral need not equal the original centre-strip force. Retaining `source_*` is not a display-force-conservation claim. The API does not renormalize pressure; see [the local 18/77 example and limits](contact_patterns.en.md).
+
+Batch `pattern.npz` files retain original fields and add `pass_face_coordinate_m`, `pass_roll_distance_m`, `pass_pressure_pa_x_y`, `pass_samples`, `pass_ordinary_samples`, `pass_boundary_display_samples`, `local_s_edges_m`, `local_normal_edges_m` and `local_pressure_pa_s_n`. `--replot` verifies SHA manifests before drawing. Display interpolation adds no solver points or contact-boundary solution.
+
+The 0.3.0 functions `interior_snapshot`, `build_contact_pattern` and `export_contact_pattern` remain compatibility tools for finite-Hertz-band envelopes. Their `sweep_pressure_pa` follows that legacy envelope definition, not the current source-style passage display. [Contact documentation](contact_patterns.en.md) distinguishes solved pressures, display support/interpolation and model limits.
+
+Diagnostic comparisons record `source_analysis_input`, `baseline_changes_from_source` and `candidate_profile_rule`. The ISO control baseline explicitly forces `elastic_mode="iso"`, `local_contact=False` and 128×21. `replace_each_member_with_3um` replaces each member's profile crown with 3 μm rather than adding it. Composite modifications with `kind!="parameters"` raise an explicit error. The diagnostic does not overwrite the default 512×41 main workflow. For custom sources, read the recorded control-baseline changes instead of assuming unchanged source input.

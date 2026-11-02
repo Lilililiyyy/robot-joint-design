@@ -10,10 +10,13 @@
 |---|---|
 |案例01—03|公开输入、五次轨迹解析式及逐工况路径解；连续运动轨迹与代表工况点分别标记|
 |案例04|逐相位原始LTCA TE及峰压相位的原承载节点；无平滑压力插值|
-|完整接触01|[瞬时单齿Hertz带与完整通过程最大压力](../examples/results/contact_patterns/zh/01_contact_overview.png)；内外两副分别比较，彩色扫掠面积不是同时承载面积|
+|接触显示01|[两副完整齿通过程压力与等压线](../examples/results/contact_patterns/zh/01_contact_overview.png)；原始局部峰压的材料坐标插值显示，彩色面积不是同时承载面积|
 |完整接触02—03|[正面三行星](../examples/results/contact_patterns/zh/02_positive_planets.png)、[反面三行星](../examples/results/contact_patterns/zh/03_negative_planets.png)；保持工作面与行星身份，不能将其误差/载荷混合成一张无来源图|
-|完整接触04|[低载斑点](../examples/results/contact_patterns/zh/04_low_load_planets.png)；保留未承载边缘和区域状态，未解析域不自动涂成接触或零压|
+|完整接触04|[低载压力显示](../examples/results/contact_patterns/zh/04_low_load_planets.png)；采用与其他工况相同的方法，支撑凸包外保留NaN|
 |完整接触05|[四个构件齿面](../examples/results/contact_patterns/zh/05_members.png)；太阳轮、太阳侧/内齿侧行星齿面与内齿圈采用各自材料坐标|
+|接触显示06|[局部瞬时Hertz带](../examples/results/contact_patterns/zh/06_instantaneous_contact.png)；同相位一对齿，沿接触线mm、垂直接触线μm，两轴显示比例不同|
+|接触显示07|[控制基准与显式修形诊断](../examples/results/contact_patterns/zh/07_model_comparison.png)及[比较摘要](../examples/results/contact_patterns/model_comparison.json)；128×21下实际重算ISO控制基准、仅Love及各轮鼓形替换为3 μm+Love，来源输入及强制控制设置单列，默认512×41主流程不变|
+|接触显示08|[18/77参考显示复现](../examples/results/contact_patterns/zh/08_reference_reproduction.png)及[核对摘要](../examples/results/contact_patterns/reference_reproduction.json)；MASTA保存场与本次重算场在原30×30网格逐点比较，同一蓝红色标；上游显示再现误差另列|
 |案例05—06|显式评级因子应力、支承反力、结构位移与确定性角度预算；静态包络不是迟滞试验|
 |案例07|机电功率、两节点热网络精确传播与周期稳态；材料/热参数未经样机标定|
 |案例08—09|明确假定的标量热点谱、雨流损伤与同任务方案比较；网纹表示未通过给定约束|
@@ -24,9 +27,11 @@
 
 ## 完整接触图的量定义
 
-完整接触图由多个实际求解相位的条带线载荷和Hertz半宽构造有限宽带，再按相同齿、固定载荷的周期假设映射到齿面材料坐标。瞬时对照采用同相位同齿对，且两轮Hertz带均在有效齿面内域，不是峰压相位；完整通过程图在各材料点取该固定工况下一次周期等价齿通过程的最大压力，不是1.8 s任务最大压力。两者使用不同的时间含义，不能据扫掠彩色面积推断瞬时承载面积。
+0.3.1采用圆柱齿轮LTCA源项目的通过程显示方法：将一个基节周期内所有齿对的原始局部峰压按材料坐标拼接，普通齿廓排除延伸分支，再作三角线性插值并叠加等压线。存在独立端点压力时使用原端点；仅有中心值时，将首末中心值延至实际条带边界作为显示支撑，不声称新增求得端点压力。重合坐标按源方法取最大值，凸包外保留NaN并显示灰色，色标蓝端表示零压力。凸包不是实际接触边界，插值点不是新增求解点。
 
-条带沿齿宽的离散、有限Hertz带、齿面边界裁剪及显示栅格均属于模型/后处理定义，不能将其描述为新求得的二维或FE接触场。零压、非作用区域、原采样未解析域分别处理；没有用平滑插值把少量线变成完整斑点。原线力、半宽、相位、材料坐标与压力NPZ，以及源峰压、积分/边缘误差见[接触斑点说明](contact_patterns.md)。默认完整图示例使用512相位×41条带，不能据图面连续自动认定离散收敛。压力栅格显示，SVG/PDF中的文字与坐标可编辑。
+通过程图采用齿宽mm×构件材料展长mm，表示相同齿、固定局部载荷下的一次周期等价通过程，不是瞬时全齿面压力或1.8 s任务最大值。局部瞬时带另用`s / mm`×`n / μm`，两轴比例不同。中心分支保持原条带峰压/半宽常数；独立端点分支分别线性插值二者，图面积积分未必等于原条带合力，原力与显示积分另报且不重新归一化压力。不能据图面长宽比或彩色面积推断实体尺寸或瞬时合力。
+
+0.3.0有限带最大值包络与本版源项目显示不是同一个量；旧“无插值”说明已撤回。原基准中单/双齿切换造成的压力分区保留，另行标注修形诊断的输入改变和计算代价。默认局部解为512相位×41条带，更密显示网格不增加求解样本；图面连续、测试通过或Hertz积分恒等式均不能独自证明接触边界及物理准确性。原解、显示支撑、显示插值与证据范围见[接触斑点说明](contact_patterns.md)。这些图不属于新增二维或FE接触求解。压力层为栅格，SVG/PDF文字与坐标可编辑。
 
 ```bash
 python -m examples.build_showcase --output output/showcase --raw-output output/raw

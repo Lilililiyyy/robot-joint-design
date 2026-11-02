@@ -1,0 +1,20 @@
+{
+  "upstream_commit": "cb2e1ec8a8d1ac2b6137aa6a9b781b9a797c6a7f",
+  "grid_shape_x_y": [
+    30,
+    30
+  ],
+  "upstream_display_max_abs_difference_pa": 0.0,
+  "upstream_nan_mask_equal": true,
+  "masta_common_finite_count": 840,
+  "masta_display_mae_pa": 40641.26143047146,
+  "masta_display_max_abs_difference_pa": 2994763.3457541466,
+  "masta_display_rmse_pa": 140090.42882750867,
+  "masta_display_peak_pa": 186522329.40108263,
+  "project_display_peak_pa": 186524300.10156083,
+  "project_raw_endpoint_peak_pa": 186674381.6606236,
+  "project_uncovered_count": 60,
+  "masta_run_in_this_revision": false,
+  "assembly_validation": false,
+  "scope_zh": "既有MASTA30×30显示面离线比较；与原端点压力的误差指标不同。上游显示复现误差与MASTA差异分开报告。"
+}

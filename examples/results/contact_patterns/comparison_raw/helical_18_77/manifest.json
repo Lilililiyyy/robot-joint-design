@@ -1,0 +1,27 @@
+{
+  "module": "gear_contact",
+  "version": "0.2.0",
+  "implementation": "新写物理模型计算内核",
+  "units": {
+    "length": "m",
+    "angle": "rad",
+    "force": "N",
+    "torque": "N m",
+    "pressure": "Pa",
+    "compliance": "m/N",
+    "normal_stiffness": "N/m"
+  },
+  "array_layout": "cell_offsets[k]:cell_offsets[k+1] 对应phase[k]的原始接触单元",
+  "line_load_concentration": "每相位max(F_i/w_i)除以总力/理论接触线总长度；非标准评级系数",
+  "te_reference": "法向接近量保留输入间隙基准；角度TE参考小轮虚功一致法向力臂",
+  "files": {
+    "arrays.npz": "0c05d6727ca82ade8c93d2ef657ad95835d4b1cdcdf866e6771696fbd5e66481",
+    "input.json": "8c02375e71c6621242c3f5e88ceff179657ef696cb948aa21132179e1b4e9b9f",
+    "summary.json": "e2ab20bf28867c11039e5778a299920bdd7acf52f1559fa506e7ae035e6dbee2",
+    "diagnostics.json": "67d79e7123e546fe1af23d60a064fda708156060d56bd8678c5b080d1bf12da5",
+    "te_spectrum.json": "24e46ac2b4bc83f0a35612c1569fc83c64265a3b2eb6ba6cf6c4f043e6c45627",
+    "cycle.csv": "3c214f203132b2270ebf77bd1de833317cd768f72fa0cc458f9ed180a48864e7",
+    "contact_cells.csv": "98488eb02dab6897287ed0d0696c9e5c5cb048dd276874be7b6208ce808c5855",
+    "endpoint_cells.csv": "2d5032d00704e387112c0a6a0e5c7c450bf841a835256e7edefa7ac67925287d"
+  }
+}

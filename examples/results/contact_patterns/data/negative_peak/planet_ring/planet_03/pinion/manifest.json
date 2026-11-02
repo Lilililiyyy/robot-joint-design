@@ -8,7 +8,7 @@
   "instantaneous": "只显示snapshot_index及snapshot_tooth_pair_index的一对齿",
   "sweep": "所有相位与周期等价相邻齿对的有限Hertz带最大值，不在空隙平滑填色",
   "files": {
-    "pattern.npz": "fe0b580142fa42aee5f8e9fd3fee383c4efba15af396491a1cee51614e85df83",
-    "summary.json": "cebc1d93a817ba8ed39ac5025464a0d4679c24dc882bc6ffe06fb6186fb0e9d7"
+    "pattern.npz": "dd9a1f6ee9f4cdcb1c2b4c95c3ac356c2e0e9b5a4b133d014e2111f3d1008cde",
+    "summary.json": "5ae34e83345511b215ad2cc4633878cb2b7fe2a06523a463f532e377b9990183"
   }
 }

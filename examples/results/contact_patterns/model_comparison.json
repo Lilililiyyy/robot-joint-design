@@ -1,0 +1,460 @@
+{
+  "case": "negative_peak",
+  "mesh": "sun_planet",
+  "planet": 2,
+  "phases": 128,
+  "strips": 21,
+  "source_analysis_input": {
+    "pair": {
+      "pinion": {
+        "teeth": 20,
+        "normal_module_m": 0.0005,
+        "face_width_m": 0.005,
+        "pressure_angle_rad": 0.3490658503988659,
+        "helix_angle_rad": 0.0,
+        "profile_shift": 0.0,
+        "internal": false,
+        "tip_diameter_m": null,
+        "root_diameter_m": null,
+        "root_form_diameter_m": null,
+        "tip_form_diameter_m": null
+      },
+      "wheel": {
+        "teeth": 40,
+        "normal_module_m": 0.0005,
+        "face_width_m": 0.005,
+        "pressure_angle_rad": 0.3490658503988659,
+        "helix_angle_rad": 0.0,
+        "profile_shift": 0.0,
+        "internal": false,
+        "tip_diameter_m": null,
+        "root_diameter_m": null,
+        "root_form_diameter_m": null,
+        "tip_form_diameter_m": null
+      },
+      "center_distance_m": 0.015,
+      "axial_offset_m": 0.0
+    },
+    "torque_n_m": 0.2972214072205919,
+    "misalignment_m": 0.0,
+    "phase_offset": 0.0,
+    "phases": 64,
+    "strips": 26,
+    "elastic_mode": "iso",
+    "local_contact": false,
+    "material_pinion": {
+      "youngs_modulus_pa": 210000000000.0,
+      "poisson_ratio": 0.3
+    },
+    "local_reference_depths_m": null,
+    "material_wheel": {
+      "youngs_modulus_pa": 210000000000.0,
+      "poisson_ratio": 0.3
+    },
+    "modification_pinion": {
+      "profile_crown_m": 0.0,
+      "lead_crown_m": 3e-07,
+      "profile_slope_m": 0.0,
+      "lead_slope_m": 0.0,
+      "bias_m": 0.0,
+      "tip_relief_m": 0.0,
+      "tip_start": 0.75,
+      "root_relief_m": 0.0,
+      "root_end": 0.25,
+      "end_relief_m": 0.0,
+      "end_fraction": 0.1
+    },
+    "modification_wheel": {
+      "profile_crown_m": 0.0,
+      "lead_crown_m": 2e-07,
+      "profile_slope_m": 0.0,
+      "lead_slope_m": 0.0,
+      "bias_m": 0.0,
+      "tip_relief_m": 0.0,
+      "tip_start": 0.75,
+      "root_relief_m": 0.0,
+      "root_end": 0.25,
+      "end_relief_m": 0.0,
+      "end_fraction": 0.1
+    },
+    "external_compliance_provider": false,
+    "external_boundary_gap": false,
+    "iso_settings": {
+      "nominal_pinion_torque_n_m": 0.2972214072205919,
+      "application_factor": 1.0,
+      "material_reference_youngs_modulus_pa": 207000000000.0,
+      "dedendum_coeff_pinion": null,
+      "dedendum_coeff_wheel": null,
+      "coupling_relaxation": 1.0,
+      "maximum_coupling_iterations": 500,
+      "coupling_tolerance_m": 2e-12
+    }
+  },
+  "baseline_changes_from_source": {
+    "phases": {
+      "source": 64,
+      "control": 128
+    },
+    "strips": {
+      "source": 26,
+      "control": 21
+    }
+  },
+  "candidate_profile_rule": "replace_each_member_with_3um",
+  "records": [
+    {
+      "name": "iso_baseline",
+      "input": {
+        "pair": {
+          "pinion": {
+            "teeth": 20,
+            "normal_module_m": 0.0005,
+            "face_width_m": 0.005,
+            "pressure_angle_rad": 0.3490658503988659,
+            "helix_angle_rad": 0.0,
+            "profile_shift": 0.0,
+            "internal": false,
+            "tip_diameter_m": null,
+            "root_diameter_m": null,
+            "root_form_diameter_m": null,
+            "tip_form_diameter_m": null
+          },
+          "wheel": {
+            "teeth": 40,
+            "normal_module_m": 0.0005,
+            "face_width_m": 0.005,
+            "pressure_angle_rad": 0.3490658503988659,
+            "helix_angle_rad": 0.0,
+            "profile_shift": 0.0,
+            "internal": false,
+            "tip_diameter_m": null,
+            "root_diameter_m": null,
+            "root_form_diameter_m": null,
+            "tip_form_diameter_m": null
+          },
+          "center_distance_m": 0.015,
+          "axial_offset_m": 0.0
+        },
+        "torque_n_m": 0.2972214072205919,
+        "misalignment_m": 0.0,
+        "phase_offset": 0.0,
+        "phases": 128,
+        "strips": 21,
+        "elastic_mode": "iso",
+        "local_contact": false,
+        "material_pinion": {
+          "youngs_modulus_pa": 210000000000.0,
+          "poisson_ratio": 0.3
+        },
+        "local_reference_depths_m": null,
+        "material_wheel": {
+          "youngs_modulus_pa": 210000000000.0,
+          "poisson_ratio": 0.3
+        },
+        "modification_pinion": {
+          "profile_crown_m": 0.0,
+          "lead_crown_m": 3e-07,
+          "profile_slope_m": 0.0,
+          "lead_slope_m": 0.0,
+          "bias_m": 0.0,
+          "tip_relief_m": 0.0,
+          "tip_start": 0.75,
+          "root_relief_m": 0.0,
+          "root_end": 0.25,
+          "end_relief_m": 0.0,
+          "end_fraction": 0.1
+        },
+        "modification_wheel": {
+          "profile_crown_m": 0.0,
+          "lead_crown_m": 2e-07,
+          "profile_slope_m": 0.0,
+          "lead_slope_m": 0.0,
+          "bias_m": 0.0,
+          "tip_relief_m": 0.0,
+          "tip_start": 0.75,
+          "root_relief_m": 0.0,
+          "root_end": 0.25,
+          "end_relief_m": 0.0,
+          "end_fraction": 0.1
+        },
+        "external_compliance_provider": false,
+        "external_boundary_gap": false,
+        "iso_settings": {
+          "nominal_pinion_torque_n_m": 0.2972214072205919,
+          "application_factor": 1.0,
+          "material_reference_youngs_modulus_pa": 207000000000.0,
+          "dedendum_coeff_pinion": null,
+          "dedendum_coeff_wheel": null,
+          "coupling_relaxation": 1.0,
+          "maximum_coupling_iterations": 500,
+          "coupling_tolerance_m": 2e-12
+        }
+      },
+      "source_summary": {
+        "torque_n_m": 0.2972214072205919,
+        "normal_force_n": 63.2592830136331,
+        "mean_normal_approach_m": 1.3036012795691091e-06,
+        "te_peak_to_peak_m": 8.366437089484509e-07,
+        "te_rms_ac_m": 4.014360975871479e-07,
+        "angular_te_peak_to_peak_rad": 0.00017806752770894955,
+        "max_pressure_pa": 827461603.6946222,
+        "max_line_load_n_per_m": 13909.178711137665,
+        "mean_mesh_stiffness_n_per_m": 62024467.57454583,
+        "mesh_stiffness_fluctuation_n_per_m": 37805389.75972317,
+        "max_line_load_concentration_factor": 1.1987569331350285,
+        "max_abs_load_centroid_offset_m": 8.226730022862989e-20,
+        "mean_contact_fraction": 1.0,
+        "max_force_residual_n": 1.4210854715202004e-14,
+        "max_gap_residual_m": 1.0587911840678754e-21,
+        "all_converged": true,
+        "elastic_mode": "iso",
+        "local_contact": false,
+        "extended_contact": false,
+        "transverse_contact_ratio": 1.635185963571462,
+        "overlap_ratio": 0.0,
+        "model_scope": "ISO综合齿对刚度、可选Love条带影响；无摩擦、准静态，压力采用局部线接触近似"
+      },
+      "peak_pressure_pa": 827461603.6946222,
+      "mean_approach_m": 1.3036012795691091e-06,
+      "max_neighbour_force_jump_over_total": 0.4999999999999997,
+      "uncovered_display_count": 201
+    },
+    {
+      "name": "love_only",
+      "input": {
+        "pair": {
+          "pinion": {
+            "teeth": 20,
+            "normal_module_m": 0.0005,
+            "face_width_m": 0.005,
+            "pressure_angle_rad": 0.3490658503988659,
+            "helix_angle_rad": 0.0,
+            "profile_shift": 0.0,
+            "internal": false,
+            "tip_diameter_m": null,
+            "root_diameter_m": null,
+            "root_form_diameter_m": null,
+            "tip_form_diameter_m": null
+          },
+          "wheel": {
+            "teeth": 40,
+            "normal_module_m": 0.0005,
+            "face_width_m": 0.005,
+            "pressure_angle_rad": 0.3490658503988659,
+            "helix_angle_rad": 0.0,
+            "profile_shift": 0.0,
+            "internal": false,
+            "tip_diameter_m": null,
+            "root_diameter_m": null,
+            "root_form_diameter_m": null,
+            "tip_form_diameter_m": null
+          },
+          "center_distance_m": 0.015,
+          "axial_offset_m": 0.0
+        },
+        "torque_n_m": 0.2972214072205919,
+        "misalignment_m": 0.0,
+        "phase_offset": 0.0,
+        "phases": 128,
+        "strips": 21,
+        "elastic_mode": "iso_love",
+        "local_contact": false,
+        "material_pinion": {
+          "youngs_modulus_pa": 210000000000.0,
+          "poisson_ratio": 0.3
+        },
+        "local_reference_depths_m": null,
+        "material_wheel": {
+          "youngs_modulus_pa": 210000000000.0,
+          "poisson_ratio": 0.3
+        },
+        "modification_pinion": {
+          "profile_crown_m": 0.0,
+          "lead_crown_m": 3e-07,
+          "profile_slope_m": 0.0,
+          "lead_slope_m": 0.0,
+          "bias_m": 0.0,
+          "tip_relief_m": 0.0,
+          "tip_start": 0.75,
+          "root_relief_m": 0.0,
+          "root_end": 0.25,
+          "end_relief_m": 0.0,
+          "end_fraction": 0.1
+        },
+        "modification_wheel": {
+          "profile_crown_m": 0.0,
+          "lead_crown_m": 2e-07,
+          "profile_slope_m": 0.0,
+          "lead_slope_m": 0.0,
+          "bias_m": 0.0,
+          "tip_relief_m": 0.0,
+          "tip_start": 0.75,
+          "root_relief_m": 0.0,
+          "root_end": 0.25,
+          "end_relief_m": 0.0,
+          "end_fraction": 0.1
+        },
+        "external_compliance_provider": false,
+        "external_boundary_gap": false,
+        "iso_settings": {
+          "nominal_pinion_torque_n_m": 0.2972214072205919,
+          "application_factor": 1.0,
+          "material_reference_youngs_modulus_pa": 207000000000.0,
+          "dedendum_coeff_pinion": null,
+          "dedendum_coeff_wheel": null,
+          "coupling_relaxation": 1.0,
+          "maximum_coupling_iterations": 500,
+          "coupling_tolerance_m": 2e-12
+        }
+      },
+      "source_summary": {
+        "torque_n_m": 0.2972214072205919,
+        "normal_force_n": 63.2592830136331,
+        "mean_normal_approach_m": 1.303601279569109e-06,
+        "te_peak_to_peak_m": 8.366437089484506e-07,
+        "te_rms_ac_m": 4.014360975871476e-07,
+        "angular_te_peak_to_peak_rad": 0.0001780675277089495,
+        "max_pressure_pa": 820081199.4783211,
+        "max_line_load_n_per_m": 13701.661298236248,
+        "mean_mesh_stiffness_n_per_m": 62024467.57454583,
+        "mesh_stiffness_fluctuation_n_per_m": 37805389.759723164,
+        "max_line_load_concentration_factor": 1.1774680790386278,
+        "max_abs_load_centroid_offset_m": 7.541169187624406e-20,
+        "mean_contact_fraction": 1.0,
+        "max_force_residual_n": 0.0,
+        "max_gap_residual_m": 1.8746790474889904e-13,
+        "all_converged": true,
+        "elastic_mode": "iso_love",
+        "local_contact": false,
+        "extended_contact": false,
+        "transverse_contact_ratio": 1.635185963571462,
+        "overlap_ratio": 0.0,
+        "model_scope": "ISO综合齿对刚度、可选Love条带影响；无摩擦、准静态，压力采用局部线接触近似"
+      },
+      "peak_pressure_pa": 820081199.4783211,
+      "mean_approach_m": 1.303601279569109e-06,
+      "max_neighbour_force_jump_over_total": 0.5,
+      "uncovered_display_count": 201
+    },
+    {
+      "name": "love_crown_each_3um",
+      "input": {
+        "pair": {
+          "pinion": {
+            "teeth": 20,
+            "normal_module_m": 0.0005,
+            "face_width_m": 0.005,
+            "pressure_angle_rad": 0.3490658503988659,
+            "helix_angle_rad": 0.0,
+            "profile_shift": 0.0,
+            "internal": false,
+            "tip_diameter_m": null,
+            "root_diameter_m": null,
+            "root_form_diameter_m": null,
+            "tip_form_diameter_m": null
+          },
+          "wheel": {
+            "teeth": 40,
+            "normal_module_m": 0.0005,
+            "face_width_m": 0.005,
+            "pressure_angle_rad": 0.3490658503988659,
+            "helix_angle_rad": 0.0,
+            "profile_shift": 0.0,
+            "internal": false,
+            "tip_diameter_m": null,
+            "root_diameter_m": null,
+            "root_form_diameter_m": null,
+            "tip_form_diameter_m": null
+          },
+          "center_distance_m": 0.015,
+          "axial_offset_m": 0.0
+        },
+        "torque_n_m": 0.2972214072205919,
+        "misalignment_m": 0.0,
+        "phase_offset": 0.0,
+        "phases": 128,
+        "strips": 21,
+        "elastic_mode": "iso_love",
+        "local_contact": false,
+        "material_pinion": {
+          "youngs_modulus_pa": 210000000000.0,
+          "poisson_ratio": 0.3
+        },
+        "local_reference_depths_m": null,
+        "material_wheel": {
+          "youngs_modulus_pa": 210000000000.0,
+          "poisson_ratio": 0.3
+        },
+        "modification_pinion": {
+          "profile_crown_m": 3e-06,
+          "lead_crown_m": 3e-07,
+          "profile_slope_m": 0.0,
+          "lead_slope_m": 0.0,
+          "bias_m": 0.0,
+          "tip_relief_m": 0.0,
+          "tip_start": 0.75,
+          "root_relief_m": 0.0,
+          "root_end": 0.25,
+          "end_relief_m": 0.0,
+          "end_fraction": 0.1
+        },
+        "modification_wheel": {
+          "profile_crown_m": 3e-06,
+          "lead_crown_m": 2e-07,
+          "profile_slope_m": 0.0,
+          "lead_slope_m": 0.0,
+          "bias_m": 0.0,
+          "tip_relief_m": 0.0,
+          "tip_start": 0.75,
+          "root_relief_m": 0.0,
+          "root_end": 0.25,
+          "end_relief_m": 0.0,
+          "end_fraction": 0.1
+        },
+        "external_compliance_provider": false,
+        "external_boundary_gap": false,
+        "iso_settings": {
+          "nominal_pinion_torque_n_m": 0.2972214072205919,
+          "application_factor": 1.0,
+          "material_reference_youngs_modulus_pa": 207000000000.0,
+          "dedendum_coeff_pinion": null,
+          "dedendum_coeff_wheel": null,
+          "coupling_relaxation": 1.0,
+          "maximum_coupling_iterations": 500,
+          "coupling_tolerance_m": 2e-12
+        }
+      },
+      "source_summary": {
+        "torque_n_m": 0.2972214072205919,
+        "normal_force_n": 63.2592830136331,
+        "mean_normal_approach_m": 2.7785959999242438e-06,
+        "te_peak_to_peak_m": 3.799378862737919e-07,
+        "te_rms_ac_m": 1.2982604990168127e-07,
+        "angular_te_peak_to_peak_rad": 8.086429069881001e-05,
+        "max_pressure_pa": 708122346.4691426,
+        "max_line_load_n_per_m": 13701.66129823625,
+        "mean_mesh_stiffness_n_per_m": 51513494.33907311,
+        "mesh_stiffness_fluctuation_n_per_m": 37805389.759723164,
+        "max_line_load_concentration_factor": 2.1659526705801246,
+        "max_abs_load_centroid_offset_m": 2.33090683981118e-19,
+        "mean_contact_fraction": 0.8616071428571428,
+        "max_force_residual_n": 2.1316282072803006e-14,
+        "max_gap_residual_m": 1.874679051724155e-13,
+        "all_converged": true,
+        "elastic_mode": "iso_love",
+        "local_contact": false,
+        "extended_contact": false,
+        "transverse_contact_ratio": 1.635185963571462,
+        "overlap_ratio": 0.0,
+        "model_scope": "ISO综合齿对刚度、可选Love条带影响；无摩擦、准静态，压力采用局部线接触近似"
+      },
+      "peak_pressure_pa": 708122346.4691426,
+      "mean_approach_m": 2.7785959999242438e-06,
+      "max_neighbour_force_jump_over_total": 0.020495113330749645,
+      "uncovered_display_count": 201
+    }
+  ],
+  "system_load_sharing_recomputed": false,
+  "physical_validation": false,
+  "scope_zh": "指定ISO控制基准、仅切换Love、Love下每轮齿廓鼓形替换3µm；原输入和所有控制改动明确保存。三组实际重算，候选非最优、非制造推荐；不能外推总成。"
+}

@@ -123,6 +123,26 @@ result = analyze_joint(config)
 `manifest.json`保存导出文件SHA256。JSON非有限的未定义统计量输出null；NPZ不用对象数组或pickle。原始计算节点与展示图分开保存。
 
 
-## 完整接触斑点接口
+## 接触压力显示接口
 
-`interior_snapshot(contact)->(phase_index,tooth_pair_index)`选择两轮有限带均在有效齿面内域的有载齿对。`build_contact_pattern(contact,member="pinion",profile_points=1601,snapshot_index=None,snapshot_tooth_pair_index=None)->ContactPattern`直接使用原`AnalysisResult`，`export_contact_pattern(pattern,path)`写出无pickle的原条带及矩阵。瞬时和扫掠压力采用不同齿廓坐标，不能逐像素比较；正反面由源接触对象决定。默认自动快照为源峰压相位，可能发生齿顶裁剪；正式示例先显式调用interior_snapshot。完整通过程、弧长/Hertz带、守恒/裁剪/栅格误差与拒绝的模型分支见[接触方法](contact_patterns.md)。
+0.3.1的通过程显示使用`robot_joint.contact_display`，直接读取原`AnalysisResult`，不回写载荷或刚度：
+
+```python
+from robot_joint.contact_display import contact_pass_data, instantaneous_contact_data
+
+# contact为逐行星、逐副保存的gear_contact.AnalysisResult。
+passage = contact_pass_data(contact, samples=(201, 241))
+instant = instantaneous_contact_data(contact, normal_points=301)
+```
+
+`contact_pass_data(result, *, samples=(201,241), face_coordinate_m=None, roll_distance_m=None)`返回小轮材料坐标显示字典。`face_coordinate_m`从小轮左端起算，`roll_distance_m`为小轮展长，均为一维SI坐标；`pressure_pa_x_y`按[齿宽点, 展长点]排列。可显式传入原参照坐标进行逐点核对。`samples`保存原压力点，`ordinary_samples`排除延伸分支，`boundary_display_samples`仅记录中心模型首末条带的边界显示支撑，不是新增独立端点解。凸包外为NaN。`member_contact_pass_data(result,member="wheel",**kwargs)`按精确共轭关系换至大轮材料坐标，内外啮合分别保持同向/反向。`draw_contact_pass(ax,data,maximum_pa=...,title=None,language="zh",member="pinion")`绘制同一定义的压力及等压线。
+
+`instantaneous_contact_data(result, *, phase_index=None, tooth_pair_index=None, normal_points=301)`选择一对齿、一个相位，返回`s_edges_m`、`normal_edges_m`、`pressure_pa_s_n`及`source_*`原值。矩阵按[沿接触线单元, 法向单元]排列，函数采用SI，图中才把沿线转mm、法向转μm；两轴显示比例不同。`normal_points`须为不小于21的整数。默认通过`interior_snapshot`在其支持范围内选择内域相位；显式给相位而不选齿对时，选择该相位峰压节点所属齿对。中心模型保持各原条带常值，独立端点模型仅作端点分段线性显示细分。瞬时与通过程不能逐像素比较。
+
+局部函数另返回`source_total_force_n`、`display_integrated_force_n`、`display_relative_force_error`。后者为`(显示积分−原合力)/原合力`的有符号无量纲差，原合力为0时定义为0。中心常值分支的解析Hertz积分与原条带力满足恒等式；独立端点分支分别插值峰压与半宽，显示积分不保证与原中心条带合力相等。保留原`source_*`不是显示积分守恒声明，接口不重新归一化压力，见[18/77局部示例及边界](contact_patterns.md)。
+
+批量结果`pattern.npz`保留原字段，追加`pass_face_coordinate_m`、`pass_roll_distance_m`、`pass_pressure_pa_x_y`、`pass_samples`、`pass_ordinary_samples`、`pass_boundary_display_samples`及`local_s_edges_m`、`local_normal_edges_m`、`local_pressure_pa_s_n`。`--replot`先校验SHA清单再重绘；显示插值不增加求解点或接触边界求解。
+
+0.3.0的`interior_snapshot`、`build_contact_pattern`及`export_contact_pattern`保留为有限Hertz带包络的兼容工具。其`sweep_pressure_pa`属于旧包络定义，不是本版源项目方法的通过程显示。原始压力、显示支撑、插值和模型边界分别解释于[接触说明](contact_patterns.md)。
+
+诊断比较输出`source_analysis_input`、`baseline_changes_from_source`与`candidate_profile_rule`。ISO控制基准显式强制`elastic_mode="iso"`、`local_contact=False`和128×21；`replace_each_member_with_3um`将各轮齿廓鼓形替换为3 μm，非累加规则。`kind!="parameters"`的组合修形明确报错。该诊断不改写默认512×41主流程；自定义来源的控制基准变动须读取记录，不能假定与来源输入完全相同。

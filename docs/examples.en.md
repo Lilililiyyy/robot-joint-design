@@ -6,7 +6,7 @@
 
 [Back to the project](../README.en.md). Run all commands below from the project root.
 
-This parameterized NGW calculation kernel connects loads, geometry, materials, tooth modifications, support, motor and thermal inputs. It exports raw contact arrays, engineering results, a Chinese calculation report and CAD/BOM parameters. Version **0.3.0** runs without commercial software or vendor DLLs.
+This parameterized NGW calculation kernel connects loads, geometry, materials, tooth modifications, support, motor and thermal inputs. It exports raw contact arrays, engineering results, a Chinese calculation report and CAD/BOM parameters. Version **0.3.1** runs without commercial software or vendor DLLs.
 
 ## Case: redesigning the joint transmission for a physical DFKI pendulum
 
@@ -50,7 +50,7 @@ Each state analyzes both meshes for all three planets, using 64 mesh phases and 
 
 ![Two-mesh LTCA and raw contact-node pressures](../examples/results/dfki_pendulum/en/04_contact.png)
 
-Maximum local Hertz pressure is **827.21 MPa**. The node plot does not interpolate a complete flank-pressure field. Normal TE, local pressure and output angle budget are different quantities.
+Maximum local Hertz pressure is **827.21 MPa**. This figure retains original contact nodes, unlike the passage interpolation below. Neither adds a 2D flank-pressure solve. Normal TE, local pressure and output angle budget are different quantities.
 
 ## 4. Check rating stresses and support separately
 
@@ -140,9 +140,15 @@ The original 16×13 sampling missed the ring mesh's short double-contact branch,
 New assumed design requirements are output stiffness ≥20 kN·m/rad, Kγ≤2, and supplied-hotspot damage D≤1; these are not original product specifications. After recomputation, the baseline passes; errors ×3 fails stiffness and load sharing, while pin stiffness ×0.3 fails stiffness. Hatching marks candidates that fail configured constraints, and Pareto membership is evaluated only among feasible candidates. Actual values, thresholds, directions and missing constraints are in `summary.check_details`; unmodelled failure modes are in `summary.assessment_coverage` and the [design review](design_review.en.md).
 
 
-## Full patterns and further design
+## Contact-display checks and further design
 
-The [full-pattern workflow](contact_patterns.en.md) adds all planets, both meshes, positive/negative and low-load states, and each member's own material coordinates. The original one-phase node figure remains as a raw-sample view. New [planet-pin/bearing](planet_support.en.md) and [DC-bus](dc_bus.en.md) checks can be called directly or configured at the top level of analyze_joint to participate in screening.
+The 0.3.1 [contact-display workflow](contact_patterns.en.md) follows the cylindrical-LTCA source method. `contact_pass_data` linearly interpolates raw local peak pressures in material coordinates and draws contours for all planets, both meshes, positive/negative and low-load states, and each member. `instantaneous_contact_data` separately displays one pair's instantaneous band in mm along the line and μm normal to it. The original node plot retains its raw-sample meaning; legacy finite-band envelopes remain diagnostics rather than the new passage definition.
+
+![Full tooth-passage pressure and contours](../examples/results/contact_patterns/en/01_contact_overview.png)
+
+[Local instantaneous bands](../examples/results/contact_patterns/en/06_instantaneous_contact.png), the [ISO-control/Love/explicit-crown+Love diagnostic](../examples/results/contact_patterns/en/07_model_comparison.png) and [matching 18/77 original-grid reproduction](../examples/results/contact_patterns/en/08_reference_reproduction.png) separately examine coordinates, model effects and the display chain. The diagnostic replaces each member's profile crown with 3 μm and records source input plus ISO/`local_contact=False`/128×21 controls. It neither changes the default-case 512×41 main workflow nor validates hardware. A NaN convex hull is not a solved contact boundary; local endpoint displays need not integrate to original centre-strip forces, and differences are reported separately. See [contact documentation](contact_patterns.en.md) and [the API](api.en.md) for data and new functions.
+
+New [planet-pin/bearing](planet_support.en.md) and [DC-bus](dc_bus.en.md) checks can be called directly or configured at the top level of `analyze_joint` to participate in screening.
 
 The [integrated design input](../examples/dfki_with_screens.json) explicitly updates system kpin to the new assumed 6mm pin's load-conjugate bending/shear stiffness, then recouples all 34 states and checks planet-bearing static safety and a 4700μF bus. It is reported separately from the fixed-300MN/m consistency comparison. New geometry, allowables and electrical inputs are not original DFKI product specifications.
 

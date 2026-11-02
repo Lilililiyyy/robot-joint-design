@@ -1,0 +1,7 @@
+{
+  "files": {
+    "model_comparison.json": "d40f19229de70706093a42c90ab941bb28e7d61752c64d71e1254b7509dd90d9",
+    "reference_reproduction.json": "ef38fd4e07433a328d0fef229757efe10d2df93bc7355e626a7fdc05d14c284b",
+    "comparison_data.npz": "e83f73b927ba4502ec743f312bd6cf9abed025e71414730747126750101ce7e9"
+  }
+}
