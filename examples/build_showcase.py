@@ -12,8 +12,8 @@ from robot_joint import analyze_joint, thermal_response, reversal_curve, sn_dama
 from robot_joint.io import export_joint
 from gear_contact.io import write_json
 from .pendulum_case import pendulum_duty, candidate_configs, validate_saved_duty
+from robot_joint.figure_style import COLORS, publication_settings, save_publication_figure
 
-COLORS = ['#155f78','#de8d35','#7482a4','#318a6e']
 FIGURES = ['01_design','02_duty','03_load_sharing','04_contact','05_strength_support',
            '06_precision','07_motor_thermal','08_fatigue','09_comparison']
 
@@ -90,10 +90,9 @@ def render_figures(data, output, language):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
-    from matplotlib import font_manager
     from matplotlib.patches import Circle
-    names={f.name for f in font_manager.fontManager.ttflist}
-    chinese=next((name for name in ('Microsoft YaHei','SimHei','Noto Sans CJK SC') if name in names),'DejaVu Sans')
+    from matplotlib.colors import LinearSegmentedColormap
+    pressure_map=LinearSegmentedColormap.from_list('pressure_blue_red',['#2166ac','#a8cce3','#f3e5e4','#b2182b'])
     L=lambda zh,en:zh if language=='zh' else en
     base,req,r=data['base'],data['requirements'],data['result']
     time=data['time']; count=len(r.cases); n=base['stage']['planet_count']
@@ -101,17 +100,11 @@ def render_figures(data, output, language):
     def style(ax):
         ax.grid(alpha=.14); ax.spines['top'].set_visible(False);ax.spines['right'].set_visible(False)
     def save(fig,name,title):
-        fig.suptitle(title,fontsize=15,fontweight='bold')
-        # 为底部图义保留独立空间，避免与横轴标题相互覆盖。
-        fig.get_layout_engine().set(rect=(0,.055,1,.93))
-        fig.text(.012,.008,L('真实台架需求参照 · 新设计模型计算，非样机实测','Physical-testbed requirements · redesign-model results, not measurements'),
-                 fontsize=8,color='#677681')
-        fig.savefig(path/(name+'.png'),dpi=160,facecolor='white')
-        fig.savefig(path/(name+'.svg'),facecolor='white',metadata={'Title':title,'Description':'language='+language})
+        save_publication_figure(fig,path/name,title=title,language=language,
+            footnote=L('公开台架需求参照；新设计模型计算，非样机实测。',
+                       'Published testbed requirements; redesign-model results, not measurements.'))
         plt.close(fig)
-    settings={'font.family':chinese if language=='zh' else 'DejaVu Sans','font.size':10,
-              'axes.unicode_minus':False,'axes.titlepad':12,'axes.labelpad':7,
-              'legend.frameon':False,'axes.spines.top':False,'axes.spines.right':False}
+    settings=publication_settings(language)
     with plt.rc_context(settings):
         fig,axes=plt.subplots(1,2,figsize=(12,5.8),layout='constrained')
         ax=axes[0];theta=math.pi/3;length=.5
@@ -149,7 +142,7 @@ def render_figures(data, output, language):
 
         fig,axes=plt.subplots(2,1,figsize=(11.5,7),sharex=True,layout='constrained')
         forces=np.array([c['sharing']['tangential_forces_n'] for c in r.cases])
-        for j in range(n):axes[0].plot(time,forces[:,j],'o-',color=COLORS[j],label=L(f'行星{j+1}',f'Planet {j+1}'),ms=4)
+        for j in range(n):axes[0].plot(time,forces[:,j],['o-','s--','^-.'][j%3],color=COLORS[j],label=L(f'行星{j+1}',f'Planet {j+1}'),ms=4)
         axes[0].set_ylabel(L('单副切向力 / N','Tangential force per mesh / N'));axes[0].legend(ncol=3)
         axes[1].plot(time,[c['sharing']['load_share_factor'] for c in r.cases],'o-',color=COLORS[0],ms=4)
         axes[1].axhline(1,color='#87939c',ls='--',label=L('理想均载','Ideal sharing'))
@@ -165,7 +158,7 @@ def render_figures(data, output, language):
             rotation=max(contact.rotations,key=lambda z:float(np.max(z.pressure_pa)))
             ax=axes[1,col];loaded=rotation.solution.active_mask
             sc=ax.scatter(rotation.grid.face_coordinate_m[loaded]*1e3,rotation.grid.roll_pinion_m[loaded]*1e3,
-                 c=rotation.pressure_pa[loaded]/1e6,cmap='viridis',s=65,marker='s',vmin=0,vmax=r.summary['maximum_contact_pressure_pa']/1e6)
+                 c=rotation.pressure_pa[loaded]/1e6,cmap=pressure_map,s=65,marker='s',vmin=0,vmax=r.summary['maximum_contact_pressure_pa']/1e6)
             ax.set(xlabel=L('齿宽位置 / mm','Face position / mm'),ylabel=L('小轮展长 / mm','Pinion roll length / mm'),
                    title=L('峰压相位：原始接触节点','Peak-pressure phase: raw contact nodes'))
             fig.colorbar(sc,ax=ax,label=L('Hertz峰压 / MPa','Hertz peak pressure / MPa'),shrink=.8);style(ax)
@@ -243,6 +236,14 @@ def render_figures(data, output, language):
             axes[0].annotate(name,(row['maximum_angle_budget_rad']*factor,row['maximum_contact_pressure_pa']/1e6),xytext=(6,7),textcoords='offset points',fontsize=9)
         axes[0].margins(x=.3,y=.3);axes[0].set(xlabel=L('最坏角度预算 / arcmin','Worst angle budget / arcmin'),ylabel=L('峰压 / MPa','Peak pressure / MPa'),title=L('两项指标均希望降低','Both objectives are minimized'))
         axes[1].bar(names,[row['minimum_output_torsional_stiffness_n_m_per_rad']/1000 for row in data['metrics']['candidate_comparison']],color=COLORS[:3])
+        for bar,row in zip(axes[1].patches,data['metrics']['candidate_comparison']):
+            if not row['configured_checks_pass']:
+                bar.set_hatch('///');bar.set_edgecolor('#444444')
+        minimum=base.get('design_limits',{}).get('minimum_output_torsional_stiffness_n_m_per_rad')
+        if minimum is not None:
+            axes[1].axhline(minimum/1000,color=COLORS[1],ls='--',lw=1,
+                label=L('给定最低刚度；网纹为未通过方案','Required stiffness; hatching marks failed candidates'))
+            axes[1].legend(fontsize=8)
         axes[1].set(ylabel='kN·m/rad',title=L('改善均载时也要关注刚度代价','Check stiffness cost when improving load sharing'))
         for ax in axes:style(ax)
         save(fig,FIGURES[8],L('同一几何与任务：误差和销柔度的设计取舍','Same geometry and duty: trade-offs in errors and pin compliance'))
@@ -252,18 +253,24 @@ def main():
     parser=argparse.ArgumentParser(description='复算DFKI摆台参照再设计案例并生成中英双版图表')
     parser.add_argument('--output',type=Path,default=project_dir()/'examples/results/dfki_pendulum')
     parser.add_argument('--raw-output',type=Path,help='可选的完整原接触数组输出目录')
+    parser.add_argument('--language',choices=['zh','en','both'],default='both',help='图表标注语言；both需要中文字体')
     args=parser.parse_args();root=project_dir()
     base=json.loads((root/'examples/dfki_pendulum_case.json').read_text(encoding='utf-8'))
     requirements=json.loads((root/'examples/dfki_pendulum_requirements.json').read_text(encoding='utf-8'))
     generated,_=pendulum_duty(requirements)
     validate_saved_duty(generated,base['duty_segments'])
-    results=[analyze_joint(c) for c in candidate_configs(base)]
+    results=[]
+    for config in candidate_configs(base):
+        results.append(analyze_joint(config))
+        print(json.dumps({'已完成方案':config['case_id'],
+              'configured_checks_pass':results[-1].summary['configured_checks_pass']},ensure_ascii=False),flush=True)
     data=prepare_data(base,requirements,results)
     args.output.mkdir(parents=True,exist_ok=True)
     write_json(args.output/'metrics.json',data['metrics'])
     write_json(args.output/'summary.json',results[0].summary)
     write_json(args.output/'design_comparison.json',data['metrics']['candidate_comparison'])
-    for language in ('zh','en'):render_figures(data,args.output,language)
+    for language in (('zh','en') if args.language=='both' else (args.language,)):
+        render_figures(data,args.output,language)
     with (args.output/'duty.csv').open('w',encoding='utf-8-sig',newline='') as stream:
         writer=csv.writer(stream);writer.writerow(['time_s','theta_rad','output_torque_n_m','output_speed_rad_s','load_share_factor','output_stiffness_n_m_per_rad'])
         for state,segment,case in zip(data['derived']['states'],base['duty_segments'],results[0].cases):

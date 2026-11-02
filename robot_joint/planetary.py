@@ -65,7 +65,12 @@ class PlanetaryStage:
 
 
 def stage_geometry(stage: PlanetaryStage) -> dict:
-    """返回参考圆、均布布局和装配检查；不冒称刀具根切/齿廓干涉校核。"""
+    """返回参考几何、装配及标准全齿高齿条根切风险初筛。
+
+    零变位外齿轮、标准齿条齿顶高系数ha*=1时，避免理论根切需
+    z·sin²α>=2ha*。该式只是一项解析风险筛查，不检查实际刀尖圆角、
+    根部过渡、齿顶厚度或内啮合干涉，也不据此自动否决加工方案。
+    """
     if not isinstance(stage, PlanetaryStage):
         raise ValueError("stage必须为PlanetaryStage")
     sun = stage.module_m * stage.sun_teeth / 2
@@ -73,6 +78,16 @@ def stage_geometry(stage: PlanetaryStage) -> dict:
     ring = stage.module_m * stage.ring_teeth / 2
     radius = sun + planet
     angles = 2 * math.pi * np.arange(stage.planet_count, dtype=float) / stage.planet_count
+    sine_squared = math.sin(stage.pressure_angle_rad)**2
+    minimum_teeth = (2/sine_squared if sine_squared >= 2/np.finfo(float).max else None)
+    undercut = {
+        'method': '零变位标准全齿高齿条：z·sin²α>=2；ha*=1',
+        'minimum_teeth_continuous': minimum_teeth,
+        'sun_no_undercut_screen': bool(stage.sun_teeth*sine_squared >= 2),
+        'planet_no_undercut_screen': bool(stage.planet_teeth*sine_squared >= 2),
+        'automatic_design_rejection': False,
+        'unassessed': ['实际刀具与齿根过渡', '内齿轮渐开线/摆线/修切干涉', '齿顶厚度与尖顶'],
+    }
     return {
         "ratio": 1 + stage.ring_teeth / stage.sun_teeth,
         "sun_radius_m": sun,
@@ -84,7 +99,8 @@ def stage_geometry(stage: PlanetaryStage) -> dict:
         "assembly_index": (stage.sun_teeth + stage.ring_teeth) // stage.planet_count,
         "adjacent_tip_clearance_m": (2 * radius * math.sin(math.pi / stage.planet_count)
                                      - stage.module_m * (stage.planet_teeth + 2)),
-        "geometry_scope": "零变位直齿参考几何、均布装配及邻接齿顶圆检查；未检查刀具根切和完整齿廓干涉",
+        "undercut_screen": undercut,
+        "geometry_scope": "零变位直齿参考几何、均布装配、邻接齿顶圆及外齿标准齿条根切风险初筛；实际刀具及完整齿廓干涉未评估",
     }
 
 

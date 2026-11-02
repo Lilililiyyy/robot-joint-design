@@ -2,6 +2,7 @@
 from pathlib import Path
 import math
 import numpy as np
+from .figure_style import COLORS, publication_settings, save_publication_figure
 
 
 def plot_joint(result, output_dir):
@@ -9,23 +10,18 @@ def plot_joint(result, output_dir):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
-    from matplotlib import font_manager
     from .precision import reversal_curve
-    names = {f.name for f in font_manager.fontManager.ttflist}
-    font = next((name for name in ('Microsoft YaHei', 'SimHei', 'Noto Sans CJK SC', 'WenQuanYi Zen Hei') if name in names), 'DejaVu Sans')
-    with plt.rc_context({'font.family': font, 'axes.unicode_minus': False, 'font.size': 10,
-                         'axes.spines.top': False, 'axes.spines.right': False}):
+    with plt.rc_context(publication_settings('zh')):
         fig, axes = plt.subplots(2, 2, figsize=(12, 8), constrained_layout=True)
-        colors = ['#23687c', '#d48c36', '#6d749e', '#4a9578']
+        colors = COLORS
         ax = axes[0, 0]
         n = len(result.cases)
-        for i, case in enumerate(result.cases):
-            force = case['sharing']['tangential_forces_n']
-            x = np.arange(len(force)) + (i-(n-1)/2)*.18
-            ax.bar(x, force, width=.17, label=case['label'], color=colors[i % len(colors)])
-        ax.set(xticks=np.arange(result.inputs['stage']['planet_count']),
-               xticklabels=[str(i+1) for i in range(result.inputs['stage']['planet_count'])],
-               xlabel='行星编号', ylabel='每副切向力 / N', title='行星载荷分配')
+        # 按行星画工况曲线，避免多工况分组柱越过行星坐标并产生上百条图例。
+        forces = np.array([case['sharing']['tangential_forces_n'] for case in result.cases])
+        for j in range(result.inputs['stage']['planet_count']):
+            ax.plot(np.arange(1, n+1), forces[:, j], ['o-', 's--', '^-.'][j % 3],
+                    label=f'行星{j+1}', color=colors[j % len(colors)], markersize=3)
+        ax.set(xlabel='工况序号', ylabel='每副切向力 / N', title='行星载荷分配')
         ax.legend(fontsize=8)
         ax = axes[0, 1]
         time = np.asarray(result.thermal['time_s'])
@@ -58,8 +54,7 @@ def plot_joint(result, output_dir):
         ax.legend(fontsize=8)
         for axis in axes.flat:
             axis.grid(alpha=.15)
-        fig.suptitle('NGW关节设计计算 · '+result.inputs['case_id'], fontsize=15, fontweight='bold')
         path = Path(output_dir)/'overview.png'
-        fig.savefig(path, dpi=160)
-        fig.savefig(path.with_suffix('.svg'))
+        save_publication_figure(fig, path, title='NGW关节设计计算 · '+result.inputs['case_id'],
+                                footnote='给定参数下的准静态设计结果；不代表样机实测。')
         plt.close(fig)

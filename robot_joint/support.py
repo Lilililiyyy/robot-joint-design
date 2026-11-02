@@ -36,14 +36,23 @@ def _array(value, name, shape=None):
     return result
 
 
-def support_response(wrench, stiffness_matrix) -> dict:
-    """由凝聚6×6刚度求输出端小位移，K u = W。
+def support_response(wrench, stiffness_matrix, *, reference_offset_m=0.0) -> dict:
+    """由凝聚6×6刚度及参考点偏置求输出载荷端口小位移。
 
     W=[Fx,Fy,Fz,Mx,My,Mz]，u=[x,y,z,θx,θy,θz]。
     K的平移块为N/m，旋转块为N·m/rad，耦合项须满足虚功互易。
+    reference_offset_m是K参考点到输出载荷端口的有符号z距离h。
+    uport=B uref，B的平移—转动块为-[r]×；Wref=Bᵀ Wport，故
+    Mref=Mport+r×F。先在K参考点解K uref=Wref，再返回uport，
+    两端虚功完全一致。h缺省0，与历史的端口凝聚矩阵接口兼容。
+    此偏置独立于bearings.load_offset_m（后者原点为双支承中点）。
     刚度可由梁、试验或FE缩聚取得；本函数不补设缺失的约束。
     """
     force = _array(wrench, "六分量载荷", (6,))
+    offset = _scalar(reference_offset_m, "结构刚度参考点到载荷端口的z偏置m")
+    transform = np.eye(6)
+    transform[0, 4], transform[1, 3] = offset, -offset
+    reference_force = transform.T @ force
     stiffness = _array(stiffness_matrix, "凝聚支承刚度", (6, 6))
     diagonal = np.diag(stiffness)
     if np.any(diagonal <= 0):
@@ -57,18 +66,27 @@ def support_response(wrench, stiffness_matrix) -> dict:
         np.linalg.cholesky(normalized)
     except np.linalg.LinAlgError as error:
         raise ValueError("凝聚支承刚度必须正定，不能含未约束刚体自由度") from error
-    displacement = np.linalg.solve(normalized, force / scale) / scale
-    residual = stiffness @ displacement - force
-    denominator = max(float(np.linalg.norm(force / scale)), np.finfo(float).tiny)
+    reference_displacement = np.linalg.solve(normalized, reference_force / scale) / scale
+    displacement = transform @ reference_displacement
+    residual = stiffness @ reference_displacement - reference_force
+    denominator = max(float(np.linalg.norm(reference_force / scale)), np.finfo(float).tiny)
+    reference_compliance = (np.linalg.solve(normalized, np.eye(6)) / np.outer(scale, scale))
+    port_compliance = transform @ reference_compliance @ transform.T
     return {
         "generalized_displacement": displacement.tolist(),
         "displacement_m": displacement[:3].tolist(),
         "rotation_rad": displacement[3:].tolist(),
+        "reference_offset_m": offset,
+        "reference_wrench": reference_force.tolist(),
+        "reference_generalized_displacement": reference_displacement.tolist(),
+        "load_point_compliance": port_compliance.tolist(),
         "strain_energy_j": float(np.dot(force, displacement) / 2),
         "diagnostics": {
             "wrench_residual": residual.tolist(),
             "relative_scaled_residual": float(np.linalg.norm(residual / scale) / denominator),
             "stiffness_positive_definite": True,
+            "virtual_work_residual_j": float(np.dot(force, displacement)
+                                              - np.dot(reference_force, reference_displacement)),
         },
         "model": "给定凝聚刚度下的线弹性小位移响应",
         "physical_validation": False,

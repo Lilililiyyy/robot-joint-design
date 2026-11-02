@@ -132,6 +132,17 @@ class ValidPlanetaryTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             PlanetaryStage(True, 27, 72, 3, 0.001, 0.012)
 
+    def test_standard_rack_undercut_risk_is_explicit_without_rejecting_layout(self):
+        original = stage_geometry(self.stage)["undercut_screen"]
+        self.assertAlmostEqual(original["minimum_teeth_continuous"], 2/math.sin(math.radians(20))**2)
+        self.assertTrue(original["sun_no_undercut_screen"])
+        self.assertTrue(original["planet_no_undercut_screen"])
+        risky = stage_geometry(PlanetaryStage(12, 24, 60, 3, 0.001, 0.012))["undercut_screen"]
+        self.assertFalse(risky["sun_no_undercut_screen"])
+        self.assertTrue(risky["planet_no_undercut_screen"])
+        self.assertFalse(risky["automatic_design_rejection"])
+        self.assertTrue(any("内齿轮" in item for item in risky["unassessed"]))
+
     def test_invalid_compliance_stiffness_and_load(self):
         cases = [
             {"sun_mesh_stiffness_n_per_m": [1e8, 0, 1e8]},

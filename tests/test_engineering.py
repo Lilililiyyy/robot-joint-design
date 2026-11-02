@@ -75,6 +75,15 @@ class EngineeringTests(unittest.TestCase):
         self.assertEqual(json.loads(rows["ring"]["specification"])["teeth"], 72)
         self.assertTrue(json.loads(rows["ring"]["specification"])["internal"])
 
+    def test_load_port_and_stiffness_reference_are_not_silently_identified(self):
+        self.inputs["support"] = {"reference_offset_m": 0.005}
+        parameters = self.export()
+        references = parameters["coordinate_references"]
+        self.assertAlmostEqual(references["output_load_port_z_from_bearing_origin_m"], 0.012)
+        self.assertAlmostEqual(references["stiffness_reference_to_load_port_z_m"], 0.005)
+        self.assertAlmostEqual(references["stiffness_reference_z_from_bearing_origin_m"], 0.007)
+        self.assertIn("未给定", references["gear_axial_plane"])
+
     def test_svg_contains_exact_layout_metadata_without_external_resources(self):
         parameters = self.export()
         body = (self.output / "layout.svg").read_text(encoding="utf-8")

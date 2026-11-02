@@ -65,5 +65,24 @@
     "adopted_sun_planet_center_distance_m": 0.015,
     "zh": "供应页的30mm中心距表述与m=0.5mm、20/40齿的零变位关系不一致。采用a=m(zs+zp)/2=15mm，30mm仅保留为待确认信息，不能用其重定义模型。",
     "en": "The supplier calls 30 mm a center distance; the zero-shift 20/40 pair at module 0.5 mm gives a=15 mm. This model uses the derived 15 mm; the 30 mm statement remains unresolved."
+  },
+  "revision_020": {
+    "support_reference_zh": "结构刚度参考点为输出端口；输出支承反力参考点为两支承中点，分别配置。",
+    "support_reference_en": "Structural stiffness is condensed at the output port; bearing reactions use the bearing midpoint as a separate reference.",
+    "new_design_limits": {
+      "minimum_output_torsional_stiffness_n_m_per_rad": 20000.0,
+      "maximum_load_share_factor": 2.0,
+      "fatigue_damage_per_input_history": 1.0
+    },
+    "limits_status_zh": "本案例新设计假设，非原产品规格；疲劳仅限给定热点谱。",
+    "limits_status_en": "New design assumptions, not original product specifications; fatigue applies only to the supplied hotspot history.",
+    "selected_resolution": [
+      64,
+      26
+    ],
+    "resolution_reference": [
+      256,
+      26
+    ]
   }
 }

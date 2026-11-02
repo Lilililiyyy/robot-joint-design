@@ -56,9 +56,17 @@ def export_joint(result, output_dir, *, plots=False):
              f"|电机最高温度 / °C|{result.summary['maximum_motor_temperature_k']-273.15:.4f}|",
              f"|减速器最高温度 / °C|{result.summary['maximum_gear_temperature_k']-273.15:.4f}|", '',
              f"热计算模式：{result.summary['thermal_mode']}。", '',
-             '## 约束初筛', '', '|已配置项目|结果|', '|---|---|']
-    for name, passed in result.summary['checks'].items():
-        lines.append(f"|{name}|{'通过' if passed else '未通过'}|")
+             '## 约束初筛', '', '|项目|实际值|比较|限值|状态|', '|---|---:|---|---:|---|']
+    statuses = {'passed': '通过', 'failed': '未通过', 'not_configured': '未配置限值',
+                'not_evaluated': '缺少评价输入/未定义'}
+    for name, detail in result.summary['check_details'].items():
+        actual = '—' if detail['actual'] is None else f"{detail['actual']:.6g}"
+        threshold = '—' if detail['threshold'] is None else f"{detail['threshold']:.6g}"
+        lines.append(f"|{name}|{actual}|{detail['relation']}|{threshold}|{statuses[detail['status']]}|")
+    lines.extend(['', '未配置限值、缺少评价输入及未建模项不计入通过项目。给定热点谱的默认Miner损伤限值为1，'
+                  '只评价该输入谱，不等同整关节服役寿命。', '', '## 设计评估覆盖', '', '|项目|当前范围|', '|---|---|'])
+    for name, scope in result.summary['assessment_coverage'].items():
+        lines.append(f'|{name}|{scope}|')
     lines.extend(['', '## 逐工况载荷与精度', '',
                   '|工况|行星切向力 / N|均载系数|角度预算 / rad|协调残差 / m|', '|---|---|---:|---:|---:|'])
     for case in result.cases:
@@ -76,7 +84,7 @@ def export_joint(result, output_dir, *, plots=False):
     if plots:
         from .plotting import plot_joint
         plot_joint(result, root)
-    manifest = {'version': '0.1.2', 'units': {'length': 'm', 'angle': 'rad', 'torque': 'N m',
+    manifest = {'version': '0.2.0', 'units': {'length': 'm', 'angle': 'rad', 'torque': 'N m',
                 'force': 'N', 'pressure': 'Pa', 'temperature': 'K', 'time': 's'},
                 'files': {p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                           for p in sorted(root.rglob('*')) if p.is_file() and p.name != 'manifest.json'}}

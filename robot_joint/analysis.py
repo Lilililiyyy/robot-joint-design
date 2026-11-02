@@ -98,8 +98,8 @@ def analyze_joint(config: dict) -> JointResult:
                                           'output_acceleration_rad_s2'}})
     motor = motor_duty(motor_segments, geometry['ratio'], motor=values['motor'], **values['drive'])
     support_options = values['support']
-    if set(support_options) != {'stiffness_matrix'}:
-        raise ValueError('support只接受stiffness_matrix，结构边界必须显式给出')
+    if 'stiffness_matrix' not in support_options or set(support_options)-{'stiffness_matrix', 'reference_offset_m'}:
+        raise ValueError('support须给定stiffness_matrix，可附reference_offset_m；结构边界必须显式给出')
     bearing_options = values['bearings']
     if set(bearing_options)-{'spacing_m', 'load_offset_m', 'axial_share', 'ratings'}:
         raise ValueError('bearings含未知字段')
@@ -107,7 +107,8 @@ def analyze_joint(config: dict) -> JointResult:
         raise ValueError('首版双支承接口必须给定两组轴承评级参数')
     cases = []
     for index, segment in enumerate(segments):
-        support = support_response(segment['output_wrench'], support_options['stiffness_matrix'])
+        support = support_response(segment['output_wrench'], support_options['stiffness_matrix'],
+                                   reference_offset_m=support_options.get('reference_offset_m', 0.0))
         displacement = np.asarray(support['generalized_displacement'])
         bearing = two_bearing_reactions(segment['output_wrench'],
                     bearing_options['spacing_m'], bearing_options.get('load_offset_m', 0),
@@ -122,7 +123,7 @@ def analyze_joint(config: dict) -> JointResult:
                 ratings[name] = [rate_mesh(pair, force, values['mesh']['material'], values['rating'][name])
                                  for force in sharing['tangential_forces_n']]
         gear_k = sharing['output_torsional_stiffness_n_m_per_rad']
-        compliance = np.linalg.inv(np.asarray(support_options['stiffness_matrix'], dtype=float))
+        compliance = np.asarray(support['load_point_compliance'])
         total_k = 1 / (1/gear_k + compliance[5, 5])
         precision = precision_budget(
             output_elastic_twist_rad=sharing['output_elastic_twist_rad']+float(displacement[5]),
@@ -164,9 +165,24 @@ def analyze_joint(config: dict) -> JointResult:
         fatigue['scope'] = '调用方给定热点应力历程上的有限寿命模型；不代表所有齿轮、轴承和结构的寿命'
     peak_pressure = max(a.summary['max_pressure_pa'] for c in cases for group in c['contacts'].values() for a in group)
     factors = [c['sharing']['load_share_factor'] for c in cases if c['sharing']['load_share_factor'] is not None]
-    checks = {'motor_speed': motor['within_speed_limit'], 'motor_peak_torque': motor['within_peak_torque_limit'],
-              'motor_continuous_screen': motor['continuous_duty_screen_pass'],
-              'brake_static_screen': motor['brake_static_screen_pass']}
+    checks, check_details = {}, {}
+
+    def record_check(name, actual, threshold, relation, *, scope):
+        """同时保存实际值、限值与比较方向，不把未配置约束算作通过。"""
+        passed = actual <= threshold if relation == '<=' else actual >= threshold
+        checks[name] = bool(passed)
+        check_details[name] = {'status': 'passed' if passed else 'failed',
+                               'actual': float(actual), 'threshold': float(threshold),
+                               'relation': relation, 'scope': scope}
+
+    record_check('motor_speed', max(abs(s['motor_speed_rad_s']) for s in motor['segments']),
+                 values['motor']['maximum_speed_rad_s'], '<=', scope='电机代表工况最大转速，rad/s')
+    record_check('motor_peak_torque', max(abs(s['motor_torque_n_m'])/s['peak_torque_limit_n_m']
+                 for s in motor['segments']), 1.0, '<=', scope='逐工况恒转矩—恒功率峰值包络利用率')
+    record_check('motor_continuous_screen', motor['normalized_continuous_torque_rms'], 1.0,
+                 '<=', scope='按转速包络归一化的连续转矩RMS初筛，不替代温升校核')
+    record_check('brake_static_screen', motor['brake_available_torque_n_m'],
+                 motor['brake_required_torque_n_m'], '>=', scope='输入侧静态保持力矩，N·m；不含动态制动认证')
     gear_ratings = [rating[role] for case in cases for group in case['ratings'].values()
                     for rating in group for role in ('pinion', 'wheel')]
     contact_safety = [r['contact_safety_factor'] for r in gear_ratings if r['contact_safety_factor'] is not None]
@@ -185,34 +201,73 @@ def analyze_joint(config: dict) -> JointResult:
                'minimum_bending_safety_factor': min(bending_safety) if bending_safety else None,
                'minimum_bearing_static_safety_factor': min(static_safety) if static_safety else None,
                'minimum_bearing_life_hours': min(bearing_lives) if bearing_lives else None,
+               'fatigue_damage_per_input_history': fatigue.get('damage_per_duty'),
                'all_couplings_converged': all(c['sharing']['coupling']['converged'] for c in cases),
-               'checks': checks, 'physical_validation': False, 'vendor_system_validation': False,
+               'checks': checks, 'check_details': check_details,
+               'physical_validation': False, 'vendor_system_validation': False,
                'implementation': '新写NGW降阶系统实现，复用公开齿轮内核；非厂商整机等价重建',
                'scope': '固定环零变位直齿单级NGW、准静态、小变形、周期平均协调；不含RV/谐波、完整FE、同步动力学、控制、润滑预测或实物认证'}
     limits = values.get('design_limits', {})
     metric_names = {'contact_pressure_pa': 'maximum_contact_pressure_pa',
                     'angle_budget_rad': 'maximum_angle_budget_rad',
                     'motor_temperature_k': 'maximum_motor_temperature_k',
-                    'gear_temperature_k': 'maximum_gear_temperature_k'}
+                    'gear_temperature_k': 'maximum_gear_temperature_k',
+                    'maximum_load_share_factor': 'maximum_load_share_factor',
+                    'fatigue_damage_per_input_history': 'fatigue_damage_per_input_history'}
     lower_metrics = {'minimum_contact_safety_factor': 'minimum_contact_safety_factor',
                      'minimum_bending_safety_factor': 'minimum_bending_safety_factor',
                      'minimum_bearing_static_safety_factor': 'minimum_bearing_static_safety_factor',
-                     'minimum_bearing_life_hours': 'minimum_bearing_life_hours'}
+                     'minimum_bearing_life_hours': 'minimum_bearing_life_hours',
+                     'minimum_output_torsional_stiffness_n_m_per_rad':
+                         'minimum_output_torsional_stiffness_n_m_per_rad'}
+    scopes = {'contact_pressure_pa': '当前离散局部Hertz峰压，Pa；须另查网格/相位收敛',
+              'angle_budget_rad': '指定受载状态的未补偿确定性角度预算，rad',
+              'motor_temperature_k': '给定热参数的电机节点最高温度，K',
+              'gear_temperature_k': '给定热参数的传动节点最高温度，K',
+              'maximum_load_share_factor': '有载工况最大均载系数；全零载时未定义',
+              'fatigue_damage_per_input_history': '给定热点标量应力谱的Miner损伤；不代表整关节服役寿命',
+              'minimum_contact_safety_factor': '给定评级因子与材料限值的最小接触安全系数',
+              'minimum_bending_safety_factor': '给定评级因子与材料限值的最小齿根安全系数',
+              'minimum_bearing_static_safety_factor': '输出双支承基本静安全；不含行星轴承',
+              'minimum_bearing_life_hours': '输出双支承基本L10小时数；无摆动/润滑/微动修正',
+              'minimum_output_torsional_stiffness_n_m_per_rad': '最终承载分支局部输出扭转刚度，N·m/rad'}
+    for name, metric in {**metric_names, **lower_metrics}.items():
+        actual = summary[metric]
+        check_details[name] = {'status': 'not_configured' if actual is not None else 'not_evaluated',
+                               'actual': actual, 'threshold': None,
+                               'relation': '<=' if name in metric_names else '>=',
+                               'scope': scopes[name]}
     if set(limits)-set(metric_names)-set(lower_metrics):
         raise ValueError('design_limits含不支持的指标')
     for name, threshold in limits.items():
         if isinstance(threshold, bool) or not np.isfinite(threshold) or threshold <= 0:
             raise ValueError('方案限值必须为正有限值')
         if name in metric_names:
-            checks[name] = bool(summary[metric_names[name]] <= threshold)
+            value = summary[metric_names[name]]
+            relation = '<='
         else:
             value = summary[lower_metrics[name]]
-            if value is None:
-                raise ValueError(name+'没有已计算的有限评价量，不能校核此限值')
-            checks[name] = bool(value >= threshold)
+            relation = '>='
+        if value is None:
+            raise ValueError(name+'没有已计算的有限评价量，不能校核此限值')
+        record_check(name, value, threshold, relation, scope=scopes[name])
     for name in ('minimum_contact_safety_factor', 'minimum_bending_safety_factor', 'minimum_bearing_static_safety_factor'):
         if summary[name] is not None and name not in limits:
-            checks[name] = bool(summary[name] >= 1.0)
+            record_check(name, summary[name], 1.0, '>=', scope=scopes[name])
+    if summary['fatigue_damage_per_input_history'] is not None and 'fatigue_damage_per_input_history' not in limits:
+        # 只评价本次明确给定的热点谱，不能推广成齿轮全寿命或整关节认证。
+        record_check('fatigue_damage_per_input_history', summary['fatigue_damage_per_input_history'],
+                     1.0, '<=', scope=scopes['fatigue_damage_per_input_history'])
+    summary['assessment_coverage'] = {
+        'output_bearing_life': '仅基本L10；小角摆动、微动和润滑修正未评估',
+        'hotspot_fatigue': '仅给定标量应力谱' if 'fatigue' in values else '未配置应力谱与S-N数据',
+        'planet_pin_strength': '未评估；等效销刚度不等同销强度',
+        'planet_bearing_life': '未评估；当前轴承仅为两个输出支承',
+        'ring_carrier_housing_strength': '未评估；未构造完整实体和FE边界',
+        'regenerative_bus_and_inverter': '未评估；机电功率平衡不等同母线吸能和驱动器能力',
+        'dynamics_and_resonance': '未评估；当前为周期平均准静态协调',
+        'manufacturing_interference': '仅外齿轮标准全齿高齿条根切风险初筛；内齿干涉、尖顶和刀具未评估',
+        'physical_validation': '未完成样机标定与试验'}
     summary['configured_checks_pass'] = all(checks.values())
     summary['check_scope'] = '仅对已配置约束的数值初筛；未配置强度/寿命/温升限值不自动视为已校核'
     return JointResult(values, geometry, cases, motor, thermal, bearings, fatigue, summary)

@@ -28,6 +28,41 @@ class SupportTests(unittest.TestCase):
         self.assertAlmostEqual(float(a @ ub), float(b @ ua), places=15)
         np.testing.assert_allclose(stiffness @ ua, a, atol=1e-12)
 
+    def test_offset_port_force_creates_bending_and_preserves_virtual_work(self):
+        stiffness = np.diag([1e8, 2e8, 3e8, 1e5, 2e5, 3e5])
+        load = np.array([100, -200, 30, 2, -3, 5.0])
+        offset = 0.07
+        reference_load = load.copy()
+        reference_load[3:6] += np.cross([0, 0, offset], load[:3])
+        reference_displacement = reference_load/np.diag(stiffness)
+        port_displacement = reference_displacement.copy()
+        port_displacement[:3] += np.cross(reference_displacement[3:], [0, 0, offset])
+        result = support_response(load, stiffness, reference_offset_m=offset)
+        np.testing.assert_allclose(result["reference_wrench"], reference_load, atol=1e-14)
+        np.testing.assert_allclose(result["reference_generalized_displacement"], reference_displacement, atol=1e-18)
+        np.testing.assert_allclose(result["generalized_displacement"], port_displacement, atol=1e-18)
+        self.assertAlmostEqual(result["strain_energy_j"], reference_load @ reference_displacement/2, places=15)
+        self.assertLess(abs(result["diagnostics"]["virtual_work_residual_j"]), 1e-16)
+        np.testing.assert_allclose(np.asarray(result["load_point_compliance"]) @ load, port_displacement, atol=1e-18)
+
+    def test_offset_port_compliance_is_reciprocal_for_both_offset_signs(self):
+        stiffness = np.diag([1e8, 2e8, 3e8, 1e5, 2e5, 3e5])
+        a, b = np.array([100, 0, 0, 0, 0, 0]), np.array([0, 0, 0, 0, 10, 0])
+        for offset in (-0.05, 0.05):
+            ra = support_response(a, stiffness, reference_offset_m=offset)
+            rb = support_response(b, stiffness, reference_offset_m=offset)
+            ua, ub = np.array(ra["generalized_displacement"]), np.array(rb["generalized_displacement"])
+            self.assertAlmostEqual(float(a @ ub), float(b @ ua), places=15)
+            self.assertEqual(math.copysign(1, ua[4]), math.copysign(1, offset))
+            compliance = np.array(ra["load_point_compliance"])
+            np.testing.assert_allclose(compliance, compliance.T, atol=1e-20)
+            self.assertGreater(np.linalg.eigvalsh(compliance)[0], 0)
+
+    def test_offset_requires_finite_real_si_scalar(self):
+        for offset in (True, math.inf, math.nan, '0.1'):
+            with self.subTest(offset=offset), self.assertRaises(ValueError):
+                support_response([1, 0, 0, 0, 0, 0], np.eye(6), reference_offset_m=offset)
+
     def test_unconstrained_and_nonreciprocal_rejected(self):
         invalid = [np.zeros((6, 6)), np.diag([1, 1, 1, 1, 1, -1])]
         nonsymmetric = np.eye(6)

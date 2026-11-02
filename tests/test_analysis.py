@@ -24,12 +24,16 @@ class JointAnalysisTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.original_config = json.loads(_example_path().read_text(encoding="utf-8"))
+        # 集成测试只需实际求解一个工况；公开完整任务和64×26离散由案例/收敛脚本复算。
+        cls.original_config["duty_segments"] = [cls.original_config["duty_segments"][0]]
+        cls.original_config["mesh"]["phases"] = 4
+        cls.original_config["mesh"]["strips"] = 3
         cls.original_before = deepcopy(cls.original_config)
         cls.original_result = analyze_joint(cls.original_config)
         cls.small_config = deepcopy(cls.original_config)
         cls.small_config["duty_segments"] = [cls.small_config["duty_segments"][0]]
         cls.small_config["mesh"]["phases"] = 4
-        cls.small_config["mesh"]["strips"] = 5
+        cls.small_config["mesh"]["strips"] = 3
         # 平面摆台本身没有Mx/My；本分支另加给定倾覆矩以实际激活失准接口。
         cls.small_config["duty_segments"][0]["output_wrench"][3:5] = [2.0, -1.0]
         # 独立给定非对角SPD支承，用于核验六分量位移到齿宽失准的接入。
@@ -148,6 +152,7 @@ class JointAnalysisTests(unittest.TestCase):
         config = deepcopy(self.small_config)
         config.pop("rating")
         config.pop("fatigue")
+        config["design_limits"].pop("fatigue_damage_per_input_history", None)
         for key in ("minimum_contact_safety_factor", "minimum_bending_safety_factor"):
             config["design_limits"].pop(key, None)
         result = self._reuse_small_contacts(config)
@@ -157,6 +162,80 @@ class JointAnalysisTests(unittest.TestCase):
         self.assertIsNone(result.summary["minimum_bending_safety_factor"])
         self.assertFalse(result.summary["physical_validation"])
         self.assertFalse(result.summary["vendor_system_validation"])
+
+    def test_supplied_fatigue_failure_cannot_pass_design_screen(self):
+        config = deepcopy(self.small_config)
+        config["design_limits"].pop("fatigue_damage_per_input_history", None)
+        # 仅降低S-N参考循环数使给定谱D>1，保持齿面/机电输入不变。
+        config["fatigue"]["reference_cycles"] = 0.01
+        result = self._reuse_small_contacts(config)
+        self.assertGreater(result.summary["fatigue_damage_per_input_history"], 1)
+        self.assertFalse(result.summary["checks"]["fatigue_damage_per_input_history"])
+        self.assertFalse(result.summary["configured_checks_pass"])
+        detail = result.summary["check_details"]["fatigue_damage_per_input_history"]
+        self.assertEqual(detail["status"], "failed")
+        self.assertEqual(detail["threshold"], 1)
+        self.assertEqual(detail["relation"], "<=")
+        self.assertIn("给定热点", detail["scope"])
+
+    def test_joint_stiffness_sharing_and_fatigue_limits_have_actual_values(self):
+        config = deepcopy(self.small_config)
+        config["design_limits"].update({
+            "minimum_output_torsional_stiffness_n_m_per_rad": 1e12,
+            "maximum_load_share_factor": 1.0,
+            "fatigue_damage_per_input_history": 1e-20,
+        })
+        result = self._reuse_small_contacts(config)
+        for name in ("minimum_output_torsional_stiffness_n_m_per_rad", "maximum_load_share_factor",
+                     "fatigue_damage_per_input_history"):
+            with self.subTest(name=name):
+                detail = result.summary["check_details"][name]
+                self.assertFalse(result.summary["checks"][name])
+                self.assertEqual(detail["status"], "failed")
+                self.assertEqual(detail["actual"], result.summary[name])
+                self.assertEqual(detail["threshold"], config["design_limits"][name])
+
+    def test_missing_fatigue_and_unconfigured_constraints_remain_unevaluated(self):
+        config = deepcopy(self.small_config)
+        config.pop("fatigue")
+        config["design_limits"].pop("fatigue_damage_per_input_history", None)
+        config["design_limits"].pop("minimum_output_torsional_stiffness_n_m_per_rad", None)
+        result = self._reuse_small_contacts(config)
+        detail = result.summary["check_details"]
+        self.assertEqual(detail["fatigue_damage_per_input_history"]["status"], "not_evaluated")
+        self.assertNotIn("fatigue_damage_per_input_history", result.summary["checks"])
+        self.assertEqual(detail["minimum_output_torsional_stiffness_n_m_per_rad"]["status"], "not_configured")
+        self.assertIsNone(detail["minimum_output_torsional_stiffness_n_m_per_rad"]["threshold"])
+        self.assertIn("未评估", result.summary["assessment_coverage"]["planet_pin_strength"])
+        config["design_limits"]["fatigue_damage_per_input_history"] = 0.5
+        with self.assertRaisesRegex(ValueError, "没有已计算"):
+            self._reuse_small_contacts(config)
+
+    def test_reported_motor_check_actuals_obey_the_model_units(self):
+        result = self.small_result
+        detail = result.summary["check_details"]
+        self.assertEqual(detail["motor_speed"]["actual"],
+                         max(abs(s["motor_speed_rad_s"]) for s in result.motor["segments"]))
+        self.assertEqual(detail["motor_speed"]["threshold"], self.small_config["motor"]["maximum_speed_rad_s"])
+        self.assertEqual(detail["brake_static_screen"]["actual"], result.motor["brake_available_torque_n_m"])
+        self.assertEqual(detail["brake_static_screen"]["threshold"], result.motor["brake_required_torque_n_m"])
+        for name, passed in result.summary["checks"].items():
+            self.assertEqual(detail[name]["status"], "passed" if passed else "failed")
+
+    def test_stiffness_reference_offset_reaches_structure_and_mesh_alignment(self):
+        config = deepcopy(self.small_config)
+        config["support"]["reference_offset_m"] = 0.05
+        result = analyze_joint(config)
+        case = result.cases[0]
+        wrench = np.asarray(config["duty_segments"][0]["output_wrench"])
+        expected_reference = wrench.copy()
+        expected_reference[3:] += np.cross([0, 0, 0.05], wrench[:3])
+        np.testing.assert_allclose(case["support"]["reference_wrench"], expected_reference, atol=1e-14)
+        rotation = np.array(case["support"]["generalized_displacement"])
+        self.assertGreater(np.linalg.norm(rotation-self.small_result.cases[0]["support"]["generalized_displacement"]), 1e-9)
+        for name, matrix in config["mesh"]["alignment_maps"].items():
+            np.testing.assert_allclose(case["sharing"]["coupling"]["misalignment_m"][name],
+                                       np.asarray(matrix) @ rotation, atol=1e-15)
 
 
 if __name__ == "__main__":

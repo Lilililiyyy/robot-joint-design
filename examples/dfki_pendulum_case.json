@@ -547,8 +547,8 @@
       "youngs_modulus_pa": 210000000000.0,
       "poisson_ratio": 0.3
     },
-    "phases": 16,
-    "strips": 13,
+    "phases": 64,
+    "strips": 26,
     "elastic_mode": "iso",
     "modifications": {
       "positive": {
@@ -699,7 +699,8 @@
         0.0,
         200000.0
       ]
-    ]
+    ],
+    "reference_offset_m": 0.0
   },
   "bearings": {
     "spacing_m": 0.024,
@@ -887,13 +888,19 @@
     "contact_pressure_pa": 1200000000.0,
     "angle_budget_rad": 0.003490658503988659,
     "motor_temperature_k": 353.15,
-    "gear_temperature_k": 343.15
+    "gear_temperature_k": 343.15,
+    "minimum_output_torsional_stiffness_n_m_per_rad": 20000.0,
+    "maximum_load_share_factor": 2.0,
+    "fatigue_damage_per_input_history": 1.0
   },
   "notes": [
     "真实需求参照与新设计模型；不是AK80-6或DFKI样机的内部结构恢复、实测回放或产品认证。",
     "工作轨迹、阻尼、压力角、修形、支承/失准映射、外部评级因子/应力限、轴承参数、效率、热参数、S-N及制动器均为新增设计假设；未获DFKI或mjbots标定。",
     "供应页的30mm中心距表述与m=0.5mm、20/40齿的零变位关系不一致。采用a=m(zs+zp)/2=15mm，30mm仅保留为待确认信息，不能用其重定义模型。",
     "分段中点工况为新设计往返任务的离散近似；不是原台架测量记录。",
-    "相电阻未直接作为铜损系数，Req=(Kt/Km)^2使Kt与Km的电流基准一致；电机包络拐点仍为设计假设。"
+    "相电阻未直接作为铜损系数，Req=(Kt/Km)^2使Kt与Km的电流基准一致；电机包络拐点仍为设计假设。",
+    "结构6×6刚度凝聚于输出载荷端口，reference_offset_m=0；双支承中点至端口偏置另由bearings.load_offset_m=0.012定义。",
+    "新增设计约束Kout≥20000 N·m/rad、Kγ≤2及给定热点输入谱D≤1均为本案例设计假设，不是DFKI原产品规格。",
+    "相位与条带由16×13加密到64×26；峰压代表工况相对256×26的内齿副平均TE差0.932%、输出刚度差0.343%，仅对本次离散比较有效。"
   ]
 }

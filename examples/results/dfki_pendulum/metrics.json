@@ -216,17 +216,18 @@
   "summary": {
     "case_id": "dfki_pendulum_baseline",
     "ratio": 6.0,
-    "maximum_load_share_factor": 1.8504911345096582,
-    "maximum_contact_pressure_pa": 827427106.5727332,
-    "minimum_output_torsional_stiffness_n_m_per_rad": 23786.442796846768,
-    "maximum_angle_budget_rad": 0.0017404313501405287,
+    "maximum_load_share_factor": 1.8439111493869114,
+    "maximum_contact_pressure_pa": 827210643.7579715,
+    "minimum_output_torsional_stiffness_n_m_per_rad": 23432.160660718888,
+    "maximum_angle_budget_rad": 0.001742841948081583,
     "maximum_motor_temperature_k": 302.0944054354601,
     "maximum_gear_temperature_k": 300.78769106900677,
     "thermal_mode": "periodic_steady",
-    "minimum_contact_safety_factor": 1.4235301661113078,
-    "minimum_bending_safety_factor": 2.326100004987442,
+    "minimum_contact_safety_factor": 1.4239553849856135,
+    "minimum_bending_safety_factor": 2.3274898587118504,
     "minimum_bearing_static_safety_factor": 59.56250619838511,
     "minimum_bearing_life_hours": 2337677949.339132,
+    "fatigue_damage_per_input_history": 2.8112133239961853e-07,
     "all_couplings_converged": true,
     "checks": {
       "motor_speed": true,
@@ -237,14 +238,135 @@
       "angle_budget_rad": true,
       "motor_temperature_k": true,
       "gear_temperature_k": true,
+      "minimum_output_torsional_stiffness_n_m_per_rad": true,
+      "maximum_load_share_factor": true,
+      "fatigue_damage_per_input_history": true,
       "minimum_contact_safety_factor": true,
       "minimum_bending_safety_factor": true,
       "minimum_bearing_static_safety_factor": true
+    },
+    "check_details": {
+      "motor_speed": {
+        "status": "passed",
+        "actual": 46.756453468248665,
+        "threshold": 229.2,
+        "relation": "<=",
+        "scope": "电机代表工况最大转速，rad/s"
+      },
+      "motor_peak_torque": {
+        "status": "passed",
+        "actual": 0.40236663055493854,
+        "threshold": 1.0,
+        "relation": "<=",
+        "scope": "逐工况恒转矩—恒功率峰值包络利用率"
+      },
+      "motor_continuous_screen": {
+        "status": "passed",
+        "actual": 0.46122601964002785,
+        "threshold": 1.0,
+        "relation": "<=",
+        "scope": "按转速包络归一化的连续转矩RMS初筛，不替代温升校核"
+      },
+      "brake_static_screen": {
+        "status": "passed",
+        "actual": 3.0,
+        "threshold": 1.2142425439879034,
+        "relation": ">=",
+        "scope": "输入侧静态保持力矩，N·m；不含动态制动认证"
+      },
+      "contact_pressure_pa": {
+        "status": "passed",
+        "actual": 827210643.7579715,
+        "threshold": 1200000000.0,
+        "relation": "<=",
+        "scope": "当前离散局部Hertz峰压，Pa；须另查网格/相位收敛"
+      },
+      "angle_budget_rad": {
+        "status": "passed",
+        "actual": 0.001742841948081583,
+        "threshold": 0.003490658503988659,
+        "relation": "<=",
+        "scope": "指定受载状态的未补偿确定性角度预算，rad"
+      },
+      "motor_temperature_k": {
+        "status": "passed",
+        "actual": 302.0944054354601,
+        "threshold": 353.15,
+        "relation": "<=",
+        "scope": "给定热参数的电机节点最高温度，K"
+      },
+      "gear_temperature_k": {
+        "status": "passed",
+        "actual": 300.78769106900677,
+        "threshold": 343.15,
+        "relation": "<=",
+        "scope": "给定热参数的传动节点最高温度，K"
+      },
+      "maximum_load_share_factor": {
+        "status": "passed",
+        "actual": 1.8439111493869114,
+        "threshold": 2.0,
+        "relation": "<=",
+        "scope": "有载工况最大均载系数；全零载时未定义"
+      },
+      "fatigue_damage_per_input_history": {
+        "status": "passed",
+        "actual": 2.8112133239961853e-07,
+        "threshold": 1.0,
+        "relation": "<=",
+        "scope": "给定热点标量应力谱的Miner损伤；不代表整关节服役寿命"
+      },
+      "minimum_contact_safety_factor": {
+        "status": "passed",
+        "actual": 1.4239553849856135,
+        "threshold": 1.0,
+        "relation": ">=",
+        "scope": "给定评级因子与材料限值的最小接触安全系数"
+      },
+      "minimum_bending_safety_factor": {
+        "status": "passed",
+        "actual": 2.3274898587118504,
+        "threshold": 1.0,
+        "relation": ">=",
+        "scope": "给定评级因子与材料限值的最小齿根安全系数"
+      },
+      "minimum_bearing_static_safety_factor": {
+        "status": "passed",
+        "actual": 59.56250619838511,
+        "threshold": 1.0,
+        "relation": ">=",
+        "scope": "输出双支承基本静安全；不含行星轴承"
+      },
+      "minimum_bearing_life_hours": {
+        "status": "not_configured",
+        "actual": 2337677949.339132,
+        "threshold": null,
+        "relation": ">=",
+        "scope": "输出双支承基本L10小时数；无摆动/润滑/微动修正"
+      },
+      "minimum_output_torsional_stiffness_n_m_per_rad": {
+        "status": "passed",
+        "actual": 23432.160660718888,
+        "threshold": 20000.0,
+        "relation": ">=",
+        "scope": "最终承载分支局部输出扭转刚度，N·m/rad"
+      }
     },
     "physical_validation": false,
     "vendor_system_validation": false,
     "implementation": "新写NGW降阶系统实现，复用公开齿轮内核；非厂商整机等价重建",
     "scope": "固定环零变位直齿单级NGW、准静态、小变形、周期平均协调；不含RV/谐波、完整FE、同步动力学、控制、润滑预测或实物认证",
+    "assessment_coverage": {
+      "output_bearing_life": "仅基本L10；小角摆动、微动和润滑修正未评估",
+      "hotspot_fatigue": "仅给定标量应力谱",
+      "planet_pin_strength": "未评估；等效销刚度不等同销强度",
+      "planet_bearing_life": "未评估；当前轴承仅为两个输出支承",
+      "ring_carrier_housing_strength": "未评估；未构造完整实体和FE边界",
+      "regenerative_bus_and_inverter": "未评估；机电功率平衡不等同母线吸能和驱动器能力",
+      "dynamics_and_resonance": "未评估；当前为周期平均准静态协调",
+      "manufacturing_interference": "仅外齿轮标准全齿高齿条根切风险初筛；内齿干涉、尖顶和刀具未评估",
+      "physical_validation": "未完成样机标定与试验"
+    },
     "configured_checks_pass": true,
     "check_scope": "仅对已配置约束的数值初筛；未配置强度/寿命/温升限值不自动视为已校核"
   },
@@ -255,24 +377,25 @@
   "motor_rms_current_a": 5.534712235680336,
   "fatigue_damage_per_input_history": 2.8112133239961853e-07,
   "thermal_periodic_residual_k": 0.0,
-  "maximum_path_residual_m": 1.5013237611151546e-09,
+  "maximum_path_residual_m": 1.6261840281666214e-09,
   "minimum_active_planets": 3,
   "candidate_comparison": [
     {
       "candidate": "baseline",
       "case_id": "dfki_pendulum_baseline",
       "ratio": 6.0,
-      "maximum_load_share_factor": 1.8504911345096582,
-      "maximum_contact_pressure_pa": 827427106.5727332,
-      "minimum_output_torsional_stiffness_n_m_per_rad": 23786.442796846768,
-      "maximum_angle_budget_rad": 0.0017404313501405287,
+      "maximum_load_share_factor": 1.8439111493869114,
+      "maximum_contact_pressure_pa": 827210643.7579715,
+      "minimum_output_torsional_stiffness_n_m_per_rad": 23432.160660718888,
+      "maximum_angle_budget_rad": 0.001742841948081583,
       "maximum_motor_temperature_k": 302.0944054354601,
       "maximum_gear_temperature_k": 300.78769106900677,
       "thermal_mode": "periodic_steady",
-      "minimum_contact_safety_factor": 1.4235301661113078,
-      "minimum_bending_safety_factor": 2.326100004987442,
+      "minimum_contact_safety_factor": 1.4239553849856135,
+      "minimum_bending_safety_factor": 2.3274898587118504,
       "minimum_bearing_static_safety_factor": 59.56250619838511,
       "minimum_bearing_life_hours": 2337677949.339132,
+      "fatigue_damage_per_input_history": 2.8112133239961853e-07,
       "all_couplings_converged": true,
       "checks": {
         "motor_speed": true,
@@ -283,14 +406,135 @@
         "angle_budget_rad": true,
         "motor_temperature_k": true,
         "gear_temperature_k": true,
+        "minimum_output_torsional_stiffness_n_m_per_rad": true,
+        "maximum_load_share_factor": true,
+        "fatigue_damage_per_input_history": true,
         "minimum_contact_safety_factor": true,
         "minimum_bending_safety_factor": true,
         "minimum_bearing_static_safety_factor": true
+      },
+      "check_details": {
+        "motor_speed": {
+          "status": "passed",
+          "actual": 46.756453468248665,
+          "threshold": 229.2,
+          "relation": "<=",
+          "scope": "电机代表工况最大转速，rad/s"
+        },
+        "motor_peak_torque": {
+          "status": "passed",
+          "actual": 0.40236663055493854,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "逐工况恒转矩—恒功率峰值包络利用率"
+        },
+        "motor_continuous_screen": {
+          "status": "passed",
+          "actual": 0.46122601964002785,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "按转速包络归一化的连续转矩RMS初筛，不替代温升校核"
+        },
+        "brake_static_screen": {
+          "status": "passed",
+          "actual": 3.0,
+          "threshold": 1.2142425439879034,
+          "relation": ">=",
+          "scope": "输入侧静态保持力矩，N·m；不含动态制动认证"
+        },
+        "contact_pressure_pa": {
+          "status": "passed",
+          "actual": 827210643.7579715,
+          "threshold": 1200000000.0,
+          "relation": "<=",
+          "scope": "当前离散局部Hertz峰压，Pa；须另查网格/相位收敛"
+        },
+        "angle_budget_rad": {
+          "status": "passed",
+          "actual": 0.001742841948081583,
+          "threshold": 0.003490658503988659,
+          "relation": "<=",
+          "scope": "指定受载状态的未补偿确定性角度预算，rad"
+        },
+        "motor_temperature_k": {
+          "status": "passed",
+          "actual": 302.0944054354601,
+          "threshold": 353.15,
+          "relation": "<=",
+          "scope": "给定热参数的电机节点最高温度，K"
+        },
+        "gear_temperature_k": {
+          "status": "passed",
+          "actual": 300.78769106900677,
+          "threshold": 343.15,
+          "relation": "<=",
+          "scope": "给定热参数的传动节点最高温度，K"
+        },
+        "maximum_load_share_factor": {
+          "status": "passed",
+          "actual": 1.8439111493869114,
+          "threshold": 2.0,
+          "relation": "<=",
+          "scope": "有载工况最大均载系数；全零载时未定义"
+        },
+        "fatigue_damage_per_input_history": {
+          "status": "passed",
+          "actual": 2.8112133239961853e-07,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "给定热点标量应力谱的Miner损伤；不代表整关节服役寿命"
+        },
+        "minimum_contact_safety_factor": {
+          "status": "passed",
+          "actual": 1.4239553849856135,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "给定评级因子与材料限值的最小接触安全系数"
+        },
+        "minimum_bending_safety_factor": {
+          "status": "passed",
+          "actual": 2.3274898587118504,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "给定评级因子与材料限值的最小齿根安全系数"
+        },
+        "minimum_bearing_static_safety_factor": {
+          "status": "passed",
+          "actual": 59.56250619838511,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "输出双支承基本静安全；不含行星轴承"
+        },
+        "minimum_bearing_life_hours": {
+          "status": "not_configured",
+          "actual": 2337677949.339132,
+          "threshold": null,
+          "relation": ">=",
+          "scope": "输出双支承基本L10小时数；无摆动/润滑/微动修正"
+        },
+        "minimum_output_torsional_stiffness_n_m_per_rad": {
+          "status": "passed",
+          "actual": 23432.160660718888,
+          "threshold": 20000.0,
+          "relation": ">=",
+          "scope": "最终承载分支局部输出扭转刚度，N·m/rad"
+        }
       },
       "physical_validation": false,
       "vendor_system_validation": false,
       "implementation": "新写NGW降阶系统实现，复用公开齿轮内核；非厂商整机等价重建",
       "scope": "固定环零变位直齿单级NGW、准静态、小变形、周期平均协调；不含RV/谐波、完整FE、同步动力学、控制、润滑预测或实物认证",
+      "assessment_coverage": {
+        "output_bearing_life": "仅基本L10；小角摆动、微动和润滑修正未评估",
+        "hotspot_fatigue": "仅给定标量应力谱",
+        "planet_pin_strength": "未评估；等效销刚度不等同销强度",
+        "planet_bearing_life": "未评估；当前轴承仅为两个输出支承",
+        "ring_carrier_housing_strength": "未评估；未构造完整实体和FE边界",
+        "regenerative_bus_and_inverter": "未评估；机电功率平衡不等同母线吸能和驱动器能力",
+        "dynamics_and_resonance": "未评估；当前为周期平均准静态协调",
+        "manufacturing_interference": "仅外齿轮标准全齿高齿条根切风险初筛；内齿干涉、尖顶和刀具未评估",
+        "physical_validation": "未完成样机标定与试验"
+      },
       "configured_checks_pass": true,
       "check_scope": "仅对已配置约束的数值初筛；未配置强度/寿命/温升限值不自动视为已校核",
       "pareto_nondominated": true
@@ -299,17 +543,18 @@
       "candidate": "larger_errors",
       "case_id": "dfki_pendulum_larger_errors",
       "ratio": 6.0,
-      "maximum_load_share_factor": 2.9812261584543402,
-      "maximum_contact_pressure_pa": 892035856.9486357,
-      "minimum_output_torsional_stiffness_n_m_per_rad": 8546.442779243762,
-      "maximum_angle_budget_rad": 0.0017624313828430442,
+      "maximum_load_share_factor": 2.9731768513576657,
+      "maximum_contact_pressure_pa": 891437904.049392,
+      "minimum_output_torsional_stiffness_n_m_per_rad": 9013.076295612847,
+      "maximum_angle_budget_rad": 0.0017648393205219651,
       "maximum_motor_temperature_k": 302.0944054354601,
       "maximum_gear_temperature_k": 300.78769106900677,
       "thermal_mode": "periodic_steady",
-      "minimum_contact_safety_factor": 1.30727358762286,
-      "minimum_bending_safety_factor": 1.9616792855908687,
+      "minimum_contact_safety_factor": 1.3082603539720281,
+      "minimum_bending_safety_factor": 1.9646418631147173,
       "minimum_bearing_static_safety_factor": 59.56250619838511,
       "minimum_bearing_life_hours": 2337677949.339132,
+      "fatigue_damage_per_input_history": 2.8112133239961853e-07,
       "all_couplings_converged": true,
       "checks": {
         "motor_speed": true,
@@ -320,15 +565,136 @@
         "angle_budget_rad": true,
         "motor_temperature_k": true,
         "gear_temperature_k": true,
+        "minimum_output_torsional_stiffness_n_m_per_rad": false,
+        "maximum_load_share_factor": false,
+        "fatigue_damage_per_input_history": true,
         "minimum_contact_safety_factor": true,
         "minimum_bending_safety_factor": true,
         "minimum_bearing_static_safety_factor": true
+      },
+      "check_details": {
+        "motor_speed": {
+          "status": "passed",
+          "actual": 46.756453468248665,
+          "threshold": 229.2,
+          "relation": "<=",
+          "scope": "电机代表工况最大转速，rad/s"
+        },
+        "motor_peak_torque": {
+          "status": "passed",
+          "actual": 0.40236663055493854,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "逐工况恒转矩—恒功率峰值包络利用率"
+        },
+        "motor_continuous_screen": {
+          "status": "passed",
+          "actual": 0.46122601964002785,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "按转速包络归一化的连续转矩RMS初筛，不替代温升校核"
+        },
+        "brake_static_screen": {
+          "status": "passed",
+          "actual": 3.0,
+          "threshold": 1.2142425439879034,
+          "relation": ">=",
+          "scope": "输入侧静态保持力矩，N·m；不含动态制动认证"
+        },
+        "contact_pressure_pa": {
+          "status": "passed",
+          "actual": 891437904.049392,
+          "threshold": 1200000000.0,
+          "relation": "<=",
+          "scope": "当前离散局部Hertz峰压，Pa；须另查网格/相位收敛"
+        },
+        "angle_budget_rad": {
+          "status": "passed",
+          "actual": 0.0017648393205219651,
+          "threshold": 0.003490658503988659,
+          "relation": "<=",
+          "scope": "指定受载状态的未补偿确定性角度预算，rad"
+        },
+        "motor_temperature_k": {
+          "status": "passed",
+          "actual": 302.0944054354601,
+          "threshold": 353.15,
+          "relation": "<=",
+          "scope": "给定热参数的电机节点最高温度，K"
+        },
+        "gear_temperature_k": {
+          "status": "passed",
+          "actual": 300.78769106900677,
+          "threshold": 343.15,
+          "relation": "<=",
+          "scope": "给定热参数的传动节点最高温度，K"
+        },
+        "maximum_load_share_factor": {
+          "status": "failed",
+          "actual": 2.9731768513576657,
+          "threshold": 2.0,
+          "relation": "<=",
+          "scope": "有载工况最大均载系数；全零载时未定义"
+        },
+        "fatigue_damage_per_input_history": {
+          "status": "passed",
+          "actual": 2.8112133239961853e-07,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "给定热点标量应力谱的Miner损伤；不代表整关节服役寿命"
+        },
+        "minimum_contact_safety_factor": {
+          "status": "passed",
+          "actual": 1.3082603539720281,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "给定评级因子与材料限值的最小接触安全系数"
+        },
+        "minimum_bending_safety_factor": {
+          "status": "passed",
+          "actual": 1.9646418631147173,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "给定评级因子与材料限值的最小齿根安全系数"
+        },
+        "minimum_bearing_static_safety_factor": {
+          "status": "passed",
+          "actual": 59.56250619838511,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "输出双支承基本静安全；不含行星轴承"
+        },
+        "minimum_bearing_life_hours": {
+          "status": "not_configured",
+          "actual": 2337677949.339132,
+          "threshold": null,
+          "relation": ">=",
+          "scope": "输出双支承基本L10小时数；无摆动/润滑/微动修正"
+        },
+        "minimum_output_torsional_stiffness_n_m_per_rad": {
+          "status": "failed",
+          "actual": 9013.076295612847,
+          "threshold": 20000.0,
+          "relation": ">=",
+          "scope": "最终承载分支局部输出扭转刚度，N·m/rad"
+        }
       },
       "physical_validation": false,
       "vendor_system_validation": false,
       "implementation": "新写NGW降阶系统实现，复用公开齿轮内核；非厂商整机等价重建",
       "scope": "固定环零变位直齿单级NGW、准静态、小变形、周期平均协调；不含RV/谐波、完整FE、同步动力学、控制、润滑预测或实物认证",
-      "configured_checks_pass": true,
+      "assessment_coverage": {
+        "output_bearing_life": "仅基本L10；小角摆动、微动和润滑修正未评估",
+        "hotspot_fatigue": "仅给定标量应力谱",
+        "planet_pin_strength": "未评估；等效销刚度不等同销强度",
+        "planet_bearing_life": "未评估；当前轴承仅为两个输出支承",
+        "ring_carrier_housing_strength": "未评估；未构造完整实体和FE边界",
+        "regenerative_bus_and_inverter": "未评估；机电功率平衡不等同母线吸能和驱动器能力",
+        "dynamics_and_resonance": "未评估；当前为周期平均准静态协调",
+        "manufacturing_interference": "仅外齿轮标准全齿高齿条根切风险初筛；内齿干涉、尖顶和刀具未评估",
+        "physical_validation": "未完成样机标定与试验"
+      },
+      "configured_checks_pass": false,
       "check_scope": "仅对已配置约束的数值初筛；未配置强度/寿命/温升限值不自动视为已校核",
       "pareto_nondominated": false
     },
@@ -336,17 +702,18 @@
       "candidate": "flexible_pins",
       "case_id": "dfki_pendulum_flexible_pins",
       "ratio": 6.0,
-      "maximum_load_share_factor": 1.7273741089195611,
-      "maximum_contact_pressure_pa": 821667579.3065628,
-      "minimum_output_torsional_stiffness_n_m_per_rad": 19206.419534539815,
-      "maximum_angle_budget_rad": 0.0017964064063650087,
+      "maximum_load_share_factor": 1.7211271711545455,
+      "maximum_contact_pressure_pa": 821517322.9719974,
+      "minimum_output_torsional_stiffness_n_m_per_rad": 18828.943067830165,
+      "maximum_angle_budget_rad": 0.0017988172193531906,
       "maximum_motor_temperature_k": 302.0944054354601,
       "maximum_gear_temperature_k": 300.78769106900677,
       "thermal_mode": "periodic_steady",
-      "minimum_contact_safety_factor": 1.4349337240501723,
-      "minimum_bending_safety_factor": 2.363516931977433,
+      "minimum_contact_safety_factor": 1.4352337352819386,
+      "minimum_bending_safety_factor": 2.3645053480142253,
       "minimum_bearing_static_safety_factor": 59.56250619838511,
       "minimum_bearing_life_hours": 2337677949.339132,
+      "fatigue_damage_per_input_history": 2.8112133239961853e-07,
       "all_couplings_converged": true,
       "checks": {
         "motor_speed": true,
@@ -357,17 +724,138 @@
         "angle_budget_rad": true,
         "motor_temperature_k": true,
         "gear_temperature_k": true,
+        "minimum_output_torsional_stiffness_n_m_per_rad": false,
+        "maximum_load_share_factor": true,
+        "fatigue_damage_per_input_history": true,
         "minimum_contact_safety_factor": true,
         "minimum_bending_safety_factor": true,
         "minimum_bearing_static_safety_factor": true
+      },
+      "check_details": {
+        "motor_speed": {
+          "status": "passed",
+          "actual": 46.756453468248665,
+          "threshold": 229.2,
+          "relation": "<=",
+          "scope": "电机代表工况最大转速，rad/s"
+        },
+        "motor_peak_torque": {
+          "status": "passed",
+          "actual": 0.40236663055493854,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "逐工况恒转矩—恒功率峰值包络利用率"
+        },
+        "motor_continuous_screen": {
+          "status": "passed",
+          "actual": 0.46122601964002785,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "按转速包络归一化的连续转矩RMS初筛，不替代温升校核"
+        },
+        "brake_static_screen": {
+          "status": "passed",
+          "actual": 3.0,
+          "threshold": 1.2142425439879034,
+          "relation": ">=",
+          "scope": "输入侧静态保持力矩，N·m；不含动态制动认证"
+        },
+        "contact_pressure_pa": {
+          "status": "passed",
+          "actual": 821517322.9719974,
+          "threshold": 1200000000.0,
+          "relation": "<=",
+          "scope": "当前离散局部Hertz峰压，Pa；须另查网格/相位收敛"
+        },
+        "angle_budget_rad": {
+          "status": "passed",
+          "actual": 0.0017988172193531906,
+          "threshold": 0.003490658503988659,
+          "relation": "<=",
+          "scope": "指定受载状态的未补偿确定性角度预算，rad"
+        },
+        "motor_temperature_k": {
+          "status": "passed",
+          "actual": 302.0944054354601,
+          "threshold": 353.15,
+          "relation": "<=",
+          "scope": "给定热参数的电机节点最高温度，K"
+        },
+        "gear_temperature_k": {
+          "status": "passed",
+          "actual": 300.78769106900677,
+          "threshold": 343.15,
+          "relation": "<=",
+          "scope": "给定热参数的传动节点最高温度，K"
+        },
+        "maximum_load_share_factor": {
+          "status": "passed",
+          "actual": 1.7211271711545455,
+          "threshold": 2.0,
+          "relation": "<=",
+          "scope": "有载工况最大均载系数；全零载时未定义"
+        },
+        "fatigue_damage_per_input_history": {
+          "status": "passed",
+          "actual": 2.8112133239961853e-07,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "给定热点标量应力谱的Miner损伤；不代表整关节服役寿命"
+        },
+        "minimum_contact_safety_factor": {
+          "status": "passed",
+          "actual": 1.4352337352819386,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "给定评级因子与材料限值的最小接触安全系数"
+        },
+        "minimum_bending_safety_factor": {
+          "status": "passed",
+          "actual": 2.3645053480142253,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "给定评级因子与材料限值的最小齿根安全系数"
+        },
+        "minimum_bearing_static_safety_factor": {
+          "status": "passed",
+          "actual": 59.56250619838511,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "输出双支承基本静安全；不含行星轴承"
+        },
+        "minimum_bearing_life_hours": {
+          "status": "not_configured",
+          "actual": 2337677949.339132,
+          "threshold": null,
+          "relation": ">=",
+          "scope": "输出双支承基本L10小时数；无摆动/润滑/微动修正"
+        },
+        "minimum_output_torsional_stiffness_n_m_per_rad": {
+          "status": "failed",
+          "actual": 18828.943067830165,
+          "threshold": 20000.0,
+          "relation": ">=",
+          "scope": "最终承载分支局部输出扭转刚度，N·m/rad"
+        }
       },
       "physical_validation": false,
       "vendor_system_validation": false,
       "implementation": "新写NGW降阶系统实现，复用公开齿轮内核；非厂商整机等价重建",
       "scope": "固定环零变位直齿单级NGW、准静态、小变形、周期平均协调；不含RV/谐波、完整FE、同步动力学、控制、润滑预测或实物认证",
-      "configured_checks_pass": true,
+      "assessment_coverage": {
+        "output_bearing_life": "仅基本L10；小角摆动、微动和润滑修正未评估",
+        "hotspot_fatigue": "仅给定标量应力谱",
+        "planet_pin_strength": "未评估；等效销刚度不等同销强度",
+        "planet_bearing_life": "未评估；当前轴承仅为两个输出支承",
+        "ring_carrier_housing_strength": "未评估；未构造完整实体和FE边界",
+        "regenerative_bus_and_inverter": "未评估；机电功率平衡不等同母线吸能和驱动器能力",
+        "dynamics_and_resonance": "未评估；当前为周期平均准静态协调",
+        "manufacturing_interference": "仅外齿轮标准全齿高齿条根切风险初筛；内齿干涉、尖顶和刀具未评估",
+        "physical_validation": "未完成样机标定与试验"
+      },
+      "configured_checks_pass": false,
       "check_scope": "仅对已配置约束的数值初筛；未配置强度/寿命/温升限值不自动视为已校核",
-      "pareto_nondominated": true
+      "pareto_nondominated": false
     }
   ],
   "figures": [
@@ -387,18 +875,18 @@
   ],
   "representative_meshes": {
     "sun_planet": {
-      "torque_n_m": 0.29739899815774584,
-      "normal_force_n": 63.297080679215576,
-      "mean_normal_approach_m": 1.2642673915629026e-06,
-      "te_peak_to_peak_m": 8.370186043353307e-07,
-      "te_rms_ac_m": 3.8796850669641273e-07,
-      "angular_te_peak_to_peak_rad": 0.00017814731877649384,
-      "max_pressure_pa": 827427106.5727332,
-      "max_line_load_n_per_m": 13912.326194918234,
-      "mean_mesh_stiffness_n_per_m": 63806122.76294397,
-      "mesh_stiffness_fluctuation_n_per_m": 37811035.71137421,
-      "max_line_load_concentration_factor": 1.1979412076561267,
-      "max_abs_load_centroid_offset_m": 6.851514546019286e-20,
+      "torque_n_m": 0.2972214072205919,
+      "normal_force_n": 63.2592830136331,
+      "mean_normal_approach_m": 1.303732660194995e-06,
+      "te_peak_to_peak_m": 8.366437089484502e-07,
+      "te_rms_ac_m": 4.014360975871475e-07,
+      "angular_te_peak_to_peak_rad": 0.00017806752770894944,
+      "max_pressure_pa": 827210643.7579715,
+      "max_line_load_n_per_m": 13904.579577013303,
+      "mean_mesh_stiffness_n_per_m": 62024467.57454581,
+      "mesh_stiffness_fluctuation_n_per_m": 37805389.759723164,
+      "max_line_load_concentration_factor": 1.1980299040089832,
+      "max_abs_load_centroid_offset_m": 8.226730022862989e-20,
       "mean_contact_fraction": 1.0,
       "max_force_residual_n": 0.0,
       "max_gap_residual_m": 6.352747104407253e-22,
@@ -411,21 +899,21 @@
       "model_scope": "ISO综合齿对刚度、可选Love条带影响；无摩擦、准静态，压力采用局部线接触近似"
     },
     "planet_ring": {
-      "torque_n_m": 0.5947979963154917,
-      "normal_force_n": 63.297080679215576,
-      "mean_normal_approach_m": 8.287892113435672e-07,
-      "te_peak_to_peak_m": 0.0,
-      "te_rms_ac_m": 0.0,
-      "angular_te_peak_to_peak_rad": 0.0,
-      "max_pressure_pa": 334562473.28100383,
-      "max_line_load_n_per_m": 7534.69686477366,
-      "mean_mesh_stiffness_n_per_m": 90912101.1910738,
-      "mesh_stiffness_fluctuation_n_per_m": 0.0,
-      "max_line_load_concentration_factor": 1.190370358936281,
-      "max_abs_load_centroid_offset_m": 6.851514546019286e-20,
+      "torque_n_m": 0.5944428144411839,
+      "normal_force_n": 63.2592830136331,
+      "mean_normal_approach_m": 8.616909424800216e-07,
+      "te_peak_to_peak_m": 6.959329889485041e-07,
+      "te_rms_ac_m": 1.471001089873753e-07,
+      "angular_te_peak_to_peak_rad": 7.405964179717227e-05,
+      "max_pressure_pa": 334474550.7196764,
+      "max_line_load_n_per_m": 13856.665470403046,
+      "mean_mesh_stiffness_n_per_m": 88768091.97009088,
+      "mesh_stiffness_fluctuation_n_per_m": 45449263.088686526,
+      "max_line_load_concentration_factor": 1.190455662833987,
+      "max_abs_load_centroid_offset_m": 2.0566825057157473e-19,
       "mean_contact_fraction": 1.0,
       "max_force_residual_n": 7.105427357601002e-15,
-      "max_gap_residual_m": 3.1763735522036263e-22,
+      "max_gap_residual_m": 4.235164736271502e-22,
       "all_converged": true,
       "elastic_mode": "iso",
       "local_contact": false,

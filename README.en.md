@@ -2,113 +2,32 @@
 
 [中文](README.md) · [English](README.en.md)
 
-**Follow a 6:1 robot-joint transmission design from published physical-testbed requirements to engineering checks.**
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License: AGPL-3.0-only](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE)
 
-This parameterized NGW calculation kernel connects loads, geometry, materials, tooth modifications, support, motor and thermal inputs. It exports raw contact arrays, engineering results, a Chinese calculation report and CAD/BOM parameters. Version **0.1.2** runs without commercial software or vendor DLLs.
+An independent Python kernel for parameterized design and quasi-static assessment of a single-stage NGW robot joint. It connects duty loads, planetary load sharing, per-planet LTCA, rating stresses, output support, motor matching, precision budgets and periodic thermal response through callable functions and reproducible raw results. No commercial software or vendor DLL is required at runtime.
 
-## Case: redesigning the joint transmission for a physical DFKI pendulum
+## Contents
 
-The [DFKI hardware documentation](https://github.com/dfki-ric-underactuated-lab/torque_limited_simple_pendulum/blob/11a946d4e6db58d001fdeff89be269eb61461757/hardware/testbench_description.md) provides a 0.546 kg point mass, a 0.130 kg rod/mounting assembly and a 0.5 m length. Its original actuator has a 6:1 ratio and 6/12 N·m rated/peak output torque. The redesign uses the geometry of a [public mjbots steel gearset](https://mjbots.com/products/m05-6x-planetary-gearset). **This is a source-grounded new design calculation, not a reconstruction of AK80-6 internals or a replay of measured testbed performance.**
+- [Installation and use](#installation-and-use)
+- [Calculation capabilities](#calculation-capabilities)
+- [Design review and improvements](#design-review-and-improvements)
+- [Design case and candidate comparison](#design-case-and-candidate-comparison)
+- [Professional-software and public-reference comparisons](#professional-software-and-public-reference-comparisons)
+- [Verification and reproduction](#verification-and-reproduction)
+- [Scope](#scope)
+- [Release history and next steps](#release-history-and-next-steps)
+- [Documentation and repository layout](#documentation-and-repository-layout)
 
-![Physical requirements and 6:1 planetary layout](examples/results/dfki_pendulum/en/01_design.png)
+## Installation and use
 
-|Input|Value|Basis|
-|---|---:|---|
-|Total mass / pendulum length|0.676 kg / 0.5 m|Published DFKI hardware data|
-|Sun / planet / ring|20 / 40 / 100 teeth|Published gearset geometry|
-|Module / planet count|0.5 mm / 3|Published gearset geometry|
-|Effective face width|5 mm|Planet/ring width; published sun tooth length is 6 mm|
-|Pressure angle / shift|20° / zero|Model assumptions|
-|Designed motion|±60°; 0.5 s moves and 0.4 s holds|New 1.8 s design duty|
-|Uniform-rod inertia / center of mass|0.147333 kg·m² / 0.451923 m|Derived mass model; published COM is approximately 0.45 m|
-
-Modifications, support, bearing coefficients, rating factors and stress limits, efficiencies, thermal parameters, the hotspot stress map and S–N data are **design inputs not calibrated against this hardware**. See the [requirements and provenance](examples/dfki_pendulum_requirements.json) and [solver input](examples/dfki_pendulum_case.json).
-
-The supplier calls 30 mm a center distance, whereas `a=m(zs+zp)/2` gives 15 mm for the stated zero-shift geometry. This model uses 15 mm and retains the 30 mm statement as unresolved. The drawing shows parameter circles, not manufactured tooth profiles.
-
-## 1. Turn motion requirements into loads
-
-Quintic sweeps have zero endpoint velocity and acceleration. The point-mass/uniform-rod model gives `T=Iα+g(mpL+mrL/2)sinθ+bω` and a consistent six-component output load for the support and transmission. A stationary hold still requires gravitational torque.
-
-![Motion and required output loads](examples/results/dfki_pendulum/en/02_duty.png)
-
-The 34 saved midpoint states reach **4.8570 N·m**. A dense analytical trajectory reaches 4.8664 N·m, a 0.195% difference. This checks duty discretization only; it does not establish LTCA phase/strip convergence.
-
-## 2. Resolve individual planet loads
-
-Supply flank-specific path errors, pin stiffness, shared sun translation and optional condensed compliance. Nonnegative path forces are solved together with cycle-averaged contact displacement and tangent/intercept feedback. Iteration checks both torque equilibrium and path compatibility.
-
-![Individual planet loads and load-sharing factor](examples/results/dfki_pendulum/en/03_load_sharing.png)
-
-The maximum load-sharing factor is **1.8505**, with at least 3 planets carrying load simultaneously. Micrometer-scale errors produce unequal loads; paths can unload and re-enter rather than receiving a fixed one-third share.
-
-## 3. Per-planet LTCA: transmission error, stiffness and local pressure
-
-Each state analyzes both meshes for all three planets, using 16 mesh phases and 13 strips per contact line. The figure selects the highest-pressure state and the most heavily stressed planet in each mesh. The upper panels show normal transmission error; the lower panels retain raw loaded contact nodes at the peak-pressure phase.
-
-![Two-mesh LTCA and raw contact-node pressures](examples/results/dfki_pendulum/en/04_contact.png)
-
-Maximum local Hertz pressure is **827.43 MPa**. The node plot does not interpolate a complete flank-pressure field. Normal TE, local pressure and output angle budget are different quantities.
-
-## 4. Check rating stresses and support separately
-
-Geometry, local nominal force and elastic properties enter the ISO 6336:2006 explicit-factor stress chain. Tooth-form, stress-correction and load factors, together with material limits, are supplied inputs. These scalar rating stresses are evaluated separately from local Hertz pressure.
-
-![Rating stresses, safety factors and output support](examples/results/dfki_pendulum/en/05_strength_support.png)
-
-Minimum contact and bending safety factors are **1.424** and **2.326**. A supplied six-DOF condensed stiffness gives structural displacement; two-support reactions follow span and load offset. Here the load lies in one support plane, explaining the nearly zero radial reaction at the other bearing.
-
-The two output bearings also receive revolution-weighted basic L10 and static checks. Minimum static safety is 59.56. The light-load basic formula gives approximately 2.34e+09 h; **this is not a physical service-life prediction**. Small-angle oscillation, fretting, lubrication and planet needle-bearing failure are outside this output-support model.
-
-## 5. Output precision and stiffness
-
-Planetary and output-structure compliances are placed in series. The deterministic budget adds the magnitudes of loaded angular offset, half-backlash, half an encoder count and assembly error. This case uses the published 0.15° total backlash and a 12-bit motor-side encoder; input quantization is referred through the ratio.
-
-![Output angle budget and stiffness](examples/results/dfki_pendulum/en/06_precision.png)
-
-The worst angle budget is **5.983 arcmin** and minimum output stiffness is **23.786 kN·m/rad**. This is not compensated closed-loop positioning accuracy. The two-flank curves are static envelopes, not history-dependent friction hysteresis.
-
-## 6. Motor, brake and periodic temperature
-
-Motoring and backdriving use separate supplied efficiencies. Rotor inertia is included; the code screens torque–speed envelopes, duration-weighted RMS and input-side static brake requirements. `Req=(Kt/Km)²` establishes a consistent copper-loss basis instead of directly mixing phase resistance and incompatible current conventions.
-
-![Motor matching and periodic thermal response](examples/results/dfki_pendulum/en/07_motor_thermal.png)
-
-Current RMS is 5.535 A. With the supplied thermal network, periodic peak motor/gearbox temperatures are **28.944 / 27.638 °C**. The cold-start plot shows 100 repeated duties approaching that cycle. Thermal parameters and the envelope knee are assumptions, so these are not temperature predictions for the original actuator.
-
-## 7. Fatigue: demonstrate the stress-to-damage interface
-
-An explicitly assumed hotspot coefficient of 12 MPa/(N·m) generates a signed scalar stress history. Rainflow, supplied S–N data, tensile-mean Goodman correction and Miner accumulation then evaluate that history. This is separate from gear rating and is not a tooth-root fatigue history recovered from LTCA.
-
-![Hotspot history, rainflow and conditional damage](examples/results/dfki_pendulum/en/08_fatigue.png)
-
-Conditional damage for the input history is **2.811e-07**. It is not whole-joint damage. Repeated truncated records require consistent ordering and residual half-cycle handling before any conversion to service hours.
-
-## 8. Compare design choices under the same duty
-
-Tooth counts, module, materials and motion are held constant. Only path errors or pin compliance change, avoiding reuse of old rating factors after a geometry change. The results expose the trade-off among load sharing, pressure and output stiffness.
-
-![Three-candidate design trade-off](examples/results/dfki_pendulum/en/09_comparison.png)
-
-|Candidate|Peak pressure / MPa|Angle budget / arcmin|Minimum output stiffness / kN·m/rad|
-|---|---:|---:|---:|
-|Baseline|827.43|5.983|23.786|
-|Path errors ×3|892.04|6.059|8.546|
-|Pin stiffness ×0.3|821.67|6.176|19.206|
-
-Larger errors increase the adverse contact load. Softer pins can improve sharing while increasing output compliance. Pareto comparison covers the supplied finite candidates, not a continuous global optimum.
-
-## 9. Reproduce the case and integrate the kernel
+Requires Python 3.10 or later. Run from the project root:
 
 ```bash
-python -m pip install ".[plots]"
+python -m pip install -e ".[plots]"
 python -m robot_joint examples/dfki_pendulum_case.json --output output/pendulum
-python -m examples.build_showcase --output output/showcase --raw-output output/raw
-python -m examples.compare_designs --output output/comparison.json
-python -m unittest discover -s tests -v
 ```
 
-Alternatively, copy `robot_joint/`, `gear_contact/` and the license into your application:
+For the calculation kernel alone, use `python -m pip install -e .`. The command entry point is `robot-joint`; functions can also be called directly:
 
 ```python
 import json
@@ -120,12 +39,126 @@ result = analyze_joint(config)
 export_joint(result, "output/pendulum")
 ```
 
-Outputs include raw contact NPZ/CSV, loads and diagnostics, rating stresses and safety factors, motor/thermal/bearing/fatigue results, `cad_parameters.json`, `bom.csv`, `layout.svg` and a Chinese calculation report. CAD/BOM exports are parameter interfaces, not manufacturing solids or procurement part numbers.
+Interfaces use SI units: m, rad, N, N·m, Pa, s and K. Each state explicitly provides a six-component output wrench; axial moment `Mz` and required output torque share the same value and sign. See the [API contract](docs/api.en.md) for fields, coordinates and array layouts.
 
-Shared chart data are in [metrics.json](examples/results/dfki_pendulum/metrics.json) and [duty.csv](examples/results/dfki_pendulum/duty.csv); editable SVGs accompany the PNGs. Full internal raw runs are not duplicated among the selected showcase files; the commands above regenerate every contact node. Units are m, rad, N, N·m, Pa, s and K.
+## Calculation capabilities
 
-## Scope and verification
+|Module|Implemented functions|Required inputs or boundary|
+|---|---|---|
+|NGW geometry and kinematics|Tooth assembly, adjacent-planet clearance, ratio, speeds and mesh-force relations|Fixed ring, sun input, carrier output; zero-shift spur gears|
+|Planetary load sharing|Flank-specific path errors, pin compliance, shared sun translation and nonnegative path forces with unloading/re-entry|Supplied support stiffness and additional condensed compliance|
+|Per-planet LTCA|Two-mesh cyclic TE, tangent stiffness, contact-node forces and local Hertz pressure; displacement-compatible iteration|Quasi-static, cycle-mean coupling; raw contact arrays retained|
+|Rating stresses|ISO 6336:2006 explicit-factor contact/bending stresses and safety factors|External rating factors and material limits supplied by the user|
+|Structure and bearings|Six-DOF condensed stiffness, two-support reactions, revolution-weighted basic L10 and static safety|No actual bearing contact, preload, clearance or small-oscillation damage|
+|Motor and brake|Motoring/backdriving efficiency, rotor inertia, torque–speed envelopes, RMS current and static brake screening|Supplied motor envelope, efficiencies, current convention and brake safety factor|
+|Precision and thermal response|Loaded angle, backlash, encoder and assembly budget; two-node transient/periodic temperature|Deterministic angular bound; thermal capacity/conductance and losses require calibration|
+|Fatigue and candidate screening|Rainflow, supplied S–N, Goodman/Miner; explicit design limits and finite-candidate Pareto comparison|Applies to a supplied scalar hotspot history; does not infer whole-joint life|
+|Engineering exports|JSON/CSV/NPZ, calculation report, CAD dimensions, parameter-level BOM and reference layout|No manufacturing solids, procurement part numbers or tolerance chain|
 
-The model covers a fixed-ring, sun-input, carrier-output, zero-shift spur NGW stage with small deformation, quasi-static response and cycle-mean coupling. New system modules have analytical/equation and numerical checks, but no vendor whole-system benchmark or hardware validation. RV/harmonic drives, full FE, measured hysteresis, control, electromagnetic and lubrication prediction are outside this release. Existing single-mesh comparisons do not certify the whole joint.
+Rating stresses, local contact pressure, output angle budgets and controlled positioning accuracy have separate definitions. See the [model documentation](docs/model.en.md) for equations, coupling and omitted physics.
 
-See the [model](docs/model.en.md) and [API contract](docs/api.en.md). The license is [AGPL-3.0-only](LICENSE); see [source and license notices](THIRD_PARTY_NOTICES.md). Version 0.1.2 adds a physical-requirement-based case, bilingual documentation and nine paired figure sets. Next priorities are measured compliance, friction/thermal calibration, multistage interfaces and hardware validation.
+## Design review and improvements
+
+This revision adds minimum output-stiffness, maximum load-sharing and supplied-hotspot damage limits. Results report actual values, thresholds and coverage through four states: `passed`, `failed`, `not_configured` and `not_evaluated`. The structural stiffness reference and load port can be defined separately, with offset loads handled by work-conjugate wrench/displacement transformations. External gears also receive an undercut-risk screen under the standard full-depth rack assumption.
+
+The current case assumes `Kout≥20000 N·m/rad`, `Kγ≤2` and supplied-history `D≤1` for same-duty candidate screening. These are not DFKI hardware specifications. See the [design review](docs/design_review.en.md) for findings, fixes and remaining pin/bearing strength, manufacturing and hardware-validation needs.
+
+## Design case and candidate comparison
+
+A 6:1 redesign uses [published DFKI physical-pendulum requirements](https://github.com/dfki-ric-underactuated-lab/torque_limited_simple_pendulum/blob/11a946d4e6db58d001fdeff89be269eb61461757/hardware/testbench_description.md), with geometry referenced to a [mjbots steel gearset](https://mjbots.com/products/m05-6x-planetary-gearset). It demonstrates the parameterized workflow; added support, modifications, thermal parameters and rating limits are recorded separately as assumptions.
+
+![Requirements and NGW layout](examples/results/dfki_pendulum/en/01_design.png)
+
+|Parameter|Value|
+|---|---:|
+|Point mass / rod and mounts / length|0.546 kg / 0.130 kg / 0.5 m|
+|Sun / planet / ring|20 / 40 / 100 teeth|
+|Module / planet count / effective face width|0.5 mm / 3 / 5 mm|
+|Ratio / pressure angle / shift|6 / 20° / zero|
+|New motion duty|±60°; 0.5 s move, 0.4 s hold; 1.8 s period|
+
+The supplier states a 30 mm center distance, while the listed zero-shift tooth counts and module give 15 mm. The model uses 15 mm and retains that source conflict for clarification. This is a source-grounded new design, without reconstruction of AK80-6 internals or measured-performance reproduction.
+
+**Load sharing and tooth contact**
+
+Thirty-four representative states connect three planets, both meshes and system compliance. The current case uses 64 phases ×26 strips. Supplied errors produce unequal sharing. The figure shows cyclic normal TE and raw loaded nodes at the peak-pressure phase.
+
+![Per-planet LTCA and raw contact nodes](examples/results/dfki_pendulum/en/04_contact.png)
+
+**Motor matching and periodic temperature**
+
+The same duty checks motoring/backdriving, motor envelopes and static brake requirements, then feeds segment losses into the two-node thermal model. Temperatures are conditional on the assumed thermal inputs.
+
+![Motor matching and periodic thermal response](examples/results/dfki_pendulum/en/07_motor_thermal.png)
+
+**Candidate comparison under the same duty**
+
+With geometry, materials and motion fixed, compare the baseline, increased path errors and flexible pins to expose trade-offs among pressure, angle budget and output stiffness.
+
+![Three-candidate comparison](examples/results/dfki_pendulum/en/09_comparison.png)
+
+The [complete case guide](docs/examples.en.md) contains all nine stages, input provenance and key numbers. Shared chart data are in [metrics.json](examples/results/dfki_pendulum/metrics.json) and [duty.csv](examples/results/dfki_pendulum/duty.csv); editable SVG/PDF files accompany the images. See the [figure guide](docs/figures.en.md) for the blue/red styling, source data, dimensions and English-only reproduction. CAD/BOM files provide parameter interfaces.
+
+## Professional-software and public-reference comparisons
+
+Evidence is reported at its actual calculation level:
+
+|Evidence|Comparison target|Supported conclusion|
+|---|---|---|
+|Retained MASTA single-mesh reference|Cylindrical geometry, rating stresses and LTCA with matching input, flank, load and discretization|Numerical agreement of the reused contact kernel for the listed states|
+|Public software references and independent equations|Declared algorithm tables, equilibrium relations and numerical solutions|Correctness and regression coverage of the corresponding module/equation|
+|DFKI hardware and mjbots geometry documentation|Published masses, length, ratio, tooth counts and related parameters|Traceability of case inputs and geometric consistency|
+
+![MASTA single-mesh numerical comparison](benchmarks/results/en/01_masta_comparison.png)
+
+The 18/77 helical pair is recalculated with matching inputs. All 12 geometry and 14 rating-stress common fields pass their declared tolerances. Cycle summaries are below; ppm expresses the relative difference in parts per million:
+
+|Cycle metric|Saved MASTA reference|Current kernel|Relative difference / ppm|
+|---|---:|---:|---:|
+|Mean normal TE / μm|1.106704585|1.106704539|0.0414|
+|TE peak-to-peak / μm|0.034133914|0.034133913|0.0400|
+|Maximum endpoint contact pressure / MPa|186.674352|186.674382|0.160|
+|Mean normal stiffness / N/μm|220.932698401|220.932698268|0.000603|
+
+Endpoint pressure follows the reference endpoint definition and is saved separately from strip-centre peak pressure. In addition, all 48 scalar fields from two published MathWorks rainflow tables match; reproduction does not execute MATLAB.
+
+See the [validation record](docs/validation.en.md) for reference inputs, retained results, absolute/relative differences and reproduction commands. Single-mesh comparisons do not cover the NGW assembly; hardware-parameter checks do not validate actual joint temperature, stiffness, precision or life. No assembly-level KISSsoft, JYCD or ETAGear comparison is currently available.
+
+## Verification and reproduction
+
+```bash
+python -m examples.build_showcase --output output/showcase --raw-output output/raw
+python -m examples.compare_designs --output output/comparison.json
+python -m examples.run_benchmarks --output output/benchmarks
+python -m examples.check_joint_resolution --output output/benchmarks/resolution
+python -m examples.plot_validation --source output/benchmarks --output output/benchmarks
+python -m unittest discover -s tests -v
+```
+
+Tests cover planetary torque/path compatibility, reverse loading and unloading, six-DOF support, electromechanical power, rainflow, analytical thermal response and interface constraints. Results retain input, units and diagnostics. Convergence, vendor-component numerical comparisons and physical experiments are separate verification states. Passing configured design limits is a screening result for the chosen model and thresholds.
+
+The resolution study compares seven actual solver grids at one peak-pressure state. It does not establish asymptotic convergence across all states or parameters. Figure exports include PNG and editable SVG/PDF. Add `--language en` to `build_showcase` and `plot_validation` for English-only figures; see the [figure guide](docs/figures.en.md).
+
+## Scope
+
+The system layer currently covers one fixed-ring, sun-input, carrier-output, zero-shift spur NGW stage with small deformation, linear elasticity and quasi-static cycle-mean response. The independent contact kernel supports additional single-mesh configurations, but the system interface has not been extended to helical, multistage, RV or harmonic drives.
+
+Full housing/shaft FE, synchronized transient mesh dynamics, friction-history hysteresis, planet needle bearings and small-angle oscillatory wear, lubrication, electromagnetics, control precision and manufacturing tolerance chains are not included. Light-load basic L10, assumed-hotspot damage and deterministic angle budgets are interpreted separately, without whole-joint life or positioning certification.
+
+## Release history and next steps
+
+- **0.1.0**: NGW system, support, fatigue, thermal, electromechanical, precision and parameter-level engineering exports.
+- **0.1.2**: DFKI physical-requirement reference, complete bilingual case and figures, and a cross-platform floating-point tolerance fix for saved duty comparison.
+- **0.2.0**: Project-level bilingual documentation, blue/red publication-style figures, expert design review, explicit assessment coverage and reproducible comparison evidence; a single default branch, `main`.
+- **Near-term priorities**: Extend the resolution study to all critical duty states, add measured torsional stiffness/backlash and friction calibration, identify thermal networks and efficiency maps, and assess bearing suitability under actual oscillatory duty.
+- **Later extensions**: Multistage/helical systems, physical gear-body/support compliance, manufacturing tolerance statistics and prototype comparisons after separate validation. These remain planned work.
+
+## Documentation and repository layout
+
+- [Model and equations](docs/model.en.md) · [API and units](docs/api.en.md) · [Complete case](docs/examples.en.md) · [Comparison evidence](docs/validation.en.md)
+- [Design review and further validation](docs/design_review.en.md) · [Blue/red figures and source data](docs/figures.en.md)
+- `robot_joint/`: new NGW system/performance modules; `gear_contact/`: reused cylindrical-contact kernel.
+- `examples/`: inputs, runnable workflows and selected results; `benchmarks/`: offline references and comparison outputs.
+- `tests/` and `.github/`: automated verification; `docs/`: equations, integration and engineering guidance.
+
+The project uses [AGPL-3.0-only](LICENSE). See the [source and license notices](THIRD_PARTY_NOTICES.md) for reused code, source commits and dependencies.

@@ -57,7 +57,17 @@ def _parameters(result: "JointResult") -> dict:
             "load_offset_m": inputs["bearings"].get("load_offset_m", 0.0),
             "geometry_status": "仅定义双支承轴向中心位置，未提供轴承直径、宽度或安装配合",
         },
-        "coordinate_system": "x/y为齿轮平面，z为旋转轴；原点为双支承轴向中点",
+        "coordinate_system": "x/y为齿轮平面，z为旋转轴；支承中点、输出载荷端口和结构刚度参考点分别登记，不默认重合",
+        "coordinate_references": {
+            "bearing_origin": "双支承轴向中点，两支承z坐标为±spacing_m/2",
+            "output_load_port_z_from_bearing_origin_m": inputs["bearings"].get("load_offset_m", 0.0),
+            "stiffness_reference_to_load_port_z_m": inputs.get("support", {}).get("reference_offset_m", 0.0),
+            "stiffness_reference_z_from_bearing_origin_m": (
+                inputs["bearings"].get("load_offset_m", 0.0)
+                - inputs.get("support", {}).get("reference_offset_m", 0.0)),
+            "wrench_reference": "output_wrench的力和自由力矩给定于输出载荷端口；结构及双支承分别作虚功一致的参考点变换",
+            "gear_axial_plane": "当前仅定义xy参数布局，未给定其相对双支承中点的实际z位置",
+        },
         "solid_constructed": False,
         "manufacturing_tooth_profile_constructed": False,
         "scope": "参数级布局与CAD接入参数；未构造实体、真实齿面、根部过渡、孔位公差或装配工艺",
