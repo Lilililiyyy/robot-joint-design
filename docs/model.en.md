@@ -69,3 +69,8 @@ Equivalent pin stiffness is not pin strength; basic L10 for the two output beari
 ## Current verification state
 
 The modules have analytical, equilibrium, public-reference-table, numerical and interface tests. The reused single-mesh kernel has bounded vendor comparison history; current reproducible benchmarks and discretization evidence are described in [validation](validation.en.md). Vendor numerical agreement, independent equation checks, published hardware-parameter checks and physical testing are separate levels. The new system layer has no whole-system commercial benchmark or hardware accuracy validation. The pendulum case is a reproducible source-grounded redesign, not a calibrated replica of the physical testbed.
+
+
+## 0.3.0: further design and complete patterns
+
+Optional [planet-pin/bearing](planet_support.en.md) and [bus-energy](dc_bus.en.md) checks participate in screening under explicit inputs. The pin model does not silently replace path stiffness: geometry feedback requires a deliberate configuration update and recomputation. Beam/shear, basic ratings and ideal-source assumptions retain separate limits. [Full contact postprocessing](contact_patterns.en.md) expands original Hertz bands in material arc coordinates and separately stores one-pair snapshots, periodic-equivalent passage envelopes, original force and clipping/raster errors; it does not add a 2D/FE contact solver.

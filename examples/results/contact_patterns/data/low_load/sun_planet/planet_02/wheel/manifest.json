@@ -1,0 +1,14 @@
+{
+  "units": {
+    "length": "m",
+    "pressure": "Pa",
+    "force": "N"
+  },
+  "layout": "sweep压力用profile_roll_edges_m；instant压力用snapshot_profile_roll_edges_m；横向均为face_edges_m相邻条带。原采样以phase_index/tooth_pair_index区分",
+  "instantaneous": "只显示snapshot_index及snapshot_tooth_pair_index的一对齿",
+  "sweep": "所有相位与周期等价相邻齿对的有限Hertz带最大值，不在空隙平滑填色",
+  "files": {
+    "pattern.npz": "b783b079d6e51b73e298d6ddd73db3652ffd0a710aa03950e8898ca3262cf1c8",
+    "summary.json": "4ff487d36759a11b2249a3b9d46b7889e09c2193697463c2f51faee3d98412fa"
+  }
+}

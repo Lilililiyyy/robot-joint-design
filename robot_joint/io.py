@@ -23,6 +23,9 @@ def export_joint(result, output_dir, *, plots=False):
     _write(root/'thermal.json', result.thermal)
     _write(root/'bearings.json', result.bearings)
     _write(root/'fatigue.json', result.fatigue)
+    # 无选项时明确写null，防止同一输出目录残留上次已配置的校核文件。
+    _write(root/'planet_support.json', result.planet_support)
+    _write(root/'dc_bus.json', result.dc_bus)
     from .engineering import export_engineering_parameters
     export_engineering_parameters(result, root)
     rows = []
@@ -67,6 +70,22 @@ def export_joint(result, output_dir, *, plots=False):
                   '只评价该输入谱，不等同整关节服役寿命。', '', '## 设计评估覆盖', '', '|项目|当前范围|', '|---|---|'])
     for name, scope in result.summary['assessment_coverage'].items():
         lines.append(f'|{name}|{scope}|')
+    if result.planet_support is not None:
+        lines.extend(['', '## 行星销与行星轴承', '',
+            '按已收敛销反力独立检查，未自动回写路径刚度。短粗销三维接触、支承板、局部配合和销疲劳仍需单独验证。', '',
+            '|行星|销平均弯剪刚度 / MN/m|与系统kpin之比|最大弯曲 / MPa|最大中心挠度 / μm|静校核|', '|---|---:|---:|---:|---:|---|'])
+        for pin in result.planet_support['pins']:
+            lines.append(f"|{pin['planet_index']+1}|{pin['equivalent_pin_stiffness_n_per_m']/1e6:.6g}|"
+                         f"{pin['stiffness_ratio_to_system_input']:.6g}|{pin['maximum_bending_stress_pa']/1e6:.6g}|"
+                         f"{pin['maximum_center_deflection_m']*1e6:.6g}|{'通过' if pin['static_checks_pass'] else '未通过'}|")
+        lines.extend(['', '行星轴承基本L10使用相对行星架转速，不含摆动/润滑/微动修正；小时寿命仅在明确配置下限时参与判定。'])
+    if result.dc_bus is not None:
+        bus = result.dc_bus
+        lines.extend(['', '## 直流母线能量初筛', '',
+            f"最高母线电压{bus['maximum_voltage_v']:.6g} V，给定上限{bus['parameters']['maximum_voltage_v']:.6g} V。",
+            f"当前历程回馈DC能量{bus['regenerated_dc_energy_j']:.6g} J，外部吸收{bus['externally_absorbed_energy_j']:.6g} J，"
+            f"最大分段能量残差{bus['maximum_segment_energy_residual_j']:.3g} J。", '',
+            '最低电压由理想无限供能源保证，不算真实欠压校核；单次输入历程通过不能替代重复任务能量平衡或真实驱动器认证。'])
     lines.extend(['', '## 逐工况载荷与精度', '',
                   '|工况|行星切向力 / N|均载系数|角度预算 / rad|协调残差 / m|', '|---|---|---:|---:|---:|'])
     for case in result.cases:
@@ -84,7 +103,7 @@ def export_joint(result, output_dir, *, plots=False):
     if plots:
         from .plotting import plot_joint
         plot_joint(result, root)
-    manifest = {'version': '0.2.0', 'units': {'length': 'm', 'angle': 'rad', 'torque': 'N m',
+    manifest = {'version': '0.3.0', 'units': {'length': 'm', 'angle': 'rad', 'torque': 'N m',
                 'force': 'N', 'pressure': 'Pa', 'temperature': 'K', 'time': 's'},
                 'files': {p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                           for p in sorted(root.rglob('*')) if p.is_file() and p.name != 'manifest.json'}}

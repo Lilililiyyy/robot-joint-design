@@ -2,6 +2,34 @@
 
 [中文](api.md) · [English](api.en.md)
 
+## 可选销、行星轴承与母线校核
+
+`planet_support={pins,bearing_ratings}`只在显式配置时计算；参数及公式见[销与行星轴承](planet_support.md)。销的静强度利用率取各项`实际应力×要求安全系数/许用值`最大值，`planet_pin_static`要求不大于1并参与总体初筛。计算得到的销平均弯剪刚度只对照系统输入；静强度通过不表示刚度一致，不自动回写分载。行星轴承缺省静安全要求1；基本L10只在指定寿命下限时参与判定。
+
+`dc_bus`直接传入`dc_bus_screen`，使用`motor.segments[*].electrical_power_w`，保留电机损耗和转子惯性影响，不以负机械功率替代回馈电功率。`dc_bus_maximum_voltage`用当前模型最高电压与输入上限比较并参与总体初筛；`dc_bus_minimum_voltage`因理想无限供能电源假设而保持`not_evaluated`，不冒称真实欠压校核。母线详细模型见[母线说明](dc_bus.md)。
+
+```python
+import json
+from pathlib import Path
+from examples.check_planet_support import default_assumptions
+from robot_joint import analyze_joint
+
+config = json.loads(Path("examples/dfki_pendulum_case.json").read_text(encoding="utf-8"))
+candidate = default_assumptions()["candidates"][1]
+config["planet_support"] = {key: candidate[key] for key in ("pins", "bearing_ratings")}
+config["dc_bus"] = {
+    "capacitance_f": 0.01, "source_voltage_v": 48,
+    "minimum_voltage_v": 42, "maximum_voltage_v": 60,
+    "inverter_motoring_efficiency": 0.95,
+    "inverter_regenerating_efficiency": 0.95,
+    "absorption_power_limit_w": 10,
+}
+config.setdefault("design_limits", {})["maximum_pin_stiffness_relative_difference"] = 0.1
+result = analyze_joint(config)
+```
+
+这里的销参数和母线参数均是新增设计假设，不能解释为原实物规格。`JointResult`在原9个位置字段之后新增`planet_support=None`和`dc_bus=None`，旧构造接口保留；显式配置时返回完整对象。导出另存`planet_support.json`与`dc_bus.json`，缺配写JSON null防止旧文件残留。summary增加销静利用率、销刚度相对差、行星轴承基本静安全/小时寿命及最高母线电压；缺配的指标为null、相关check_details为`not_evaluated`。
+
 ## 调用流程
 
 `analyze_joint(config) -> JointResult`：解析JSON兼容的命名配置，计算所有工况。原配置不修改。`export_joint(result, output_dir, plots=False)`：导出输入、诊断、全数组与报告。`compare_joint_designs(configs)`：重算每个完整候选；`results`保留原结果对象，`candidates`给出可序列化比较表，只在已配置约束通过的候选内判定Pareto非支配。
@@ -26,6 +54,8 @@
 |`precision`|总自由侧隙、编码器计数/安装侧、装配误差上界|
 |`rating`|可选；`sun_planet`与`planet_ring`分别给定mesh/gear因子及限值|
 |`fatigue`|可选；`stress_history_pa`、S-N参考应力/循环数/斜率及可选抗拉强度|
+|`planet_support`|可选；`pins`为简支圆销弯剪/许用参数，`bearing_ratings`为行星轴承显式容量与全部目录系数|
+|`dc_bus`|可选；电容、源/最低/最高电压、逆变驱动/回馈效率，可附外部吸收功率上限与初始电压|
 |`design_limits`|可选的压力/角度/温度/均载/热点谱损伤上限，以及刚度、强度安全系数、轴承静安全/小时寿命下限|
 
 完整可编辑字段示例见`examples/dfki_pendulum_case.json`，需求与来源见`examples/dfki_pendulum_requirements.json`。嵌套工作面、修形和载荷分配中的未知字段报错，防止拼写错误静默失效。
@@ -68,6 +98,9 @@
 |`minimum_output_torsional_stiffness_n_m_per_rad`|实际值≥限值|全部工况的最小局部输出扭转刚度，N·m/rad|
 |`maximum_load_share_factor`|实际值≤限值|有载工况最大行星均载系数；全零载时未定义|
 |`fatigue_damage_per_input_history`|实际值≤限值|给定热点标量谱的Miner损伤；无目标服役小时数映射|
+|`maximum_pin_stiffness_relative_difference`|实际值≤限值|销平均弯剪刚度与系统给定kpin的最大相对差；未配置该限值时只作诊断|
+|`minimum_planet_bearing_static_safety_factor`|实际值≥限值|行星轴承显式评级参数下的基本静安全；配置行星支承后缺省要求1|
+|`minimum_planet_bearing_basic_l10_hours`|实际值≥限值|行星相对行星架转速的基本L10小时数，仅在明确指定下限时判定|
 
 当前案例选择刚度≥20000 N·m/rad、均载系数≤2、给定谱损伤≤1，均是**本例新增设计假设，不是DFKI实物规格**。生产示例采用64相位×26条带；普通接口测试使用小型求解，完整案例和离散研究由相应复算入口承担。
 
@@ -88,3 +121,8 @@
 未配置`rating`时各工况ratings为空，汇总安全系数为null；未配置fatigue时返回未配置状态。零载未定义安全系数/无损伤寿命返回null，不能读为已通过所有物理失效模式。
 
 `manifest.json`保存导出文件SHA256。JSON非有限的未定义统计量输出null；NPZ不用对象数组或pickle。原始计算节点与展示图分开保存。
+
+
+## 完整接触斑点接口
+
+`interior_snapshot(contact)->(phase_index,tooth_pair_index)`选择两轮有限带均在有效齿面内域的有载齿对。`build_contact_pattern(contact,member="pinion",profile_points=1601,snapshot_index=None,snapshot_tooth_pair_index=None)->ContactPattern`直接使用原`AnalysisResult`，`export_contact_pattern(pattern,path)`写出无pickle的原条带及矩阵。瞬时和扫掠压力采用不同齿廓坐标，不能逐像素比较；正反面由源接触对象决定。默认自动快照为源峰压相位，可能发生齿顶裁剪；正式示例先显式调用interior_snapshot。完整通过程、弧长/Hertz带、守恒/裁剪/栅格误差与拒绝的模型分支见[接触方法](contact_patterns.md)。

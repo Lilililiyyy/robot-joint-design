@@ -51,6 +51,8 @@ def _parameters(result: "JointResult") -> dict:
         "geometry": json_value(result.geometry),
         "gear_radii_m": _gear_radii(stage),
         "face_width_m": stage["face_width_m"],
+        "planet_support": deepcopy(inputs.get("planet_support")),
+        "dc_bus": deepcopy(inputs.get("dc_bus")),
         "bearings": {
             "spacing_m": spacing,
             "centre_z_m": [-spacing / 2, spacing / 2],
@@ -104,9 +106,18 @@ def _bom_rows(result: "JointResult") -> list[dict]:
            "固定内齿圈，未提供轮缘和壳体实体尺寸")
     append("carrier", "行星架", 1, {"planet_count": count},
            "仅已知行星数量与计算布局，未提供架板厚度、销孔尺寸及连接结构")
-    append("planet_pin", "行星销", count,
-           {"tangential_stiffness_n_per_m": deepcopy(inputs["load_sharing"]["pin_stiffness_n_per_m"])},
-           "仅有等效支承刚度，未提供销径、长度或材料牌号")
+    pin_spec = {"tangential_stiffness_n_per_m": deepcopy(inputs["load_sharing"]["pin_stiffness_n_per_m"])}
+    if "planet_support" in inputs:
+        pin_spec["static_design"] = deepcopy(inputs["planet_support"]["pins"])
+    append("planet_pin", "行星销", count, pin_spec,
+           "已给简支销计算几何与许用值；尚无实际销孔/配合/制造图样" if "planet_support" in inputs
+           else "仅有等效支承刚度，未提供销径、长度或材料牌号")
+    if "planet_support" in inputs:
+        append("planet_bearing", "行星轴承", count, deepcopy(inputs["planet_support"]["bearing_ratings"]),
+               "基本评级容量为设计输入，未指定采购型号、内部几何、预紧或润滑")
+    if "dc_bus" in inputs:
+        append("dc_bus", "母线储能与吸收参数", 1, deepcopy(inputs["dc_bus"]),
+               "电容及吸收能力为理想能量模型输入，未指定器件、电阻和驱动器采购型号")
     append("output_bearing", "输出支承", 2, deepcopy(inputs["bearings"]),
            "两组评级参数按负z、正z支承顺序给定；未指定采购型号")
     append("motor", "电机", 1, deepcopy(inputs["motor"]),
@@ -135,7 +146,7 @@ def _layout_svg(parameters: dict) -> str:
         '<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="650" viewBox="0 0 1000 650" role="img" aria-labelledby="title description">',
         f'<title id="title">{title}：NGW参数布局</title>',
         '<desc id="description">参考圆、齿顶圆、齿根圆和行星销中心圆构成的参数布局；不是制造齿廓或实体模型。</desc>',
-        '<rect width="1000" height="650" fill="#f7f9fb"/>',
+        '<rect width="1000" height="650" fill="#ffffff"/>',
         '<g font-family="sans-serif" fill="#243241">',
         f'<text x="36" y="42" font-size="24">{title}</text>',
         '<text x="36" y="70" font-size="14">单级固定内齿圈 · 太阳轮输入 · 行星架输出 · 零变位直齿</text>',
@@ -154,21 +165,21 @@ def _layout_svg(parameters: dict) -> str:
         circle(f"ring_{kind}", 0, 0, radii["ring"][kind + "_radius_m"],
                "#657383" if kind != "reference" else "#273d4d",
                dash="7 5" if kind == "reference" else None, width=1.8)
-    circle("carrier_pitch", 0, 0, geometry["carrier_radius_m"], "#23856b", dash="4 6")
+    circle("carrier_pitch", 0, 0, geometry["carrier_radius_m"], "#2166ac", dash="4 6")
     for kind in ("root", "tip", "reference"):
-        circle(f"sun_{kind}", 0, 0, radii["sun"][kind + "_radius_m"], "#bb6a24",
+        circle(f"sun_{kind}", 0, 0, radii["sun"][kind + "_radius_m"], "#b2182b",
                dash="6 4" if kind == "reference" else None)
     for index, (x, y) in enumerate(geometry["planet_centres_xy_m"], 1):
         output.append(f'<line x1="{centre[0]}" y1="{centre[1]}" '
                       f'x2="{centre[0]+scale*x:.12g}" y2="{centre[1]-scale*y:.12g}" '
-                      'stroke="#b9c9c3" stroke-width="1" stroke-dasharray="3 6"/>')
+                      'stroke="#c5d5e5" stroke-width="1" stroke-dasharray="3 6"/>')
         for kind in ("root", "tip", "reference"):
-            circle(f"planet_{index}_{kind}", x, y, radii["planet"][kind + "_radius_m"], "#3a77a4",
+            circle(f"planet_{index}_{kind}", x, y, radii["planet"][kind + "_radius_m"], "#67a9cf",
                    dash="6 4" if kind == "reference" else None)
         # 十字仅标销中心，不用缺失的销直径伪造圆形安装包络。
         px, py = centre[0] + scale * x, centre[1] - scale * y
         output.append(f'<path d="M {px-4:.12g} {py:.12g} h 8 M {px:.12g} {py-4:.12g} v 8" '
-                      'stroke="#23856b" stroke-width="1.5"/>')
+                      'stroke="#2166ac" stroke-width="1.5"/>')
     output.extend(['</g>', '<g font-size="15">',
                    '<text x="620" y="145" font-size="20">参数与图义</text>'])
     notes = [

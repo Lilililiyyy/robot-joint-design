@@ -13,6 +13,8 @@ from .electromechanical import motor_duty
 from .thermal import thermal_response
 from .fatigue import rainflow_cycles, sn_damage
 from .precision import precision_budget
+from .planet_support import assess_planet_support
+from .dc_bus import dc_bus_screen
 
 
 def _keys(value, allowed, required, name):
@@ -31,6 +33,8 @@ class JointResult:
     bearings: list
     fatigue: dict
     summary: dict
+    planet_support: dict | None = None
+    dc_bus: dict | None = None
 
 
 def analyze_joint(config: dict) -> JointResult:
@@ -45,7 +49,8 @@ def analyze_joint(config: dict) -> JointResult:
     values = deepcopy(config)
     required = {'schema_version', 'case_id', 'stage', 'duty_segments', 'load_sharing',
                 'mesh', 'support', 'bearings', 'motor', 'drive', 'thermal', 'precision'}
-    allowed = required | {'label', 'rating', 'fatigue', 'design_limits', 'notes', 'thermal_mode'}
+    allowed = required | {'label', 'rating', 'fatigue', 'design_limits', 'notes', 'thermal_mode',
+                          'planet_support', 'dc_bus'}
     if required-set(values) or set(values)-allowed:
         raise ValueError('关节输入缺少必要字段或含未知字段：' + str(sorted((required-set(values)) | (set(values)-allowed))))
     if isinstance(values['schema_version'], bool) or values['schema_version'] != 1:
@@ -163,6 +168,17 @@ def analyze_joint(config: dict) -> JointResult:
         fatigue = sn_damage(cycles, **options)
         fatigue['cycles'] = cycles
         fatigue['scope'] = '调用方给定热点应力历程上的有限寿命模型；不代表所有齿轮、轴承和结构的寿命'
+    planet_support = None
+    if 'planet_support' in values:
+        _keys(values['planet_support'], {'pins', 'bearing_ratings'}, {'pins', 'bearing_ratings'}, 'planet_support')
+        planet_support = assess_planet_support(cases, segments, **values['planet_support'],
+            specified_pin_stiffness_n_per_m=values['load_sharing']['pin_stiffness_n_per_m'])
+    dc_bus = None
+    if 'dc_bus' in values:
+        bus_required = {'capacitance_f', 'source_voltage_v', 'minimum_voltage_v', 'maximum_voltage_v',
+                        'inverter_motoring_efficiency', 'inverter_regenerating_efficiency'}
+        _keys(values['dc_bus'], bus_required | {'absorption_power_limit_w', 'initial_voltage_v'}, bus_required, 'dc_bus')
+        dc_bus = dc_bus_screen(motor['segments'], **values['dc_bus'])
     peak_pressure = max(a.summary['max_pressure_pa'] for c in cases for group in c['contacts'].values() for a in group)
     factors = [c['sharing']['load_share_factor'] for c in cases if c['sharing']['load_share_factor'] is not None]
     checks, check_details = {}, {}
@@ -202,6 +218,15 @@ def analyze_joint(config: dict) -> JointResult:
                'minimum_bearing_static_safety_factor': min(static_safety) if static_safety else None,
                'minimum_bearing_life_hours': min(bearing_lives) if bearing_lives else None,
                'fatigue_damage_per_input_history': fatigue.get('damage_per_duty'),
+               'maximum_pin_static_utilization': (max(detail['actual_pa']*detail['required_safety_factor']/detail['allowable_pa']
+                    for case in planet_support['cases'] for pin in case['pins'] for detail in pin['checks'].values()) if planet_support else None),
+               'maximum_pin_stiffness_relative_difference': (max(abs(pin['stiffness_ratio_to_system_input']-1)
+                    for pin in planet_support['pins']) if planet_support else None),
+               'minimum_planet_bearing_static_safety_factor': (planet_support['summary']['minimum_planet_bearing_static_safety_factor']
+                    if planet_support else None),
+               'minimum_planet_bearing_basic_l10_hours': (planet_support['summary']['minimum_basic_planet_bearing_life_hours']
+                    if planet_support else None),
+               'maximum_dc_bus_voltage_v': dc_bus['maximum_voltage_v'] if dc_bus else None,
                'all_couplings_converged': all(c['sharing']['coupling']['converged'] for c in cases),
                'checks': checks, 'check_details': check_details,
                'physical_validation': False, 'vendor_system_validation': False,
@@ -213,13 +238,16 @@ def analyze_joint(config: dict) -> JointResult:
                     'motor_temperature_k': 'maximum_motor_temperature_k',
                     'gear_temperature_k': 'maximum_gear_temperature_k',
                     'maximum_load_share_factor': 'maximum_load_share_factor',
-                    'fatigue_damage_per_input_history': 'fatigue_damage_per_input_history'}
+                    'fatigue_damage_per_input_history': 'fatigue_damage_per_input_history',
+                    'maximum_pin_stiffness_relative_difference': 'maximum_pin_stiffness_relative_difference'}
     lower_metrics = {'minimum_contact_safety_factor': 'minimum_contact_safety_factor',
                      'minimum_bending_safety_factor': 'minimum_bending_safety_factor',
                      'minimum_bearing_static_safety_factor': 'minimum_bearing_static_safety_factor',
                      'minimum_bearing_life_hours': 'minimum_bearing_life_hours',
                      'minimum_output_torsional_stiffness_n_m_per_rad':
-                         'minimum_output_torsional_stiffness_n_m_per_rad'}
+                         'minimum_output_torsional_stiffness_n_m_per_rad',
+                     'minimum_planet_bearing_static_safety_factor': 'minimum_planet_bearing_static_safety_factor',
+                     'minimum_planet_bearing_basic_l10_hours': 'minimum_planet_bearing_basic_l10_hours'}
     scopes = {'contact_pressure_pa': '当前离散局部Hertz峰压，Pa；须另查网格/相位收敛',
               'angle_budget_rad': '指定受载状态的未补偿确定性角度预算，rad',
               'motor_temperature_k': '给定热参数的电机节点最高温度，K',
@@ -230,7 +258,10 @@ def analyze_joint(config: dict) -> JointResult:
               'minimum_bending_safety_factor': '给定评级因子与材料限值的最小齿根安全系数',
               'minimum_bearing_static_safety_factor': '输出双支承基本静安全；不含行星轴承',
               'minimum_bearing_life_hours': '输出双支承基本L10小时数；无摆动/润滑/微动修正',
-              'minimum_output_torsional_stiffness_n_m_per_rad': '最终承载分支局部输出扭转刚度，N·m/rad'}
+              'minimum_output_torsional_stiffness_n_m_per_rad': '最终承载分支局部输出扭转刚度，N·m/rad',
+              'maximum_pin_stiffness_relative_difference': '简支圆销平均弯剪刚度与系统给定kpin之最大相对差；不自动回写分载刚度',
+              'minimum_planet_bearing_static_safety_factor': '显式容量/系数下的行星轴承基本静安全',
+              'minimum_planet_bearing_basic_l10_hours': '行星相对行星架转速的基本L10小时数；无摆动/润滑修正'}
     for name, metric in {**metric_names, **lower_metrics}.items():
         actual = summary[metric]
         check_details[name] = {'status': 'not_configured' if actual is not None else 'not_evaluated',
@@ -258,19 +289,41 @@ def analyze_joint(config: dict) -> JointResult:
         # 只评价本次明确给定的热点谱，不能推广成齿轮全寿命或整关节认证。
         record_check('fatigue_damage_per_input_history', summary['fatigue_damage_per_input_history'],
                      1.0, '<=', scope=scopes['fatigue_damage_per_input_history'])
+    check_details['planet_pin_static'] = {'status': 'not_evaluated', 'actual': None, 'threshold': None,
+        'relation': '<=', 'scope': '未配置销几何、许用应力与安全系数；不能由路径刚度反推销强度'}
+    if planet_support:
+        record_check('planet_pin_static', summary['maximum_pin_static_utilization'], 1.0, '<=',
+                     scope='销弯曲/横剪/平均面压各自实际值×要求安全系数/许用值的最大值；不含局部/疲劳')
+        name = 'minimum_planet_bearing_static_safety_factor'
+        if summary[name] is not None and name not in limits:
+            record_check(name, summary[name], 1.0, '>=', scope=scopes[name])
+    check_details['dc_bus_maximum_voltage'] = {'status': 'not_evaluated', 'actual': None,
+        'threshold': None, 'relation': '<=', 'scope': '未配置电容、逆变效率、源电压与回馈吸收模型'}
+    check_details['dc_bus_minimum_voltage'] = {'status': 'not_evaluated',
+        'actual': dc_bus['minimum_voltage_v'] if dc_bus else None,
+        'threshold': values['dc_bus']['minimum_voltage_v'] if dc_bus else None, 'relation': '>=',
+        'scope': '理想无限供能电源维持源电压下限；未评价真实电源欠压能力，不计为已通过的物理校核'}
+    if dc_bus:
+        record_check('dc_bus_maximum_voltage', dc_bus['maximum_voltage_v'],
+                     values['dc_bus']['maximum_voltage_v'], '<=',
+                     scope='当前分段恒功率/理想电源/给定回馈吸收模型中的最高母线电压，V')
     summary['assessment_coverage'] = {
         'output_bearing_life': '仅基本L10；小角摆动、微动和润滑修正未评估',
         'hotspot_fatigue': '仅给定标量应力谱' if 'fatigue' in values else '未配置应力谱与S-N数据',
-        'planet_pin_strength': '未评估；等效销刚度不等同销强度',
-        'planet_bearing_life': '未评估；当前轴承仅为两个输出支承',
+        'planet_pin_strength': ('简支圆销弯曲/横剪/平均面压与弯剪挠度初筛；局部销孔/配合/疲劳未评估'
+                               if planet_support else '未评估；等效销刚度不等同销强度'),
+        'planet_bearing_life': ('显式容量及相对行星架转速的基本L10/静安全；摆动/润滑修正未评估'
+                               if planet_support else '未评估；当前轴承仅为两个输出支承'),
         'ring_carrier_housing_strength': '未评估；未构造完整实体和FE边界',
-        'regenerative_bus_and_inverter': '未评估；机电功率平衡不等同母线吸能和驱动器能力',
+        'regenerative_bus_and_inverter': ('分段母线电容能量及给定回馈吸收初筛；未模拟PWM/电源阻抗/真实驱动器包络'
+                                         if dc_bus else '未评估；机电功率平衡不等同母线吸能和驱动器能力'),
         'dynamics_and_resonance': '未评估；当前为周期平均准静态协调',
         'manufacturing_interference': '仅外齿轮标准全齿高齿条根切风险初筛；内齿干涉、尖顶和刀具未评估',
         'physical_validation': '未完成样机标定与试验'}
     summary['configured_checks_pass'] = all(checks.values())
     summary['check_scope'] = '仅对已配置约束的数值初筛；未配置强度/寿命/温升限值不自动视为已校核'
-    return JointResult(values, geometry, cases, motor, thermal, bearings, fatigue, summary)
+    return JointResult(values, geometry, cases, motor, thermal, bearings, fatigue, summary,
+                       planet_support=planet_support, dc_bus=dc_bus)
 
 
 def compare_joint_designs(configs):

@@ -8,5 +8,8 @@ from .thermal import thermal_response, periodic_thermal_response
 from .electromechanical import motor_duty
 from .precision import precision_budget, reversal_curve
 from .io import export_joint
+from .planet_support import pin_response, assess_planet_support
+from .dc_bus import dc_bus_screen
+from .contact_pattern import ContactPattern, build_contact_pattern, export_contact_pattern, interior_snapshot
 
-__version__ = '0.2.0'
+__version__ = '0.3.0'

@@ -6,7 +6,7 @@
 
 [Back to the project](../README.en.md). Run all commands below from the project root.
 
-This parameterized NGW calculation kernel connects loads, geometry, materials, tooth modifications, support, motor and thermal inputs. It exports raw contact arrays, engineering results, a Chinese calculation report and CAD/BOM parameters. Version **0.2.0** runs without commercial software or vendor DLLs.
+This parameterized NGW calculation kernel connects loads, geometry, materials, tooth modifications, support, motor and thermal inputs. It exports raw contact arrays, engineering results, a Chinese calculation report and CAD/BOM parameters. Version **0.3.0** runs without commercial software or vendor DLLs.
 
 ## Case: redesigning the joint transmission for a physical DFKI pendulum
 
@@ -138,3 +138,14 @@ See the [model](../docs/model.en.md) and [API contract](../docs/api.en.md). The 
 The original 16×13 sampling missed the ring mesh's short double-contact branch, giving zero TE peak-to-peak at this state. After seven independently solved resolution variants, the full case uses 64×26. At the selected peak-pressure state, its ring-mesh mean TE differs by 0.932% and output stiffness by 0.343% from 256×26. Other critical states still need study. See [the resolution study and source data](validation.en.md#ngw-case-discretization-sensitivity); this is not proof of global convergence or prototype accuracy.
 
 New assumed design requirements are output stiffness ≥20 kN·m/rad, Kγ≤2, and supplied-hotspot damage D≤1; these are not original product specifications. After recomputation, the baseline passes; errors ×3 fails stiffness and load sharing, while pin stiffness ×0.3 fails stiffness. Hatching marks candidates that fail configured constraints, and Pareto membership is evaluated only among feasible candidates. Actual values, thresholds, directions and missing constraints are in `summary.check_details`; unmodelled failure modes are in `summary.assessment_coverage` and the [design review](design_review.en.md).
+
+
+## Full patterns and further design
+
+The [full-pattern workflow](contact_patterns.en.md) adds all planets, both meshes, positive/negative and low-load states, and each member's own material coordinates. The original one-phase node figure remains as a raw-sample view. New [planet-pin/bearing](planet_support.en.md) and [DC-bus](dc_bus.en.md) checks can be called directly or configured at the top level of analyze_joint to participate in screening.
+
+The [integrated design input](../examples/dfki_with_screens.json) explicitly updates system kpin to the new assumed 6mm pin's load-conjugate bending/shear stiffness, then recouples all 34 states and checks planet-bearing static safety and a 4700μF bus. It is reported separately from the fixed-300MN/m consistency comparison. New geometry, allowables and electrical inputs are not original DFKI product specifications.
+
+```bash
+python -m robot_joint examples/dfki_with_screens.json --output output/integrated --plots
+```

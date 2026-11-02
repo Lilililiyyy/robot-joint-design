@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "case_id": "dfki_pendulum_with_optional_screens",
+  "units": {
+    "length": "m",
+    "angle": "rad",
+    "force": "N",
+    "torque": "N m",
+    "pressure": "Pa",
+    "stiffness": "N/m"
+  },
+  "stage": {
+    "sun_teeth": 20,
+    "planet_teeth": 40,
+    "ring_teeth": 100,
+    "planet_count": 3,
+    "module_m": 0.0005,
+    "face_width_m": 0.005,
+    "pressure_angle_rad": 0.3490658503988659
+  },
+  "geometry": {
+    "ratio": 6.0,
+    "sun_radius_m": 0.005,
+    "planet_radius_m": 0.01,
+    "ring_radius_m": 0.025,
+    "carrier_radius_m": 0.015,
+    "planet_angles_rad": [
+      0.0,
+      2.0943951023931953,
+      4.1887902047863905
+    ],
+    "planet_centres_xy_m": [
+      [
+        0.015,
+        0.0
+      ],
+      [
+        -0.007499999999999996,
+        0.01299038105676658
+      ],
+      [
+        -0.007500000000000007,
+        -0.012990381056766576
+      ]
+    ],
+    "assembly_index": 40,
+    "adjacent_tip_clearance_m": 0.004980762113533155,
+    "undercut_screen": {
+      "method": "零变位标准全齿高齿条：z·sin²α>=2；ha*=1",
+      "minimum_teeth_continuous": 17.09726434082606,
+      "sun_no_undercut_screen": true,
+      "planet_no_undercut_screen": true,
+      "automatic_design_rejection": false,
+      "unassessed": [
+        "实际刀具与齿根过渡",
+        "内齿轮渐开线/摆线/修切干涉",
+        "齿顶厚度与尖顶"
+      ]
+    },
+    "geometry_scope": "零变位直齿参考几何、均布装配、邻接齿顶圆及外齿标准齿条根切风险初筛；实际刀具及完整齿廓干涉未评估"
+  },
+  "gear_radii_m": {
+    "sun": {
+      "reference_radius_m": 0.005,
+      "base_radius_m": 0.004698463103929542,
+      "tip_radius_m": 0.0055,
+      "root_radius_m": 0.004375
+    },
+    "planet": {
+      "reference_radius_m": 0.01,
+      "base_radius_m": 0.009396926207859084,
+      "tip_radius_m": 0.0105,
+      "root_radius_m": 0.009375
+    },
+    "ring": {
+      "reference_radius_m": 0.025,
+      "base_radius_m": 0.023492315519647713,
+      "tip_radius_m": 0.0245,
+      "root_radius_m": 0.025625000000000002
+    }
+  },
+  "face_width_m": 0.005,
+  "planet_support": {
+    "pins": {
+      "diameter_m": 0.006,
+      "support_span_m": 0.012,
+      "loaded_width_m": 0.005,
+      "young_modulus_pa": 210000000000.0,
+      "poisson_ratio": 0.3,
+      "shear_coefficient": 0.9,
+      "allowable_bending_stress_pa": 300000000.0,
+      "allowable_shear_stress_pa": 180000000.0,
+      "allowable_projected_pressure_pa": 60000000.0,
+      "required_safety_factor": 1.5
+    },
+    "bearing_ratings": {
+      "dynamic_capacity_n": 800.0,
+      "static_capacity_n": 500.0,
+      "exponent": 3.3333333333333335,
+      "radial_factor": 1.0,
+      "axial_factor": 0.0,
+      "static_radial_factor": 1.0,
+      "static_axial_factor": 0.0
+    }
+  },
+  "dc_bus": {
+    "capacitance_f": 0.0047,
+    "source_voltage_v": 36.0,
+    "minimum_voltage_v": 30.0,
+    "maximum_voltage_v": 48.0,
+    "initial_voltage_v": 36.0,
+    "inverter_motoring_efficiency": 0.96,
+    "inverter_regenerating_efficiency": 0.96,
+    "absorption_power_limit_w": 0.0
+  },
+  "bearings": {
+    "spacing_m": 0.024,
+    "centre_z_m": [
+      -0.012,
+      0.012
+    ],
+    "load_offset_m": 0.012,
+    "geometry_status": "仅定义双支承轴向中心位置，未提供轴承直径、宽度或安装配合"
+  },
+  "coordinate_system": "x/y为齿轮平面，z为旋转轴；支承中点、输出载荷端口和结构刚度参考点分别登记，不默认重合",
+  "coordinate_references": {
+    "bearing_origin": "双支承轴向中点，两支承z坐标为±spacing_m/2",
+    "output_load_port_z_from_bearing_origin_m": 0.012,
+    "stiffness_reference_to_load_port_z_m": 0.0,
+    "stiffness_reference_z_from_bearing_origin_m": 0.012,
+    "wrench_reference": "output_wrench的力和自由力矩给定于输出载荷端口；结构及双支承分别作虚功一致的参考点变换",
+    "gear_axial_plane": "当前仅定义xy参数布局，未给定其相对双支承中点的实际z位置"
+  },
+  "solid_constructed": false,
+  "manufacturing_tooth_profile_constructed": false,
+  "scope": "参数级布局与CAD接入参数；未构造实体、真实齿面、根部过渡、孔位公差或装配工艺"
+}

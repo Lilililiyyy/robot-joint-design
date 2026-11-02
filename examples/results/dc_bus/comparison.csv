@@ -1,0 +1,4 @@
+candidate,maximum_voltage_v,maximum_voltage_time_s,maximum_regenerated_dc_power_w,regenerated_dc_energy_j,externally_absorbed_energy_j,capacitor_reused_for_motoring_energy_j,average_external_absorbed_power_w,maximum_external_absorbed_power_w,additional_peak_energy_buffer_required_j,minimum_capacitance_f_for_nominal_start,within_maximum_voltage,total_energy_balance_residual_j
+small_capacitor_no_sink,83.62370334643309,0.40625,13.398296128017842,2.677554167844954,0.0,2.677554167844954,0.0,0.0,1.101897083922477,0.002656303737941423,False,0.0
+larger_capacitor_no_sink,43.193661295810806,0.40625,13.398296128017842,2.677554167844954,0.0,2.677554167844954,0.0,0.0,0.0,0.002656303737941423,True,0.0
+small_capacitor_external_sink,36.0,0.0,13.398296128017842,2.677554167844954,2.677554167844954,0.0,1.4875300932471969,13.398296128017842,0.0,0.0,True,0.0

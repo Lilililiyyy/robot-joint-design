@@ -2,6 +2,36 @@
 
 [中文](api.md) · [English](api.en.md)
 
+## Optional pin, planet-bearing and bus checks
+
+`planet_support={pins,bearing_ratings}` runs only when explicitly configured. See [pins and planet bearings](planet_support.en.md) for parameters and formulas. Pin utilization is the maximum `actual stress×required safety factor/allowable`; `planet_pin_static` requires a value ≤1 and enters overall screening. Calculated mean bending/shear pin stiffness only diagnoses consistency with system input: static strength does not establish stiffness agreement or update load sharing. Configured planet-bearing static safety defaults to ≥1. Basic L10 enters acceptance only with an explicit life requirement.
+
+`dc_bus` is passed to `dc_bus_screen` using `motor.segments[*].electrical_power_w`, retaining motor losses and rotor inertia rather than treating negative mechanical power as regenerated electrical power. `dc_bus_maximum_voltage` compares the calculated peak with the configured upper limit and enters screening. `dc_bus_minimum_voltage` stays `not_evaluated` because the ideal unlimited supply enforces the floor; it is not a real undervoltage check. See the [bus model](dc_bus.en.md).
+
+```python
+import json
+from pathlib import Path
+from examples.check_planet_support import default_assumptions
+from robot_joint import analyze_joint
+
+config = json.loads(Path("examples/dfki_pendulum_case.json").read_text(encoding="utf-8"))
+candidate = default_assumptions()["candidates"][1]
+config["planet_support"] = {key: candidate[key] for key in ("pins", "bearing_ratings")}
+config["dc_bus"] = {
+    "capacitance_f": 0.01, "source_voltage_v": 48,
+    "minimum_voltage_v": 42, "maximum_voltage_v": 60,
+    "inverter_motoring_efficiency": 0.95,
+    "inverter_regenerating_efficiency": 0.95,
+    "absorption_power_limit_w": 10,
+}
+config.setdefault("design_limits", {})["maximum_pin_stiffness_relative_difference"] = 0.1
+result = analyze_joint(config)
+```
+
+These pin and bus inputs are new design assumptions, not physical-product specifications. `JointResult` adds `planet_support=None` and `dc_bus=None` after its original nine positional fields, preserving old construction. Configured options return complete result objects. Export writes `planet_support.json` and `dc_bus.json`; missing options produce JSON null, preventing stale optional results. Summary adds pin static utilization, relative stiffness difference, planet-bearing basic static safety/L10 hours and peak bus voltage. Missing inputs yield null metrics and `not_evaluated` check details.
+
+Additional `design_limits` are `maximum_pin_stiffness_relative_difference` (upper bound, diagnostic unless explicitly limited), `minimum_planet_bearing_static_safety_factor` (lower bound, configured bearings default to 1), and `minimum_planet_bearing_basic_l10_hours` (explicit lower bound only). None establishes oscillatory bearing service life or physical stiffness calibration.
+
 ## Entry points
 
 `analyze_joint(config) -> JointResult` evaluates one complete design and its duty states without modifying the input. `export_joint(result, output_dir, plots=False)` exports raw arrays, diagnostics, engineering parameters and a Chinese report. `compare_joint_designs(configs)` recalculates complete candidates; `results` retains calculation objects and `candidates` provides a serializable comparison. Pareto eligibility requires the configured checks to pass.
@@ -83,10 +113,15 @@ The case selects stiffness ≥20000 N·m/rad, load-share factor ≤2 and supplie
 
 `summary.checks` retains evaluated Boolean results. Each `summary.check_details[name]` provides `status,actual,threshold,relation,scope`. Status is `passed`, `failed`, `not_configured` (a calculated actual value without a limit), or `not_evaluated` (missing inputs or an undefined quantity). The last two states do not count as passes; requesting a limit for a missing quantity raises an error. The motor peak check reports maximum segment peak-envelope utilization; the continuous screen reports speed-normalized torque RMS. Both have a limit of 1.
 
-`summary.assessment_coverage` records basic output-bearing L10 and hotspot fatigue, plus the uncovered planet-pin strength, planet bearings, ring/carrier/housing strength, regenerative bus/inverter, synchronous dynamics, manufacturing interference and hardware validation. Passing configured constraints does not replace these remaining design tasks.
+`summary.assessment_coverage` records basic output-bearing L10 and hotspot fatigue, the configured scope of optional pin/planet-bearing and bus models, and uncovered ring/carrier/housing strength, synchronous dynamics, manufacturing interference and hardware validation. Passing configured constraints does not replace these remaining design tasks.
 
 `geometry.undercut_screen` reports the continuous tooth-count threshold and sun/planet risk for a zero-shift standard full-depth rack, together with unassessed items; `automatic_design_rejection=false`. Actual cutter tips, internal-gear interference and tooth peaking are not evaluated. This screen is not manufacturing acceptance.
 
 Missing rating produces empty per-state `ratings` and null safety summaries. Missing fatigue returns an explicit unconfigured status. Undefined zero-load safety factors or zero-damage life are null, not proof that every failure mode has passed.
 
 JSON uses null for undefined nonfinite statistics. NPZ contains numeric arrays without pickle/object data. `manifest.json` hashes exported files. Raw nodes, interpolated displays and aggregate metrics remain distinct.
+
+
+## Full contact-pattern API
+
+`interior_snapshot(contact)->(phase_index,tooth_pair_index)` selects a loaded pair with both finite bands inside the effective flanks. `build_contact_pattern(contact,member="pinion",profile_points=1601,snapshot_index=None,snapshot_tooth_pair_index=None)->ContactPattern` uses an original `AnalysisResult`; `export_contact_pattern(pattern,path)` exports original strips and matrices without pickle. Snapshot and sweep pressures use different profile coordinates and cannot be compared pixelwise; the source object selects the flank. The automatic snapshot defaults to the source peak-pressure phase and may clip a tip; published examples explicitly call interior_snapshot first. See [contact methods](contact_patterns.en.md) for full-passage construction, arc/Hertz mapping, force/clipping/raster diagnostics and rejected branches.

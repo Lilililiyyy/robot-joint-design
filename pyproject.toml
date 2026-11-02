@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "robot-joint-design"
-version = "0.2.0"
+version = "0.3.0"
 description = "单级NGW机器人关节模组参数化设计与准静态校核计算内核"
 readme = "README.md"
 requires-python = ">=3.10"

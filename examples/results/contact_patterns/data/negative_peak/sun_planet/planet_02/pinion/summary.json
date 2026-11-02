@@ -1,0 +1,37 @@
+{
+  "member": "pinion",
+  "phases": 512,
+  "strips": 41,
+  "profile_points": 1601,
+  "source_nodes": 34358,
+  "source_contact_lines": 838,
+  "snapshot_index": 261,
+  "snapshot_phase": 0.509765625,
+  "snapshot_tooth_pair_index": -1,
+  "snapshot_all_pair_force_n": 63.2592830136331,
+  "snapshot_selected_pair_force_n": 31.62964150681655,
+  "snapshot_analytical_clipped_force_n": 31.62964150681655,
+  "snapshot_grid_integrated_force_n": 31.62962182690705,
+  "snapshot_grid_force_relative_error": 6.221983102501537e-07,
+  "source_peak_pressure_pa": 827576599.004623,
+  "map_peak_pressure_pa": 827575380.4470109,
+  "hertz_strip_force_max_absolute_error_n": 4.440892098500626e-16,
+  "unresolved_between_loaded_samples_area_m2": 0.0,
+  "unresolved_between_loaded_samples_fraction": 0.0,
+  "source_normal_force_n": 63.2592830136331,
+  "source_torque_n_m": 0.2972214072205919,
+  "theoretical_contact_roll_bounds_m": [
+    0.0004454565981030804,
+    0.0028590985399270115
+  ],
+  "full_effective_flank_roll_bounds_m": [
+    0.0,
+    0.0028590985399270115
+  ],
+  "scope": "直齿局部Hertz带、周期相同齿等价拼接的已采样相位最大值；非二维FE接触或实测斑点",
+  "interpolated_pressure": false,
+  "physical_validation": false,
+  "frozen_tangential_force_n": 59.44428144411839,
+  "signed_output_torque_n_m": -4.856970175951614,
+  "loaded_flank": "negative"
+}

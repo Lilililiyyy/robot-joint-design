@@ -80,6 +80,8 @@
     }
   },
   "face_width_m": 0.005,
+  "planet_support": null,
+  "dc_bus": null,
   "bearings": {
     "spacing_m": 0.024,
     "centre_z_m": [

@@ -4,7 +4,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License: AGPL-3.0-only](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE)
 
-单级NGW机器人关节模组的独立 Python 设计与准静态校核计算内核。连接载荷谱、行星均载、逐行星LTCA、标准强度、输出支承、机电匹配、精度预算与周期热响应，提供函数接口和可复算的原始数据。运行不依赖商业软件或厂商DLL。
+单级NGW机器人关节模组的独立 Python 设计与准静态校核计算内核。连接载荷谱、行星均载、逐行星LTCA、完整齿通过程接触分布、标准强度、输出支承、机电匹配、精度预算与周期热响应，并提供可选的行星销/行星轴承及再生母线初筛。当前版本 **0.3.0**，运行不依赖商业软件或厂商DLL，函数与原始结果可直接复算。
 
 ## 目录
 
@@ -48,9 +48,12 @@ export_joint(result, "output/pendulum")
 |NGW几何与运动学|齿数装配、相邻行星间隙、速比、转速与啮合载荷关系|固定内齿圈、太阳输入、行星架输出；零变位直齿|
 |行星载荷分配|双工作面路径误差、销柔度、太阳轮共享平移、非负路径力与脱开/重入|支承刚度及额外凝聚柔度由输入给定|
 |逐行星LTCA|内外两副周期TE、切线刚度、接触节点力与局部Hertz压力；位移协调迭代|准静态、周期平均耦合；保留原始接触数组|
+|完整接触斑点|单齿瞬时有限宽Hertz带、完整通过程最大压力、三行星及正反工作面扫掠图|由多相位实际解和有限Hertz带后处理生成；固定载荷、相同齿周期假设，非二维接触或FE|
 |标准强度|ISO 6336:2006显式因子接触/齿根应力及安全系数|外部评级因子、材料限值由用户提供|
 |结构与轴承|六自由度凝聚刚度、双支承反力、转数加权基本L10与静安全|不含实际轴承接触、预紧、游隙和小角摆动损伤|
+|行星销与行星轴承|圆实销弯曲/横剪/平均孔压、弯剪挠度与刚度、逐行星基本评级|显式简支与加载宽度；使用真实销反力和行星相对转速，尺寸/许用值/容量须给定|
 |机电与制动|驱动/回驱效率、转子惯量、转矩—转速包络、RMS电流、静态制动初筛|电机包络、效率、电流基准与制动安全系数由输入给定|
+|再生母线|双向逆变效率、分段电容储能、过压阈值时刻及缓冲/吸收需求|理想供能源、显式电容与吸收上限；不模拟实际保护、PWM或电阻热设计|
 |精度与热|承载角、侧隙、编码器及装配误差预算；双节点瞬态/周期热稳态|确定性角度上界；热容、热导及损耗参数需标定|
 |疲劳与方案筛选|雨流、给定S-N、Goodman/Miner；显式设计限值与有限候选Pareto比较|对给定标量热点应力谱有效，不自动预测整机寿命|
 |工程交付|JSON/CSV/NPZ、计算报告、CAD尺寸参数、参数级BOM与参考布局|未生成制造实体、采购型号或公差链|
@@ -59,9 +62,9 @@ export_joint(result, "output/pendulum")
 
 ## 设计审查与修订
 
-本轮补入最小输出刚度、最大均载系数与给定热点谱损伤限值，并以 `passed`、`failed`、`not_configured`、`not_evaluated` 四种状态报告实际值、阈值和覆盖范围。结构刚度参考点与载荷端口可以独立定义，偏置载荷通过保持虚功的力/位移变换计入；外齿轮新增标准全齿高齿条假设下的根切风险提示。
+已有最小输出刚度、最大均载系数与给定热点谱损伤限值，以 `passed`、`failed`、`not_configured`、`not_evaluated` 四种状态报告实际值、阈值和覆盖范围。结构参考点偏置采用保持虚功的变换，外齿轮保留标准齿条假设下的根切风险提示。0.3.0继续落实销强度、行星轴承与再生母线初筛，并补上原先未展示的完整齿通过程接触斑点；可选模块使用明确输入和判据，不暗中回写原分载刚度。
 
-当前案例假定 `Kout≥20000 N·m/rad`、`Kγ≤2`、给定谱 `D≤1`，用于同任务方案筛选，不是DFKI公布的实物指标。完整问题、修复和仍需补充的销/轴承强度、制造及样机验证见[设计审查](docs/design_review.md)。
+当前案例假定 `Kout≥20000 N·m/rad`、`Kγ≤2`、给定谱 `D≤1`，用于同任务方案筛选，不是DFKI公布的实物指标。新增零件尺寸、材料许用值、轴承容量及母线参数同样单列为设计假设。已落实与仍需实物/制造数据的工作见[设计审查](docs/design_review.md)。
 
 ## 设计案例与方案比较
 
@@ -79,11 +82,15 @@ export_joint(result, "output/pendulum")
 
 供应页中心距表述为30 mm，而上述零变位齿数与模数给出15 mm；模型使用15 mm，并保留来源冲突待确认。本案例是公开需求驱动的新设计，未复原AK80-6内部结构，也未复现其实测性能。
 
-**载荷分配与齿面接触**
+**载荷分配与完整接触斑点**
 
-34个代表工况连接三颗行星、内外两副接触与系统柔度，当前案例采用64相位×26条带。给定误差使载荷偏离三等分；图中显示周期法向TE及峰压相位原始承载节点。
+34个代表工况连接三颗行星、内外两副接触与系统柔度，基准协调采用64相位×26条带。完整斑点在所选固定局部载荷下进一步计算512相位×41条带：上排为单齿瞬时有限宽Hertz带，下排为完整通过程经历的最大压力。
 
-![逐行星LTCA与原始接触节点](examples/results/dfki_pendulum/zh/04_contact.png)
+![两副瞬时单齿接触带与完整通过程最大压力](examples/results/contact_patterns/zh/01_contact_overview.png)
+
+完整通过程将相同齿、固定载荷下的周期结果折叠到齿面材料坐标，不能把彩色面积理解为同一时刻承载面积。有限Hertz带来自原条带线载荷/半宽，未将一两条线平滑扩成整面，也不是二维接触或完整FE解。[正工作面三行星](examples/results/contact_patterns/zh/02_positive_planets.png)、[反工作面三行星](examples/results/contact_patterns/zh/03_negative_planets.png)及[低载边缘](examples/results/contact_patterns/zh/04_low_load_planets.png)分别提供；原始数据、裁剪/栅格误差与复算见[接触斑点说明](docs/contact_patterns.md)。原[周期TE与接触节点图](examples/results/dfki_pendulum/zh/04_contact.png)保留作参考。
+
+[四个构件齿面图](examples/results/contact_patterns/zh/05_members.png)分别显示太阳轮、太阳侧行星齿面、内齿侧行星齿面和内齿圈自身的材料坐标。瞬时对照选择同相位同齿对且两轮Hertz带均在有效齿面内域；它不是峰压相位。通过程最大压力冻结该工况的局部载荷，不是1.8 s任务内所有工况的最大压力；原采样NPZ与源峰压、积分/边缘误差同时保存。
 
 **机电匹配与周期温升**
 
@@ -98,6 +105,30 @@ export_joint(result, "output/pendulum")
 ![三候选方案比较](examples/results/dfki_pendulum/zh/09_comparison.png)
 
 完整九步图文案例、输入来源与所有关键数值见[案例复现指南](docs/examples.md)。共享图表数据见[metrics.json](examples/results/dfki_pendulum/metrics.json)和[duty.csv](examples/results/dfki_pendulum/duty.csv)，图像旁保存可编辑SVG/PDF。蓝红配色、数据来源、输出尺寸及英文图复算方法见[图表说明](docs/figures.md)。CAD/BOM导出用于参数接入。
+
+**行星销与行星轴承：强度和刚度分别检查**
+
+由已收敛销反力得到最大销载118.889 N。在新增的12 mm简支跨距、5 mm加载宽度等假设下，4/6 mm销的最大弯曲应力分别为44.939/13.315 MPa，中心挠度为1.805/0.433 μm；给定许用值的静筛均通过。但载荷共轭弯剪刚度仅为71.225/297.707 MN/m，而原系统给定值为300 MN/m，4 mm销需要显式更新系统刚度后重新分载。
+
+![行星销静强度、挠度与刚度比较](examples/results/design_screens/zh/01_planet_support.png)
+
+行星轴承采用相对行星架转速；假定容量下的最小静安全约4.206，基本L10大数值不能解释为摆动服役寿命。短粗销、真实销孔接触与轴承采购选型仍需独立设计。输入、公式及[逐行星结果](examples/results/planet_support/summary.json)见[行星支承说明](docs/planet_support.md)。
+
+**再生母线：功率守恒之外还要校核缓冲能力**
+
+基于含铜损及转子惯性功率的电机电功率，比较新增的36 V源、48 V上限、96%双向逆变效率：470 μF且无吸收时自由能量推算峰值83.624 V，未满足上限；4700 μF为43.194 V；470 μF配15 W外部吸收为36 V。
+
+![电容与外部吸收能力的母线初筛](examples/results/design_screens/zh/02_dc_bus.png)
+
+DC回馈峰值13.398 W、历程回馈2.678 J；无吸收时名义起始所需最低电容约2656 μF。越过上限后的电压是假定规定功率持续时的能量外推，真实驱动器可能提前保护关断。所有母线数值均为设计假设，详见[母线模型](docs/dc_bus.md)及[比较数据](examples/results/dc_bus/comparison.csv)。
+
+**带几何反馈的集成方案**
+
+[新集成输入](examples/dfki_with_screens.json)明确将6 mm假定销的弯剪刚度297.707 MN/m写入系统，再重新协调34工况；同时纳入行星轴承静安全和4700 μF母线。此次已实际复算，销刚度相对差为0、最小行星轴承静安全约4.206、最高母线电压43.194 V，已配置初筛通过。[计算报告与判据](examples/results/integrated_design/report.md)及[汇总JSON](examples/results/integrated_design/summary.json)同时保存；真实电源欠压仍为未评估，未以理想源假设替代硬件验证。
+
+```bash
+python -m robot_joint examples/dfki_with_screens.json --output output/integrated --plots
+```
 
 ## 专业软件与公开参考对标
 
@@ -128,7 +159,11 @@ export_joint(result, "output/pendulum")
 
 ```bash
 python -m examples.build_showcase --output output/showcase --raw-output output/raw
+python -m examples.build_contact_patterns --phases 512 --strips 41
 python -m examples.compare_designs --output output/comparison.json
+python -m examples.check_planet_support --results output/pendulum --output output/planet_support
+python -m examples.check_dc_bus --results output/pendulum --output output/dc_bus
+python -m examples.plot_design_screens
 python -m examples.run_benchmarks --output output/benchmarks
 python -m examples.check_joint_resolution --output output/benchmarks/resolution
 python -m examples.plot_validation --source output/benchmarks --output output/benchmarks
@@ -143,13 +178,14 @@ python -m unittest discover -s tests -v
 
 当前系统层限于单级、固定环、太阳输入、行星架输出、零变位直齿NGW，小变形、线弹性与准静态周期平均响应。独立齿面内核具备更多单副能力，但系统接口尚未扩展至斜齿、多级、RV或谐波结构。
 
-尚未覆盖完整箱体/轴系FE、瞬态同步啮合动力学、摩擦历史迟滞、行星针轴承与小角摆动磨损、润滑、电磁、控制精度和制造公差链。轻载基本L10、假定热点谱损伤及确定性角度预算分别解释，不合并为整关节寿命或定位性能认证。
+尚未覆盖完整箱体/轴系FE、瞬态同步啮合动力学、摩擦历史迟滞、真实销孔/滚动体接触、小角摆动磨损、润滑、电磁、驱动器保护、控制精度和制造公差链。销/行星轴承及母线初筛具有明确简化边界；有限宽接触带不等同二维接触求解。轻载基本L10、假定热点谱损伤及确定性角度预算分别解释，不合并为整关节寿命或定位性能认证。
 
 ## 更新记录与后续计划
 
 - **0.1.0**：建立NGW系统、支承、疲劳、热、机电、精度与参数级工程交付。
 - **0.1.2**：加入DFKI实物需求参照、完整中英案例与图表，修正跨平台案例输入比较的浮点容差。
 - **0.2.0**：重组项目级中英说明，统一蓝红论文式图表，补充专家设计审查、显式校核覆盖与可复算对标证据；默认分支统一为 `main`。
+- **0.3.0**：补齐瞬时有限宽Hertz带及完整齿通过程最大压力、三行星/正反工作面/低载接触图；增加行星销与行星轴承、再生母线初筛及相应双语数据和说明。
 - **近期优先**：将离散研究扩大至所有关键工况，补充实测扭转刚度/回差与摩擦标定，识别热网络和效率图谱，并在实际摆动工况评价轴承适用性。
 - **后续扩展**：在独立验证后增加多级与斜齿系统、真实轮体/支承柔度、制造公差统计及样机性能比较。以上为计划。
 
@@ -157,6 +193,7 @@ python -m unittest discover -s tests -v
 
 - [模型与公式](docs/model.md) · [接口与单位](docs/api.md) · [完整案例](docs/examples.md) · [对标与证据边界](docs/validation.md)
 - [设计审查与后续验证](docs/design_review.md) · [蓝红图表与源数据](docs/figures.md)
+- [完整接触斑点](docs/contact_patterns.md) · [行星销与行星轴承](docs/planet_support.md) · [再生母线](docs/dc_bus.md)
 - `robot_joint/`：新写NGW系统与性能模块；`gear_contact/`：复用圆柱齿轮接触内核。
 - `examples/`：案例输入、运行脚本及精选结果；`benchmarks/`：离线参照与对标输出。
 - `tests/` 与 `.github/`：自动验证；`docs/`：公式、接入和工程说明。

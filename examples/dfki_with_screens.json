@@ -1,0 +1,944 @@
+{
+  "schema_version": 1,
+  "case_id": "dfki_pendulum_with_optional_screens",
+  "label": "DFKI实物摆台需求驱动的6:1关节传动再设计",
+  "stage": {
+    "sun_teeth": 20,
+    "planet_teeth": 40,
+    "ring_teeth": 100,
+    "planet_count": 3,
+    "module_m": 0.0005,
+    "face_width_m": 0.005,
+    "pressure_angle_rad": 0.3490658503988659
+  },
+  "duty_segments": [
+    {
+      "label": "forward_01",
+      "duration_s": 0.03125,
+      "output_torque_n_m": -0.490361407427342,
+      "output_speed_rad_s": 0.11516840134047665,
+      "output_acceleration_rad_s2": 14.266021327336462,
+      "output_wrench": [
+        2.1849430741784017,
+        2.860545103226062,
+        0,
+        0,
+        0,
+        -0.490361407427342
+      ]
+    },
+    {
+      "label": "forward_02",
+      "duration_s": 0.03125,
+      "output_torque_n_m": 2.55761725822436,
+      "output_speed_rad_s": 0.9070859830864388,
+      "output_acceleration_rad_s2": 34.698645421973204,
+      "output_wrench": [
+        5.65239646383257,
+        -2.339663254112729,
+        0,
+        0,
+        0,
+        2.55761725822436
+      ]
+    },
+    {
+      "label": "forward_03",
+      "duration_s": 0.03125,
+      "output_torque_n_m": 4.259032417895305,
+      "output_speed_rad_s": 2.184124989001235,
+      "output_acceleration_rad_s2": 45.55922940020354,
+      "output_wrench": [
+        8.9108501506957,
+        -4.159221123205551,
+        0,
+        0,
+        0,
+        4.259032417895305
+      ]
+    },
+    {
+      "label": "forward_04",
+      "duration_s": 0.03125,
+      "output_torque_n_m": 4.856970175951614,
+      "output_speed_rad_s": 3.67016887726545,
+      "output_acceleration_rad_s2": 48.320394818397695,
+      "output_wrench": [
+        12.456939039214381,
+        -2.294360941342284,
+        0,
+        0,
+        0,
+        4.856970175951614
+      ]
+    },
+    {
+      "label": "forward_05",
+      "duration_s": 0.03125,
+      "output_torque_n_m": 4.597047077169747,
+      "output_speed_rad_s": 5.135120529696237,
+      "output_acceleration_rad_s2": 44.45476323292588,
+      "output_wrench": [
+        15.408763084212962,
+        3.1806557092448644,
+        0,
+        0,
+        0,
+        4.597047077169747
+      ]
+    },
+    {
+      "label": "forward_06",
+      "duration_s": 0.03125,
+      "output_torque_n_m": 3.719264583549096,
+      "output_speed_rad_s": 6.39490225174732,
+      "output_acceleration_rad_s2": 35.43495620015831,
+      "output_wrench": [
+        15.878045560520302,
+        11.231602285827027,
+        0,
+        0,
+        0,
+        3.719264583549096
+      ]
+    },
+    {
+      "label": "forward_07",
+      "duration_s": 0.03125,
+      "output_torque_n_m": 2.440967682202004,
+      "output_speed_rad_s": 7.311455772508991,
+      "output_acceleration_rad_s2": 22.733595276465202,
+      "output_wrench": [
+        12.24807340692584,
+        19.474005728724535,
+        0,
+        0,
+        0,
+        2.440967682202004
+      ]
+    },
+    {
+      "label": "forward_08",
+      "duration_s": 0.03125,
+      "output_torque_n_m": 0.9425781905894918,
+      "output_speed_rad_s": 7.79274224470811,
+      "output_acceleration_rad_s2": 7.823302018216769,
+      "output_wrench": [
+        4.637229106645791,
+        24.753004391975605,
+        0,
+        0,
+        0,
+        0.9425781905894918
+      ]
+    },
+    {
+      "label": "forward_09",
+      "duration_s": 0.03125,
+      "output_torque_n_m": -0.6308685008011673,
+      "output_speed_rad_s": 7.79274224470811,
+      "output_acceleration_rad_s2": -7.823302018216769,
+      "output_wrench": [
+        -4.637229106645791,
+        24.753004391975605,
+        0,
+        0,
+        0,
+        -0.6308685008011673
+      ]
+    },
+    {
+      "label": "forward_10",
+      "duration_s": 0.03125,
+      "output_torque_n_m": -2.1485094513016447,
+      "output_speed_rad_s": 7.311455772508991,
+      "output_acceleration_rad_s2": -22.733595276465202,
+      "output_wrench": [
+        -12.24807340692584,
+        19.474005728724535,
+        0,
+        0,
+        0,
+        -2.1485094513016447
+      ]
+    },
+    {
+      "label": "forward_11",
+      "duration_s": 0.03125,
+      "output_torque_n_m": -3.463468493479203,
+      "output_speed_rad_s": 6.39490225174732,
+      "output_acceleration_rad_s2": -35.43495620015831,
+      "output_wrench": [
+        -15.878045560520302,
+        11.231602285827027,
+        0,
+        0,
+        0,
+        -3.463468493479203
+      ]
+    },
+    {
+      "label": "forward_12",
+      "duration_s": 0.03125,
+      "output_torque_n_m": -4.391642255981897,
+      "output_speed_rad_s": 5.135120529696237,
+      "output_acceleration_rad_s2": -44.45476323292588,
+      "output_wrench": [
+        -15.408763084212962,
+        3.1806557092448644,
+        0,
+        0,
+        0,
+        -4.391642255981897
+      ]
+    },
+    {
+      "label": "forward_13",
+      "duration_s": 0.03125,
+      "output_torque_n_m": -4.710163420860996,
+      "output_speed_rad_s": 3.67016887726545,
+      "output_acceleration_rad_s2": -48.320394818397695,
+      "output_wrench": [
+        -12.45693903921438,
+        -2.294360941342284,
+        0,
+        0,
+        0,
+        -4.710163420860996
+      ]
+    },
+    {
+      "label": "forward_14",
+      "duration_s": 0.03125,
+      "output_torque_n_m": -4.171667418335256,
+      "output_speed_rad_s": 2.184124989001235,
+      "output_acceleration_rad_s2": -45.55922940020354,
+      "output_wrench": [
+        -8.9108501506957,
+        -4.159221123205551,
+        0,
+        0,
+        0,
+        -4.171667418335256
+      ]
+    },
+    {
+      "label": "forward_15",
+      "duration_s": 0.03125,
+      "output_torque_n_m": -2.521333818900902,
+      "output_speed_rad_s": 0.9070859830864388,
+      "output_acceleration_rad_s2": -34.698645421973204,
+      "output_wrench": [
+        -5.652396463832569,
+        -2.3396632541127302,
+        0,
+        0,
+        0,
+        -2.521333818900902
+      ]
+    },
+    {
+      "label": "forward_16",
+      "duration_s": 0.03125,
+      "output_torque_n_m": 0.4949681434809611,
+      "output_speed_rad_s": 0.11516840134047665,
+      "output_acceleration_rad_s2": -14.266021327336462,
+      "output_wrench": [
+        -2.1849430741784017,
+        2.860545103226062,
+        0,
+        0,
+        0,
+        0.4949681434809611
+      ]
+    },
+    {
+      "label": "hold_forward",
+      "duration_s": 0.4,
+      "output_torque_n_m": 2.5954391639987926,
+      "output_speed_rad_s": 0,
+      "output_acceleration_rad_s2": 0,
+      "output_wrench": [
+        0,
+        6.63156,
+        0,
+        0,
+        0,
+        2.5954391639987926
+      ]
+    },
+    {
+      "label": "reverse_01",
+      "duration_s": 0.03125,
+      "output_torque_n_m": 0.490361407427342,
+      "output_speed_rad_s": -0.11516840134047665,
+      "output_acceleration_rad_s2": -14.266021327336462,
+      "output_wrench": [
+        -2.1849430741784017,
+        2.860545103226062,
+        0,
+        0,
+        0,
+        0.490361407427342
+      ]
+    },
+    {
+      "label": "reverse_02",
+      "duration_s": 0.03125,
+      "output_torque_n_m": -2.55761725822436,
+      "output_speed_rad_s": -0.9070859830864388,
+      "output_acceleration_rad_s2": -34.698645421973204,
+      "output_wrench": [
+        -5.65239646383257,
+        -2.339663254112729,
+        0,
+        0,
+        0,
+        -2.55761725822436
+      ]
+    },
+    {
+      "label": "reverse_03",
+      "duration_s": 0.03125,
+      "output_torque_n_m": -4.259032417895305,
+      "output_speed_rad_s": -2.184124989001235,
+      "output_acceleration_rad_s2": -45.55922940020354,
+      "output_wrench": [
+        -8.9108501506957,
+        -4.159221123205551,
+        0,
+        0,
+        0,
+        -4.259032417895305
+      ]
+    },
+    {
+      "label": "reverse_04",
+      "duration_s": 0.03125,
+      "output_torque_n_m": -4.856970175951614,
+      "output_speed_rad_s": -3.67016887726545,
+      "output_acceleration_rad_s2": -48.320394818397695,
+      "output_wrench": [
+        -12.456939039214381,
+        -2.294360941342284,
+        0,
+        0,
+        0,
+        -4.856970175951614
+      ]
+    },
+    {
+      "label": "reverse_05",
+      "duration_s": 0.03125,
+      "output_torque_n_m": -4.597047077169747,
+      "output_speed_rad_s": -5.135120529696237,
+      "output_acceleration_rad_s2": -44.45476323292588,
+      "output_wrench": [
+        -15.408763084212962,
+        3.1806557092448644,
+        0,
+        0,
+        0,
+        -4.597047077169747
+      ]
+    },
+    {
+      "label": "reverse_06",
+      "duration_s": 0.03125,
+      "output_torque_n_m": -3.719264583549096,
+      "output_speed_rad_s": -6.39490225174732,
+      "output_acceleration_rad_s2": -35.43495620015831,
+      "output_wrench": [
+        -15.878045560520302,
+        11.231602285827027,
+        0,
+        0,
+        0,
+        -3.719264583549096
+      ]
+    },
+    {
+      "label": "reverse_07",
+      "duration_s": 0.03125,
+      "output_torque_n_m": -2.440967682202004,
+      "output_speed_rad_s": -7.311455772508991,
+      "output_acceleration_rad_s2": -22.733595276465202,
+      "output_wrench": [
+        -12.24807340692584,
+        19.474005728724535,
+        0,
+        0,
+        0,
+        -2.440967682202004
+      ]
+    },
+    {
+      "label": "reverse_08",
+      "duration_s": 0.03125,
+      "output_torque_n_m": -0.9425781905894918,
+      "output_speed_rad_s": -7.79274224470811,
+      "output_acceleration_rad_s2": -7.823302018216769,
+      "output_wrench": [
+        -4.637229106645791,
+        24.753004391975605,
+        0,
+        0,
+        0,
+        -0.9425781905894918
+      ]
+    },
+    {
+      "label": "reverse_09",
+      "duration_s": 0.03125,
+      "output_torque_n_m": 0.6308685008011673,
+      "output_speed_rad_s": -7.79274224470811,
+      "output_acceleration_rad_s2": 7.823302018216769,
+      "output_wrench": [
+        4.637229106645791,
+        24.753004391975605,
+        0,
+        0,
+        0,
+        0.6308685008011673
+      ]
+    },
+    {
+      "label": "reverse_10",
+      "duration_s": 0.03125,
+      "output_torque_n_m": 2.1485094513016447,
+      "output_speed_rad_s": -7.311455772508991,
+      "output_acceleration_rad_s2": 22.733595276465202,
+      "output_wrench": [
+        12.24807340692584,
+        19.474005728724535,
+        0,
+        0,
+        0,
+        2.1485094513016447
+      ]
+    },
+    {
+      "label": "reverse_11",
+      "duration_s": 0.03125,
+      "output_torque_n_m": 3.463468493479203,
+      "output_speed_rad_s": -6.39490225174732,
+      "output_acceleration_rad_s2": 35.43495620015831,
+      "output_wrench": [
+        15.878045560520302,
+        11.231602285827027,
+        0,
+        0,
+        0,
+        3.463468493479203
+      ]
+    },
+    {
+      "label": "reverse_12",
+      "duration_s": 0.03125,
+      "output_torque_n_m": 4.391642255981897,
+      "output_speed_rad_s": -5.135120529696237,
+      "output_acceleration_rad_s2": 44.45476323292588,
+      "output_wrench": [
+        15.408763084212962,
+        3.1806557092448644,
+        0,
+        0,
+        0,
+        4.391642255981897
+      ]
+    },
+    {
+      "label": "reverse_13",
+      "duration_s": 0.03125,
+      "output_torque_n_m": 4.710163420860996,
+      "output_speed_rad_s": -3.67016887726545,
+      "output_acceleration_rad_s2": 48.320394818397695,
+      "output_wrench": [
+        12.45693903921438,
+        -2.294360941342284,
+        0,
+        0,
+        0,
+        4.710163420860996
+      ]
+    },
+    {
+      "label": "reverse_14",
+      "duration_s": 0.03125,
+      "output_torque_n_m": 4.171667418335256,
+      "output_speed_rad_s": -2.184124989001235,
+      "output_acceleration_rad_s2": 45.55922940020354,
+      "output_wrench": [
+        8.9108501506957,
+        -4.159221123205551,
+        0,
+        0,
+        0,
+        4.171667418335256
+      ]
+    },
+    {
+      "label": "reverse_15",
+      "duration_s": 0.03125,
+      "output_torque_n_m": 2.521333818900902,
+      "output_speed_rad_s": -0.9070859830864388,
+      "output_acceleration_rad_s2": 34.698645421973204,
+      "output_wrench": [
+        5.652396463832569,
+        -2.3396632541127302,
+        0,
+        0,
+        0,
+        2.521333818900902
+      ]
+    },
+    {
+      "label": "reverse_16",
+      "duration_s": 0.03125,
+      "output_torque_n_m": -0.4949681434809611,
+      "output_speed_rad_s": -0.11516840134047665,
+      "output_acceleration_rad_s2": 14.266021327336462,
+      "output_wrench": [
+        2.1849430741784017,
+        2.860545103226062,
+        0,
+        0,
+        0,
+        -0.4949681434809611
+      ]
+    },
+    {
+      "label": "hold_reverse",
+      "duration_s": 0.4,
+      "output_torque_n_m": -2.5954391639987926,
+      "output_speed_rad_s": 0,
+      "output_acceleration_rad_s2": 0,
+      "output_wrench": [
+        0,
+        6.63156,
+        0,
+        0,
+        0,
+        -2.5954391639987926
+      ]
+    }
+  ],
+  "load_sharing": {
+    "initial_mesh_stiffness_n_per_m": 80000000.0,
+    "pin_stiffness_n_per_m": [
+      297707470.9613503,
+      297707470.9613503,
+      297707470.9613503
+    ],
+    "sun_radial_stiffness_n_per_m": 15000000.0,
+    "positive_path_gaps_m": [
+      0,
+      1e-06,
+      -5e-07
+    ],
+    "negative_path_gaps_m": [
+      5e-07,
+      -5e-07,
+      1e-06
+    ]
+  },
+  "mesh": {
+    "material": {
+      "youngs_modulus_pa": 210000000000.0,
+      "poisson_ratio": 0.3
+    },
+    "phases": 64,
+    "strips": 26,
+    "elastic_mode": "iso",
+    "modifications": {
+      "positive": {
+        "sun_planet": {
+          "pinion": {
+            "lead_crown_m": 3e-07
+          },
+          "wheel": {
+            "lead_crown_m": 2e-07
+          }
+        },
+        "planet_ring": {
+          "pinion": {
+            "lead_crown_m": 2e-07
+          },
+          "wheel": {
+            "lead_crown_m": 2e-07
+          }
+        }
+      },
+      "negative": {
+        "sun_planet": {
+          "pinion": {
+            "lead_crown_m": 3e-07
+          },
+          "wheel": {
+            "lead_crown_m": 2e-07
+          }
+        },
+        "planet_ring": {
+          "pinion": {
+            "lead_crown_m": 2e-07
+          },
+          "wheel": {
+            "lead_crown_m": 2e-07
+          }
+        }
+      }
+    },
+    "alignment_maps": {
+      "sun_planet": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          -0.004698463103929542,
+          0.0017101007166283435,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0008682408883346507,
+          -0.004924038765061041,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0038302222155948916,
+          0.003213938048432695,
+          0.0
+        ]
+      ],
+      "planet_ring": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          -0.004698463103929542,
+          0.0017101007166283435,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0008682408883346507,
+          -0.004924038765061041,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0038302222155948916,
+          0.003213938048432695,
+          0.0
+        ]
+      ]
+    },
+    "coupling": {
+      "maximum_iterations": 60,
+      "force_relative_tolerance": 1e-05,
+      "path_tolerance_m": 2e-09,
+      "relaxation": 0.7
+    }
+  },
+  "support": {
+    "stiffness_matrix": [
+      [
+        50000000.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        50000000.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        80000000.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        50000.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        50000.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        200000.0
+      ]
+    ],
+    "reference_offset_m": 0.0
+  },
+  "bearings": {
+    "spacing_m": 0.024,
+    "load_offset_m": 0.012,
+    "axial_share": 0.5,
+    "ratings": [
+      {
+        "dynamic_capacity_n": 3000,
+        "static_capacity_n": 1500,
+        "exponent": 3.0,
+        "radial_factor": 1,
+        "axial_factor": 1,
+        "static_radial_factor": 1,
+        "static_axial_factor": 1
+      },
+      {
+        "dynamic_capacity_n": 3000,
+        "static_capacity_n": 1500,
+        "exponent": 3.0,
+        "radial_factor": 1,
+        "axial_factor": 1,
+        "static_radial_factor": 1,
+        "static_axial_factor": 1
+      }
+    ]
+  },
+  "motor": {
+    "torque_constant_n_m_per_a": 0.091,
+    "resistance_ohm": 0.1701655996297907,
+    "continuous_torque_n_m": 1.092,
+    "peak_torque_n_m": 2.184,
+    "base_speed_rad_s": 180,
+    "maximum_speed_rad_s": 229.2,
+    "rotor_inertia_kg_m2": 6.0719e-05,
+    "no_load_loss_w": 0.5,
+    "speed_loss_w_per_rad_s_squared": 0.0001
+  },
+  "drive": {
+    "forward_efficiency": 0.94,
+    "backdrive_efficiency": 0.9,
+    "brake_torque_n_m": 3,
+    "brake_safety_factor": 1.5
+  },
+  "thermal_mode": "periodic_steady",
+  "thermal": {
+    "capacities_j_per_k": [
+      120,
+      80
+    ],
+    "ambient_conductances_w_per_k": [
+      0.8,
+      1.2
+    ],
+    "coupling_w_per_k": 2,
+    "ambient_temperature_k": 298.15
+  },
+  "precision": {
+    "output_backlash_rad": 0.002617993877991494,
+    "encoder_counts_per_revolution": 4096,
+    "encoder_on_output": false,
+    "assembly_error_rad": 0.00017453292519943296
+  },
+  "rating": {
+    "sun_planet": {
+      "mesh_factors": {
+        "application_factor": 1.0,
+        "dynamic_factor": 1.1,
+        "additional_load_factor": 1.0,
+        "face_contact_factor": 1.1,
+        "transverse_contact_factor": 1.0,
+        "face_bending_factor": 1.1,
+        "transverse_bending_factor": 1.0,
+        "contact_ratio_factor": 0.9,
+        "helix_contact_factor": 1.0,
+        "helix_bending_factor": 1.0,
+        "root_contact_ratio_factor": 1.0,
+        "deep_tooth_factor": 1.0
+      },
+      "pinion_factors": {
+        "form_factor": 2.8,
+        "stress_correction_factor": 1.6,
+        "rim_factor": 1.0,
+        "single_pair_contact_factor": 1.0,
+        "root_stress_face_width_m": 0.005
+      },
+      "wheel_factors": {
+        "form_factor": 2.8,
+        "stress_correction_factor": 1.6,
+        "rim_factor": 1.0,
+        "single_pair_contact_factor": 1.0,
+        "root_stress_face_width_m": 0.005
+      },
+      "pinion_limits": {
+        "contact_limit_pa": 900000000.0,
+        "bending_limit_pa": 300000000.0
+      },
+      "wheel_limits": {
+        "contact_limit_pa": 900000000.0,
+        "bending_limit_pa": 300000000.0
+      }
+    },
+    "planet_ring": {
+      "mesh_factors": {
+        "application_factor": 1.0,
+        "dynamic_factor": 1.1,
+        "additional_load_factor": 1.0,
+        "face_contact_factor": 1.1,
+        "transverse_contact_factor": 1.0,
+        "face_bending_factor": 1.1,
+        "transverse_bending_factor": 1.0,
+        "contact_ratio_factor": 0.9,
+        "helix_contact_factor": 1.0,
+        "helix_bending_factor": 1.0,
+        "root_contact_ratio_factor": 1.0,
+        "deep_tooth_factor": 1.0
+      },
+      "pinion_factors": {
+        "form_factor": 2.8,
+        "stress_correction_factor": 1.6,
+        "rim_factor": 1.0,
+        "single_pair_contact_factor": 1.0,
+        "root_stress_face_width_m": 0.005
+      },
+      "wheel_factors": {
+        "form_factor": 2.8,
+        "stress_correction_factor": 1.6,
+        "rim_factor": 1.0,
+        "single_pair_contact_factor": 1.0,
+        "root_stress_face_width_m": 0.005
+      },
+      "pinion_limits": {
+        "contact_limit_pa": 900000000.0,
+        "bending_limit_pa": 300000000.0
+      },
+      "wheel_limits": {
+        "contact_limit_pa": 900000000.0,
+        "bending_limit_pa": 300000000.0
+      }
+    }
+  },
+  "fatigue": {
+    "stress_history_pa": [
+      -5884336.889128104,
+      30691407.09869232,
+      51108389.01474366,
+      58283642.111419365,
+      55164564.92603696,
+      44631175.00258915,
+      29291612.186424047,
+      11310938.2870739,
+      -7570422.009614008,
+      -25782113.41561974,
+      -41561621.921750434,
+      -52699707.07178277,
+      -56521961.05033196,
+      -50060009.02002307,
+      -30256005.826810826,
+      5939617.721771533,
+      31145269.96798551,
+      5884336.889128104,
+      -30691407.09869232,
+      -51108389.01474366,
+      -58283642.111419365,
+      -55164564.92603696,
+      -44631175.00258915,
+      -29291612.186424047,
+      -11310938.2870739,
+      7570422.009614008,
+      25782113.41561974,
+      41561621.921750434,
+      52699707.07178277,
+      56521961.05033196,
+      50060009.02002307,
+      30256005.826810826,
+      -5939617.721771533,
+      -31145269.96798551,
+      -5884336.889128104
+    ],
+    "reference_stress_pa": 80000000.0,
+    "reference_cycles": 1000000.0,
+    "slope": 5,
+    "ultimate_strength_pa": 600000000.0
+  },
+  "design_limits": {
+    "contact_pressure_pa": 1200000000.0,
+    "angle_budget_rad": 0.003490658503988659,
+    "motor_temperature_k": 353.15,
+    "gear_temperature_k": 343.15,
+    "minimum_output_torsional_stiffness_n_m_per_rad": 20000.0,
+    "maximum_load_share_factor": 2.0,
+    "fatigue_damage_per_input_history": 1.0,
+    "maximum_pin_stiffness_relative_difference": 0.05,
+    "minimum_planet_bearing_static_safety_factor": 2.0
+  },
+  "notes": [
+    "真实需求参照与新设计模型；不是AK80-6或DFKI样机的内部结构恢复、实测回放或产品认证。",
+    "工作轨迹、阻尼、压力角、修形、支承/失准映射、外部评级因子/应力限、轴承参数、效率、热参数、S-N及制动器均为新增设计假设；未获DFKI或mjbots标定。",
+    "供应页的30mm中心距表述与m=0.5mm、20/40齿的零变位关系不一致。采用a=m(zs+zp)/2=15mm，30mm仅保留为待确认信息，不能用其重定义模型。",
+    "分段中点工况为新设计往返任务的离散近似；不是原台架测量记录。",
+    "相电阻未直接作为铜损系数，Req=(Kt/Km)^2使Kt与Km的电流基准一致；电机包络拐点仍为设计假设。",
+    "结构6×6刚度凝聚于输出载荷端口，reference_offset_m=0；双支承中点至端口偏置另由bearings.load_offset_m=0.012定义。",
+    "新增设计约束Kout≥20000 N·m/rad、Kγ≤2及给定热点输入谱D≤1均为本案例设计假设，不是DFKI原产品规格。",
+    "相位与条带由16×13加密到64×26；峰压代表工况相对256×26的内齿副平均TE差0.932%、输出刚度差0.343%，仅对本次离散比较有效。",
+    "0.3.0新假定设计：6mm圆销、12mm简支跨距、5mm加载宽度、显式弯剪材料参数、行星轴承容量与36V/4700μF/48V母线；均非原产品规格。",
+    "本配置明确用销的功共轭弯剪刚度更新load_sharing.pin_stiffness_n_per_m，随后重新协调34工况；独立4/6mm筛选图仍保留旧300MN/m作为一致性参照。",
+    "最大销刚度相对差5%与行星轴承静安全2为本例新要求；短粗销三维销孔接触、真实驱动器与摆动寿命仍未验证。"
+  ],
+  "planet_support": {
+    "pins": {
+      "diameter_m": 0.006,
+      "support_span_m": 0.012,
+      "loaded_width_m": 0.005,
+      "young_modulus_pa": 210000000000.0,
+      "poisson_ratio": 0.3,
+      "shear_coefficient": 0.9,
+      "allowable_bending_stress_pa": 300000000.0,
+      "allowable_shear_stress_pa": 180000000.0,
+      "allowable_projected_pressure_pa": 60000000.0,
+      "required_safety_factor": 1.5
+    },
+    "bearing_ratings": {
+      "dynamic_capacity_n": 800.0,
+      "static_capacity_n": 500.0,
+      "exponent": 3.3333333333333335,
+      "radial_factor": 1.0,
+      "axial_factor": 0.0,
+      "static_radial_factor": 1.0,
+      "static_axial_factor": 0.0
+    }
+  },
+  "dc_bus": {
+    "capacitance_f": 0.0047,
+    "source_voltage_v": 36.0,
+    "minimum_voltage_v": 30.0,
+    "maximum_voltage_v": 48.0,
+    "initial_voltage_v": 36.0,
+    "inverter_motoring_efficiency": 0.96,
+    "inverter_regenerating_efficiency": 0.96,
+    "absorption_power_limit_w": 0.0
+  }
+}

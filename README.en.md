@@ -4,7 +4,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License: AGPL-3.0-only](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE)
 
-An independent Python kernel for parameterized design and quasi-static assessment of a single-stage NGW robot joint. It connects duty loads, planetary load sharing, per-planet LTCA, rating stresses, output support, motor matching, precision budgets and periodic thermal response through callable functions and reproducible raw results. No commercial software or vendor DLL is required at runtime.
+An independent Python kernel for parameterized design and quasi-static assessment of a single-stage NGW robot joint. It connects duty loads, planetary sharing, per-planet LTCA, full tooth-passage contact distributions, rating stresses, output support, motor matching, precision budgets and periodic temperature, with optional planet-pin/bearing and regenerative-bus screens. Version **0.3.0** provides callable functions and reproducible raw results without commercial software or vendor DLLs at runtime.
 
 ## Contents
 
@@ -48,9 +48,12 @@ Interfaces use SI units: m, rad, N, N·m, Pa, s and K. Each state explicitly pro
 |NGW geometry and kinematics|Tooth assembly, adjacent-planet clearance, ratio, speeds and mesh-force relations|Fixed ring, sun input, carrier output; zero-shift spur gears|
 |Planetary load sharing|Flank-specific path errors, pin compliance, shared sun translation and nonnegative path forces with unloading/re-entry|Supplied support stiffness and additional condensed compliance|
 |Per-planet LTCA|Two-mesh cyclic TE, tangent stiffness, contact-node forces and local Hertz pressure; displacement-compatible iteration|Quasi-static, cycle-mean coupling; raw contact arrays retained|
+|Full contact patterns|Single-tooth instantaneous finite-width Hertz bands, full-passage maximum pressure, three-planet and positive/negative-flank maps|Postprocessing of actual phase solutions and finite Hertz bands; fixed-load, identical-tooth periodicity; not a 2D contact or FE solve|
 |Rating stresses|ISO 6336:2006 explicit-factor contact/bending stresses and safety factors|External rating factors and material limits supplied by the user|
 |Structure and bearings|Six-DOF condensed stiffness, two-support reactions, revolution-weighted basic L10 and static safety|No actual bearing contact, preload, clearance or small-oscillation damage|
+|Planet pins and bearings|Solid-pin bending/transverse shear/average hole pressure, bending–shear deflection/stiffness and individual basic bearing ratings|Explicit simple supports and load width; actual pin reactions and relative planet speed; dimensions, allowables and capacities must be supplied|
 |Motor and brake|Motoring/backdriving efficiency, rotor inertia, torque–speed envelopes, RMS current and static brake screening|Supplied motor envelope, efficiencies, current convention and brake safety factor|
+|Regenerative bus|Directional inverter efficiency, piecewise capacitor energy, overvoltage crossing times and buffering/absorption requirements|Ideal delivery source and explicit capacitance/sink limits; no actual protection, PWM or resistor thermal design|
 |Precision and thermal response|Loaded angle, backlash, encoder and assembly budget; two-node transient/periodic temperature|Deterministic angular bound; thermal capacity/conductance and losses require calibration|
 |Fatigue and candidate screening|Rainflow, supplied S–N, Goodman/Miner; explicit design limits and finite-candidate Pareto comparison|Applies to a supplied scalar hotspot history; does not infer whole-joint life|
 |Engineering exports|JSON/CSV/NPZ, calculation report, CAD dimensions, parameter-level BOM and reference layout|No manufacturing solids, procurement part numbers or tolerance chain|
@@ -59,9 +62,9 @@ Rating stresses, local contact pressure, output angle budgets and controlled pos
 
 ## Design review and improvements
 
-This revision adds minimum output-stiffness, maximum load-sharing and supplied-hotspot damage limits. Results report actual values, thresholds and coverage through four states: `passed`, `failed`, `not_configured` and `not_evaluated`. The structural stiffness reference and load port can be defined separately, with offset loads handled by work-conjugate wrench/displacement transformations. External gears also receive an undercut-risk screen under the standard full-depth rack assumption.
+Existing output-stiffness, load-sharing and supplied-hotspot damage limits report actual values, thresholds and coverage through `passed`, `failed`, `not_configured` and `not_evaluated`. Structural-reference offsets use work-conjugate transformations, and external gears retain the standard-rack undercut-risk screen. Version 0.3.0 advances pin strength, planet-bearing and regenerative-bus checks, and adds the previously missing full tooth-passage contact patterns. Optional modules use explicit inputs and criteria without silently replacing the original load-sharing stiffness.
 
-The current case assumes `Kout≥20000 N·m/rad`, `Kγ≤2` and supplied-history `D≤1` for same-duty candidate screening. These are not DFKI hardware specifications. See the [design review](docs/design_review.en.md) for findings, fixes and remaining pin/bearing strength, manufacturing and hardware-validation needs.
+The current case assumes `Kout≥20000 N·m/rad`, `Kγ≤2` and supplied-history `D≤1` for same-duty screening, not DFKI hardware specifications. Added dimensions, material allowables, bearing capacities and bus parameters are also recorded as design assumptions. The [design review](docs/design_review.en.md) separates implemented work from items that still require hardware or manufacturing data.
 
 ## Design case and candidate comparison
 
@@ -79,11 +82,15 @@ A 6:1 redesign uses [published DFKI physical-pendulum requirements](https://gith
 
 The supplier states a 30 mm center distance, while the listed zero-shift tooth counts and module give 15 mm. The model uses 15 mm and retains that source conflict for clarification. This is a source-grounded new design, without reconstruction of AK80-6 internals or measured-performance reproduction.
 
-**Load sharing and tooth contact**
+**Load sharing and full contact patterns**
 
-Thirty-four representative states connect three planets, both meshes and system compliance. The current case uses 64 phases ×26 strips. Supplied errors produce unequal sharing. The figure shows cyclic normal TE and raw loaded nodes at the peak-pressure phase.
+Thirty-four representative states connect three planets, both meshes and system compliance, with baseline coupling at 64 phases ×26 strips. Full patterns further resolve selected fixed local loads with 512 phases ×41 strips. The upper row shows single-tooth instantaneous finite-width Hertz bands; the lower row shows the maximum pressure experienced over a complete tooth passage.
 
-![Per-planet LTCA and raw contact nodes](examples/results/dfki_pendulum/en/04_contact.png)
+![Instantaneous single-tooth contact bands and full-passage maximum pressure for both meshes](examples/results/contact_patterns/en/01_contact_overview.png)
+
+Full-passage maps fold periodic results for identical teeth at fixed load into material coordinates. Coloured area is not the area loaded at one instant. Finite Hertz bands follow original strip line loads/half-widths; a few lines are not smoothed into a whole surface, and the result is not a 2D contact or full FE solve. Separate [positive-flank planets](examples/results/contact_patterns/en/02_positive_planets.png), [negative-flank planets](examples/results/contact_patterns/en/03_negative_planets.png) and [low-load edges](examples/results/contact_patterns/en/04_low_load_planets.png) are available. See [contact-pattern documentation](docs/contact_patterns.en.md) for raw data, clipping/grid differences and reproduction. The original [cyclic TE and contact-node plot](examples/results/dfki_pendulum/en/04_contact.png) remains a reference.
+
+[Four member surfaces](examples/results/contact_patterns/en/05_members.png) use separate material coordinates for the sun, sun-facing planet flank, ring-facing planet flank and internal ring. The instantaneous comparison uses the same phase/tooth pair with both members' Hertz bands inside their valid flank domains, rather than the peak-pressure phase. Passage maxima freeze the local loads of that state; they are not maxima across the entire 1.8 s duty. Raw sampling NPZs and source peaks, integration and edge differences are retained.
 
 **Motor matching and periodic temperature**
 
@@ -98,6 +105,30 @@ With geometry, materials and motion fixed, compare the baseline, increased path 
 ![Three-candidate comparison](examples/results/dfki_pendulum/en/09_comparison.png)
 
 The [complete case guide](docs/examples.en.md) contains all nine stages, input provenance and key numbers. Shared chart data are in [metrics.json](examples/results/dfki_pendulum/metrics.json) and [duty.csv](examples/results/dfki_pendulum/duty.csv); editable SVG/PDF files accompany the images. See the [figure guide](docs/figures.en.md) for the blue/red styling, source data, dimensions and English-only reproduction. CAD/BOM files provide parameter interfaces.
+
+**Planet pins and bearings: check strength and stiffness separately**
+
+Converged reactions give a maximum pin load of 118.889 N. Under the added 12 mm simply supported span and 5 mm loaded-width assumptions, 4/6 mm pins reach bending stresses of 44.939/13.315 MPa and centre deflections of 1.805/0.433 μm. Both pass the supplied static allowables. However, their load-conjugate bending–shear stiffnesses are only 71.225/297.707 MN/m against the system's assumed 300 MN/m. A 4 mm design requires an explicit stiffness update and a new load-sharing solve.
+
+![Planet-pin stress, deflection and stiffness comparison](examples/results/design_screens/en/01_planet_support.png)
+
+Planet bearings use speed relative to the carrier. With assumed capacities, minimum static safety is about 4.206; a large basic L10 does not establish oscillating service life. Short thick pins, actual pin-hole contact and catalog bearing selection still need independent design. Inputs, equations and [individual results](examples/results/planet_support/summary.json) are documented in [planet support](docs/planet_support.en.md).
+
+**Regenerative bus: buffering capacity beyond power balance**
+
+Using motor electrical power that includes copper loss and rotor-inertia power, compare new assumptions of a 36 V source, 48 V limit and 96% directional inverter efficiency. A 470 μF capacitor with no sink gives a free-energy extrapolated peak of 83.624 V and fails the limit; 4700 μF gives 43.194 V, while 470 μF with a 15 W external sink stays at 36 V.
+
+![DC-bus screening for capacitance and external absorption](examples/results/design_screens/en/02_dc_bus.png)
+
+DC regeneration peaks at 13.398 W and returns 2.678 J over the history. Without a sink, the nominal-start minimum capacitance is about 2656 μF. Beyond-limit voltages assume the specified power continues; real protection may disable the drive earlier. All bus values are design assumptions. See [the bus model](docs/dc_bus.en.md) and [comparison data](examples/results/dc_bus/comparison.csv).
+
+**Integrated candidate with explicit geometry feedback**
+
+The [new input](examples/dfki_with_screens.json) explicitly supplies the assumed 6 mm pin's 297.707 MN/m bending/shear stiffness to the system, then recouples all 34 states and includes planet-bearing static safety and a 4700 μF bus. This run was executed: stiffness discrepancy is zero, minimum planet-bearing static safety is about 4.206, and maximum bus voltage is 43.194 V; configured screening passes. The [Chinese calculation report](examples/results/integrated_design/report.md) and [summary JSON](examples/results/integrated_design/summary.json) retain actual criteria. Hardware undervoltage remains unevaluated; an ideal-source assumption is not hardware validation.
+
+```bash
+python -m robot_joint examples/dfki_with_screens.json --output output/integrated --plots
+```
 
 ## Professional-software and public-reference comparisons
 
@@ -128,7 +159,11 @@ See the [validation record](docs/validation.en.md) for reference inputs, retaine
 
 ```bash
 python -m examples.build_showcase --output output/showcase --raw-output output/raw
+python -m examples.build_contact_patterns --phases 512 --strips 41
 python -m examples.compare_designs --output output/comparison.json
+python -m examples.check_planet_support --results output/pendulum --output output/planet_support
+python -m examples.check_dc_bus --results output/pendulum --output output/dc_bus
+python -m examples.plot_design_screens
 python -m examples.run_benchmarks --output output/benchmarks
 python -m examples.check_joint_resolution --output output/benchmarks/resolution
 python -m examples.plot_validation --source output/benchmarks --output output/benchmarks
@@ -143,13 +178,14 @@ The resolution study compares seven actual solver grids at one peak-pressure sta
 
 The system layer currently covers one fixed-ring, sun-input, carrier-output, zero-shift spur NGW stage with small deformation, linear elasticity and quasi-static cycle-mean response. The independent contact kernel supports additional single-mesh configurations, but the system interface has not been extended to helical, multistage, RV or harmonic drives.
 
-Full housing/shaft FE, synchronized transient mesh dynamics, friction-history hysteresis, planet needle bearings and small-angle oscillatory wear, lubrication, electromagnetics, control precision and manufacturing tolerance chains are not included. Light-load basic L10, assumed-hotspot damage and deterministic angle budgets are interpreted separately, without whole-joint life or positioning certification.
+Full housing/shaft FE, synchronized mesh dynamics, friction-history hysteresis, actual pin-hole/rolling-element contact, small-angle oscillatory wear, lubrication, electromagnetics, drive protection, control precision and tolerance chains remain outside scope. Pin/planet-bearing and bus screens have explicit simplified boundaries; finite-width bands are not a 2D contact solution. Light-load basic L10, assumed-hotspot damage and deterministic angle budgets are interpreted separately, without whole-joint life or positioning certification.
 
 ## Release history and next steps
 
 - **0.1.0**: NGW system, support, fatigue, thermal, electromechanical, precision and parameter-level engineering exports.
 - **0.1.2**: DFKI physical-requirement reference, complete bilingual case and figures, and a cross-platform floating-point tolerance fix for saved duty comparison.
 - **0.2.0**: Project-level bilingual documentation, blue/red publication-style figures, expert design review, explicit assessment coverage and reproducible comparison evidence; a single default branch, `main`.
+- **0.3.0**: Instantaneous finite-width Hertz bands and full tooth-passage maximum pressure, with three-planet/flank/low-load maps; planet-pin/bearing and regenerative-bus screens with bilingual data and documentation.
 - **Near-term priorities**: Extend the resolution study to all critical duty states, add measured torsional stiffness/backlash and friction calibration, identify thermal networks and efficiency maps, and assess bearing suitability under actual oscillatory duty.
 - **Later extensions**: Multistage/helical systems, physical gear-body/support compliance, manufacturing tolerance statistics and prototype comparisons after separate validation. These remain planned work.
 
@@ -157,6 +193,7 @@ Full housing/shaft FE, synchronized transient mesh dynamics, friction-history hy
 
 - [Model and equations](docs/model.en.md) · [API and units](docs/api.en.md) · [Complete case](docs/examples.en.md) · [Comparison evidence](docs/validation.en.md)
 - [Design review and further validation](docs/design_review.en.md) · [Blue/red figures and source data](docs/figures.en.md)
+- [Full contact patterns](docs/contact_patterns.en.md) · [Planet pins and bearings](docs/planet_support.en.md) · [Regenerative bus](docs/dc_bus.en.md)
 - `robot_joint/`: new NGW system/performance modules; `gear_contact/`: reused cylindrical-contact kernel.
 - `examples/`: inputs, runnable workflows and selected results; `benchmarks/`: offline references and comparison outputs.
 - `tests/` and `.github/`: automated verification; `docs/`: equations, integration and engineering guidance.

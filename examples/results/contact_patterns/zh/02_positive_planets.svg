@@ -1,0 +1,1132 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="518.740157pt" height="475.511811pt" viewBox="0 0 518.740157 475.511811" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <title>正向峰载：三行星、两副的完整通过程斑点</title>
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title>正向峰载：三行星、两副的完整通过程斑点</dc:title>
+    <dc:date>2026-11-02T11:41:46.865963</dc:date>
+    <dc:description>language=zh</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.7.1, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 475.511811 
+L 518.740157 475.511811 
+L 518.740157 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 33.568217 138.388226 
+L 212.857149 138.388226 
+L 212.857149 43.749015 
+L 33.568217 43.749015 
+z
+" style="fill: #e8ebee"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 33.568217 123.643137 
+L 33.568217 43.749015 
+L 212.857149 43.749015 
+L 212.857149 123.643137 
+z
+" clip-path="url(#pacb2b4e120)" style="fill: #ffffff; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+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" id="image77ee01d174" transform="scale(1 -1) translate(0 -82.08)" x="33.84" y="-43.2" width="179.28" height="82.08"/>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="mc2835deb5c" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.6"/>
+      </defs>
+      <g>
+       <use xlink:href="#mc2835deb5c" x="51.497111" y="138.388226" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="51.497111" y="150.664101" transform="rotate(-0 51.497111 150.664101)">-2</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="87.354897" y="138.388226" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="87.354897" y="150.664101" transform="rotate(-0 87.354897 150.664101)">-1</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="123.212683" y="138.388226" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="123.212683" y="150.664101" transform="rotate(-0 123.212683 150.664101)">0</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="159.07047" y="138.388226" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="159.07047" y="150.664101" transform="rotate(-0 159.07047 150.664101)">1</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="194.928256" y="138.388226" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="194.928256" y="150.664101" transform="rotate(-0 194.928256 150.664101)">2</text>
+     </g>
+    </g>
+    <g id="text_6">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="123.212683" y="162.580695" transform="rotate(-0 123.212683 162.580695)">齿宽位置 / mm</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_6">
+      <defs>
+       <path id="mea03d25e53" d="M 0 0 
+L -3.5 0 
+" style="stroke: #000000; stroke-width: 0.6"/>
+      </defs>
+      <g>
+       <use xlink:href="#mea03d25e53" x="33.568217" y="138.388226" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="26.568217" y="141.026164" transform="rotate(-0 26.568217 141.026164)">0</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#mea03d25e53" x="33.568217" y="105.287159" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="26.568217" y="107.925097" transform="rotate(-0 26.568217 107.925097)">1</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#mea03d25e53" x="33.568217" y="72.186093" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="26.568217" y="74.82403" transform="rotate(-0 26.568217 74.82403)">2</text>
+     </g>
+    </g>
+    <g id="text_10">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="16.057217" y="91.06862" transform="rotate(-90 16.057217 91.06862)">本轮渐开线展长 / mm</text>
+    </g>
+   </g>
+   <g id="patch_4">
+    <path d="M 33.568217 138.388226 
+L 33.568217 43.749015 
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 33.568217 138.388226 
+L 212.857149 138.388226 
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_11">
+    <text style="font: 700 8px 'Microsoft YaHei'; text-anchor: start" x="20.121547" y="37.5015" transform="rotate(-0 20.121547 37.5015)">a</text>
+   </g>
+   <g id="text_12">
+    <text style="font: 7px 'Microsoft YaHei'; text-anchor: middle" x="123.212683" y="34.749015" transform="rotate(-0 123.212683 34.749015)">太阳轮副，行星1，Ft=55.05 N</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_6">
+    <path d="M 285.157194 138.388226 
+L 464.446126 138.388226 
+L 464.446126 43.749015 
+L 285.157194 43.749015 
+z
+" style="fill: #e8ebee"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 285.157194 101.543103 
+L 285.157194 43.749015 
+L 464.446126 43.749015 
+L 464.446126 101.543103 
+z
+" clip-path="url(#pa4bc6dcf28)" style="fill: #ffffff; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+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" id="image2dcd16b175" transform="scale(1 -1) translate(0 -59.76)" x="285.12" y="-43.2" width="179.28" height="59.76"/>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_6">
+     <g id="line2d_9">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="303.086087" y="138.388226" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_13">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="303.086087" y="150.664101" transform="rotate(-0 303.086087 150.664101)">-2</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="338.943873" y="138.388226" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_14">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="338.943873" y="150.664101" transform="rotate(-0 338.943873 150.664101)">-1</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_11">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="374.80166" y="138.388226" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_15">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="374.80166" y="150.664101" transform="rotate(-0 374.80166 150.664101)">0</text>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="410.659446" y="138.388226" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_16">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="410.659446" y="150.664101" transform="rotate(-0 410.659446 150.664101)">1</text>
+     </g>
+    </g>
+    <g id="xtick_10">
+     <g id="line2d_13">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="446.517232" y="138.388226" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_17">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="446.517232" y="150.664101" transform="rotate(-0 446.517232 150.664101)">2</text>
+     </g>
+    </g>
+    <g id="text_18">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="374.80166" y="162.580695" transform="rotate(-0 374.80166 162.580695)">齿宽位置 / mm</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_4">
+     <g id="line2d_14">
+      <g>
+       <use xlink:href="#mea03d25e53" x="285.157194" y="138.388226" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_19">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="278.157194" y="141.026164" transform="rotate(-0 278.157194 141.026164)">0</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_15">
+      <g>
+       <use xlink:href="#mea03d25e53" x="285.157194" y="97.98595" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_20">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="278.157194" y="100.623888" transform="rotate(-0 278.157194 100.623888)">2</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_16">
+      <g>
+       <use xlink:href="#mea03d25e53" x="285.157194" y="57.583674" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_21">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="278.157194" y="60.221612" transform="rotate(-0 278.157194 60.221612)">4</text>
+     </g>
+    </g>
+    <g id="text_22">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="267.646194" y="91.06862" transform="rotate(-90 267.646194 91.06862)">本轮渐开线展长 / mm</text>
+    </g>
+   </g>
+   <g id="patch_8">
+    <path d="M 285.157194 138.388226 
+L 285.157194 43.749015 
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 285.157194 138.388226 
+L 464.446126 138.388226 
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_23">
+    <text style="font: 700 8px 'Microsoft YaHei'; text-anchor: start" x="271.710524" y="37.5015" transform="rotate(-0 271.710524 37.5015)">b</text>
+   </g>
+   <g id="text_24">
+    <text style="font: 7px 'Microsoft YaHei'; text-anchor: middle" x="374.80166" y="34.749015" transform="rotate(-0 374.80166 34.749015)">内齿副，行星1，Ft=55.05 N</text>
+   </g>
+  </g>
+  <g id="axes_3">
+   <g id="patch_10">
+    <path d="M 33.568217 279.45673 
+L 212.857149 279.45673 
+L 212.857149 184.817519 
+L 33.568217 184.817519 
+z
+" style="fill: #e8ebee"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 33.568217 264.711641 
+L 33.568217 184.817519 
+L 212.857149 184.817519 
+L 212.857149 264.711641 
+z
+" clip-path="url(#pb460d46377)" style="fill: #ffffff; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+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" id="image35075c83e1" transform="scale(1 -1) translate(0 -82.08)" x="33.84" y="-184.32" width="179.28" height="82.08"/>
+   <g id="matplotlib.axis_5">
+    <g id="xtick_11">
+     <g id="line2d_17">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="51.497111" y="279.45673" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_25">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="51.497111" y="291.732605" transform="rotate(-0 51.497111 291.732605)">-2</text>
+     </g>
+    </g>
+    <g id="xtick_12">
+     <g id="line2d_18">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="87.354897" y="279.45673" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_26">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="87.354897" y="291.732605" transform="rotate(-0 87.354897 291.732605)">-1</text>
+     </g>
+    </g>
+    <g id="xtick_13">
+     <g id="line2d_19">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="123.212683" y="279.45673" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_27">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="123.212683" y="291.732605" transform="rotate(-0 123.212683 291.732605)">0</text>
+     </g>
+    </g>
+    <g id="xtick_14">
+     <g id="line2d_20">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="159.07047" y="279.45673" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_28">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="159.07047" y="291.732605" transform="rotate(-0 159.07047 291.732605)">1</text>
+     </g>
+    </g>
+    <g id="xtick_15">
+     <g id="line2d_21">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="194.928256" y="279.45673" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_29">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="194.928256" y="291.732605" transform="rotate(-0 194.928256 291.732605)">2</text>
+     </g>
+    </g>
+    <g id="text_30">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="123.212683" y="303.649199" transform="rotate(-0 123.212683 303.649199)">齿宽位置 / mm</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_6">
+    <g id="ytick_7">
+     <g id="line2d_22">
+      <g>
+       <use xlink:href="#mea03d25e53" x="33.568217" y="279.45673" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_31">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="26.568217" y="282.094667" transform="rotate(-0 26.568217 282.094667)">0</text>
+     </g>
+    </g>
+    <g id="ytick_8">
+     <g id="line2d_23">
+      <g>
+       <use xlink:href="#mea03d25e53" x="33.568217" y="246.355663" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_32">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="26.568217" y="248.993601" transform="rotate(-0 26.568217 248.993601)">1</text>
+     </g>
+    </g>
+    <g id="ytick_9">
+     <g id="line2d_24">
+      <g>
+       <use xlink:href="#mea03d25e53" x="33.568217" y="213.254597" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_33">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="26.568217" y="215.892534" transform="rotate(-0 26.568217 215.892534)">2</text>
+     </g>
+    </g>
+    <g id="text_34">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="16.057217" y="232.137124" transform="rotate(-90 16.057217 232.137124)">本轮渐开线展长 / mm</text>
+    </g>
+   </g>
+   <g id="patch_12">
+    <path d="M 33.568217 279.45673 
+L 33.568217 184.817519 
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 33.568217 279.45673 
+L 212.857149 279.45673 
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_35">
+    <text style="font: 700 8px 'Microsoft YaHei'; text-anchor: start" x="20.121547" y="178.570004" transform="rotate(-0 20.121547 178.570004)">c</text>
+   </g>
+   <g id="text_36">
+    <text style="font: 7px 'Microsoft YaHei'; text-anchor: middle" x="123.212683" y="175.817519" transform="rotate(-0 123.212683 175.817519)">太阳轮副，行星2，Ft=48.50 N</text>
+   </g>
+  </g>
+  <g id="axes_4">
+   <g id="patch_14">
+    <path d="M 285.157194 279.45673 
+L 464.446126 279.45673 
+L 464.446126 184.817519 
+L 285.157194 184.817519 
+z
+" style="fill: #e8ebee"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 285.157194 242.611607 
+L 285.157194 184.817519 
+L 464.446126 184.817519 
+L 464.446126 242.611607 
+z
+" clip-path="url(#pbab306760d)" style="fill: #ffffff; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+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" id="imagef21c522e6e" transform="scale(1 -1) translate(0 -59.04)" x="285.12" y="-184.32" width="179.28" height="59.04"/>
+   <g id="matplotlib.axis_7">
+    <g id="xtick_16">
+     <g id="line2d_25">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="303.086087" y="279.45673" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_37">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="303.086087" y="291.732605" transform="rotate(-0 303.086087 291.732605)">-2</text>
+     </g>
+    </g>
+    <g id="xtick_17">
+     <g id="line2d_26">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="338.943873" y="279.45673" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_38">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="338.943873" y="291.732605" transform="rotate(-0 338.943873 291.732605)">-1</text>
+     </g>
+    </g>
+    <g id="xtick_18">
+     <g id="line2d_27">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="374.80166" y="279.45673" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_39">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="374.80166" y="291.732605" transform="rotate(-0 374.80166 291.732605)">0</text>
+     </g>
+    </g>
+    <g id="xtick_19">
+     <g id="line2d_28">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="410.659446" y="279.45673" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_40">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="410.659446" y="291.732605" transform="rotate(-0 410.659446 291.732605)">1</text>
+     </g>
+    </g>
+    <g id="xtick_20">
+     <g id="line2d_29">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="446.517232" y="279.45673" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_41">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="446.517232" y="291.732605" transform="rotate(-0 446.517232 291.732605)">2</text>
+     </g>
+    </g>
+    <g id="text_42">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="374.80166" y="303.649199" transform="rotate(-0 374.80166 303.649199)">齿宽位置 / mm</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_8">
+    <g id="ytick_10">
+     <g id="line2d_30">
+      <g>
+       <use xlink:href="#mea03d25e53" x="285.157194" y="279.45673" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_43">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="278.157194" y="282.094667" transform="rotate(-0 278.157194 282.094667)">0</text>
+     </g>
+    </g>
+    <g id="ytick_11">
+     <g id="line2d_31">
+      <g>
+       <use xlink:href="#mea03d25e53" x="285.157194" y="239.054454" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_44">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="278.157194" y="241.692392" transform="rotate(-0 278.157194 241.692392)">2</text>
+     </g>
+    </g>
+    <g id="ytick_12">
+     <g id="line2d_32">
+      <g>
+       <use xlink:href="#mea03d25e53" x="285.157194" y="198.652178" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_45">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="278.157194" y="201.290116" transform="rotate(-0 278.157194 201.290116)">4</text>
+     </g>
+    </g>
+    <g id="text_46">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="267.646194" y="232.137124" transform="rotate(-90 267.646194 232.137124)">本轮渐开线展长 / mm</text>
+    </g>
+   </g>
+   <g id="patch_16">
+    <path d="M 285.157194 279.45673 
+L 285.157194 184.817519 
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_17">
+    <path d="M 285.157194 279.45673 
+L 464.446126 279.45673 
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_47">
+    <text style="font: 700 8px 'Microsoft YaHei'; text-anchor: start" x="271.710524" y="178.570004" transform="rotate(-0 271.710524 178.570004)">d</text>
+   </g>
+   <g id="text_48">
+    <text style="font: 7px 'Microsoft YaHei'; text-anchor: middle" x="374.80166" y="175.817519" transform="rotate(-0 374.80166 175.817519)">内齿副，行星2，Ft=48.50 N</text>
+   </g>
+  </g>
+  <g id="axes_5">
+   <g id="patch_18">
+    <path d="M 33.568217 420.525234 
+L 212.857149 420.525234 
+L 212.857149 325.886022 
+L 33.568217 325.886022 
+z
+" style="fill: #e8ebee"/>
+   </g>
+   <g id="patch_19">
+    <path d="M 33.568217 405.780145 
+L 33.568217 325.886022 
+L 212.857149 325.886022 
+L 212.857149 405.780145 
+z
+" clip-path="url(#p6aa6d54873)" style="fill: #ffffff; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+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" id="imagebdfafbbb4d" transform="scale(1 -1) translate(0 -82.08)" x="33.84" y="-325.44" width="179.28" height="82.08"/>
+   <g id="matplotlib.axis_9">
+    <g id="xtick_21">
+     <g id="line2d_33">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="51.497111" y="420.525234" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_49">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="51.497111" y="432.801109" transform="rotate(-0 51.497111 432.801109)">-2</text>
+     </g>
+    </g>
+    <g id="xtick_22">
+     <g id="line2d_34">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="87.354897" y="420.525234" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_50">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="87.354897" y="432.801109" transform="rotate(-0 87.354897 432.801109)">-1</text>
+     </g>
+    </g>
+    <g id="xtick_23">
+     <g id="line2d_35">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="123.212683" y="420.525234" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_51">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="123.212683" y="432.801109" transform="rotate(-0 123.212683 432.801109)">0</text>
+     </g>
+    </g>
+    <g id="xtick_24">
+     <g id="line2d_36">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="159.07047" y="420.525234" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_52">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="159.07047" y="432.801109" transform="rotate(-0 159.07047 432.801109)">1</text>
+     </g>
+    </g>
+    <g id="xtick_25">
+     <g id="line2d_37">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="194.928256" y="420.525234" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_53">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="194.928256" y="432.801109" transform="rotate(-0 194.928256 432.801109)">2</text>
+     </g>
+    </g>
+    <g id="text_54">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="123.212683" y="444.717703" transform="rotate(-0 123.212683 444.717703)">齿宽位置 / mm</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_10">
+    <g id="ytick_13">
+     <g id="line2d_38">
+      <g>
+       <use xlink:href="#mea03d25e53" x="33.568217" y="420.525234" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_55">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="26.568217" y="423.163171" transform="rotate(-0 26.568217 423.163171)">0</text>
+     </g>
+    </g>
+    <g id="ytick_14">
+     <g id="line2d_39">
+      <g>
+       <use xlink:href="#mea03d25e53" x="33.568217" y="387.424167" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_56">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="26.568217" y="390.062105" transform="rotate(-0 26.568217 390.062105)">1</text>
+     </g>
+    </g>
+    <g id="ytick_15">
+     <g id="line2d_40">
+      <g>
+       <use xlink:href="#mea03d25e53" x="33.568217" y="354.323101" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_57">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="26.568217" y="356.961038" transform="rotate(-0 26.568217 356.961038)">2</text>
+     </g>
+    </g>
+    <g id="text_58">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="16.057217" y="373.205628" transform="rotate(-90 16.057217 373.205628)">本轮渐开线展长 / mm</text>
+    </g>
+   </g>
+   <g id="patch_20">
+    <path d="M 33.568217 420.525234 
+L 33.568217 325.886022 
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_21">
+    <path d="M 33.568217 420.525234 
+L 212.857149 420.525234 
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_59">
+    <text style="font: 700 8px 'Microsoft YaHei'; text-anchor: start" x="20.121547" y="319.638508" transform="rotate(-0 20.121547 319.638508)">e</text>
+   </g>
+   <g id="text_60">
+    <text style="font: 7px 'Microsoft YaHei'; text-anchor: middle" x="123.212683" y="316.886022" transform="rotate(-0 123.212683 316.886022)">太阳轮副，行星3，Ft=58.35 N</text>
+   </g>
+  </g>
+  <g id="axes_6">
+   <g id="patch_22">
+    <path d="M 285.157194 420.525234 
+L 464.446126 420.525234 
+L 464.446126 325.886022 
+L 285.157194 325.886022 
+z
+" style="fill: #e8ebee"/>
+   </g>
+   <g id="patch_23">
+    <path d="M 285.157194 383.680111 
+L 285.157194 325.886022 
+L 464.446126 325.886022 
+L 464.446126 383.680111 
+z
+" clip-path="url(#p002c1a1ce9)" style="fill: #ffffff; stroke: #ffffff; stroke-linejoin: miter"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+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" id="image882fdb0f78" transform="scale(1 -1) translate(0 -59.76)" x="285.12" y="-325.44" width="179.28" height="59.76"/>
+   <g id="matplotlib.axis_11">
+    <g id="xtick_26">
+     <g id="line2d_41">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="303.086087" y="420.525234" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_61">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="303.086087" y="432.801109" transform="rotate(-0 303.086087 432.801109)">-2</text>
+     </g>
+    </g>
+    <g id="xtick_27">
+     <g id="line2d_42">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="338.943873" y="420.525234" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_62">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="338.943873" y="432.801109" transform="rotate(-0 338.943873 432.801109)">-1</text>
+     </g>
+    </g>
+    <g id="xtick_28">
+     <g id="line2d_43">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="374.80166" y="420.525234" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_63">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="374.80166" y="432.801109" transform="rotate(-0 374.80166 432.801109)">0</text>
+     </g>
+    </g>
+    <g id="xtick_29">
+     <g id="line2d_44">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="410.659446" y="420.525234" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_64">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="410.659446" y="432.801109" transform="rotate(-0 410.659446 432.801109)">1</text>
+     </g>
+    </g>
+    <g id="xtick_30">
+     <g id="line2d_45">
+      <g>
+       <use xlink:href="#mc2835deb5c" x="446.517232" y="420.525234" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_65">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="446.517232" y="432.801109" transform="rotate(-0 446.517232 432.801109)">2</text>
+     </g>
+    </g>
+    <g id="text_66">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="374.80166" y="444.717703" transform="rotate(-0 374.80166 444.717703)">齿宽位置 / mm</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_12">
+    <g id="ytick_16">
+     <g id="line2d_46">
+      <g>
+       <use xlink:href="#mea03d25e53" x="285.157194" y="420.525234" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_67">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="278.157194" y="423.163171" transform="rotate(-0 278.157194 423.163171)">0</text>
+     </g>
+    </g>
+    <g id="ytick_17">
+     <g id="line2d_47">
+      <g>
+       <use xlink:href="#mea03d25e53" x="285.157194" y="380.122958" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_68">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="278.157194" y="382.760895" transform="rotate(-0 278.157194 382.760895)">2</text>
+     </g>
+    </g>
+    <g id="ytick_18">
+     <g id="line2d_48">
+      <g>
+       <use xlink:href="#mea03d25e53" x="285.157194" y="339.720682" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_69">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: end" x="278.157194" y="342.358619" transform="rotate(-0 278.157194 342.358619)">4</text>
+     </g>
+    </g>
+    <g id="text_70">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="267.646194" y="373.205628" transform="rotate(-90 267.646194 373.205628)">本轮渐开线展长 / mm</text>
+    </g>
+   </g>
+   <g id="patch_24">
+    <path d="M 285.157194 420.525234 
+L 285.157194 325.886022 
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_25">
+    <path d="M 285.157194 420.525234 
+L 464.446126 420.525234 
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_71">
+    <text style="font: 700 8px 'Microsoft YaHei'; text-anchor: start" x="271.710524" y="319.638508" transform="rotate(-0 271.710524 319.638508)">f</text>
+   </g>
+   <g id="text_72">
+    <text style="font: 7px 'Microsoft YaHei'; text-anchor: middle" x="374.80166" y="316.886022" transform="rotate(-0 374.80166 316.886022)">内齿副，行星3，Ft=58.35 N</text>
+   </g>
+  </g>
+  <g id="axes_7">
+   <g id="patch_26">
+    <path d="M 221.821596 126.558325 
+L 225.370566 126.558325 
+L 225.370566 55.578916 
+L 221.821596 55.578916 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAUAAABiCAYAAACYnhkHAAAApElEQVR4nNWSyw3DMAxDZUvepMNluQzYfJzc4xeAgdoC9ZEgRZFyeU3zYZcX7uWKWYTXEfQKYAtdTsxIMds3jGhmy8n1kn9nlJNnbyQbjZBZeBk+soUbgDdyACvJHeVoRDOfrKS6857JROTOe/5JIn1mMhEy+3sZwX0B8Ng2kq8AMhNmdjLqK8mZuatMdJf3xOzYEhbCctnowY30QvQb6dV9/kYndUdzf6spAqEAAAAASUVORK5CYII=" id="imagec332839063" transform="scale(1 -1) translate(0 -70.56)" x="221.76" y="-55.44" width="3.6" height="70.56"/>
+   <g id="matplotlib.axis_13"/>
+   <g id="matplotlib.axis_14">
+    <g id="ytick_19">
+     <g id="line2d_49">
+      <defs>
+       <path id="mbc5cf705ed" d="M 0 0 
+L 3.5 0 
+" style="stroke: #000000; stroke-width: 0.6"/>
+      </defs>
+      <g>
+       <use xlink:href="#mbc5cf705ed" x="225.370566" y="126.558325" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_73">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: start" x="232.370566" y="129.196262" transform="rotate(-0 232.370566 129.196262)">0</text>
+     </g>
+    </g>
+    <g id="ytick_20">
+     <g id="line2d_50">
+      <g>
+       <use xlink:href="#mbc5cf705ed" x="225.370566" y="83.674434" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_74">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: start" x="232.370566" y="86.312372" transform="rotate(-0 232.370566 86.312372)">500</text>
+     </g>
+    </g>
+    <g id="text_75">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="254.257285" y="91.06862" transform="rotate(-90 254.257285 91.06862)">MPa</text>
+    </g>
+   </g>
+   <g id="LineCollection_1"/>
+   <g id="patch_27">
+    <path d="M 221.821596 126.558325 
+L 223.596081 126.558325 
+L 225.370566 126.558325 
+L 225.370566 55.578916 
+L 223.596081 55.578916 
+L 221.821596 55.578916 
+L 221.821596 126.558325 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="axes_8">
+   <g id="patch_28">
+    <path d="M 473.410572 126.558325 
+L 476.959543 126.558325 
+L 476.959543 55.578916 
+L 473.410572 55.578916 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAQAAABiCAYAAAB3XHI5AAAAnklEQVR4nM2QXQ7DIAyDQxNussPtcj1g/6Cvw67kQjdpvGHZX5yk13uu9vHCPVkjhE+t4BMIOXQEHdHtyN+AIiP3R/SBfgPtj4zcVELbr1l4qiAYCBcRQwcxMEJQZNwZq6Zwj4GmOIV7/ElTzRhoSo6yrK1wrCDUfcfIBgI7gFEQWjaMsONQDpoie9AutC0txxEJvXFTvZy+qV7/+U1PtkJzf1Rw7fYAAAAASUVORK5CYII=" id="image52fe42a603" transform="scale(1 -1) translate(0 -70.56)" x="473.76" y="-55.44" width="2.88" height="70.56"/>
+   <g id="matplotlib.axis_15"/>
+   <g id="matplotlib.axis_16">
+    <g id="ytick_21">
+     <g id="line2d_51">
+      <g>
+       <use xlink:href="#mbc5cf705ed" x="476.959543" y="126.558325" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_76">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: start" x="483.959543" y="129.196262" transform="rotate(-0 483.959543 129.196262)">0</text>
+     </g>
+    </g>
+    <g id="ytick_22">
+     <g id="line2d_52">
+      <g>
+       <use xlink:href="#mbc5cf705ed" x="476.959543" y="83.674434" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_77">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: start" x="483.959543" y="86.312372" transform="rotate(-0 483.959543 86.312372)">500</text>
+     </g>
+    </g>
+    <g id="text_78">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="505.846261" y="91.06862" transform="rotate(-90 505.846261 91.06862)">MPa</text>
+    </g>
+   </g>
+   <g id="LineCollection_2"/>
+   <g id="patch_29">
+    <path d="M 473.410572 126.558325 
+L 475.185057 126.558325 
+L 476.959543 126.558325 
+L 476.959543 55.578916 
+L 475.185057 55.578916 
+L 473.410572 55.578916 
+L 473.410572 126.558325 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="axes_9">
+   <g id="patch_30">
+    <path d="M 221.821596 267.626829 
+L 225.370566 267.626829 
+L 225.370566 196.64742 
+L 221.821596 196.64742 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAUAAABiCAYAAACYnhkHAAAAm0lEQVR4nO2S0Q2AMAgFacFNHM7lHNBWrf/tmdAYoyb6+XJwBQzjNBepPlMNdSZmGttQI4SDQXlEEkWGIj95gwhnp54Dkf7ykyWTiB7/sKjjRpdEbSRiGpof+YwUIGFJYhFJ6skk9UT7P5Gn56cn2pcE4bpCmIhcsrfcL0IS7XlzkoVEG4oo5HIUuZ+EdhT1rI7Ogat74Y1yKzoAYM9zhPZG8t0AAAAASUVORK5CYII=" id="image630a80635e" transform="scale(1 -1) translate(0 -70.56)" x="221.76" y="-196.56" width="3.6" height="70.56"/>
+   <g id="matplotlib.axis_17"/>
+   <g id="matplotlib.axis_18">
+    <g id="ytick_23">
+     <g id="line2d_53">
+      <g>
+       <use xlink:href="#mbc5cf705ed" x="225.370566" y="267.626829" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_79">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: start" x="232.370566" y="270.264766" transform="rotate(-0 232.370566 270.264766)">0</text>
+     </g>
+    </g>
+    <g id="ytick_24">
+     <g id="line2d_54">
+      <g>
+       <use xlink:href="#mbc5cf705ed" x="225.370566" y="224.742938" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_80">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: start" x="232.370566" y="227.380876" transform="rotate(-0 232.370566 227.380876)">500</text>
+     </g>
+    </g>
+    <g id="text_81">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="254.257285" y="232.137124" transform="rotate(-90 254.257285 232.137124)">MPa</text>
+    </g>
+   </g>
+   <g id="LineCollection_3"/>
+   <g id="patch_31">
+    <path d="M 221.821596 267.626829 
+L 223.596081 267.626829 
+L 225.370566 267.626829 
+L 225.370566 196.64742 
+L 223.596081 196.64742 
+L 221.821596 196.64742 
+L 221.821596 267.626829 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="axes_10">
+   <g id="patch_32">
+    <path d="M 473.410572 267.626829 
+L 476.959543 267.626829 
+L 476.959543 196.64742 
+L 473.410572 196.64742 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAQAAABiCAYAAAB3XHI5AAAAlUlEQVR4nO2QSw6AIAxEC6038XBezgMCKm5lxqSYGHUhOyavr58wTnOVwzPVIE1gGttAIwSDQUkkgqRGUp+4QUq7oGNAwi85ORBKcbCHpB03vSxtvyKmoXqEAAHLikUi0MEEOqjLP+knJt1ShmBZIMhIpOKV+FIiqEtZHaKidCUpBlxCUrctdSFpz/p4Qlr/pZuWVroDpa5zhMn6kacAAAAASUVORK5CYII=" id="image30fa3bd4cf" transform="scale(1 -1) translate(0 -70.56)" x="473.76" y="-196.56" width="2.88" height="70.56"/>
+   <g id="matplotlib.axis_19"/>
+   <g id="matplotlib.axis_20">
+    <g id="ytick_25">
+     <g id="line2d_55">
+      <g>
+       <use xlink:href="#mbc5cf705ed" x="476.959543" y="267.626829" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_82">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: start" x="483.959543" y="270.264766" transform="rotate(-0 483.959543 270.264766)">0</text>
+     </g>
+    </g>
+    <g id="ytick_26">
+     <g id="line2d_56">
+      <g>
+       <use xlink:href="#mbc5cf705ed" x="476.959543" y="224.742938" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_83">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: start" x="483.959543" y="227.380876" transform="rotate(-0 483.959543 227.380876)">500</text>
+     </g>
+    </g>
+    <g id="text_84">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="505.846261" y="232.137124" transform="rotate(-90 505.846261 232.137124)">MPa</text>
+    </g>
+   </g>
+   <g id="LineCollection_4"/>
+   <g id="patch_33">
+    <path d="M 473.410572 267.626829 
+L 475.185057 267.626829 
+L 476.959543 267.626829 
+L 476.959543 196.64742 
+L 475.185057 196.64742 
+L 473.410572 196.64742 
+L 473.410572 267.626829 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="axes_11">
+   <g id="patch_34">
+    <path d="M 221.821596 408.695332 
+L 225.370566 408.695332 
+L 225.370566 337.715924 
+L 221.821596 337.715924 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAUAAABiCAYAAACYnhkHAAAApklEQVR4nOWSQQ6EMAwD08Z8ZD/H6/aBULpwh0EyQisO9GhN4tpt+YzfNXZHg8peCynrUcwKIo5XJBPIJCMRKdlXummE2Ykc7JZ0oWQy4uxuS38xwj7tcd8oC4qHjxywMUIZNkk7k8hKO+GDnJG2+6sTkTuStxPZRnai3zSDuCwgzkS27pK+EZErkX1qpvvJuEvilToa+YU0u+QL1VEh/ms++0ZQyAZMI3OEKaBHuAAAAABJRU5ErkJggg==" id="image738137a4d6" transform="scale(1 -1) translate(0 -70.56)" x="221.76" y="-337.68" width="3.6" height="70.56"/>
+   <g id="matplotlib.axis_21"/>
+   <g id="matplotlib.axis_22">
+    <g id="ytick_27">
+     <g id="line2d_57">
+      <g>
+       <use xlink:href="#mbc5cf705ed" x="225.370566" y="408.695332" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_85">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: start" x="232.370566" y="411.33327" transform="rotate(-0 232.370566 411.33327)">0</text>
+     </g>
+    </g>
+    <g id="ytick_28">
+     <g id="line2d_58">
+      <g>
+       <use xlink:href="#mbc5cf705ed" x="225.370566" y="365.811442" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_86">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: start" x="232.370566" y="368.449379" transform="rotate(-0 232.370566 368.449379)">500</text>
+     </g>
+    </g>
+    <g id="text_87">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="254.257285" y="373.205628" transform="rotate(-90 254.257285 373.205628)">MPa</text>
+    </g>
+   </g>
+   <g id="LineCollection_5"/>
+   <g id="patch_35">
+    <path d="M 221.821596 408.695332 
+L 223.596081 408.695332 
+L 225.370566 408.695332 
+L 225.370566 337.715924 
+L 223.596081 337.715924 
+L 221.821596 337.715924 
+L 221.821596 408.695332 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="axes_12">
+   <g id="patch_36">
+    <path d="M 473.410572 408.695332 
+L 476.959543 408.695332 
+L 476.959543 337.715924 
+L 473.410572 337.715924 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <image xlink:href="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAAQAAABiCAYAAAB3XHI5AAAAoklEQVR4nN2RQQ6DMAwEndh8pJ/r6/pACGm4NmOkRajqoRxX43HWlMfzNezjiyWKTUF4nQOvCNJITYSDcEqDRIRce0OaupBYZNu4cCBKcxfV9ivSdA85oqVeUjDmYDaYhZsk6HASlQ78uDNCbvmrl3JLIm69VErlS9/rhmDfEWwkWleElpIYJPraxJaTEUWktT1JdbkmD3ShPsvpq//mpih3AJTyc4Tu2+rxAAAAAElFTkSuQmCC" id="imagecd93a0c045" transform="scale(1 -1) translate(0 -70.56)" x="473.76" y="-337.68" width="2.88" height="70.56"/>
+   <g id="matplotlib.axis_23"/>
+   <g id="matplotlib.axis_24">
+    <g id="ytick_29">
+     <g id="line2d_59">
+      <g>
+       <use xlink:href="#mbc5cf705ed" x="476.959543" y="408.695332" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_88">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: start" x="483.959543" y="411.33327" transform="rotate(-0 483.959543 411.33327)">0</text>
+     </g>
+    </g>
+    <g id="ytick_30">
+     <g id="line2d_60">
+      <g>
+       <use xlink:href="#mbc5cf705ed" x="476.959543" y="365.811442" style="stroke: #000000; stroke-width: 0.6"/>
+      </g>
+     </g>
+     <g id="text_89">
+      <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: start" x="483.959543" y="368.449379" transform="rotate(-0 483.959543 368.449379)">500</text>
+     </g>
+    </g>
+    <g id="text_90">
+     <text style="font: 6.6px 'Microsoft YaHei'; text-anchor: middle" x="505.846261" y="373.205628" transform="rotate(-90 505.846261 373.205628)">MPa</text>
+    </g>
+   </g>
+   <g id="LineCollection_6"/>
+   <g id="patch_37">
+    <path d="M 473.410572 408.695332 
+L 475.185057 408.695332 
+L 476.959543 408.695332 
+L 476.959543 337.715924 
+L 475.185057 337.715924 
+L 473.410572 337.715924 
+L 473.410572 408.695332 
+z
+" style="fill: none; stroke: #000000; stroke-width: 0.65; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+  </g>
+  <g id="text_91">
+   <text style="font: 700 8px 'Microsoft YaHei'; text-anchor: middle" x="259.370079" y="8.772559" transform="rotate(-0 259.370079 8.772559)">正向峰载：三行星、两副的完整通过程斑点</text>
+  </g>
+  <g id="text_92">
+   <text style="fill: #444444; font: 5.8px 'Microsoft YaHei'; text-anchor: start" x="10.374803" y="469.805669" transform="rotate(-0 10.374803 469.805669)">局部Hertz带后处理；灰区为理论路径外，白区为未记录正压；空隙及边缘误差见数据。</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pacb2b4e120">
+   <rect x="33.568217" y="43.749015" width="179.288932" height="94.639211"/>
+  </clipPath>
+  <clipPath id="pa4bc6dcf28">
+   <rect x="285.157194" y="43.749015" width="179.288932" height="94.639211"/>
+  </clipPath>
+  <clipPath id="pb460d46377">
+   <rect x="33.568217" y="184.817519" width="179.288932" height="94.639211"/>
+  </clipPath>
+  <clipPath id="pbab306760d">
+   <rect x="285.157194" y="184.817519" width="179.288932" height="94.639211"/>
+  </clipPath>
+  <clipPath id="p6aa6d54873">
+   <rect x="33.568217" y="325.886022" width="179.288932" height="94.639211"/>
+  </clipPath>
+  <clipPath id="p002c1a1ce9">
+   <rect x="285.157194" y="325.886022" width="179.288932" height="94.639211"/>
+  </clipPath>
+ </defs>
+</svg>
