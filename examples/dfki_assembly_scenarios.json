@@ -1,0 +1,46 @@
+{
+  "description": "有限装配与支承敏感性假设，尚无制造公差或实测分布依据，不是概率可靠度分析",
+  "required_checks": [
+    "maximum_load_share_factor",
+    "minimum_output_torsional_stiffness_n_m_per_rad",
+    "contact_pressure_pa",
+    "planet_pin_static",
+    "minimum_planet_bearing_static_safety_factor"
+  ],
+  "scenarios": [
+    {
+      "id": "path_offsets",
+      "description": "两个工作面的部分路径误差相对名义值变化1微米；不是单一尺寸公差的直接映射",
+      "overrides": {
+        "load_sharing": {
+          "positive_path_gaps_m": [0, 0.000002, -0.0000015],
+          "negative_path_gaps_m": [0.0000015, -0.0000015, 0.000001]
+        }
+      }
+    },
+    {
+      "id": "sun_support_soft",
+      "description": "太阳径向支承刚度取名义值50%，用于初步敏感性观察，不是材料或装配分布",
+      "overrides": {"load_sharing": {"sun_radial_stiffness_n_per_m": 7500000}}
+    },
+    {
+      "id": "pin_sizes",
+      "description": "三根销直径分别5.98/6.00/6.02毫米，保留材料、许用值和轴承容量；不是配合等级或采购选型",
+      "overrides": {
+        "planet_support": {"pins": [{"diameter_m": 0.00598}, {}, {"diameter_m": 0.00602}]}
+      }
+    },
+    {
+      "id": "combined",
+      "description": "同时施加以上已定义变化，作为一个明确组合点，未枚举连续域或全部公差角点",
+      "overrides": {
+        "load_sharing": {
+          "positive_path_gaps_m": [0, 0.000002, -0.0000015],
+          "negative_path_gaps_m": [0.0000015, -0.0000015, 0.000001],
+          "sun_radial_stiffness_n_per_m": 7500000
+        },
+        "planet_support": {"pins": [{"diameter_m": 0.00598}, {}, {"diameter_m": 0.00602}]}
+      }
+    }
+  ]
+}

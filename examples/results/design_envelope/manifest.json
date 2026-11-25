@@ -1,0 +1,15 @@
+{
+  "version": "0.5.0",
+  "files": {
+    "base_input.json": "b02cce1ea60f8d40e0aa79be56b35f3286f11a2040454d2010c1e7b0b2d8995a",
+    "combined_input.json": "c8d2eb46c3872f360ef8f06464f1b0ad5c5981ce7ccfd97652f3bcf16a043312",
+    "margins.csv": "b5700de6da88367fd5deea0252db8f19a3f8541b8a92fdf3086931ff836512a9",
+    "nominal_input.json": "b02cce1ea60f8d40e0aa79be56b35f3286f11a2040454d2010c1e7b0b2d8995a",
+    "path_offsets_input.json": "162672e090174c52f588108833bcd1f702355907540001ab292e0771a541d19d",
+    "pin_sizes_input.json": "9b4f2fc95bf38c97844d22498ed9be47a557f5daa1286c7094a11e49361a4c1c",
+    "report.en.md": "1325e4d7a44773096b042dbe6f3efca1989a6edc0271c4161b495afdc95ef61b",
+    "report.md": "b76794b81908ea6e4187bb377e59c98bc4d1d9bb4f3c69adec1799b1623529df",
+    "study.json": "817afe05bb07caa5e92a3a210d92b34409576649202459cbf52b9145f77322d0",
+    "sun_support_soft_input.json": "c691867651f1d54ec1af6ebfecfa910bf3d6a286a243c2642ce85f90d807cee2"
+  }
+}

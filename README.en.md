@@ -2,7 +2,7 @@
 
 [中文](README.md) · [English](README.en.md)
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE) [![Version](https://img.shields.io/badge/version-0.4.0-blue)](https://github.com/Lilililiyyy/robot-joint-design/tree/v0.4.0)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE) [![Version](https://img.shields.io/badge/version-0.5.0-blue)](https://github.com/Lilililiyyy/robot-joint-design/tree/v0.5.0)
 
 An independently developed robot joint design project for single-stage NGW planetary actuators. It connects task loads, gear contact, structural support, motor sizing, precision and thermal performance through parameterized calculations. Complete Python source, bilingual worked examples and engineering data exports support standalone use and integration into a design workflow.
 
@@ -33,6 +33,8 @@ An independently developed robot joint design project for single-stage NGW plane
 Modules share SI units and callable interfaces. See the [model](docs/model.en.md) and [API](docs/api.en.md) for equations and input/output definitions.
 
 ## Installation and use
+
+For product-specific work, follow the [practical input/workflow guide](docs/practical_workflow.en.md). Standard reports now retain signed margins. [Finite scenario studies](docs/design_envelope.en.md) recalculate assembly/support changes and locate governing states, planets and meshes; missing required checks cannot count as a pass.
 
 Python 3.10 or newer is required. From the repository root:
 
@@ -98,6 +100,16 @@ python -m examples.compare_pin_stiffness --output output/pin_comparison
 
 The model remains a simply supported solid-pin bending/shear model with explicit boundary assumptions. Short-pin hole contact, fits and carrier-plate response require separate validation. See [planet support](docs/planet_support.en.md) for parameters and integration.
 
+**Margins under assembly and support changes**
+
+The [editable specification](examples/dfki_assembly_scenarios.json) varies path errors, sun radial stiffness, individual pin sizes and one combined point under the same duty and limits. Every scenario recalculates sharing and both meshes. See the [finite scenario report](examples/results/design_envelope/report.en.md). These sensitivity assumptions are neither manufacturing distributions nor failure probabilities or continuous-domain worst cases.
+
+The nominal design passes, but selected assumed 1 μm path changes raise the maximum sharing factor to 2.775, and the combined scenario reduces minimum output stiffness to about 11146 N·m/rad. These violate the respective 2.0 upper and 20000 lower limits, directing attention to assembly/support requirements and governing states.
+
+```bash
+python -m examples.design_envelope --output output/design_envelope
+```
+
 The [worked example](docs/examples.en.md) explains module inputs, results and design tradeoffs. [Design criteria](docs/design_review.en.md) summarize requirements and engineering boundaries.
 
 ## Result benchmarks
@@ -123,6 +135,7 @@ Outputs support design calculation and candidate selection. Manufacturing requir
 
 ## Version history
 
+- **0.5.0**: Added signed margins, governing states/components and finite assembly/support scenario studies; missing required checks block acceptance; documented real-module inputs and workflow.
 - **0.4.0**: Added an explicit pin geometry/material stiffness source, sharing and final mesh/pin/bearing checks, reproducible diameter comparisons and per-pin provenance; preserved direct stiffness inputs.
 - **0.3.3**: Unified contact-pressure colour scale and figure style; added version badge, bilingual history and roadmap.
 - **0.3.2**: Refined standalone documentation and focused public presentation on design capabilities and results.

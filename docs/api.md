@@ -47,6 +47,10 @@ result = analyze_joint(config)
 
 `analyze_joint(config) -> JointResult`：解析JSON兼容的命名配置，计算所有工况。原配置不修改。`export_joint(result, output_dir, plots=False)`：导出输入、诊断、全数组与报告。`compare_joint_designs(configs)`：重算每个完整候选；`results`保留原结果对象，`candidates`给出可序列化比较表，只在已配置约束通过的候选内判定Pareto非支配。
 
+`constraint_margins(result)`返回逐判据有符号绝对/相对裕量和可追溯危险位置；`export_joint`默认另存`constraint_margins.json`。零限值不构造百分比，未评价/未配置项不产生裕量。
+
+`analyze_joint_envelope(config, scenarios, *, required_checks)`自动包含名义方案，对明确列出的装配/支承情景重算完整任务；返回`scenarios`、`worst_checks`、`all_scenarios_accepted`及原`results`对象。`export_joint_envelope(study, output_dir)`导出完整采用输入、CSV、双语报告及清单。所需判据缺失或任一已配置项失败均阻止情景通过；不收敛直接报错。输入白名单、判据名和有限域解释见[设计裕量](design_envelope.md)。这是新增独立接口，原单方案计算与`JointResult`布局不变。
+
 ## 主要输入
 
 |字段|含义|

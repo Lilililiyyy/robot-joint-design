@@ -1,0 +1,5637 @@
+{
+  "schema_version": 1,
+  "base_input": {
+    "schema_version": 1,
+    "case_id": "dfki_pin_geometry",
+    "label": "DFKI实物摆台需求驱动的6:1关节传动再设计",
+    "stage": {
+      "sun_teeth": 20,
+      "planet_teeth": 40,
+      "ring_teeth": 100,
+      "planet_count": 3,
+      "module_m": 0.0005,
+      "face_width_m": 0.005,
+      "pressure_angle_rad": 0.3490658503988659
+    },
+    "duty_segments": [
+      {
+        "label": "forward_01",
+        "duration_s": 0.03125,
+        "output_torque_n_m": -0.490361407427342,
+        "output_speed_rad_s": 0.11516840134047665,
+        "output_acceleration_rad_s2": 14.266021327336462,
+        "output_wrench": [
+          2.1849430741784017,
+          2.860545103226062,
+          0,
+          0,
+          0,
+          -0.490361407427342
+        ]
+      },
+      {
+        "label": "forward_02",
+        "duration_s": 0.03125,
+        "output_torque_n_m": 2.55761725822436,
+        "output_speed_rad_s": 0.9070859830864388,
+        "output_acceleration_rad_s2": 34.698645421973204,
+        "output_wrench": [
+          5.65239646383257,
+          -2.339663254112729,
+          0,
+          0,
+          0,
+          2.55761725822436
+        ]
+      },
+      {
+        "label": "forward_03",
+        "duration_s": 0.03125,
+        "output_torque_n_m": 4.259032417895305,
+        "output_speed_rad_s": 2.184124989001235,
+        "output_acceleration_rad_s2": 45.55922940020354,
+        "output_wrench": [
+          8.9108501506957,
+          -4.159221123205551,
+          0,
+          0,
+          0,
+          4.259032417895305
+        ]
+      },
+      {
+        "label": "forward_04",
+        "duration_s": 0.03125,
+        "output_torque_n_m": 4.856970175951614,
+        "output_speed_rad_s": 3.67016887726545,
+        "output_acceleration_rad_s2": 48.320394818397695,
+        "output_wrench": [
+          12.456939039214381,
+          -2.294360941342284,
+          0,
+          0,
+          0,
+          4.856970175951614
+        ]
+      },
+      {
+        "label": "forward_05",
+        "duration_s": 0.03125,
+        "output_torque_n_m": 4.597047077169747,
+        "output_speed_rad_s": 5.135120529696237,
+        "output_acceleration_rad_s2": 44.45476323292588,
+        "output_wrench": [
+          15.408763084212962,
+          3.1806557092448644,
+          0,
+          0,
+          0,
+          4.597047077169747
+        ]
+      },
+      {
+        "label": "forward_06",
+        "duration_s": 0.03125,
+        "output_torque_n_m": 3.719264583549096,
+        "output_speed_rad_s": 6.39490225174732,
+        "output_acceleration_rad_s2": 35.43495620015831,
+        "output_wrench": [
+          15.878045560520302,
+          11.231602285827027,
+          0,
+          0,
+          0,
+          3.719264583549096
+        ]
+      },
+      {
+        "label": "forward_07",
+        "duration_s": 0.03125,
+        "output_torque_n_m": 2.440967682202004,
+        "output_speed_rad_s": 7.311455772508991,
+        "output_acceleration_rad_s2": 22.733595276465202,
+        "output_wrench": [
+          12.24807340692584,
+          19.474005728724535,
+          0,
+          0,
+          0,
+          2.440967682202004
+        ]
+      },
+      {
+        "label": "forward_08",
+        "duration_s": 0.03125,
+        "output_torque_n_m": 0.9425781905894918,
+        "output_speed_rad_s": 7.79274224470811,
+        "output_acceleration_rad_s2": 7.823302018216769,
+        "output_wrench": [
+          4.637229106645791,
+          24.753004391975605,
+          0,
+          0,
+          0,
+          0.9425781905894918
+        ]
+      },
+      {
+        "label": "forward_09",
+        "duration_s": 0.03125,
+        "output_torque_n_m": -0.6308685008011673,
+        "output_speed_rad_s": 7.79274224470811,
+        "output_acceleration_rad_s2": -7.823302018216769,
+        "output_wrench": [
+          -4.637229106645791,
+          24.753004391975605,
+          0,
+          0,
+          0,
+          -0.6308685008011673
+        ]
+      },
+      {
+        "label": "forward_10",
+        "duration_s": 0.03125,
+        "output_torque_n_m": -2.1485094513016447,
+        "output_speed_rad_s": 7.311455772508991,
+        "output_acceleration_rad_s2": -22.733595276465202,
+        "output_wrench": [
+          -12.24807340692584,
+          19.474005728724535,
+          0,
+          0,
+          0,
+          -2.1485094513016447
+        ]
+      },
+      {
+        "label": "forward_11",
+        "duration_s": 0.03125,
+        "output_torque_n_m": -3.463468493479203,
+        "output_speed_rad_s": 6.39490225174732,
+        "output_acceleration_rad_s2": -35.43495620015831,
+        "output_wrench": [
+          -15.878045560520302,
+          11.231602285827027,
+          0,
+          0,
+          0,
+          -3.463468493479203
+        ]
+      },
+      {
+        "label": "forward_12",
+        "duration_s": 0.03125,
+        "output_torque_n_m": -4.391642255981897,
+        "output_speed_rad_s": 5.135120529696237,
+        "output_acceleration_rad_s2": -44.45476323292588,
+        "output_wrench": [
+          -15.408763084212962,
+          3.1806557092448644,
+          0,
+          0,
+          0,
+          -4.391642255981897
+        ]
+      },
+      {
+        "label": "forward_13",
+        "duration_s": 0.03125,
+        "output_torque_n_m": -4.710163420860996,
+        "output_speed_rad_s": 3.67016887726545,
+        "output_acceleration_rad_s2": -48.320394818397695,
+        "output_wrench": [
+          -12.45693903921438,
+          -2.294360941342284,
+          0,
+          0,
+          0,
+          -4.710163420860996
+        ]
+      },
+      {
+        "label": "forward_14",
+        "duration_s": 0.03125,
+        "output_torque_n_m": -4.171667418335256,
+        "output_speed_rad_s": 2.184124989001235,
+        "output_acceleration_rad_s2": -45.55922940020354,
+        "output_wrench": [
+          -8.9108501506957,
+          -4.159221123205551,
+          0,
+          0,
+          0,
+          -4.171667418335256
+        ]
+      },
+      {
+        "label": "forward_15",
+        "duration_s": 0.03125,
+        "output_torque_n_m": -2.521333818900902,
+        "output_speed_rad_s": 0.9070859830864388,
+        "output_acceleration_rad_s2": -34.698645421973204,
+        "output_wrench": [
+          -5.652396463832569,
+          -2.3396632541127302,
+          0,
+          0,
+          0,
+          -2.521333818900902
+        ]
+      },
+      {
+        "label": "forward_16",
+        "duration_s": 0.03125,
+        "output_torque_n_m": 0.4949681434809611,
+        "output_speed_rad_s": 0.11516840134047665,
+        "output_acceleration_rad_s2": -14.266021327336462,
+        "output_wrench": [
+          -2.1849430741784017,
+          2.860545103226062,
+          0,
+          0,
+          0,
+          0.4949681434809611
+        ]
+      },
+      {
+        "label": "hold_forward",
+        "duration_s": 0.4,
+        "output_torque_n_m": 2.5954391639987926,
+        "output_speed_rad_s": 0,
+        "output_acceleration_rad_s2": 0,
+        "output_wrench": [
+          0,
+          6.63156,
+          0,
+          0,
+          0,
+          2.5954391639987926
+        ]
+      },
+      {
+        "label": "reverse_01",
+        "duration_s": 0.03125,
+        "output_torque_n_m": 0.490361407427342,
+        "output_speed_rad_s": -0.11516840134047665,
+        "output_acceleration_rad_s2": -14.266021327336462,
+        "output_wrench": [
+          -2.1849430741784017,
+          2.860545103226062,
+          0,
+          0,
+          0,
+          0.490361407427342
+        ]
+      },
+      {
+        "label": "reverse_02",
+        "duration_s": 0.03125,
+        "output_torque_n_m": -2.55761725822436,
+        "output_speed_rad_s": -0.9070859830864388,
+        "output_acceleration_rad_s2": -34.698645421973204,
+        "output_wrench": [
+          -5.65239646383257,
+          -2.339663254112729,
+          0,
+          0,
+          0,
+          -2.55761725822436
+        ]
+      },
+      {
+        "label": "reverse_03",
+        "duration_s": 0.03125,
+        "output_torque_n_m": -4.259032417895305,
+        "output_speed_rad_s": -2.184124989001235,
+        "output_acceleration_rad_s2": -45.55922940020354,
+        "output_wrench": [
+          -8.9108501506957,
+          -4.159221123205551,
+          0,
+          0,
+          0,
+          -4.259032417895305
+        ]
+      },
+      {
+        "label": "reverse_04",
+        "duration_s": 0.03125,
+        "output_torque_n_m": -4.856970175951614,
+        "output_speed_rad_s": -3.67016887726545,
+        "output_acceleration_rad_s2": -48.320394818397695,
+        "output_wrench": [
+          -12.456939039214381,
+          -2.294360941342284,
+          0,
+          0,
+          0,
+          -4.856970175951614
+        ]
+      },
+      {
+        "label": "reverse_05",
+        "duration_s": 0.03125,
+        "output_torque_n_m": -4.597047077169747,
+        "output_speed_rad_s": -5.135120529696237,
+        "output_acceleration_rad_s2": -44.45476323292588,
+        "output_wrench": [
+          -15.408763084212962,
+          3.1806557092448644,
+          0,
+          0,
+          0,
+          -4.597047077169747
+        ]
+      },
+      {
+        "label": "reverse_06",
+        "duration_s": 0.03125,
+        "output_torque_n_m": -3.719264583549096,
+        "output_speed_rad_s": -6.39490225174732,
+        "output_acceleration_rad_s2": -35.43495620015831,
+        "output_wrench": [
+          -15.878045560520302,
+          11.231602285827027,
+          0,
+          0,
+          0,
+          -3.719264583549096
+        ]
+      },
+      {
+        "label": "reverse_07",
+        "duration_s": 0.03125,
+        "output_torque_n_m": -2.440967682202004,
+        "output_speed_rad_s": -7.311455772508991,
+        "output_acceleration_rad_s2": -22.733595276465202,
+        "output_wrench": [
+          -12.24807340692584,
+          19.474005728724535,
+          0,
+          0,
+          0,
+          -2.440967682202004
+        ]
+      },
+      {
+        "label": "reverse_08",
+        "duration_s": 0.03125,
+        "output_torque_n_m": -0.9425781905894918,
+        "output_speed_rad_s": -7.79274224470811,
+        "output_acceleration_rad_s2": -7.823302018216769,
+        "output_wrench": [
+          -4.637229106645791,
+          24.753004391975605,
+          0,
+          0,
+          0,
+          -0.9425781905894918
+        ]
+      },
+      {
+        "label": "reverse_09",
+        "duration_s": 0.03125,
+        "output_torque_n_m": 0.6308685008011673,
+        "output_speed_rad_s": -7.79274224470811,
+        "output_acceleration_rad_s2": 7.823302018216769,
+        "output_wrench": [
+          4.637229106645791,
+          24.753004391975605,
+          0,
+          0,
+          0,
+          0.6308685008011673
+        ]
+      },
+      {
+        "label": "reverse_10",
+        "duration_s": 0.03125,
+        "output_torque_n_m": 2.1485094513016447,
+        "output_speed_rad_s": -7.311455772508991,
+        "output_acceleration_rad_s2": 22.733595276465202,
+        "output_wrench": [
+          12.24807340692584,
+          19.474005728724535,
+          0,
+          0,
+          0,
+          2.1485094513016447
+        ]
+      },
+      {
+        "label": "reverse_11",
+        "duration_s": 0.03125,
+        "output_torque_n_m": 3.463468493479203,
+        "output_speed_rad_s": -6.39490225174732,
+        "output_acceleration_rad_s2": 35.43495620015831,
+        "output_wrench": [
+          15.878045560520302,
+          11.231602285827027,
+          0,
+          0,
+          0,
+          3.463468493479203
+        ]
+      },
+      {
+        "label": "reverse_12",
+        "duration_s": 0.03125,
+        "output_torque_n_m": 4.391642255981897,
+        "output_speed_rad_s": -5.135120529696237,
+        "output_acceleration_rad_s2": 44.45476323292588,
+        "output_wrench": [
+          15.408763084212962,
+          3.1806557092448644,
+          0,
+          0,
+          0,
+          4.391642255981897
+        ]
+      },
+      {
+        "label": "reverse_13",
+        "duration_s": 0.03125,
+        "output_torque_n_m": 4.710163420860996,
+        "output_speed_rad_s": -3.67016887726545,
+        "output_acceleration_rad_s2": 48.320394818397695,
+        "output_wrench": [
+          12.45693903921438,
+          -2.294360941342284,
+          0,
+          0,
+          0,
+          4.710163420860996
+        ]
+      },
+      {
+        "label": "reverse_14",
+        "duration_s": 0.03125,
+        "output_torque_n_m": 4.171667418335256,
+        "output_speed_rad_s": -2.184124989001235,
+        "output_acceleration_rad_s2": 45.55922940020354,
+        "output_wrench": [
+          8.9108501506957,
+          -4.159221123205551,
+          0,
+          0,
+          0,
+          4.171667418335256
+        ]
+      },
+      {
+        "label": "reverse_15",
+        "duration_s": 0.03125,
+        "output_torque_n_m": 2.521333818900902,
+        "output_speed_rad_s": -0.9070859830864388,
+        "output_acceleration_rad_s2": 34.698645421973204,
+        "output_wrench": [
+          5.652396463832569,
+          -2.3396632541127302,
+          0,
+          0,
+          0,
+          2.521333818900902
+        ]
+      },
+      {
+        "label": "reverse_16",
+        "duration_s": 0.03125,
+        "output_torque_n_m": -0.4949681434809611,
+        "output_speed_rad_s": -0.11516840134047665,
+        "output_acceleration_rad_s2": 14.266021327336462,
+        "output_wrench": [
+          2.1849430741784017,
+          2.860545103226062,
+          0,
+          0,
+          0,
+          -0.4949681434809611
+        ]
+      },
+      {
+        "label": "hold_reverse",
+        "duration_s": 0.4,
+        "output_torque_n_m": -2.5954391639987926,
+        "output_speed_rad_s": 0,
+        "output_acceleration_rad_s2": 0,
+        "output_wrench": [
+          0,
+          6.63156,
+          0,
+          0,
+          0,
+          -2.5954391639987926
+        ]
+      }
+    ],
+    "load_sharing": {
+      "initial_mesh_stiffness_n_per_m": 80000000.0,
+      "sun_radial_stiffness_n_per_m": 15000000.0,
+      "positive_path_gaps_m": [
+        0,
+        1e-06,
+        -5e-07
+      ],
+      "negative_path_gaps_m": [
+        5e-07,
+        -5e-07,
+        1e-06
+      ],
+      "pin_stiffness_source": "pin_geometry"
+    },
+    "mesh": {
+      "material": {
+        "youngs_modulus_pa": 210000000000.0,
+        "poisson_ratio": 0.3
+      },
+      "phases": 64,
+      "strips": 26,
+      "elastic_mode": "iso",
+      "modifications": {
+        "positive": {
+          "sun_planet": {
+            "pinion": {
+              "lead_crown_m": 3e-07
+            },
+            "wheel": {
+              "lead_crown_m": 2e-07
+            }
+          },
+          "planet_ring": {
+            "pinion": {
+              "lead_crown_m": 2e-07
+            },
+            "wheel": {
+              "lead_crown_m": 2e-07
+            }
+          }
+        },
+        "negative": {
+          "sun_planet": {
+            "pinion": {
+              "lead_crown_m": 3e-07
+            },
+            "wheel": {
+              "lead_crown_m": 2e-07
+            }
+          },
+          "planet_ring": {
+            "pinion": {
+              "lead_crown_m": 2e-07
+            },
+            "wheel": {
+              "lead_crown_m": 2e-07
+            }
+          }
+        }
+      },
+      "alignment_maps": {
+        "sun_planet": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            -0.004698463103929542,
+            0.0017101007166283435,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0008682408883346507,
+            -0.004924038765061041,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0038302222155948916,
+            0.003213938048432695,
+            0.0
+          ]
+        ],
+        "planet_ring": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            -0.004698463103929542,
+            0.0017101007166283435,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0008682408883346507,
+            -0.004924038765061041,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0038302222155948916,
+            0.003213938048432695,
+            0.0
+          ]
+        ]
+      },
+      "coupling": {
+        "maximum_iterations": 60,
+        "force_relative_tolerance": 1e-05,
+        "path_tolerance_m": 2e-09,
+        "relaxation": 0.7
+      }
+    },
+    "support": {
+      "stiffness_matrix": [
+        [
+          50000000.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          50000000.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          80000000.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          50000.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          50000.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          200000.0
+        ]
+      ],
+      "reference_offset_m": 0.0
+    },
+    "bearings": {
+      "spacing_m": 0.024,
+      "load_offset_m": 0.012,
+      "axial_share": 0.5,
+      "ratings": [
+        {
+          "dynamic_capacity_n": 3000,
+          "static_capacity_n": 1500,
+          "exponent": 3.0,
+          "radial_factor": 1,
+          "axial_factor": 1,
+          "static_radial_factor": 1,
+          "static_axial_factor": 1
+        },
+        {
+          "dynamic_capacity_n": 3000,
+          "static_capacity_n": 1500,
+          "exponent": 3.0,
+          "radial_factor": 1,
+          "axial_factor": 1,
+          "static_radial_factor": 1,
+          "static_axial_factor": 1
+        }
+      ]
+    },
+    "motor": {
+      "torque_constant_n_m_per_a": 0.091,
+      "resistance_ohm": 0.1701655996297907,
+      "continuous_torque_n_m": 1.092,
+      "peak_torque_n_m": 2.184,
+      "base_speed_rad_s": 180,
+      "maximum_speed_rad_s": 229.2,
+      "rotor_inertia_kg_m2": 6.0719e-05,
+      "no_load_loss_w": 0.5,
+      "speed_loss_w_per_rad_s_squared": 0.0001
+    },
+    "drive": {
+      "forward_efficiency": 0.94,
+      "backdrive_efficiency": 0.9,
+      "brake_torque_n_m": 3,
+      "brake_safety_factor": 1.5
+    },
+    "thermal_mode": "periodic_steady",
+    "thermal": {
+      "capacities_j_per_k": [
+        120,
+        80
+      ],
+      "ambient_conductances_w_per_k": [
+        0.8,
+        1.2
+      ],
+      "coupling_w_per_k": 2,
+      "ambient_temperature_k": 298.15
+    },
+    "precision": {
+      "output_backlash_rad": 0.002617993877991494,
+      "encoder_counts_per_revolution": 4096,
+      "encoder_on_output": false,
+      "assembly_error_rad": 0.00017453292519943296
+    },
+    "rating": {
+      "sun_planet": {
+        "mesh_factors": {
+          "application_factor": 1.0,
+          "dynamic_factor": 1.1,
+          "additional_load_factor": 1.0,
+          "face_contact_factor": 1.1,
+          "transverse_contact_factor": 1.0,
+          "face_bending_factor": 1.1,
+          "transverse_bending_factor": 1.0,
+          "contact_ratio_factor": 0.9,
+          "helix_contact_factor": 1.0,
+          "helix_bending_factor": 1.0,
+          "root_contact_ratio_factor": 1.0,
+          "deep_tooth_factor": 1.0
+        },
+        "pinion_factors": {
+          "form_factor": 2.8,
+          "stress_correction_factor": 1.6,
+          "rim_factor": 1.0,
+          "single_pair_contact_factor": 1.0,
+          "root_stress_face_width_m": 0.005
+        },
+        "wheel_factors": {
+          "form_factor": 2.8,
+          "stress_correction_factor": 1.6,
+          "rim_factor": 1.0,
+          "single_pair_contact_factor": 1.0,
+          "root_stress_face_width_m": 0.005
+        },
+        "pinion_limits": {
+          "contact_limit_pa": 900000000.0,
+          "bending_limit_pa": 300000000.0
+        },
+        "wheel_limits": {
+          "contact_limit_pa": 900000000.0,
+          "bending_limit_pa": 300000000.0
+        }
+      },
+      "planet_ring": {
+        "mesh_factors": {
+          "application_factor": 1.0,
+          "dynamic_factor": 1.1,
+          "additional_load_factor": 1.0,
+          "face_contact_factor": 1.1,
+          "transverse_contact_factor": 1.0,
+          "face_bending_factor": 1.1,
+          "transverse_bending_factor": 1.0,
+          "contact_ratio_factor": 0.9,
+          "helix_contact_factor": 1.0,
+          "helix_bending_factor": 1.0,
+          "root_contact_ratio_factor": 1.0,
+          "deep_tooth_factor": 1.0
+        },
+        "pinion_factors": {
+          "form_factor": 2.8,
+          "stress_correction_factor": 1.6,
+          "rim_factor": 1.0,
+          "single_pair_contact_factor": 1.0,
+          "root_stress_face_width_m": 0.005
+        },
+        "wheel_factors": {
+          "form_factor": 2.8,
+          "stress_correction_factor": 1.6,
+          "rim_factor": 1.0,
+          "single_pair_contact_factor": 1.0,
+          "root_stress_face_width_m": 0.005
+        },
+        "pinion_limits": {
+          "contact_limit_pa": 900000000.0,
+          "bending_limit_pa": 300000000.0
+        },
+        "wheel_limits": {
+          "contact_limit_pa": 900000000.0,
+          "bending_limit_pa": 300000000.0
+        }
+      }
+    },
+    "fatigue": {
+      "stress_history_pa": [
+        -5884336.889128104,
+        30691407.09869232,
+        51108389.01474366,
+        58283642.111419365,
+        55164564.92603696,
+        44631175.00258915,
+        29291612.186424047,
+        11310938.2870739,
+        -7570422.009614008,
+        -25782113.41561974,
+        -41561621.921750434,
+        -52699707.07178277,
+        -56521961.05033196,
+        -50060009.02002307,
+        -30256005.826810826,
+        5939617.721771533,
+        31145269.96798551,
+        5884336.889128104,
+        -30691407.09869232,
+        -51108389.01474366,
+        -58283642.111419365,
+        -55164564.92603696,
+        -44631175.00258915,
+        -29291612.186424047,
+        -11310938.2870739,
+        7570422.009614008,
+        25782113.41561974,
+        41561621.921750434,
+        52699707.07178277,
+        56521961.05033196,
+        50060009.02002307,
+        30256005.826810826,
+        -5939617.721771533,
+        -31145269.96798551,
+        -5884336.889128104
+      ],
+      "reference_stress_pa": 80000000.0,
+      "reference_cycles": 1000000.0,
+      "slope": 5,
+      "ultimate_strength_pa": 600000000.0
+    },
+    "design_limits": {
+      "contact_pressure_pa": 1200000000.0,
+      "angle_budget_rad": 0.003490658503988659,
+      "motor_temperature_k": 353.15,
+      "gear_temperature_k": 343.15,
+      "minimum_output_torsional_stiffness_n_m_per_rad": 20000.0,
+      "maximum_load_share_factor": 2.0,
+      "fatigue_damage_per_input_history": 1.0,
+      "maximum_pin_stiffness_relative_difference": 0.05,
+      "minimum_planet_bearing_static_safety_factor": 2.0
+    },
+    "notes": [
+      "真实需求参照与新设计模型；不是AK80-6或DFKI样机的内部结构恢复、实测回放或产品认证。",
+      "工作轨迹、阻尼、压力角、修形、支承/失准映射、外部评级因子/应力限、轴承参数、效率、热参数、S-N及制动器均为新增设计假设；未获DFKI或mjbots标定。",
+      "供应页的30mm中心距表述与m=0.5mm、20/40齿的零变位关系不一致。采用a=m(zs+zp)/2=15mm，30mm仅保留为待确认信息，不能用其重定义模型。",
+      "分段中点工况为新设计往返任务的离散近似；不是原台架测量记录。",
+      "相电阻未直接作为铜损系数，Req=(Kt/Km)^2使Kt与Km的电流基准一致；电机包络拐点仍为设计假设。",
+      "结构6×6刚度凝聚于输出载荷端口，reference_offset_m=0；双支承中点至端口偏置另由bearings.load_offset_m=0.012定义。",
+      "新增设计约束Kout≥20000 N·m/rad、Kγ≤2及给定热点输入谱D≤1均为本案例设计假设，不是DFKI原产品规格。",
+      "相位与条带由16×13加密到64×26；峰压代表工况相对256×26的内齿副平均TE差0.932%、输出刚度差0.343%，仅对本次离散比较有效。",
+      "0.3.0新假定设计：6mm圆销、12mm简支跨距、5mm加载宽度、显式弯剪材料参数、行星轴承容量与36V/4700μF/48V母线；均非原产品规格。",
+      "最大销刚度相对差5%与行星轴承静安全2为本例新要求；短粗销三维销孔接触、真实驱动器与摆动寿命仍未验证。",
+      "显式选择pin_geometry，由planet_support.pins计算载荷共轭平均弯剪刚度，再协调全部工况；不使用手工回填刚度。"
+    ],
+    "planet_support": {
+      "pins": {
+        "diameter_m": 0.006,
+        "support_span_m": 0.012,
+        "loaded_width_m": 0.005,
+        "young_modulus_pa": 210000000000.0,
+        "poisson_ratio": 0.3,
+        "shear_coefficient": 0.9,
+        "allowable_bending_stress_pa": 300000000.0,
+        "allowable_shear_stress_pa": 180000000.0,
+        "allowable_projected_pressure_pa": 60000000.0,
+        "required_safety_factor": 1.5
+      },
+      "bearing_ratings": {
+        "dynamic_capacity_n": 800.0,
+        "static_capacity_n": 500.0,
+        "exponent": 3.3333333333333335,
+        "radial_factor": 1.0,
+        "axial_factor": 0.0,
+        "static_radial_factor": 1.0,
+        "static_axial_factor": 0.0
+      }
+    },
+    "dc_bus": {
+      "capacitance_f": 0.0047,
+      "source_voltage_v": 36.0,
+      "minimum_voltage_v": 30.0,
+      "maximum_voltage_v": 48.0,
+      "initial_voltage_v": 36.0,
+      "inverter_motoring_efficiency": 0.96,
+      "inverter_regenerating_efficiency": 0.96,
+      "absorption_power_limit_w": 0.0
+    }
+  },
+  "scenario_definitions": [
+    {
+      "id": "path_offsets",
+      "description": "两个工作面的部分路径误差相对名义值变化1微米；不是单一尺寸公差的直接映射",
+      "overrides": {
+        "load_sharing": {
+          "positive_path_gaps_m": [
+            0,
+            2e-06,
+            -1.5e-06
+          ],
+          "negative_path_gaps_m": [
+            1.5e-06,
+            -1.5e-06,
+            1e-06
+          ]
+        }
+      }
+    },
+    {
+      "id": "sun_support_soft",
+      "description": "太阳径向支承刚度取名义值50%，用于初步敏感性观察，不是材料或装配分布",
+      "overrides": {
+        "load_sharing": {
+          "sun_radial_stiffness_n_per_m": 7500000
+        }
+      }
+    },
+    {
+      "id": "pin_sizes",
+      "description": "三根销直径分别5.98/6.00/6.02毫米，保留材料、许用值和轴承容量；不是配合等级或采购选型",
+      "overrides": {
+        "planet_support": {
+          "pins": [
+            {
+              "diameter_m": 0.00598
+            },
+            {},
+            {
+              "diameter_m": 0.00602
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "combined",
+      "description": "同时施加以上已定义变化，作为一个明确组合点，未枚举连续域或全部公差角点",
+      "overrides": {
+        "load_sharing": {
+          "positive_path_gaps_m": [
+            0,
+            2e-06,
+            -1.5e-06
+          ],
+          "negative_path_gaps_m": [
+            1.5e-06,
+            -1.5e-06,
+            1e-06
+          ],
+          "sun_radial_stiffness_n_per_m": 7500000
+        },
+        "planet_support": {
+          "pins": [
+            {
+              "diameter_m": 0.00598
+            },
+            {},
+            {
+              "diameter_m": 0.00602
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "required_checks": [
+    "maximum_load_share_factor",
+    "minimum_output_torsional_stiffness_n_m_per_rad",
+    "contact_pressure_pa",
+    "planet_pin_static",
+    "minimum_planet_bearing_static_safety_factor"
+  ],
+  "scenarios": [
+    {
+      "id": "nominal",
+      "case_id": "dfki_pin_geometry",
+      "checks": {
+        "motor_speed": {
+          "status": "passed",
+          "actual": 46.756453468248665,
+          "threshold": 229.2,
+          "relation": "<=",
+          "scope": "电机代表工况最大转速，rad/s",
+          "margin": 182.44354653175134,
+          "relative_margin": 0.7960015119186359,
+          "governing_location": {
+            "case_index": 7,
+            "label": "forward_08"
+          }
+        },
+        "motor_peak_torque": {
+          "status": "passed",
+          "actual": 0.40236663055493854,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "逐工况恒转矩—恒功率峰值包络利用率",
+          "margin": 0.5976333694450615,
+          "relative_margin": 0.5976333694450615,
+          "governing_location": {
+            "case_index": 3,
+            "label": "forward_04"
+          }
+        },
+        "motor_continuous_screen": {
+          "status": "passed",
+          "actual": 0.46122601964002785,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "按转速包络归一化的连续转矩RMS初筛，不替代温升校核",
+          "margin": 0.5387739803599721,
+          "relative_margin": 0.5387739803599721,
+          "governing_location": null
+        },
+        "brake_static_screen": {
+          "status": "passed",
+          "actual": 3.0,
+          "threshold": 1.2142425439879034,
+          "relation": ">=",
+          "scope": "输入侧静态保持力矩，N·m；不含动态制动认证",
+          "margin": 1.7857574560120966,
+          "relative_margin": 1.47067607279447,
+          "governing_location": null
+        },
+        "contact_pressure_pa": {
+          "status": "passed",
+          "actual": 827188105.6276364,
+          "threshold": 1200000000.0,
+          "relation": "<=",
+          "scope": "当前离散局部Hertz峰压，Pa；须另查网格/相位收敛",
+          "margin": 372811894.37236357,
+          "relative_margin": 0.3106765786436363,
+          "governing_location": {
+            "mesh": "sun_planet",
+            "planet_index": 1,
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "angle_budget_rad": {
+          "status": "passed",
+          "actual": 0.0017430266916510246,
+          "threshold": 0.003490658503988659,
+          "relation": "<=",
+          "scope": "指定受载状态的未补偿确定性角度预算，rad",
+          "margin": 0.0017476318123376346,
+          "relative_margin": 0.5006596349487279,
+          "governing_location": {
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "motor_temperature_k": {
+          "status": "passed",
+          "actual": 302.0944054354601,
+          "threshold": 353.15,
+          "relation": "<=",
+          "scope": "给定热参数的电机节点最高温度，K",
+          "margin": 51.05559456453989,
+          "relative_margin": 0.14457197951165196,
+          "governing_location": null
+        },
+        "gear_temperature_k": {
+          "status": "passed",
+          "actual": 300.78769106900677,
+          "threshold": 343.15,
+          "relation": "<=",
+          "scope": "给定热参数的传动节点最高温度，K",
+          "margin": 42.36230893099321,
+          "relative_margin": 0.12345128640825648,
+          "governing_location": null
+        },
+        "maximum_load_share_factor": {
+          "status": "passed",
+          "actual": 1.8434415230523722,
+          "threshold": 2.0,
+          "relation": "<=",
+          "scope": "有载工况最大均载系数；全零载时未定义",
+          "margin": 0.1565584769476278,
+          "relative_margin": 0.0782792384738139,
+          "governing_location": {
+            "case_index": 0,
+            "label": "forward_01"
+          }
+        },
+        "fatigue_damage_per_input_history": {
+          "status": "passed",
+          "actual": 2.8112133239961853e-07,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "给定热点标量应力谱的Miner损伤；不代表整关节服役寿命",
+          "margin": 0.9999997188786676,
+          "relative_margin": 0.9999997188786676,
+          "governing_location": null
+        },
+        "maximum_pin_stiffness_relative_difference": {
+          "status": "passed",
+          "actual": 0.0,
+          "threshold": 0.05,
+          "relation": "<=",
+          "scope": "简支圆销平均弯剪刚度与系统最终采用kpin之最大相对差",
+          "margin": 0.05,
+          "relative_margin": 1.0,
+          "governing_location": {
+            "planet_index": 0
+          }
+        },
+        "minimum_contact_safety_factor": {
+          "status": "passed",
+          "actual": 1.4239996738090828,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "给定评级因子与材料限值的最小接触安全系数",
+          "margin": 0.42399967380908277,
+          "relative_margin": 0.42399967380908277,
+          "governing_location": {
+            "mesh": "sun_planet",
+            "planet_index": 1,
+            "gear_role": "pinion",
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "minimum_bending_safety_factor": {
+          "status": "passed",
+          "actual": 2.3276346432909536,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "给定评级因子与材料限值的最小齿根安全系数",
+          "margin": 1.3276346432909536,
+          "relative_margin": 1.3276346432909536,
+          "governing_location": {
+            "mesh": "sun_planet",
+            "planet_index": 1,
+            "gear_role": "pinion",
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "minimum_bearing_static_safety_factor": {
+          "status": "passed",
+          "actual": 59.56250619838511,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "输出双支承基本静安全；不含行星轴承",
+          "margin": 58.56250619838511,
+          "relative_margin": 58.56250619838511,
+          "governing_location": {
+            "case_index": 7,
+            "label": "forward_08",
+            "bearing_index": 1
+          }
+        },
+        "minimum_bearing_life_hours": {
+          "status": "not_configured",
+          "actual": 2337677949.339132,
+          "threshold": null,
+          "relation": ">=",
+          "scope": "输出双支承基本L10小时数；无摆动/润滑/微动修正",
+          "margin": null,
+          "relative_margin": null,
+          "governing_location": null
+        },
+        "minimum_output_torsional_stiffness_n_m_per_rad": {
+          "status": "passed",
+          "actual": 23412.890141885375,
+          "threshold": 20000.0,
+          "relation": ">=",
+          "scope": "最终承载分支局部输出扭转刚度，N·m/rad",
+          "margin": 3412.8901418853748,
+          "relative_margin": 0.17064450709426873,
+          "governing_location": {
+            "case_index": 17,
+            "label": "reverse_01"
+          }
+        },
+        "minimum_planet_bearing_static_safety_factor": {
+          "status": "passed",
+          "actual": 4.205880624783867,
+          "threshold": 2.0,
+          "relation": ">=",
+          "scope": "显式容量/系数下的行星轴承基本静安全",
+          "margin": 2.205880624783867,
+          "relative_margin": 1.1029403123919335,
+          "governing_location": {
+            "case_index": 20,
+            "label": "reverse_04",
+            "planet_index": 1
+          }
+        },
+        "minimum_planet_bearing_basic_l10_hours": {
+          "status": "not_configured",
+          "actual": 632418.0398846733,
+          "threshold": null,
+          "relation": ">=",
+          "scope": "行星相对行星架转速的基本L10小时数；无摆动/润滑修正",
+          "margin": null,
+          "relative_margin": null,
+          "governing_location": null
+        },
+        "planet_pin_static": {
+          "status": "passed",
+          "actual": 0.09906763977355597,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "销弯曲/横剪/平均面压各自实际值×要求安全系数/许用值的最大值；不含局部/疲劳",
+          "margin": 0.9009323602264441,
+          "relative_margin": 0.9009323602264441,
+          "governing_location": {
+            "case_index": 20,
+            "label": "reverse_04",
+            "planet_index": 1,
+            "stress_kind": "projected_pressure"
+          }
+        },
+        "dc_bus_maximum_voltage": {
+          "status": "passed",
+          "actual": 43.193661295810806,
+          "threshold": 48.0,
+          "relation": "<=",
+          "scope": "当前分段恒功率/理想电源/给定回馈吸收模型中的最高母线电压，V",
+          "margin": 4.806338704189194,
+          "relative_margin": 0.10013205633727489,
+          "governing_location": null
+        },
+        "dc_bus_minimum_voltage": {
+          "status": "not_evaluated",
+          "actual": 36.0,
+          "threshold": 30.0,
+          "relation": ">=",
+          "scope": "理想无限供能电源维持源电压下限；未评价真实电源欠压能力，不计为已通过的物理校核",
+          "margin": null,
+          "relative_margin": null,
+          "governing_location": null
+        }
+      },
+      "required_checks_missing": [],
+      "failed_checks": [],
+      "accepted": true,
+      "summary": {
+        "case_id": "dfki_pin_geometry",
+        "ratio": 6.0,
+        "maximum_load_share_factor": 1.8434415230523722,
+        "maximum_contact_pressure_pa": 827188105.6276364,
+        "minimum_output_torsional_stiffness_n_m_per_rad": 23412.890141885375,
+        "maximum_angle_budget_rad": 0.0017430266916510246,
+        "maximum_motor_temperature_k": 302.0944054354601,
+        "maximum_gear_temperature_k": 300.78769106900677,
+        "thermal_mode": "periodic_steady",
+        "minimum_contact_safety_factor": 1.4239996738090828,
+        "minimum_bending_safety_factor": 2.3276346432909536,
+        "minimum_bearing_static_safety_factor": 59.56250619838511,
+        "minimum_bearing_life_hours": 2337677949.339132,
+        "fatigue_damage_per_input_history": 2.8112133239961853e-07,
+        "maximum_pin_static_utilization": 0.09906763977355597,
+        "maximum_pin_stiffness_relative_difference": 0.0,
+        "minimum_planet_bearing_static_safety_factor": 4.205880624783867,
+        "minimum_planet_bearing_basic_l10_hours": 632418.0398846733,
+        "maximum_dc_bus_voltage_v": 43.193661295810806,
+        "all_couplings_converged": true,
+        "checks": {
+          "motor_speed": true,
+          "motor_peak_torque": true,
+          "motor_continuous_screen": true,
+          "brake_static_screen": true,
+          "contact_pressure_pa": true,
+          "angle_budget_rad": true,
+          "motor_temperature_k": true,
+          "gear_temperature_k": true,
+          "minimum_output_torsional_stiffness_n_m_per_rad": true,
+          "maximum_load_share_factor": true,
+          "fatigue_damage_per_input_history": true,
+          "maximum_pin_stiffness_relative_difference": true,
+          "minimum_planet_bearing_static_safety_factor": true,
+          "minimum_contact_safety_factor": true,
+          "minimum_bending_safety_factor": true,
+          "minimum_bearing_static_safety_factor": true,
+          "planet_pin_static": true,
+          "dc_bus_maximum_voltage": true
+        },
+        "check_details": {
+          "motor_speed": {
+            "status": "passed",
+            "actual": 46.756453468248665,
+            "threshold": 229.2,
+            "relation": "<=",
+            "scope": "电机代表工况最大转速，rad/s"
+          },
+          "motor_peak_torque": {
+            "status": "passed",
+            "actual": 0.40236663055493854,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "逐工况恒转矩—恒功率峰值包络利用率"
+          },
+          "motor_continuous_screen": {
+            "status": "passed",
+            "actual": 0.46122601964002785,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "按转速包络归一化的连续转矩RMS初筛，不替代温升校核"
+          },
+          "brake_static_screen": {
+            "status": "passed",
+            "actual": 3.0,
+            "threshold": 1.2142425439879034,
+            "relation": ">=",
+            "scope": "输入侧静态保持力矩，N·m；不含动态制动认证"
+          },
+          "contact_pressure_pa": {
+            "status": "passed",
+            "actual": 827188105.6276364,
+            "threshold": 1200000000.0,
+            "relation": "<=",
+            "scope": "当前离散局部Hertz峰压，Pa；须另查网格/相位收敛"
+          },
+          "angle_budget_rad": {
+            "status": "passed",
+            "actual": 0.0017430266916510246,
+            "threshold": 0.003490658503988659,
+            "relation": "<=",
+            "scope": "指定受载状态的未补偿确定性角度预算，rad"
+          },
+          "motor_temperature_k": {
+            "status": "passed",
+            "actual": 302.0944054354601,
+            "threshold": 353.15,
+            "relation": "<=",
+            "scope": "给定热参数的电机节点最高温度，K"
+          },
+          "gear_temperature_k": {
+            "status": "passed",
+            "actual": 300.78769106900677,
+            "threshold": 343.15,
+            "relation": "<=",
+            "scope": "给定热参数的传动节点最高温度，K"
+          },
+          "maximum_load_share_factor": {
+            "status": "passed",
+            "actual": 1.8434415230523722,
+            "threshold": 2.0,
+            "relation": "<=",
+            "scope": "有载工况最大均载系数；全零载时未定义"
+          },
+          "fatigue_damage_per_input_history": {
+            "status": "passed",
+            "actual": 2.8112133239961853e-07,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "给定热点标量应力谱的Miner损伤；不代表整关节服役寿命"
+          },
+          "maximum_pin_stiffness_relative_difference": {
+            "status": "passed",
+            "actual": 0.0,
+            "threshold": 0.05,
+            "relation": "<=",
+            "scope": "简支圆销平均弯剪刚度与系统最终采用kpin之最大相对差"
+          },
+          "minimum_contact_safety_factor": {
+            "status": "passed",
+            "actual": 1.4239996738090828,
+            "threshold": 1.0,
+            "relation": ">=",
+            "scope": "给定评级因子与材料限值的最小接触安全系数"
+          },
+          "minimum_bending_safety_factor": {
+            "status": "passed",
+            "actual": 2.3276346432909536,
+            "threshold": 1.0,
+            "relation": ">=",
+            "scope": "给定评级因子与材料限值的最小齿根安全系数"
+          },
+          "minimum_bearing_static_safety_factor": {
+            "status": "passed",
+            "actual": 59.56250619838511,
+            "threshold": 1.0,
+            "relation": ">=",
+            "scope": "输出双支承基本静安全；不含行星轴承"
+          },
+          "minimum_bearing_life_hours": {
+            "status": "not_configured",
+            "actual": 2337677949.339132,
+            "threshold": null,
+            "relation": ">=",
+            "scope": "输出双支承基本L10小时数；无摆动/润滑/微动修正"
+          },
+          "minimum_output_torsional_stiffness_n_m_per_rad": {
+            "status": "passed",
+            "actual": 23412.890141885375,
+            "threshold": 20000.0,
+            "relation": ">=",
+            "scope": "最终承载分支局部输出扭转刚度，N·m/rad"
+          },
+          "minimum_planet_bearing_static_safety_factor": {
+            "status": "passed",
+            "actual": 4.205880624783867,
+            "threshold": 2.0,
+            "relation": ">=",
+            "scope": "显式容量/系数下的行星轴承基本静安全"
+          },
+          "minimum_planet_bearing_basic_l10_hours": {
+            "status": "not_configured",
+            "actual": 632418.0398846733,
+            "threshold": null,
+            "relation": ">=",
+            "scope": "行星相对行星架转速的基本L10小时数；无摆动/润滑修正"
+          },
+          "planet_pin_static": {
+            "status": "passed",
+            "actual": 0.09906763977355597,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "销弯曲/横剪/平均面压各自实际值×要求安全系数/许用值的最大值；不含局部/疲劳"
+          },
+          "dc_bus_maximum_voltage": {
+            "status": "passed",
+            "actual": 43.193661295810806,
+            "threshold": 48.0,
+            "relation": "<=",
+            "scope": "当前分段恒功率/理想电源/给定回馈吸收模型中的最高母线电压，V"
+          },
+          "dc_bus_minimum_voltage": {
+            "status": "not_evaluated",
+            "actual": 36.0,
+            "threshold": 30.0,
+            "relation": ">=",
+            "scope": "理想无限供能电源维持源电压下限；未评价真实电源欠压能力，不计为已通过的物理校核"
+          }
+        },
+        "physical_validation": false,
+        "vendor_system_validation": false,
+        "implementation": "新写NGW降阶系统实现，复用公开齿轮内核；非厂商整机等价重建",
+        "scope": "固定环零变位直齿单级NGW、准静态、小变形、周期平均协调；不含RV/谐波、完整FE、同步动力学、控制、润滑预测或实物认证",
+        "assessment_coverage": {
+          "output_bearing_life": "仅基本L10；小角摆动、微动和润滑修正未评估",
+          "hotspot_fatigue": "仅给定标量应力谱",
+          "planet_pin_strength": "简支圆销弯曲/横剪/平均面压与弯剪挠度初筛；局部销孔/配合/疲劳未评估",
+          "planet_bearing_life": "显式容量及相对行星架转速的基本L10/静安全；摆动/润滑修正未评估",
+          "ring_carrier_housing_strength": "未评估；未构造完整实体和FE边界",
+          "regenerative_bus_and_inverter": "分段母线电容能量及给定回馈吸收初筛；未模拟PWM/电源阻抗/真实驱动器包络",
+          "dynamics_and_resonance": "未评估；当前为周期平均准静态协调",
+          "manufacturing_interference": "仅外齿轮标准全齿高齿条根切风险初筛；内齿干涉、尖顶和刀具未评估",
+          "physical_validation": "未完成样机标定与试验"
+        },
+        "configured_checks_pass": true,
+        "check_scope": "仅对已配置约束的数值初筛；未配置强度/寿命/温升限值不自动视为已校核"
+      },
+      "pin_stiffness": {
+        "source": "pin_geometry",
+        "adopted_pin_stiffness_n_per_m": [
+          297707470.9613503,
+          297707470.9613503,
+          297707470.9613503
+        ],
+        "specified_input_n_per_m": null,
+        "specified_input_used": false,
+        "load_independent": true,
+        "planets": [
+          {
+            "planet_index": 0,
+            "adopted_pin_stiffness_n_per_m": 297707470.9613503,
+            "source_parameters": {
+              "diameter_m": 0.006,
+              "support_span_m": 0.012,
+              "loaded_width_m": 0.005,
+              "young_modulus_pa": 210000000000.0,
+              "poisson_ratio": 0.3,
+              "shear_coefficient": 0.9,
+              "support_model": "simply_supported_centered_uniform"
+            },
+            "load_weighted_bending_compliance_m_per_n": 2.304830549576928e-09,
+            "load_weighted_shear_compliance_m_per_n": 1.05417148275643e-09,
+            "span_to_diameter_ratio": 2.0,
+            "short_pin_review_required": true
+          },
+          {
+            "planet_index": 1,
+            "adopted_pin_stiffness_n_per_m": 297707470.9613503,
+            "source_parameters": {
+              "diameter_m": 0.006,
+              "support_span_m": 0.012,
+              "loaded_width_m": 0.005,
+              "young_modulus_pa": 210000000000.0,
+              "poisson_ratio": 0.3,
+              "shear_coefficient": 0.9,
+              "support_model": "simply_supported_centered_uniform"
+            },
+            "load_weighted_bending_compliance_m_per_n": 2.304830549576928e-09,
+            "load_weighted_shear_compliance_m_per_n": 1.05417148275643e-09,
+            "span_to_diameter_ratio": 2.0,
+            "short_pin_review_required": true
+          },
+          {
+            "planet_index": 2,
+            "adopted_pin_stiffness_n_per_m": 297707470.9613503,
+            "source_parameters": {
+              "diameter_m": 0.006,
+              "support_span_m": 0.012,
+              "loaded_width_m": 0.005,
+              "young_modulus_pa": 210000000000.0,
+              "poisson_ratio": 0.3,
+              "shear_coefficient": 0.9,
+              "support_model": "simply_supported_centered_uniform"
+            },
+            "load_weighted_bending_compliance_m_per_n": 2.304830549576928e-09,
+            "load_weighted_shear_compliance_m_per_n": 1.05417148275643e-09,
+            "span_to_diameter_ratio": 2.0,
+            "short_pin_review_required": true
+          }
+        ],
+        "path_compliance_contribution_m_per_n": [
+          1.3436008129333434e-08,
+          1.3436008129333434e-08,
+          1.3436008129333434e-08
+        ],
+        "physical_validation": false,
+        "scope": "简支圆实销中央均布横载的功共轭平均弯剪刚度；销力=2Ft，路径柔度=4/kpin；未计销孔/配合/架板局部柔度",
+        "coupling": {
+          "all_converged": true,
+          "cases": [
+            {
+              "index": 0,
+              "label": "forward_01",
+              "converged": true,
+              "iterations": 11,
+              "path_residual_m": 8.005795960593513e-12,
+              "force_relative_change": 4.231145661560611e-06,
+              "output_torque_balance_n_m": -5.551115123125783e-17
+            },
+            {
+              "index": 1,
+              "label": "forward_02",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6218359914561112e-09,
+              "force_relative_change": 7.4370316924135176e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 2,
+              "label": "forward_03",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6198378076886655e-09,
+              "force_relative_change": 3.315559794004197e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 3,
+              "label": "forward_04",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6041857156487686e-09,
+              "force_relative_change": 4.515225128495715e-06,
+              "output_torque_balance_n_m": 8.881784197001252e-16
+            },
+            {
+              "index": 4,
+              "label": "forward_05",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6131570965917096e-09,
+              "force_relative_change": 4.066583612566193e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 5,
+              "label": "forward_06",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6171126859030772e-09,
+              "force_relative_change": 1.6985386034039471e-06,
+              "output_torque_balance_n_m": 4.440892098500626e-16
+            },
+            {
+              "index": 6,
+              "label": "forward_07",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.621988856837614e-09,
+              "force_relative_change": 9.138007316503375e-06,
+              "output_torque_balance_n_m": 4.440892098500626e-16
+            },
+            {
+              "index": 7,
+              "label": "forward_08",
+              "converged": true,
+              "iterations": 9,
+              "path_residual_m": 4.7424736067266815e-11,
+              "force_relative_change": 7.033806118901276e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 8,
+              "label": "forward_09",
+              "converged": true,
+              "iterations": 10,
+              "path_residual_m": 1.736454163129032e-11,
+              "force_relative_change": 5.2217688922364754e-06,
+              "output_torque_balance_n_m": -1.1102230246251565e-16
+            },
+            {
+              "index": 9,
+              "label": "forward_10",
+              "converged": true,
+              "iterations": 7,
+              "path_residual_m": 4.909028758003726e-10,
+              "force_relative_change": 3.942766067163639e-06,
+              "output_torque_balance_n_m": 4.440892098500626e-16
+            },
+            {
+              "index": 10,
+              "label": "forward_11",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.613516722568677e-09,
+              "force_relative_change": 1.4551834121446976e-06,
+              "output_torque_balance_n_m": 4.440892098500626e-16
+            },
+            {
+              "index": 11,
+              "label": "forward_12",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6118417338564088e-09,
+              "force_relative_change": 4.280782767789221e-06,
+              "output_torque_balance_n_m": 8.881784197001252e-16
+            },
+            {
+              "index": 12,
+              "label": "forward_13",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6012150283319563e-09,
+              "force_relative_change": 4.825528073140849e-06,
+              "output_torque_balance_n_m": 8.881784197001252e-16
+            },
+            {
+              "index": 13,
+              "label": "forward_14",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6162686535010054e-09,
+              "force_relative_change": 3.8063604612332607e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 14,
+              "label": "forward_15",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6251978774760951e-09,
+              "force_relative_change": 5.721766841376353e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 15,
+              "label": "forward_16",
+              "converged": true,
+              "iterations": 12,
+              "path_residual_m": 1.6917978489452476e-11,
+              "force_relative_change": 6.080229715132203e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 16,
+              "label": "hold_forward",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6216340354242235e-09,
+              "force_relative_change": 6.934360429314636e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 17,
+              "label": "reverse_01",
+              "converged": true,
+              "iterations": 12,
+              "path_residual_m": 2.8219529131085134e-11,
+              "force_relative_change": 9.918350996467475e-06,
+              "output_torque_balance_n_m": -5.551115123125783e-17
+            },
+            {
+              "index": 18,
+              "label": "reverse_02",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6246673242572612e-09,
+              "force_relative_change": 5.28764993112049e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 19,
+              "label": "reverse_03",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6148099431630872e-09,
+              "force_relative_change": 4.0057694874002745e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 20,
+              "label": "reverse_04",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.5947582431276299e-09,
+              "force_relative_change": 5.0305331808085895e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 21,
+              "label": "reverse_05",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6055336918977724e-09,
+              "force_relative_change": 4.648953254342564e-06,
+              "output_torque_balance_n_m": -8.881784197001252e-16
+            },
+            {
+              "index": 22,
+              "label": "reverse_06",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6169708164860317e-09,
+              "force_relative_change": 2.4844778654539925e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 23,
+              "label": "reverse_07",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6261507461995038e-09,
+              "force_relative_change": 6.7524280907493954e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 24,
+              "label": "reverse_08",
+              "converged": true,
+              "iterations": 9,
+              "path_residual_m": 4.8267247747042733e-11,
+              "force_relative_change": 4.913889116167268e-06,
+              "output_torque_balance_n_m": -1.1102230246251565e-16
+            },
+            {
+              "index": 25,
+              "label": "reverse_09",
+              "converged": true,
+              "iterations": 10,
+              "path_residual_m": 1.7525576729743307e-11,
+              "force_relative_change": 8.57635763260641e-06,
+              "output_torque_balance_n_m": 1.1102230246251565e-16
+            },
+            {
+              "index": 26,
+              "label": "reverse_10",
+              "converged": true,
+              "iterations": 7,
+              "path_residual_m": 4.882600558307086e-10,
+              "force_relative_change": 5.05409548791141e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 27,
+              "label": "reverse_11",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6100323115942875e-09,
+              "force_relative_change": 8.25312631851031e-07,
+              "output_torque_balance_n_m": 4.440892098500626e-16
+            },
+            {
+              "index": 28,
+              "label": "reverse_12",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6179246442845178e-09,
+              "force_relative_change": 3.636081452135709e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 29,
+              "label": "reverse_13",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6096423042980132e-09,
+              "force_relative_change": 4.2738115313228975e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 30,
+              "label": "reverse_14",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6205731601096597e-09,
+              "force_relative_change": 3.083580600281619e-06,
+              "output_torque_balance_n_m": 8.881784197001252e-16
+            },
+            {
+              "index": 31,
+              "label": "reverse_15",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.621960104687502e-09,
+              "force_relative_change": 7.940827742365815e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 32,
+              "label": "reverse_16",
+              "converged": true,
+              "iterations": 11,
+              "path_residual_m": 7.307459083529279e-12,
+              "force_relative_change": 4.028469897834732e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 33,
+              "label": "hold_reverse",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.624048563287184e-09,
+              "force_relative_change": 4.901383330082445e-06,
+              "output_torque_balance_n_m": 0.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "path_offsets",
+      "case_id": "dfki_pin_geometry__path_offsets",
+      "checks": {
+        "motor_speed": {
+          "status": "passed",
+          "actual": 46.756453468248665,
+          "threshold": 229.2,
+          "relation": "<=",
+          "scope": "电机代表工况最大转速，rad/s",
+          "margin": 182.44354653175134,
+          "relative_margin": 0.7960015119186359,
+          "governing_location": {
+            "case_index": 7,
+            "label": "forward_08"
+          }
+        },
+        "motor_peak_torque": {
+          "status": "passed",
+          "actual": 0.40236663055493854,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "逐工况恒转矩—恒功率峰值包络利用率",
+          "margin": 0.5976333694450615,
+          "relative_margin": 0.5976333694450615,
+          "governing_location": {
+            "case_index": 3,
+            "label": "forward_04"
+          }
+        },
+        "motor_continuous_screen": {
+          "status": "passed",
+          "actual": 0.46122601964002785,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "按转速包络归一化的连续转矩RMS初筛，不替代温升校核",
+          "margin": 0.5387739803599721,
+          "relative_margin": 0.5387739803599721,
+          "governing_location": null
+        },
+        "brake_static_screen": {
+          "status": "passed",
+          "actual": 3.0,
+          "threshold": 1.2142425439879034,
+          "relation": ">=",
+          "scope": "输入侧静态保持力矩，N·m；不含动态制动认证",
+          "margin": 1.7857574560120966,
+          "relative_margin": 1.47067607279447,
+          "governing_location": null
+        },
+        "contact_pressure_pa": {
+          "status": "passed",
+          "actual": 866316386.6425488,
+          "threshold": 1200000000.0,
+          "relation": "<=",
+          "scope": "当前离散局部Hertz峰压，Pa；须另查网格/相位收敛",
+          "margin": 333683613.3574512,
+          "relative_margin": 0.278069677797876,
+          "governing_location": {
+            "mesh": "sun_planet",
+            "planet_index": 1,
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "angle_budget_rad": {
+          "status": "passed",
+          "actual": 0.0017429531988672527,
+          "threshold": 0.003490658503988659,
+          "relation": "<=",
+          "scope": "指定受载状态的未补偿确定性角度预算，rad",
+          "margin": 0.0017477053051214064,
+          "relative_margin": 0.5006806890804019,
+          "governing_location": {
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "motor_temperature_k": {
+          "status": "passed",
+          "actual": 302.0944054354601,
+          "threshold": 353.15,
+          "relation": "<=",
+          "scope": "给定热参数的电机节点最高温度，K",
+          "margin": 51.05559456453989,
+          "relative_margin": 0.14457197951165196,
+          "governing_location": null
+        },
+        "gear_temperature_k": {
+          "status": "passed",
+          "actual": 300.78769106900677,
+          "threshold": 343.15,
+          "relation": "<=",
+          "scope": "给定热参数的传动节点最高温度，K",
+          "margin": 42.36230893099321,
+          "relative_margin": 0.12345128640825648,
+          "governing_location": null
+        },
+        "maximum_load_share_factor": {
+          "status": "failed",
+          "actual": 2.7750181716261055,
+          "threshold": 2.0,
+          "relation": "<=",
+          "scope": "有载工况最大均载系数；全零载时未定义",
+          "margin": -0.7750181716261055,
+          "relative_margin": -0.38750908581305277,
+          "governing_location": {
+            "case_index": 0,
+            "label": "forward_01"
+          }
+        },
+        "fatigue_damage_per_input_history": {
+          "status": "passed",
+          "actual": 2.8112133239961853e-07,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "给定热点标量应力谱的Miner损伤；不代表整关节服役寿命",
+          "margin": 0.9999997188786676,
+          "relative_margin": 0.9999997188786676,
+          "governing_location": null
+        },
+        "maximum_pin_stiffness_relative_difference": {
+          "status": "passed",
+          "actual": 0.0,
+          "threshold": 0.05,
+          "relation": "<=",
+          "scope": "简支圆销平均弯剪刚度与系统最终采用kpin之最大相对差",
+          "margin": 0.05,
+          "relative_margin": 1.0,
+          "governing_location": {
+            "planet_index": 0
+          }
+        },
+        "minimum_contact_safety_factor": {
+          "status": "passed",
+          "actual": 1.3511427561180478,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "给定评级因子与材料限值的最小接触安全系数",
+          "margin": 0.3511427561180478,
+          "relative_margin": 0.3511427561180478,
+          "governing_location": {
+            "mesh": "sun_planet",
+            "planet_index": 1,
+            "gear_role": "pinion",
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "minimum_bending_safety_factor": {
+          "status": "passed",
+          "actual": 2.095547488653123,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "给定评级因子与材料限值的最小齿根安全系数",
+          "margin": 1.0955474886531231,
+          "relative_margin": 1.0955474886531231,
+          "governing_location": {
+            "mesh": "sun_planet",
+            "planet_index": 1,
+            "gear_role": "pinion",
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "minimum_bearing_static_safety_factor": {
+          "status": "passed",
+          "actual": 59.56250619838511,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "输出双支承基本静安全；不含行星轴承",
+          "margin": 58.56250619838511,
+          "relative_margin": 58.56250619838511,
+          "governing_location": {
+            "case_index": 7,
+            "label": "forward_08",
+            "bearing_index": 1
+          }
+        },
+        "minimum_bearing_life_hours": {
+          "status": "not_configured",
+          "actual": 2337677949.339132,
+          "threshold": null,
+          "relation": ">=",
+          "scope": "输出双支承基本L10小时数；无摆动/润滑/微动修正",
+          "margin": null,
+          "relative_margin": null,
+          "governing_location": null
+        },
+        "minimum_output_torsional_stiffness_n_m_per_rad": {
+          "status": "failed",
+          "actual": 12109.172026873826,
+          "threshold": 20000.0,
+          "relation": ">=",
+          "scope": "最终承载分支局部输出扭转刚度，N·m/rad",
+          "margin": -7890.827973126174,
+          "relative_margin": -0.39454139865630866,
+          "governing_location": {
+            "case_index": 0,
+            "label": "forward_01"
+          }
+        },
+        "minimum_planet_bearing_static_safety_factor": {
+          "status": "passed",
+          "actual": 3.7865146088302835,
+          "threshold": 2.0,
+          "relation": ">=",
+          "scope": "显式容量/系数下的行星轴承基本静安全",
+          "margin": 1.7865146088302835,
+          "relative_margin": 0.8932573044151417,
+          "governing_location": {
+            "case_index": 20,
+            "label": "reverse_04",
+            "planet_index": 1
+          }
+        },
+        "minimum_planet_bearing_basic_l10_hours": {
+          "status": "not_configured",
+          "actual": 482464.14694846363,
+          "threshold": null,
+          "relation": ">=",
+          "scope": "行星相对行星架转速的基本L10小时数；无摆动/润滑修正",
+          "margin": null,
+          "relative_margin": null,
+          "governing_location": null
+        },
+        "planet_pin_static": {
+          "status": "passed",
+          "actual": 0.11003963003205784,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "销弯曲/横剪/平均面压各自实际值×要求安全系数/许用值的最大值；不含局部/疲劳",
+          "margin": 0.8899603699679421,
+          "relative_margin": 0.8899603699679421,
+          "governing_location": {
+            "case_index": 20,
+            "label": "reverse_04",
+            "planet_index": 1,
+            "stress_kind": "projected_pressure"
+          }
+        },
+        "dc_bus_maximum_voltage": {
+          "status": "passed",
+          "actual": 43.193661295810806,
+          "threshold": 48.0,
+          "relation": "<=",
+          "scope": "当前分段恒功率/理想电源/给定回馈吸收模型中的最高母线电压，V",
+          "margin": 4.806338704189194,
+          "relative_margin": 0.10013205633727489,
+          "governing_location": null
+        },
+        "dc_bus_minimum_voltage": {
+          "status": "not_evaluated",
+          "actual": 36.0,
+          "threshold": 30.0,
+          "relation": ">=",
+          "scope": "理想无限供能电源维持源电压下限；未评价真实电源欠压能力，不计为已通过的物理校核",
+          "margin": null,
+          "relative_margin": null,
+          "governing_location": null
+        }
+      },
+      "required_checks_missing": [],
+      "failed_checks": [
+        "maximum_load_share_factor",
+        "minimum_output_torsional_stiffness_n_m_per_rad"
+      ],
+      "accepted": false,
+      "summary": {
+        "case_id": "dfki_pin_geometry__path_offsets",
+        "ratio": 6.0,
+        "maximum_load_share_factor": 2.7750181716261055,
+        "maximum_contact_pressure_pa": 866316386.6425488,
+        "minimum_output_torsional_stiffness_n_m_per_rad": 12109.172026873826,
+        "maximum_angle_budget_rad": 0.0017429531988672527,
+        "maximum_motor_temperature_k": 302.0944054354601,
+        "maximum_gear_temperature_k": 300.78769106900677,
+        "thermal_mode": "periodic_steady",
+        "minimum_contact_safety_factor": 1.3511427561180478,
+        "minimum_bending_safety_factor": 2.095547488653123,
+        "minimum_bearing_static_safety_factor": 59.56250619838511,
+        "minimum_bearing_life_hours": 2337677949.339132,
+        "fatigue_damage_per_input_history": 2.8112133239961853e-07,
+        "maximum_pin_static_utilization": 0.11003963003205784,
+        "maximum_pin_stiffness_relative_difference": 0.0,
+        "minimum_planet_bearing_static_safety_factor": 3.7865146088302835,
+        "minimum_planet_bearing_basic_l10_hours": 482464.14694846363,
+        "maximum_dc_bus_voltage_v": 43.193661295810806,
+        "all_couplings_converged": true,
+        "checks": {
+          "motor_speed": true,
+          "motor_peak_torque": true,
+          "motor_continuous_screen": true,
+          "brake_static_screen": true,
+          "contact_pressure_pa": true,
+          "angle_budget_rad": true,
+          "motor_temperature_k": true,
+          "gear_temperature_k": true,
+          "minimum_output_torsional_stiffness_n_m_per_rad": false,
+          "maximum_load_share_factor": false,
+          "fatigue_damage_per_input_history": true,
+          "maximum_pin_stiffness_relative_difference": true,
+          "minimum_planet_bearing_static_safety_factor": true,
+          "minimum_contact_safety_factor": true,
+          "minimum_bending_safety_factor": true,
+          "minimum_bearing_static_safety_factor": true,
+          "planet_pin_static": true,
+          "dc_bus_maximum_voltage": true
+        },
+        "check_details": {
+          "motor_speed": {
+            "status": "passed",
+            "actual": 46.756453468248665,
+            "threshold": 229.2,
+            "relation": "<=",
+            "scope": "电机代表工况最大转速，rad/s"
+          },
+          "motor_peak_torque": {
+            "status": "passed",
+            "actual": 0.40236663055493854,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "逐工况恒转矩—恒功率峰值包络利用率"
+          },
+          "motor_continuous_screen": {
+            "status": "passed",
+            "actual": 0.46122601964002785,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "按转速包络归一化的连续转矩RMS初筛，不替代温升校核"
+          },
+          "brake_static_screen": {
+            "status": "passed",
+            "actual": 3.0,
+            "threshold": 1.2142425439879034,
+            "relation": ">=",
+            "scope": "输入侧静态保持力矩，N·m；不含动态制动认证"
+          },
+          "contact_pressure_pa": {
+            "status": "passed",
+            "actual": 866316386.6425488,
+            "threshold": 1200000000.0,
+            "relation": "<=",
+            "scope": "当前离散局部Hertz峰压，Pa；须另查网格/相位收敛"
+          },
+          "angle_budget_rad": {
+            "status": "passed",
+            "actual": 0.0017429531988672527,
+            "threshold": 0.003490658503988659,
+            "relation": "<=",
+            "scope": "指定受载状态的未补偿确定性角度预算，rad"
+          },
+          "motor_temperature_k": {
+            "status": "passed",
+            "actual": 302.0944054354601,
+            "threshold": 353.15,
+            "relation": "<=",
+            "scope": "给定热参数的电机节点最高温度，K"
+          },
+          "gear_temperature_k": {
+            "status": "passed",
+            "actual": 300.78769106900677,
+            "threshold": 343.15,
+            "relation": "<=",
+            "scope": "给定热参数的传动节点最高温度，K"
+          },
+          "maximum_load_share_factor": {
+            "status": "failed",
+            "actual": 2.7750181716261055,
+            "threshold": 2.0,
+            "relation": "<=",
+            "scope": "有载工况最大均载系数；全零载时未定义"
+          },
+          "fatigue_damage_per_input_history": {
+            "status": "passed",
+            "actual": 2.8112133239961853e-07,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "给定热点标量应力谱的Miner损伤；不代表整关节服役寿命"
+          },
+          "maximum_pin_stiffness_relative_difference": {
+            "status": "passed",
+            "actual": 0.0,
+            "threshold": 0.05,
+            "relation": "<=",
+            "scope": "简支圆销平均弯剪刚度与系统最终采用kpin之最大相对差"
+          },
+          "minimum_contact_safety_factor": {
+            "status": "passed",
+            "actual": 1.3511427561180478,
+            "threshold": 1.0,
+            "relation": ">=",
+            "scope": "给定评级因子与材料限值的最小接触安全系数"
+          },
+          "minimum_bending_safety_factor": {
+            "status": "passed",
+            "actual": 2.095547488653123,
+            "threshold": 1.0,
+            "relation": ">=",
+            "scope": "给定评级因子与材料限值的最小齿根安全系数"
+          },
+          "minimum_bearing_static_safety_factor": {
+            "status": "passed",
+            "actual": 59.56250619838511,
+            "threshold": 1.0,
+            "relation": ">=",
+            "scope": "输出双支承基本静安全；不含行星轴承"
+          },
+          "minimum_bearing_life_hours": {
+            "status": "not_configured",
+            "actual": 2337677949.339132,
+            "threshold": null,
+            "relation": ">=",
+            "scope": "输出双支承基本L10小时数；无摆动/润滑/微动修正"
+          },
+          "minimum_output_torsional_stiffness_n_m_per_rad": {
+            "status": "failed",
+            "actual": 12109.172026873826,
+            "threshold": 20000.0,
+            "relation": ">=",
+            "scope": "最终承载分支局部输出扭转刚度，N·m/rad"
+          },
+          "minimum_planet_bearing_static_safety_factor": {
+            "status": "passed",
+            "actual": 3.7865146088302835,
+            "threshold": 2.0,
+            "relation": ">=",
+            "scope": "显式容量/系数下的行星轴承基本静安全"
+          },
+          "minimum_planet_bearing_basic_l10_hours": {
+            "status": "not_configured",
+            "actual": 482464.14694846363,
+            "threshold": null,
+            "relation": ">=",
+            "scope": "行星相对行星架转速的基本L10小时数；无摆动/润滑修正"
+          },
+          "planet_pin_static": {
+            "status": "passed",
+            "actual": 0.11003963003205784,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "销弯曲/横剪/平均面压各自实际值×要求安全系数/许用值的最大值；不含局部/疲劳"
+          },
+          "dc_bus_maximum_voltage": {
+            "status": "passed",
+            "actual": 43.193661295810806,
+            "threshold": 48.0,
+            "relation": "<=",
+            "scope": "当前分段恒功率/理想电源/给定回馈吸收模型中的最高母线电压，V"
+          },
+          "dc_bus_minimum_voltage": {
+            "status": "not_evaluated",
+            "actual": 36.0,
+            "threshold": 30.0,
+            "relation": ">=",
+            "scope": "理想无限供能电源维持源电压下限；未评价真实电源欠压能力，不计为已通过的物理校核"
+          }
+        },
+        "physical_validation": false,
+        "vendor_system_validation": false,
+        "implementation": "新写NGW降阶系统实现，复用公开齿轮内核；非厂商整机等价重建",
+        "scope": "固定环零变位直齿单级NGW、准静态、小变形、周期平均协调；不含RV/谐波、完整FE、同步动力学、控制、润滑预测或实物认证",
+        "assessment_coverage": {
+          "output_bearing_life": "仅基本L10；小角摆动、微动和润滑修正未评估",
+          "hotspot_fatigue": "仅给定标量应力谱",
+          "planet_pin_strength": "简支圆销弯曲/横剪/平均面压与弯剪挠度初筛；局部销孔/配合/疲劳未评估",
+          "planet_bearing_life": "显式容量及相对行星架转速的基本L10/静安全；摆动/润滑修正未评估",
+          "ring_carrier_housing_strength": "未评估；未构造完整实体和FE边界",
+          "regenerative_bus_and_inverter": "分段母线电容能量及给定回馈吸收初筛；未模拟PWM/电源阻抗/真实驱动器包络",
+          "dynamics_and_resonance": "未评估；当前为周期平均准静态协调",
+          "manufacturing_interference": "仅外齿轮标准全齿高齿条根切风险初筛；内齿干涉、尖顶和刀具未评估",
+          "physical_validation": "未完成样机标定与试验"
+        },
+        "configured_checks_pass": false,
+        "check_scope": "仅对已配置约束的数值初筛；未配置强度/寿命/温升限值不自动视为已校核"
+      },
+      "pin_stiffness": {
+        "source": "pin_geometry",
+        "adopted_pin_stiffness_n_per_m": [
+          297707470.9613503,
+          297707470.9613503,
+          297707470.9613503
+        ],
+        "specified_input_n_per_m": null,
+        "specified_input_used": false,
+        "load_independent": true,
+        "planets": [
+          {
+            "planet_index": 0,
+            "adopted_pin_stiffness_n_per_m": 297707470.9613503,
+            "source_parameters": {
+              "diameter_m": 0.006,
+              "support_span_m": 0.012,
+              "loaded_width_m": 0.005,
+              "young_modulus_pa": 210000000000.0,
+              "poisson_ratio": 0.3,
+              "shear_coefficient": 0.9,
+              "support_model": "simply_supported_centered_uniform"
+            },
+            "load_weighted_bending_compliance_m_per_n": 2.304830549576928e-09,
+            "load_weighted_shear_compliance_m_per_n": 1.05417148275643e-09,
+            "span_to_diameter_ratio": 2.0,
+            "short_pin_review_required": true
+          },
+          {
+            "planet_index": 1,
+            "adopted_pin_stiffness_n_per_m": 297707470.9613503,
+            "source_parameters": {
+              "diameter_m": 0.006,
+              "support_span_m": 0.012,
+              "loaded_width_m": 0.005,
+              "young_modulus_pa": 210000000000.0,
+              "poisson_ratio": 0.3,
+              "shear_coefficient": 0.9,
+              "support_model": "simply_supported_centered_uniform"
+            },
+            "load_weighted_bending_compliance_m_per_n": 2.304830549576928e-09,
+            "load_weighted_shear_compliance_m_per_n": 1.05417148275643e-09,
+            "span_to_diameter_ratio": 2.0,
+            "short_pin_review_required": true
+          },
+          {
+            "planet_index": 2,
+            "adopted_pin_stiffness_n_per_m": 297707470.9613503,
+            "source_parameters": {
+              "diameter_m": 0.006,
+              "support_span_m": 0.012,
+              "loaded_width_m": 0.005,
+              "young_modulus_pa": 210000000000.0,
+              "poisson_ratio": 0.3,
+              "shear_coefficient": 0.9,
+              "support_model": "simply_supported_centered_uniform"
+            },
+            "load_weighted_bending_compliance_m_per_n": 2.304830549576928e-09,
+            "load_weighted_shear_compliance_m_per_n": 1.05417148275643e-09,
+            "span_to_diameter_ratio": 2.0,
+            "short_pin_review_required": true
+          }
+        ],
+        "path_compliance_contribution_m_per_n": [
+          1.3436008129333434e-08,
+          1.3436008129333434e-08,
+          1.3436008129333434e-08
+        ],
+        "physical_validation": false,
+        "scope": "简支圆实销中央均布横载的功共轭平均弯剪刚度；销力=2Ft，路径柔度=4/kpin；未计销孔/配合/架板局部柔度",
+        "coupling": {
+          "all_converged": true,
+          "cases": [
+            {
+              "index": 0,
+              "label": "forward_01",
+              "converged": true,
+              "iterations": 12,
+              "path_residual_m": 1.45841862686499e-11,
+              "force_relative_change": 4.877039489590481e-06,
+              "output_torque_balance_n_m": 5.551115123125783e-17
+            },
+            {
+              "index": 1,
+              "label": "forward_02",
+              "converged": true,
+              "iterations": 7,
+              "path_residual_m": 4.959351545271942e-10,
+              "force_relative_change": 7.015800609950021e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 2,
+              "label": "forward_03",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.641675576171499e-09,
+              "force_relative_change": 7.869265389193068e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 3,
+              "label": "forward_04",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6544305802717732e-09,
+              "force_relative_change": 9.979561171041777e-06,
+              "output_torque_balance_n_m": 8.881784197001252e-16
+            },
+            {
+              "index": 4,
+              "label": "forward_05",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6518071711507446e-09,
+              "force_relative_change": 9.194583077391962e-06,
+              "output_torque_balance_n_m": -8.881784197001252e-16
+            },
+            {
+              "index": 5,
+              "label": "forward_06",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6143881556077958e-09,
+              "force_relative_change": 4.723100721483242e-06,
+              "output_torque_balance_n_m": 4.440892098500626e-16
+            },
+            {
+              "index": 6,
+              "label": "forward_07",
+              "converged": true,
+              "iterations": 7,
+              "path_residual_m": 4.992251780030001e-10,
+              "force_relative_change": 8.510496994519347e-06,
+              "output_torque_balance_n_m": 4.440892098500626e-16
+            },
+            {
+              "index": 7,
+              "label": "forward_08",
+              "converged": true,
+              "iterations": 11,
+              "path_residual_m": 5.0730022813354976e-11,
+              "force_relative_change": 6.800918063762444e-06,
+              "output_torque_balance_n_m": -1.1102230246251565e-16
+            },
+            {
+              "index": 8,
+              "label": "forward_09",
+              "converged": true,
+              "iterations": 11,
+              "path_residual_m": 3.4981228646959286e-11,
+              "force_relative_change": 8.280821005581369e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 9,
+              "label": "forward_10",
+              "converged": true,
+              "iterations": 7,
+              "path_residual_m": 5.048111127511161e-10,
+              "force_relative_change": 7.55186642159243e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 10,
+              "label": "forward_11",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6210137642566584e-09,
+              "force_relative_change": 4.527076000046686e-06,
+              "output_torque_balance_n_m": -4.440892098500626e-16
+            },
+            {
+              "index": 11,
+              "label": "forward_12",
+              "converged": true,
+              "iterations": 7,
+              "path_residual_m": 4.929762681000846e-10,
+              "force_relative_change": 3.4541783029336922e-06,
+              "output_torque_balance_n_m": -8.881784197001252e-16
+            },
+            {
+              "index": 12,
+              "label": "forward_13",
+              "converged": true,
+              "iterations": 7,
+              "path_residual_m": 4.923046741533834e-10,
+              "force_relative_change": 3.8161618251322395e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 13,
+              "label": "forward_14",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6338750162612027e-09,
+              "force_relative_change": 9.291070666054666e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 14,
+              "label": "forward_15",
+              "converged": true,
+              "iterations": 7,
+              "path_residual_m": 4.938344829986321e-10,
+              "force_relative_change": 3.4664312095743883e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 15,
+              "label": "forward_16",
+              "converged": true,
+              "iterations": 10,
+              "path_residual_m": 1.674336743575913e-11,
+              "force_relative_change": 5.340072514364421e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 16,
+              "label": "hold_forward",
+              "converged": true,
+              "iterations": 7,
+              "path_residual_m": 4.948659918731911e-10,
+              "force_relative_change": 6.576621980354158e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 17,
+              "label": "reverse_01",
+              "converged": true,
+              "iterations": 10,
+              "path_residual_m": 1.6801252422765453e-11,
+              "force_relative_change": 5.462797634046786e-06,
+              "output_torque_balance_n_m": -5.551115123125783e-17
+            },
+            {
+              "index": 18,
+              "label": "reverse_02",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6342695243966382e-09,
+              "force_relative_change": 9.270145164360602e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 19,
+              "label": "reverse_03",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6344788988108406e-09,
+              "force_relative_change": 9.692421874077513e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 20,
+              "label": "reverse_04",
+              "converged": true,
+              "iterations": 7,
+              "path_residual_m": 4.914379949481912e-10,
+              "force_relative_change": 3.9510137668167804e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 21,
+              "label": "reverse_05",
+              "converged": true,
+              "iterations": 7,
+              "path_residual_m": 4.92738597516052e-10,
+              "force_relative_change": 3.6993445267872505e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 22,
+              "label": "reverse_06",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.625421781386949e-09,
+              "force_relative_change": 6.61825698216923e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 23,
+              "label": "reverse_07",
+              "converged": true,
+              "iterations": 7,
+              "path_residual_m": 4.962035330117098e-10,
+              "force_relative_change": 4.191984087030545e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 24,
+              "label": "reverse_08",
+              "converged": true,
+              "iterations": 10,
+              "path_residual_m": 1.915730618074041e-11,
+              "force_relative_change": 3.962003240766023e-06,
+              "output_torque_balance_n_m": -1.1102230246251565e-16
+            },
+            {
+              "index": 25,
+              "label": "reverse_09",
+              "converged": true,
+              "iterations": 9,
+              "path_residual_m": 4.8594891989736023e-11,
+              "force_relative_change": 7.92833032474825e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 26,
+              "label": "reverse_10",
+              "converged": true,
+              "iterations": 8,
+              "path_residual_m": 1.547189674091138e-10,
+              "force_relative_change": 4.975317340070306e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 27,
+              "label": "reverse_11",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6224101371205435e-09,
+              "force_relative_change": 3.556699889085548e-06,
+              "output_torque_balance_n_m": -4.440892098500626e-16
+            },
+            {
+              "index": 28,
+              "label": "reverse_12",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6466157958254855e-09,
+              "force_relative_change": 8.436290509967192e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 29,
+              "label": "reverse_13",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.65346766658549e-09,
+              "force_relative_change": 9.557943067543484e-06,
+              "output_torque_balance_n_m": 8.881784197001252e-16
+            },
+            {
+              "index": 30,
+              "label": "reverse_14",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6376960431491953e-09,
+              "force_relative_change": 7.4577946405951194e-06,
+              "output_torque_balance_n_m": -8.881784197001252e-16
+            },
+            {
+              "index": 31,
+              "label": "reverse_15",
+              "converged": true,
+              "iterations": 7,
+              "path_residual_m": 4.969593369678295e-10,
+              "force_relative_change": 7.457120398813359e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 32,
+              "label": "reverse_16",
+              "converged": true,
+              "iterations": 12,
+              "path_residual_m": 1.2256640644571022e-11,
+              "force_relative_change": 4.227278637327126e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 33,
+              "label": "hold_reverse",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6312385480291915e-09,
+              "force_relative_change": 8.380088730764756e-06,
+              "output_torque_balance_n_m": 0.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "sun_support_soft",
+      "case_id": "dfki_pin_geometry__sun_support_soft",
+      "checks": {
+        "motor_speed": {
+          "status": "passed",
+          "actual": 46.756453468248665,
+          "threshold": 229.2,
+          "relation": "<=",
+          "scope": "电机代表工况最大转速，rad/s",
+          "margin": 182.44354653175134,
+          "relative_margin": 0.7960015119186359,
+          "governing_location": {
+            "case_index": 7,
+            "label": "forward_08"
+          }
+        },
+        "motor_peak_torque": {
+          "status": "passed",
+          "actual": 0.40236663055493854,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "逐工况恒转矩—恒功率峰值包络利用率",
+          "margin": 0.5976333694450615,
+          "relative_margin": 0.5976333694450615,
+          "governing_location": {
+            "case_index": 3,
+            "label": "forward_04"
+          }
+        },
+        "motor_continuous_screen": {
+          "status": "passed",
+          "actual": 0.46122601964002785,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "按转速包络归一化的连续转矩RMS初筛，不替代温升校核",
+          "margin": 0.5387739803599721,
+          "relative_margin": 0.5387739803599721,
+          "governing_location": null
+        },
+        "brake_static_screen": {
+          "status": "passed",
+          "actual": 3.0,
+          "threshold": 1.2142425439879034,
+          "relation": ">=",
+          "scope": "输入侧静态保持力矩，N·m；不含动态制动认证",
+          "margin": 1.7857574560120966,
+          "relative_margin": 1.47067607279447,
+          "governing_location": null
+        },
+        "contact_pressure_pa": {
+          "status": "passed",
+          "actual": 812815124.7992978,
+          "threshold": 1200000000.0,
+          "relation": "<=",
+          "scope": "当前离散局部Hertz峰压，Pa；须另查网格/相位收敛",
+          "margin": 387184875.2007022,
+          "relative_margin": 0.32265406266725183,
+          "governing_location": {
+            "mesh": "sun_planet",
+            "planet_index": 1,
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "angle_budget_rad": {
+          "status": "passed",
+          "actual": 0.0017430486837031547,
+          "threshold": 0.003490658503988659,
+          "relation": "<=",
+          "scope": "指定受载状态的未补偿确定性角度预算，rad",
+          "margin": 0.0017476098202855045,
+          "relative_margin": 0.5006533346898784,
+          "governing_location": {
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "motor_temperature_k": {
+          "status": "passed",
+          "actual": 302.0944054354601,
+          "threshold": 353.15,
+          "relation": "<=",
+          "scope": "给定热参数的电机节点最高温度，K",
+          "margin": 51.05559456453989,
+          "relative_margin": 0.14457197951165196,
+          "governing_location": null
+        },
+        "gear_temperature_k": {
+          "status": "passed",
+          "actual": 300.78769106900677,
+          "threshold": 343.15,
+          "relation": "<=",
+          "scope": "给定热参数的传动节点最高温度，K",
+          "margin": 42.36230893099321,
+          "relative_margin": 0.12345128640825648,
+          "governing_location": null
+        },
+        "maximum_load_share_factor": {
+          "status": "passed",
+          "actual": 1.520031245644351,
+          "threshold": 2.0,
+          "relation": "<=",
+          "scope": "有载工况最大均载系数；全零载时未定义",
+          "margin": 0.479968754355649,
+          "relative_margin": 0.2399843771778245,
+          "governing_location": {
+            "case_index": 0,
+            "label": "forward_01"
+          }
+        },
+        "fatigue_damage_per_input_history": {
+          "status": "passed",
+          "actual": 2.8112133239961853e-07,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "给定热点标量应力谱的Miner损伤；不代表整关节服役寿命",
+          "margin": 0.9999997188786676,
+          "relative_margin": 0.9999997188786676,
+          "governing_location": null
+        },
+        "maximum_pin_stiffness_relative_difference": {
+          "status": "passed",
+          "actual": 0.0,
+          "threshold": 0.05,
+          "relation": "<=",
+          "scope": "简支圆销平均弯剪刚度与系统最终采用kpin之最大相对差",
+          "margin": 0.05,
+          "relative_margin": 1.0,
+          "governing_location": {
+            "planet_index": 0
+          }
+        },
+        "minimum_contact_safety_factor": {
+          "status": "passed",
+          "actual": 1.4528316749232006,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "给定评级因子与材料限值的最小接触安全系数",
+          "margin": 0.45283167492320064,
+          "relative_margin": 0.45283167492320064,
+          "governing_location": {
+            "mesh": "sun_planet",
+            "planet_index": 1,
+            "gear_role": "pinion",
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "minimum_bending_safety_factor": {
+          "status": "passed",
+          "actual": 2.4228450063873264,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "给定评级因子与材料限值的最小齿根安全系数",
+          "margin": 1.4228450063873264,
+          "relative_margin": 1.4228450063873264,
+          "governing_location": {
+            "mesh": "sun_planet",
+            "planet_index": 1,
+            "gear_role": "pinion",
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "minimum_bearing_static_safety_factor": {
+          "status": "passed",
+          "actual": 59.56250619838511,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "输出双支承基本静安全；不含行星轴承",
+          "margin": 58.56250619838511,
+          "relative_margin": 58.56250619838511,
+          "governing_location": {
+            "case_index": 7,
+            "label": "forward_08",
+            "bearing_index": 1
+          }
+        },
+        "minimum_bearing_life_hours": {
+          "status": "not_configured",
+          "actual": 2337677949.339132,
+          "threshold": null,
+          "relation": ">=",
+          "scope": "输出双支承基本L10小时数；无摆动/润滑/微动修正",
+          "margin": null,
+          "relative_margin": null,
+          "governing_location": null
+        },
+        "minimum_output_torsional_stiffness_n_m_per_rad": {
+          "status": "passed",
+          "actual": 25363.654533138404,
+          "threshold": 20000.0,
+          "relation": ">=",
+          "scope": "最终承载分支局部输出扭转刚度，N·m/rad",
+          "margin": 5363.654533138404,
+          "relative_margin": 0.2681827266569202,
+          "governing_location": {
+            "case_index": 17,
+            "label": "reverse_01"
+          }
+        },
+        "minimum_planet_bearing_static_safety_factor": {
+          "status": "passed",
+          "actual": 4.3779194035414735,
+          "threshold": 2.0,
+          "relation": ">=",
+          "scope": "显式容量/系数下的行星轴承基本静安全",
+          "margin": 2.3779194035414735,
+          "relative_margin": 1.1889597017707367,
+          "governing_location": {
+            "case_index": 20,
+            "label": "reverse_04",
+            "planet_index": 1
+          }
+        },
+        "minimum_planet_bearing_basic_l10_hours": {
+          "status": "not_configured",
+          "actual": 657089.1956257357,
+          "threshold": null,
+          "relation": ">=",
+          "scope": "行星相对行星架转速的基本L10小时数；无摆动/润滑修正",
+          "margin": null,
+          "relative_margin": null,
+          "governing_location": null
+        },
+        "planet_pin_static": {
+          "status": "passed",
+          "actual": 0.09517458597561397,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "销弯曲/横剪/平均面压各自实际值×要求安全系数/许用值的最大值；不含局部/疲劳",
+          "margin": 0.904825414024386,
+          "relative_margin": 0.904825414024386,
+          "governing_location": {
+            "case_index": 20,
+            "label": "reverse_04",
+            "planet_index": 1,
+            "stress_kind": "projected_pressure"
+          }
+        },
+        "dc_bus_maximum_voltage": {
+          "status": "passed",
+          "actual": 43.193661295810806,
+          "threshold": 48.0,
+          "relation": "<=",
+          "scope": "当前分段恒功率/理想电源/给定回馈吸收模型中的最高母线电压，V",
+          "margin": 4.806338704189194,
+          "relative_margin": 0.10013205633727489,
+          "governing_location": null
+        },
+        "dc_bus_minimum_voltage": {
+          "status": "not_evaluated",
+          "actual": 36.0,
+          "threshold": 30.0,
+          "relation": ">=",
+          "scope": "理想无限供能电源维持源电压下限；未评价真实电源欠压能力，不计为已通过的物理校核",
+          "margin": null,
+          "relative_margin": null,
+          "governing_location": null
+        }
+      },
+      "required_checks_missing": [],
+      "failed_checks": [],
+      "accepted": true,
+      "summary": {
+        "case_id": "dfki_pin_geometry__sun_support_soft",
+        "ratio": 6.0,
+        "maximum_load_share_factor": 1.520031245644351,
+        "maximum_contact_pressure_pa": 812815124.7992978,
+        "minimum_output_torsional_stiffness_n_m_per_rad": 25363.654533138404,
+        "maximum_angle_budget_rad": 0.0017430486837031547,
+        "maximum_motor_temperature_k": 302.0944054354601,
+        "maximum_gear_temperature_k": 300.78769106900677,
+        "thermal_mode": "periodic_steady",
+        "minimum_contact_safety_factor": 1.4528316749232006,
+        "minimum_bending_safety_factor": 2.4228450063873264,
+        "minimum_bearing_static_safety_factor": 59.56250619838511,
+        "minimum_bearing_life_hours": 2337677949.339132,
+        "fatigue_damage_per_input_history": 2.8112133239961853e-07,
+        "maximum_pin_static_utilization": 0.09517458597561397,
+        "maximum_pin_stiffness_relative_difference": 0.0,
+        "minimum_planet_bearing_static_safety_factor": 4.3779194035414735,
+        "minimum_planet_bearing_basic_l10_hours": 657089.1956257357,
+        "maximum_dc_bus_voltage_v": 43.193661295810806,
+        "all_couplings_converged": true,
+        "checks": {
+          "motor_speed": true,
+          "motor_peak_torque": true,
+          "motor_continuous_screen": true,
+          "brake_static_screen": true,
+          "contact_pressure_pa": true,
+          "angle_budget_rad": true,
+          "motor_temperature_k": true,
+          "gear_temperature_k": true,
+          "minimum_output_torsional_stiffness_n_m_per_rad": true,
+          "maximum_load_share_factor": true,
+          "fatigue_damage_per_input_history": true,
+          "maximum_pin_stiffness_relative_difference": true,
+          "minimum_planet_bearing_static_safety_factor": true,
+          "minimum_contact_safety_factor": true,
+          "minimum_bending_safety_factor": true,
+          "minimum_bearing_static_safety_factor": true,
+          "planet_pin_static": true,
+          "dc_bus_maximum_voltage": true
+        },
+        "check_details": {
+          "motor_speed": {
+            "status": "passed",
+            "actual": 46.756453468248665,
+            "threshold": 229.2,
+            "relation": "<=",
+            "scope": "电机代表工况最大转速，rad/s"
+          },
+          "motor_peak_torque": {
+            "status": "passed",
+            "actual": 0.40236663055493854,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "逐工况恒转矩—恒功率峰值包络利用率"
+          },
+          "motor_continuous_screen": {
+            "status": "passed",
+            "actual": 0.46122601964002785,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "按转速包络归一化的连续转矩RMS初筛，不替代温升校核"
+          },
+          "brake_static_screen": {
+            "status": "passed",
+            "actual": 3.0,
+            "threshold": 1.2142425439879034,
+            "relation": ">=",
+            "scope": "输入侧静态保持力矩，N·m；不含动态制动认证"
+          },
+          "contact_pressure_pa": {
+            "status": "passed",
+            "actual": 812815124.7992978,
+            "threshold": 1200000000.0,
+            "relation": "<=",
+            "scope": "当前离散局部Hertz峰压，Pa；须另查网格/相位收敛"
+          },
+          "angle_budget_rad": {
+            "status": "passed",
+            "actual": 0.0017430486837031547,
+            "threshold": 0.003490658503988659,
+            "relation": "<=",
+            "scope": "指定受载状态的未补偿确定性角度预算，rad"
+          },
+          "motor_temperature_k": {
+            "status": "passed",
+            "actual": 302.0944054354601,
+            "threshold": 353.15,
+            "relation": "<=",
+            "scope": "给定热参数的电机节点最高温度，K"
+          },
+          "gear_temperature_k": {
+            "status": "passed",
+            "actual": 300.78769106900677,
+            "threshold": 343.15,
+            "relation": "<=",
+            "scope": "给定热参数的传动节点最高温度，K"
+          },
+          "maximum_load_share_factor": {
+            "status": "passed",
+            "actual": 1.520031245644351,
+            "threshold": 2.0,
+            "relation": "<=",
+            "scope": "有载工况最大均载系数；全零载时未定义"
+          },
+          "fatigue_damage_per_input_history": {
+            "status": "passed",
+            "actual": 2.8112133239961853e-07,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "给定热点标量应力谱的Miner损伤；不代表整关节服役寿命"
+          },
+          "maximum_pin_stiffness_relative_difference": {
+            "status": "passed",
+            "actual": 0.0,
+            "threshold": 0.05,
+            "relation": "<=",
+            "scope": "简支圆销平均弯剪刚度与系统最终采用kpin之最大相对差"
+          },
+          "minimum_contact_safety_factor": {
+            "status": "passed",
+            "actual": 1.4528316749232006,
+            "threshold": 1.0,
+            "relation": ">=",
+            "scope": "给定评级因子与材料限值的最小接触安全系数"
+          },
+          "minimum_bending_safety_factor": {
+            "status": "passed",
+            "actual": 2.4228450063873264,
+            "threshold": 1.0,
+            "relation": ">=",
+            "scope": "给定评级因子与材料限值的最小齿根安全系数"
+          },
+          "minimum_bearing_static_safety_factor": {
+            "status": "passed",
+            "actual": 59.56250619838511,
+            "threshold": 1.0,
+            "relation": ">=",
+            "scope": "输出双支承基本静安全；不含行星轴承"
+          },
+          "minimum_bearing_life_hours": {
+            "status": "not_configured",
+            "actual": 2337677949.339132,
+            "threshold": null,
+            "relation": ">=",
+            "scope": "输出双支承基本L10小时数；无摆动/润滑/微动修正"
+          },
+          "minimum_output_torsional_stiffness_n_m_per_rad": {
+            "status": "passed",
+            "actual": 25363.654533138404,
+            "threshold": 20000.0,
+            "relation": ">=",
+            "scope": "最终承载分支局部输出扭转刚度，N·m/rad"
+          },
+          "minimum_planet_bearing_static_safety_factor": {
+            "status": "passed",
+            "actual": 4.3779194035414735,
+            "threshold": 2.0,
+            "relation": ">=",
+            "scope": "显式容量/系数下的行星轴承基本静安全"
+          },
+          "minimum_planet_bearing_basic_l10_hours": {
+            "status": "not_configured",
+            "actual": 657089.1956257357,
+            "threshold": null,
+            "relation": ">=",
+            "scope": "行星相对行星架转速的基本L10小时数；无摆动/润滑修正"
+          },
+          "planet_pin_static": {
+            "status": "passed",
+            "actual": 0.09517458597561397,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "销弯曲/横剪/平均面压各自实际值×要求安全系数/许用值的最大值；不含局部/疲劳"
+          },
+          "dc_bus_maximum_voltage": {
+            "status": "passed",
+            "actual": 43.193661295810806,
+            "threshold": 48.0,
+            "relation": "<=",
+            "scope": "当前分段恒功率/理想电源/给定回馈吸收模型中的最高母线电压，V"
+          },
+          "dc_bus_minimum_voltage": {
+            "status": "not_evaluated",
+            "actual": 36.0,
+            "threshold": 30.0,
+            "relation": ">=",
+            "scope": "理想无限供能电源维持源电压下限；未评价真实电源欠压能力，不计为已通过的物理校核"
+          }
+        },
+        "physical_validation": false,
+        "vendor_system_validation": false,
+        "implementation": "新写NGW降阶系统实现，复用公开齿轮内核；非厂商整机等价重建",
+        "scope": "固定环零变位直齿单级NGW、准静态、小变形、周期平均协调；不含RV/谐波、完整FE、同步动力学、控制、润滑预测或实物认证",
+        "assessment_coverage": {
+          "output_bearing_life": "仅基本L10；小角摆动、微动和润滑修正未评估",
+          "hotspot_fatigue": "仅给定标量应力谱",
+          "planet_pin_strength": "简支圆销弯曲/横剪/平均面压与弯剪挠度初筛；局部销孔/配合/疲劳未评估",
+          "planet_bearing_life": "显式容量及相对行星架转速的基本L10/静安全；摆动/润滑修正未评估",
+          "ring_carrier_housing_strength": "未评估；未构造完整实体和FE边界",
+          "regenerative_bus_and_inverter": "分段母线电容能量及给定回馈吸收初筛；未模拟PWM/电源阻抗/真实驱动器包络",
+          "dynamics_and_resonance": "未评估；当前为周期平均准静态协调",
+          "manufacturing_interference": "仅外齿轮标准全齿高齿条根切风险初筛；内齿干涉、尖顶和刀具未评估",
+          "physical_validation": "未完成样机标定与试验"
+        },
+        "configured_checks_pass": true,
+        "check_scope": "仅对已配置约束的数值初筛；未配置强度/寿命/温升限值不自动视为已校核"
+      },
+      "pin_stiffness": {
+        "source": "pin_geometry",
+        "adopted_pin_stiffness_n_per_m": [
+          297707470.9613503,
+          297707470.9613503,
+          297707470.9613503
+        ],
+        "specified_input_n_per_m": null,
+        "specified_input_used": false,
+        "load_independent": true,
+        "planets": [
+          {
+            "planet_index": 0,
+            "adopted_pin_stiffness_n_per_m": 297707470.9613503,
+            "source_parameters": {
+              "diameter_m": 0.006,
+              "support_span_m": 0.012,
+              "loaded_width_m": 0.005,
+              "young_modulus_pa": 210000000000.0,
+              "poisson_ratio": 0.3,
+              "shear_coefficient": 0.9,
+              "support_model": "simply_supported_centered_uniform"
+            },
+            "load_weighted_bending_compliance_m_per_n": 2.304830549576928e-09,
+            "load_weighted_shear_compliance_m_per_n": 1.05417148275643e-09,
+            "span_to_diameter_ratio": 2.0,
+            "short_pin_review_required": true
+          },
+          {
+            "planet_index": 1,
+            "adopted_pin_stiffness_n_per_m": 297707470.9613503,
+            "source_parameters": {
+              "diameter_m": 0.006,
+              "support_span_m": 0.012,
+              "loaded_width_m": 0.005,
+              "young_modulus_pa": 210000000000.0,
+              "poisson_ratio": 0.3,
+              "shear_coefficient": 0.9,
+              "support_model": "simply_supported_centered_uniform"
+            },
+            "load_weighted_bending_compliance_m_per_n": 2.304830549576928e-09,
+            "load_weighted_shear_compliance_m_per_n": 1.05417148275643e-09,
+            "span_to_diameter_ratio": 2.0,
+            "short_pin_review_required": true
+          },
+          {
+            "planet_index": 2,
+            "adopted_pin_stiffness_n_per_m": 297707470.9613503,
+            "source_parameters": {
+              "diameter_m": 0.006,
+              "support_span_m": 0.012,
+              "loaded_width_m": 0.005,
+              "young_modulus_pa": 210000000000.0,
+              "poisson_ratio": 0.3,
+              "shear_coefficient": 0.9,
+              "support_model": "simply_supported_centered_uniform"
+            },
+            "load_weighted_bending_compliance_m_per_n": 2.304830549576928e-09,
+            "load_weighted_shear_compliance_m_per_n": 1.05417148275643e-09,
+            "span_to_diameter_ratio": 2.0,
+            "short_pin_review_required": true
+          }
+        ],
+        "path_compliance_contribution_m_per_n": [
+          1.3436008129333434e-08,
+          1.3436008129333434e-08,
+          1.3436008129333434e-08
+        ],
+        "physical_validation": false,
+        "scope": "简支圆实销中央均布横载的功共轭平均弯剪刚度；销力=2Ft，路径柔度=4/kpin；未计销孔/配合/架板局部柔度",
+        "coupling": {
+          "all_converged": true,
+          "cases": [
+            {
+              "index": 0,
+              "label": "forward_01",
+              "converged": true,
+              "iterations": 9,
+              "path_residual_m": 4.090258469978469e-11,
+              "force_relative_change": 5.23071547430559e-06,
+              "output_torque_balance_n_m": 5.551115123125783e-17
+            },
+            {
+              "index": 1,
+              "label": "forward_02",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6073037977648885e-09,
+              "force_relative_change": 1.9723115318577235e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 2,
+              "label": "forward_03",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6024516221950509e-09,
+              "force_relative_change": 9.93121754681333e-07,
+              "output_torque_balance_n_m": 8.881784197001252e-16
+            },
+            {
+              "index": 3,
+              "label": "forward_04",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.5756789953532705e-09,
+              "force_relative_change": 1.320745749264256e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 4,
+              "label": "forward_05",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.5892140341203505e-09,
+              "force_relative_change": 1.1984840611436146e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 5,
+              "label": "forward_06",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.612034538840796e-09,
+              "force_relative_change": 5.087407824882086e-07,
+              "output_torque_balance_n_m": 4.440892098500626e-16
+            },
+            {
+              "index": 6,
+              "label": "forward_07",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6040145935783127e-09,
+              "force_relative_change": 2.442491312005337e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 7,
+              "label": "forward_08",
+              "converged": true,
+              "iterations": 8,
+              "path_residual_m": 1.336353988961301e-10,
+              "force_relative_change": 4.4542235480212215e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 8,
+              "label": "forward_09",
+              "converged": true,
+              "iterations": 8,
+              "path_residual_m": 1.3284797071102653e-10,
+              "force_relative_change": 9.074247371120703e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 9,
+              "label": "forward_10",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.5964033835931532e-09,
+              "force_relative_change": 3.4450409138861812e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 10,
+              "label": "forward_11",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6112198023534952e-09,
+              "force_relative_change": 3.608720888677218e-07,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 11,
+              "label": "forward_12",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.594463148240129e-09,
+              "force_relative_change": 1.1860612770191938e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 12,
+              "label": "forward_13",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.5792301282318457e-09,
+              "force_relative_change": 1.3448547731729999e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 13,
+              "label": "forward_14",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6023728642796394e-09,
+              "force_relative_change": 1.0476876228168412e-06,
+              "output_torque_balance_n_m": -8.881784197001252e-16
+            },
+            {
+              "index": 14,
+              "label": "forward_15",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6089676301858795e-09,
+              "force_relative_change": 1.7439018548239412e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 15,
+              "label": "forward_16",
+              "converged": true,
+              "iterations": 9,
+              "path_residual_m": 3.9646646832930296e-11,
+              "force_relative_change": 7.181903998825971e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 16,
+              "label": "hold_forward",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6081729442656713e-09,
+              "force_relative_change": 1.8333709102568882e-06,
+              "output_torque_balance_n_m": 8.881784197001252e-16
+            },
+            {
+              "index": 17,
+              "label": "reverse_01",
+              "converged": true,
+              "iterations": 9,
+              "path_residual_m": 3.965988536550221e-11,
+              "force_relative_change": 7.34145063998062e-06,
+              "output_torque_balance_n_m": -5.551115123125783e-17
+            },
+            {
+              "index": 18,
+              "label": "reverse_02",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.609684419232278e-09,
+              "force_relative_change": 1.6163111482473521e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 19,
+              "label": "reverse_03",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.5994987883278398e-09,
+              "force_relative_change": 1.1058579228774689e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 20,
+              "label": "reverse_04",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.570803209944509e-09,
+              "force_relative_change": 1.4045904629471611e-06,
+              "output_torque_balance_n_m": 8.881784197001252e-16
+            },
+            {
+              "index": 21,
+              "label": "reverse_05",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.585130133999096e-09,
+              "force_relative_change": 1.2933934556283062e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 22,
+              "label": "reverse_06",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6111844324861615e-09,
+              "force_relative_change": 6.61750909168915e-07,
+              "output_torque_balance_n_m": 4.440892098500626e-16
+            },
+            {
+              "index": 23,
+              "label": "reverse_07",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.607073183262615e-09,
+              "force_relative_change": 2.046940498813249e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 24,
+              "label": "reverse_08",
+              "converged": true,
+              "iterations": 8,
+              "path_residual_m": 1.3600865117285506e-10,
+              "force_relative_change": 3.70984338492603e-06,
+              "output_torque_balance_n_m": 1.1102230246251565e-16
+            },
+            {
+              "index": 25,
+              "label": "reverse_09",
+              "converged": true,
+              "iterations": 9,
+              "path_residual_m": 3.970252272660716e-11,
+              "force_relative_change": 3.9922664275818855e-06,
+              "output_torque_balance_n_m": 1.1102230246251565e-16
+            },
+            {
+              "index": 26,
+              "label": "reverse_10",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.5914585080059434e-09,
+              "force_relative_change": 3.972684495078279e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 27,
+              "label": "reverse_11",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.610911760601277e-09,
+              "force_relative_change": 2.3311439838535586e-07,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 28,
+              "label": "reverse_12",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.5978745697167211e-09,
+              "force_relative_change": 1.0808526862762742e-06,
+              "output_torque_balance_n_m": 8.881784197001252e-16
+            },
+            {
+              "index": 29,
+              "label": "reverse_13",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.5836663040813892e-09,
+              "force_relative_change": 1.2550051120013052e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 30,
+              "label": "reverse_14",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6050122121149277e-09,
+              "force_relative_change": 9.295601204665769e-07,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 31,
+              "label": "reverse_15",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6063802012871857e-09,
+              "force_relative_change": 2.111567325688804e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 32,
+              "label": "reverse_16",
+              "converged": true,
+              "iterations": 9,
+              "path_residual_m": 4.083158223667297e-11,
+              "force_relative_change": 5.0745624858467355e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 33,
+              "label": "hold_reverse",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.610341739338894e-09,
+              "force_relative_change": 1.4889692853276403e-06,
+              "output_torque_balance_n_m": 0.0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "pin_sizes",
+      "case_id": "dfki_pin_geometry__pin_sizes",
+      "checks": {
+        "motor_speed": {
+          "status": "passed",
+          "actual": 46.756453468248665,
+          "threshold": 229.2,
+          "relation": "<=",
+          "scope": "电机代表工况最大转速，rad/s",
+          "margin": 182.44354653175134,
+          "relative_margin": 0.7960015119186359,
+          "governing_location": {
+            "case_index": 7,
+            "label": "forward_08"
+          }
+        },
+        "motor_peak_torque": {
+          "status": "passed",
+          "actual": 0.40236663055493854,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "逐工况恒转矩—恒功率峰值包络利用率",
+          "margin": 0.5976333694450615,
+          "relative_margin": 0.5976333694450615,
+          "governing_location": {
+            "case_index": 3,
+            "label": "forward_04"
+          }
+        },
+        "motor_continuous_screen": {
+          "status": "passed",
+          "actual": 0.46122601964002785,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "按转速包络归一化的连续转矩RMS初筛，不替代温升校核",
+          "margin": 0.5387739803599721,
+          "relative_margin": 0.5387739803599721,
+          "governing_location": null
+        },
+        "brake_static_screen": {
+          "status": "passed",
+          "actual": 3.0,
+          "threshold": 1.2142425439879034,
+          "relation": ">=",
+          "scope": "输入侧静态保持力矩，N·m；不含动态制动认证",
+          "margin": 1.7857574560120966,
+          "relative_margin": 1.47067607279447,
+          "governing_location": null
+        },
+        "contact_pressure_pa": {
+          "status": "passed",
+          "actual": 827196380.1486442,
+          "threshold": 1200000000.0,
+          "relation": "<=",
+          "scope": "当前离散局部Hertz峰压，Pa；须另查网格/相位收敛",
+          "margin": 372803619.8513558,
+          "relative_margin": 0.31066968320946314,
+          "governing_location": {
+            "mesh": "sun_planet",
+            "planet_index": 1,
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "angle_budget_rad": {
+          "status": "passed",
+          "actual": 0.0017430335588015458,
+          "threshold": 0.003490658503988659,
+          "relation": "<=",
+          "scope": "指定受载状态的未补偿确定性角度预算，rad",
+          "margin": 0.0017476249451871134,
+          "relative_margin": 0.5006576676550171,
+          "governing_location": {
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "motor_temperature_k": {
+          "status": "passed",
+          "actual": 302.0944054354601,
+          "threshold": 353.15,
+          "relation": "<=",
+          "scope": "给定热参数的电机节点最高温度，K",
+          "margin": 51.05559456453989,
+          "relative_margin": 0.14457197951165196,
+          "governing_location": null
+        },
+        "gear_temperature_k": {
+          "status": "passed",
+          "actual": 300.78769106900677,
+          "threshold": 343.15,
+          "relation": "<=",
+          "scope": "给定热参数的传动节点最高温度，K",
+          "margin": 42.36230893099321,
+          "relative_margin": 0.12345128640825648,
+          "governing_location": null
+        },
+        "maximum_load_share_factor": {
+          "status": "passed",
+          "actual": 1.8435951567546922,
+          "threshold": 2.0,
+          "relation": "<=",
+          "scope": "有载工况最大均载系数；全零载时未定义",
+          "margin": 0.1564048432453078,
+          "relative_margin": 0.0782024216226539,
+          "governing_location": {
+            "case_index": 0,
+            "label": "forward_01"
+          }
+        },
+        "fatigue_damage_per_input_history": {
+          "status": "passed",
+          "actual": 2.8112133239961853e-07,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "给定热点标量应力谱的Miner损伤；不代表整关节服役寿命",
+          "margin": 0.9999997188786676,
+          "relative_margin": 0.9999997188786676,
+          "governing_location": null
+        },
+        "maximum_pin_stiffness_relative_difference": {
+          "status": "passed",
+          "actual": 0.0,
+          "threshold": 0.05,
+          "relation": "<=",
+          "scope": "简支圆销平均弯剪刚度与系统最终采用kpin之最大相对差",
+          "margin": 0.05,
+          "relative_margin": 1.0,
+          "governing_location": {
+            "planet_index": 0
+          }
+        },
+        "minimum_contact_safety_factor": {
+          "status": "passed",
+          "actual": 1.4239834135337133,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "给定评级因子与材料限值的最小接触安全系数",
+          "margin": 0.42398341353371327,
+          "relative_margin": 0.42398341353371327,
+          "governing_location": {
+            "mesh": "sun_planet",
+            "planet_index": 1,
+            "gear_role": "pinion",
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "minimum_bending_safety_factor": {
+          "status": "passed",
+          "actual": 2.3275814863066273,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "给定评级因子与材料限值的最小齿根安全系数",
+          "margin": 1.3275814863066273,
+          "relative_margin": 1.3275814863066273,
+          "governing_location": {
+            "mesh": "sun_planet",
+            "planet_index": 1,
+            "gear_role": "pinion",
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "minimum_bearing_static_safety_factor": {
+          "status": "passed",
+          "actual": 59.56250619838511,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "输出双支承基本静安全；不含行星轴承",
+          "margin": 58.56250619838511,
+          "relative_margin": 58.56250619838511,
+          "governing_location": {
+            "case_index": 7,
+            "label": "forward_08",
+            "bearing_index": 1
+          }
+        },
+        "minimum_bearing_life_hours": {
+          "status": "not_configured",
+          "actual": 2337677949.339132,
+          "threshold": null,
+          "relation": ">=",
+          "scope": "输出双支承基本L10小时数；无摆动/润滑/微动修正",
+          "margin": null,
+          "relative_margin": null,
+          "governing_location": null
+        },
+        "minimum_output_torsional_stiffness_n_m_per_rad": {
+          "status": "passed",
+          "actual": 23412.803625718527,
+          "threshold": 20000.0,
+          "relation": ">=",
+          "scope": "最终承载分支局部输出扭转刚度，N·m/rad",
+          "margin": 3412.8036257185267,
+          "relative_margin": 0.17064018128592634,
+          "governing_location": {
+            "case_index": 17,
+            "label": "reverse_01"
+          }
+        },
+        "minimum_planet_bearing_static_safety_factor": {
+          "status": "passed",
+          "actual": 4.205784573656988,
+          "threshold": 2.0,
+          "relation": ">=",
+          "scope": "显式容量/系数下的行星轴承基本静安全",
+          "margin": 2.205784573656988,
+          "relative_margin": 1.102892286828494,
+          "governing_location": {
+            "case_index": 20,
+            "label": "reverse_04",
+            "planet_index": 1
+          }
+        },
+        "minimum_planet_bearing_basic_l10_hours": {
+          "status": "not_configured",
+          "actual": 632394.7747487655,
+          "threshold": null,
+          "relation": ">=",
+          "scope": "行星相对行星架转速的基本L10小时数；无摆动/润滑修正",
+          "margin": null,
+          "relative_margin": null,
+          "governing_location": null
+        },
+        "planet_pin_static": {
+          "status": "passed",
+          "actual": 0.09906990226662256,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "销弯曲/横剪/平均面压各自实际值×要求安全系数/许用值的最大值；不含局部/疲劳",
+          "margin": 0.9009300977333774,
+          "relative_margin": 0.9009300977333774,
+          "governing_location": {
+            "case_index": 20,
+            "label": "reverse_04",
+            "planet_index": 1,
+            "stress_kind": "projected_pressure"
+          }
+        },
+        "dc_bus_maximum_voltage": {
+          "status": "passed",
+          "actual": 43.193661295810806,
+          "threshold": 48.0,
+          "relation": "<=",
+          "scope": "当前分段恒功率/理想电源/给定回馈吸收模型中的最高母线电压，V",
+          "margin": 4.806338704189194,
+          "relative_margin": 0.10013205633727489,
+          "governing_location": null
+        },
+        "dc_bus_minimum_voltage": {
+          "status": "not_evaluated",
+          "actual": 36.0,
+          "threshold": 30.0,
+          "relation": ">=",
+          "scope": "理想无限供能电源维持源电压下限；未评价真实电源欠压能力，不计为已通过的物理校核",
+          "margin": null,
+          "relative_margin": null,
+          "governing_location": null
+        }
+      },
+      "required_checks_missing": [],
+      "failed_checks": [],
+      "accepted": true,
+      "summary": {
+        "case_id": "dfki_pin_geometry__pin_sizes",
+        "ratio": 6.0,
+        "maximum_load_share_factor": 1.8435951567546922,
+        "maximum_contact_pressure_pa": 827196380.1486442,
+        "minimum_output_torsional_stiffness_n_m_per_rad": 23412.803625718527,
+        "maximum_angle_budget_rad": 0.0017430335588015458,
+        "maximum_motor_temperature_k": 302.0944054354601,
+        "maximum_gear_temperature_k": 300.78769106900677,
+        "thermal_mode": "periodic_steady",
+        "minimum_contact_safety_factor": 1.4239834135337133,
+        "minimum_bending_safety_factor": 2.3275814863066273,
+        "minimum_bearing_static_safety_factor": 59.56250619838511,
+        "minimum_bearing_life_hours": 2337677949.339132,
+        "fatigue_damage_per_input_history": 2.8112133239961853e-07,
+        "maximum_pin_static_utilization": 0.09906990226662256,
+        "maximum_pin_stiffness_relative_difference": 0.0,
+        "minimum_planet_bearing_static_safety_factor": 4.205784573656988,
+        "minimum_planet_bearing_basic_l10_hours": 632394.7747487655,
+        "maximum_dc_bus_voltage_v": 43.193661295810806,
+        "all_couplings_converged": true,
+        "checks": {
+          "motor_speed": true,
+          "motor_peak_torque": true,
+          "motor_continuous_screen": true,
+          "brake_static_screen": true,
+          "contact_pressure_pa": true,
+          "angle_budget_rad": true,
+          "motor_temperature_k": true,
+          "gear_temperature_k": true,
+          "minimum_output_torsional_stiffness_n_m_per_rad": true,
+          "maximum_load_share_factor": true,
+          "fatigue_damage_per_input_history": true,
+          "maximum_pin_stiffness_relative_difference": true,
+          "minimum_planet_bearing_static_safety_factor": true,
+          "minimum_contact_safety_factor": true,
+          "minimum_bending_safety_factor": true,
+          "minimum_bearing_static_safety_factor": true,
+          "planet_pin_static": true,
+          "dc_bus_maximum_voltage": true
+        },
+        "check_details": {
+          "motor_speed": {
+            "status": "passed",
+            "actual": 46.756453468248665,
+            "threshold": 229.2,
+            "relation": "<=",
+            "scope": "电机代表工况最大转速，rad/s"
+          },
+          "motor_peak_torque": {
+            "status": "passed",
+            "actual": 0.40236663055493854,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "逐工况恒转矩—恒功率峰值包络利用率"
+          },
+          "motor_continuous_screen": {
+            "status": "passed",
+            "actual": 0.46122601964002785,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "按转速包络归一化的连续转矩RMS初筛，不替代温升校核"
+          },
+          "brake_static_screen": {
+            "status": "passed",
+            "actual": 3.0,
+            "threshold": 1.2142425439879034,
+            "relation": ">=",
+            "scope": "输入侧静态保持力矩，N·m；不含动态制动认证"
+          },
+          "contact_pressure_pa": {
+            "status": "passed",
+            "actual": 827196380.1486442,
+            "threshold": 1200000000.0,
+            "relation": "<=",
+            "scope": "当前离散局部Hertz峰压，Pa；须另查网格/相位收敛"
+          },
+          "angle_budget_rad": {
+            "status": "passed",
+            "actual": 0.0017430335588015458,
+            "threshold": 0.003490658503988659,
+            "relation": "<=",
+            "scope": "指定受载状态的未补偿确定性角度预算，rad"
+          },
+          "motor_temperature_k": {
+            "status": "passed",
+            "actual": 302.0944054354601,
+            "threshold": 353.15,
+            "relation": "<=",
+            "scope": "给定热参数的电机节点最高温度，K"
+          },
+          "gear_temperature_k": {
+            "status": "passed",
+            "actual": 300.78769106900677,
+            "threshold": 343.15,
+            "relation": "<=",
+            "scope": "给定热参数的传动节点最高温度，K"
+          },
+          "maximum_load_share_factor": {
+            "status": "passed",
+            "actual": 1.8435951567546922,
+            "threshold": 2.0,
+            "relation": "<=",
+            "scope": "有载工况最大均载系数；全零载时未定义"
+          },
+          "fatigue_damage_per_input_history": {
+            "status": "passed",
+            "actual": 2.8112133239961853e-07,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "给定热点标量应力谱的Miner损伤；不代表整关节服役寿命"
+          },
+          "maximum_pin_stiffness_relative_difference": {
+            "status": "passed",
+            "actual": 0.0,
+            "threshold": 0.05,
+            "relation": "<=",
+            "scope": "简支圆销平均弯剪刚度与系统最终采用kpin之最大相对差"
+          },
+          "minimum_contact_safety_factor": {
+            "status": "passed",
+            "actual": 1.4239834135337133,
+            "threshold": 1.0,
+            "relation": ">=",
+            "scope": "给定评级因子与材料限值的最小接触安全系数"
+          },
+          "minimum_bending_safety_factor": {
+            "status": "passed",
+            "actual": 2.3275814863066273,
+            "threshold": 1.0,
+            "relation": ">=",
+            "scope": "给定评级因子与材料限值的最小齿根安全系数"
+          },
+          "minimum_bearing_static_safety_factor": {
+            "status": "passed",
+            "actual": 59.56250619838511,
+            "threshold": 1.0,
+            "relation": ">=",
+            "scope": "输出双支承基本静安全；不含行星轴承"
+          },
+          "minimum_bearing_life_hours": {
+            "status": "not_configured",
+            "actual": 2337677949.339132,
+            "threshold": null,
+            "relation": ">=",
+            "scope": "输出双支承基本L10小时数；无摆动/润滑/微动修正"
+          },
+          "minimum_output_torsional_stiffness_n_m_per_rad": {
+            "status": "passed",
+            "actual": 23412.803625718527,
+            "threshold": 20000.0,
+            "relation": ">=",
+            "scope": "最终承载分支局部输出扭转刚度，N·m/rad"
+          },
+          "minimum_planet_bearing_static_safety_factor": {
+            "status": "passed",
+            "actual": 4.205784573656988,
+            "threshold": 2.0,
+            "relation": ">=",
+            "scope": "显式容量/系数下的行星轴承基本静安全"
+          },
+          "minimum_planet_bearing_basic_l10_hours": {
+            "status": "not_configured",
+            "actual": 632394.7747487655,
+            "threshold": null,
+            "relation": ">=",
+            "scope": "行星相对行星架转速的基本L10小时数；无摆动/润滑修正"
+          },
+          "planet_pin_static": {
+            "status": "passed",
+            "actual": 0.09906990226662256,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "销弯曲/横剪/平均面压各自实际值×要求安全系数/许用值的最大值；不含局部/疲劳"
+          },
+          "dc_bus_maximum_voltage": {
+            "status": "passed",
+            "actual": 43.193661295810806,
+            "threshold": 48.0,
+            "relation": "<=",
+            "scope": "当前分段恒功率/理想电源/给定回馈吸收模型中的最高母线电压，V"
+          },
+          "dc_bus_minimum_voltage": {
+            "status": "not_evaluated",
+            "actual": 36.0,
+            "threshold": 30.0,
+            "relation": ">=",
+            "scope": "理想无限供能电源维持源电压下限；未评价真实电源欠压能力，不计为已通过的物理校核"
+          }
+        },
+        "physical_validation": false,
+        "vendor_system_validation": false,
+        "implementation": "新写NGW降阶系统实现，复用公开齿轮内核；非厂商整机等价重建",
+        "scope": "固定环零变位直齿单级NGW、准静态、小变形、周期平均协调；不含RV/谐波、完整FE、同步动力学、控制、润滑预测或实物认证",
+        "assessment_coverage": {
+          "output_bearing_life": "仅基本L10；小角摆动、微动和润滑修正未评估",
+          "hotspot_fatigue": "仅给定标量应力谱",
+          "planet_pin_strength": "简支圆销弯曲/横剪/平均面压与弯剪挠度初筛；局部销孔/配合/疲劳未评估",
+          "planet_bearing_life": "显式容量及相对行星架转速的基本L10/静安全；摆动/润滑修正未评估",
+          "ring_carrier_housing_strength": "未评估；未构造完整实体和FE边界",
+          "regenerative_bus_and_inverter": "分段母线电容能量及给定回馈吸收初筛；未模拟PWM/电源阻抗/真实驱动器包络",
+          "dynamics_and_resonance": "未评估；当前为周期平均准静态协调",
+          "manufacturing_interference": "仅外齿轮标准全齿高齿条根切风险初筛；内齿干涉、尖顶和刀具未评估",
+          "physical_validation": "未完成样机标定与试验"
+        },
+        "configured_checks_pass": true,
+        "check_scope": "仅对已配置约束的数值初筛；未配置强度/寿命/温升限值不自动视为已校核"
+      },
+      "pin_stiffness": {
+        "source": "pin_geometry",
+        "adopted_pin_stiffness_n_per_m": [
+          294372710.47851825,
+          297707470.9613503,
+          301065845.93275815
+        ],
+        "specified_input_n_per_m": null,
+        "specified_input_used": false,
+        "load_independent": true,
+        "planets": [
+          {
+            "planet_index": 0,
+            "adopted_pin_stiffness_n_per_m": 294372710.47851825,
+            "source_parameters": {
+              "diameter_m": 0.00598,
+              "support_span_m": 0.012,
+              "loaded_width_m": 0.005,
+              "young_modulus_pa": 210000000000.0,
+              "poisson_ratio": 0.3,
+              "shear_coefficient": 0.9,
+              "support_model": "simply_supported_centered_uniform"
+            },
+            "load_weighted_bending_compliance_m_per_n": 2.335819433148989e-09,
+            "load_weighted_shear_compliance_m_per_n": 1.0612345885177873e-09,
+            "span_to_diameter_ratio": 2.0066889632107023,
+            "short_pin_review_required": true
+          },
+          {
+            "planet_index": 1,
+            "adopted_pin_stiffness_n_per_m": 297707470.9613503,
+            "source_parameters": {
+              "diameter_m": 0.006,
+              "support_span_m": 0.012,
+              "loaded_width_m": 0.005,
+              "young_modulus_pa": 210000000000.0,
+              "poisson_ratio": 0.3,
+              "shear_coefficient": 0.9,
+              "support_model": "simply_supported_centered_uniform"
+            },
+            "load_weighted_bending_compliance_m_per_n": 2.304830549576928e-09,
+            "load_weighted_shear_compliance_m_per_n": 1.05417148275643e-09,
+            "span_to_diameter_ratio": 2.0,
+            "short_pin_review_required": true
+          },
+          {
+            "planet_index": 2,
+            "adopted_pin_stiffness_n_per_m": 301065845.93275815,
+            "source_parameters": {
+              "diameter_m": 0.00602,
+              "support_span_m": 0.012,
+              "loaded_width_m": 0.005,
+              "young_modulus_pa": 210000000000.0,
+              "poisson_ratio": 0.3,
+              "shear_coefficient": 0.9,
+              "support_model": "simply_supported_centered_uniform"
+            },
+            "load_weighted_bending_compliance_m_per_n": 2.2743538704902606e-09,
+            "load_weighted_shear_compliance_m_per_n": 1.0471786563953894e-09,
+            "span_to_diameter_ratio": 1.9933554817275747,
+            "short_pin_review_required": true
+          }
+        ],
+        "path_compliance_contribution_m_per_n": [
+          1.3588216086667106e-08,
+          1.3436008129333434e-08,
+          1.3286130107542601e-08
+        ],
+        "physical_validation": false,
+        "scope": "简支圆实销中央均布横载的功共轭平均弯剪刚度；销力=2Ft，路径柔度=4/kpin；未计销孔/配合/架板局部柔度",
+        "coupling": {
+          "all_converged": true,
+          "cases": [
+            {
+              "index": 0,
+              "label": "forward_01",
+              "converged": true,
+              "iterations": 11,
+              "path_residual_m": 8.010895855548164e-12,
+              "force_relative_change": 4.234975173354472e-06,
+              "output_torque_balance_n_m": 5.551115123125783e-17
+            },
+            {
+              "index": 1,
+              "label": "forward_02",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6219678076004656e-09,
+              "force_relative_change": 7.434678489723693e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 2,
+              "label": "forward_03",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6198604151924218e-09,
+              "force_relative_change": 3.3198837380296087e-06,
+              "output_torque_balance_n_m": 8.881784197001252e-16
+            },
+            {
+              "index": 3,
+              "label": "forward_04",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6042126543093874e-09,
+              "force_relative_change": 4.519598944874985e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 4,
+              "label": "forward_05",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6131822908108435e-09,
+              "force_relative_change": 4.070951399742103e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 5,
+              "label": "forward_06",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6171302258314797e-09,
+              "force_relative_change": 1.7261249059855443e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 6,
+              "label": "forward_07",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6221574154318882e-09,
+              "force_relative_change": 9.136051465010305e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 7,
+              "label": "forward_08",
+              "converged": true,
+              "iterations": 9,
+              "path_residual_m": 4.7455378531913495e-11,
+              "force_relative_change": 7.035205540633646e-06,
+              "output_torque_balance_n_m": 1.1102230246251565e-16
+            },
+            {
+              "index": 8,
+              "label": "forward_09",
+              "converged": true,
+              "iterations": 10,
+              "path_residual_m": 1.7368716296486576e-11,
+              "force_relative_change": 5.223385158492645e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 9,
+              "label": "forward_10",
+              "converged": true,
+              "iterations": 7,
+              "path_residual_m": 4.909038993194107e-10,
+              "force_relative_change": 3.942855561669687e-06,
+              "output_torque_balance_n_m": -4.440892098500626e-16
+            },
+            {
+              "index": 10,
+              "label": "forward_11",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6135285833516558e-09,
+              "force_relative_change": 1.4590269407236165e-06,
+              "output_torque_balance_n_m": -4.440892098500626e-16
+            },
+            {
+              "index": 11,
+              "label": "forward_12",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6115792889312858e-09,
+              "force_relative_change": 4.285264116312672e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 12,
+              "label": "forward_13",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6008325508989676e-09,
+              "force_relative_change": 4.830100539810651e-06,
+              "output_torque_balance_n_m": 8.881784197001252e-16
+            },
+            {
+              "index": 13,
+              "label": "forward_14",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6160863217931374e-09,
+              "force_relative_change": 3.810750262689923e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 14,
+              "label": "forward_15",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.625193516472756e-09,
+              "force_relative_change": 5.719972762252002e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 15,
+              "label": "forward_16",
+              "converged": true,
+              "iterations": 12,
+              "path_residual_m": 1.6948674937732346e-11,
+              "force_relative_change": 6.090104353686672e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 16,
+              "label": "hold_forward",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6217537454907867e-09,
+              "force_relative_change": 6.9318922205105066e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 17,
+              "label": "reverse_01",
+              "converged": true,
+              "iterations": 12,
+              "path_residual_m": 2.8298430263992037e-11,
+              "force_relative_change": 9.944132042932064e-06,
+              "output_torque_balance_n_m": -5.551115123125783e-17
+            },
+            {
+              "index": 18,
+              "label": "reverse_02",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6246622925558703e-09,
+              "force_relative_change": 5.2857232875181355e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 19,
+              "label": "reverse_03",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6145960802929217e-09,
+              "force_relative_change": 4.010198899322345e-06,
+              "output_torque_balance_n_m": 8.881784197001252e-16
+            },
+            {
+              "index": 20,
+              "label": "reverse_04",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.594318955828026e-09,
+              "force_relative_change": 5.035134569360594e-06,
+              "output_torque_balance_n_m": -8.881784197001252e-16
+            },
+            {
+              "index": 21,
+              "label": "reverse_05",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6051943615662929e-09,
+              "force_relative_change": 4.653498199152969e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 22,
+              "label": "reverse_06",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6169451976835862e-09,
+              "force_relative_change": 2.488574808026576e-06,
+              "output_torque_balance_n_m": -4.440892098500626e-16
+            },
+            {
+              "index": 23,
+              "label": "reverse_07",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6261479131677922e-09,
+              "force_relative_change": 6.750951719915308e-06,
+              "output_torque_balance_n_m": 4.440892098500626e-16
+            },
+            {
+              "index": 24,
+              "label": "reverse_08",
+              "converged": true,
+              "iterations": 9,
+              "path_residual_m": 4.82697923500598e-11,
+              "force_relative_change": 4.915456033992221e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 25,
+              "label": "reverse_09",
+              "converged": true,
+              "iterations": 10,
+              "path_residual_m": 1.7542092678533585e-11,
+              "force_relative_change": 8.578795600987208e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 26,
+              "label": "reverse_10",
+              "converged": true,
+              "iterations": 7,
+              "path_residual_m": 4.88350178775538e-10,
+              "force_relative_change": 5.053935454134971e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 27,
+              "label": "reverse_11",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.610144882889194e-09,
+              "force_relative_change": 8.435149185265441e-07,
+              "output_torque_balance_n_m": 4.440892098500626e-16
+            },
+            {
+              "index": 28,
+              "label": "reverse_12",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6179483133441737e-09,
+              "force_relative_change": 3.640428311338015e-06,
+              "output_torque_balance_n_m": 8.881784197001252e-16
+            },
+            {
+              "index": 29,
+              "label": "reverse_13",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6096682816859278e-09,
+              "force_relative_change": 4.27818443541225e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 30,
+              "label": "reverse_14",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6205950324125347e-09,
+              "force_relative_change": 3.0878847365129354e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 31,
+              "label": "reverse_15",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.622103446677679e-09,
+              "force_relative_change": 7.938590958247357e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 32,
+              "label": "reverse_16",
+              "converged": true,
+              "iterations": 11,
+              "path_residual_m": 7.31946756364316e-12,
+              "force_relative_change": 4.036512821625362e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 33,
+              "label": "hold_reverse",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.624042844538735e-09,
+              "force_relative_change": 4.864367752357787e-06,
+              "output_torque_balance_n_m": -4.440892098500626e-16
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "combined",
+      "case_id": "dfki_pin_geometry__combined",
+      "checks": {
+        "motor_speed": {
+          "status": "passed",
+          "actual": 46.756453468248665,
+          "threshold": 229.2,
+          "relation": "<=",
+          "scope": "电机代表工况最大转速，rad/s",
+          "margin": 182.44354653175134,
+          "relative_margin": 0.7960015119186359,
+          "governing_location": {
+            "case_index": 7,
+            "label": "forward_08"
+          }
+        },
+        "motor_peak_torque": {
+          "status": "passed",
+          "actual": 0.40236663055493854,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "逐工况恒转矩—恒功率峰值包络利用率",
+          "margin": 0.5976333694450615,
+          "relative_margin": 0.5976333694450615,
+          "governing_location": {
+            "case_index": 3,
+            "label": "forward_04"
+          }
+        },
+        "motor_continuous_screen": {
+          "status": "passed",
+          "actual": 0.46122601964002785,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "按转速包络归一化的连续转矩RMS初筛，不替代温升校核",
+          "margin": 0.5387739803599721,
+          "relative_margin": 0.5387739803599721,
+          "governing_location": null
+        },
+        "brake_static_screen": {
+          "status": "passed",
+          "actual": 3.0,
+          "threshold": 1.2142425439879034,
+          "relation": ">=",
+          "scope": "输入侧静态保持力矩，N·m；不含动态制动认证",
+          "margin": 1.7857574560120966,
+          "relative_margin": 1.47067607279447,
+          "governing_location": null
+        },
+        "contact_pressure_pa": {
+          "status": "passed",
+          "actual": 835872333.1319146,
+          "threshold": 1200000000.0,
+          "relation": "<=",
+          "scope": "当前离散局部Hertz峰压，Pa；须另查网格/相位收敛",
+          "margin": 364127666.8680854,
+          "relative_margin": 0.30343972239007116,
+          "governing_location": {
+            "mesh": "sun_planet",
+            "planet_index": 1,
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "angle_budget_rad": {
+          "status": "passed",
+          "actual": 0.0017430102011222698,
+          "threshold": 0.003490658503988659,
+          "relation": "<=",
+          "scope": "指定受载状态的未补偿确定性角度预算，rad",
+          "margin": 0.0017476483028663894,
+          "relative_margin": 0.5006643591372258,
+          "governing_location": {
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "motor_temperature_k": {
+          "status": "passed",
+          "actual": 302.0944054354601,
+          "threshold": 353.15,
+          "relation": "<=",
+          "scope": "给定热参数的电机节点最高温度，K",
+          "margin": 51.05559456453989,
+          "relative_margin": 0.14457197951165196,
+          "governing_location": null
+        },
+        "gear_temperature_k": {
+          "status": "passed",
+          "actual": 300.78769106900677,
+          "threshold": 343.15,
+          "relation": "<=",
+          "scope": "给定热参数的传动节点最高温度，K",
+          "margin": 42.36230893099321,
+          "relative_margin": 0.12345128640825648,
+          "governing_location": null
+        },
+        "maximum_load_share_factor": {
+          "status": "failed",
+          "actual": 2.1447162096530747,
+          "threshold": 2.0,
+          "relation": "<=",
+          "scope": "有载工况最大均载系数；全零载时未定义",
+          "margin": -0.14471620965307475,
+          "relative_margin": -0.07235810482653737,
+          "governing_location": {
+            "case_index": 0,
+            "label": "forward_01"
+          }
+        },
+        "fatigue_damage_per_input_history": {
+          "status": "passed",
+          "actual": 2.8112133239961853e-07,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "给定热点标量应力谱的Miner损伤；不代表整关节服役寿命",
+          "margin": 0.9999997188786676,
+          "relative_margin": 0.9999997188786676,
+          "governing_location": null
+        },
+        "maximum_pin_stiffness_relative_difference": {
+          "status": "passed",
+          "actual": 0.0,
+          "threshold": 0.05,
+          "relation": "<=",
+          "scope": "简支圆销平均弯剪刚度与系统最终采用kpin之最大相对差",
+          "margin": 0.05,
+          "relative_margin": 1.0,
+          "governing_location": {
+            "planet_index": 0
+          }
+        },
+        "minimum_contact_safety_factor": {
+          "status": "passed",
+          "actual": 1.4071414490665966,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "给定评级因子与材料限值的最小接触安全系数",
+          "margin": 0.40714144906659655,
+          "relative_margin": 0.40714144906659655,
+          "governing_location": {
+            "mesh": "sun_planet",
+            "planet_index": 1,
+            "gear_role": "pinion",
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "minimum_bending_safety_factor": {
+          "status": "passed",
+          "actual": 2.2728487950654697,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "给定评级因子与材料限值的最小齿根安全系数",
+          "margin": 1.2728487950654697,
+          "relative_margin": 1.2728487950654697,
+          "governing_location": {
+            "mesh": "sun_planet",
+            "planet_index": 1,
+            "gear_role": "pinion",
+            "case_index": 20,
+            "label": "reverse_04"
+          }
+        },
+        "minimum_bearing_static_safety_factor": {
+          "status": "passed",
+          "actual": 59.56250619838511,
+          "threshold": 1.0,
+          "relation": ">=",
+          "scope": "输出双支承基本静安全；不含行星轴承",
+          "margin": 58.56250619838511,
+          "relative_margin": 58.56250619838511,
+          "governing_location": {
+            "case_index": 7,
+            "label": "forward_08",
+            "bearing_index": 1
+          }
+        },
+        "minimum_bearing_life_hours": {
+          "status": "not_configured",
+          "actual": 2337677949.339132,
+          "threshold": null,
+          "relation": ">=",
+          "scope": "输出双支承基本L10小时数；无摆动/润滑/微动修正",
+          "margin": null,
+          "relative_margin": null,
+          "governing_location": null
+        },
+        "minimum_output_torsional_stiffness_n_m_per_rad": {
+          "status": "failed",
+          "actual": 11146.432740680712,
+          "threshold": 20000.0,
+          "relation": ">=",
+          "scope": "最终承载分支局部输出扭转刚度，N·m/rad",
+          "margin": -8853.567259319288,
+          "relative_margin": -0.4426783629659644,
+          "governing_location": {
+            "case_index": 17,
+            "label": "reverse_01"
+          }
+        },
+        "minimum_planet_bearing_static_safety_factor": {
+          "status": "passed",
+          "actual": 4.106886249430299,
+          "threshold": 2.0,
+          "relation": ">=",
+          "scope": "显式容量/系数下的行星轴承基本静安全",
+          "margin": 2.106886249430299,
+          "relative_margin": 1.0534431247151494,
+          "governing_location": {
+            "case_index": 20,
+            "label": "reverse_04",
+            "planet_index": 1
+          }
+        },
+        "minimum_planet_bearing_basic_l10_hours": {
+          "status": "not_configured",
+          "actual": 564021.738919808,
+          "threshold": null,
+          "relation": ">=",
+          "scope": "行星相对行星架转速的基本L10小时数；无摆动/润滑修正",
+          "margin": null,
+          "relative_margin": null,
+          "governing_location": null
+        },
+        "planet_pin_static": {
+          "status": "passed",
+          "actual": 0.10145561414671907,
+          "threshold": 1.0,
+          "relation": "<=",
+          "scope": "销弯曲/横剪/平均面压各自实际值×要求安全系数/许用值的最大值；不含局部/疲劳",
+          "margin": 0.8985443858532809,
+          "relative_margin": 0.8985443858532809,
+          "governing_location": {
+            "case_index": 20,
+            "label": "reverse_04",
+            "planet_index": 1,
+            "stress_kind": "projected_pressure"
+          }
+        },
+        "dc_bus_maximum_voltage": {
+          "status": "passed",
+          "actual": 43.193661295810806,
+          "threshold": 48.0,
+          "relation": "<=",
+          "scope": "当前分段恒功率/理想电源/给定回馈吸收模型中的最高母线电压，V",
+          "margin": 4.806338704189194,
+          "relative_margin": 0.10013205633727489,
+          "governing_location": null
+        },
+        "dc_bus_minimum_voltage": {
+          "status": "not_evaluated",
+          "actual": 36.0,
+          "threshold": 30.0,
+          "relation": ">=",
+          "scope": "理想无限供能电源维持源电压下限；未评价真实电源欠压能力，不计为已通过的物理校核",
+          "margin": null,
+          "relative_margin": null,
+          "governing_location": null
+        }
+      },
+      "required_checks_missing": [],
+      "failed_checks": [
+        "maximum_load_share_factor",
+        "minimum_output_torsional_stiffness_n_m_per_rad"
+      ],
+      "accepted": false,
+      "summary": {
+        "case_id": "dfki_pin_geometry__combined",
+        "ratio": 6.0,
+        "maximum_load_share_factor": 2.1447162096530747,
+        "maximum_contact_pressure_pa": 835872333.1319146,
+        "minimum_output_torsional_stiffness_n_m_per_rad": 11146.432740680712,
+        "maximum_angle_budget_rad": 0.0017430102011222698,
+        "maximum_motor_temperature_k": 302.0944054354601,
+        "maximum_gear_temperature_k": 300.78769106900677,
+        "thermal_mode": "periodic_steady",
+        "minimum_contact_safety_factor": 1.4071414490665966,
+        "minimum_bending_safety_factor": 2.2728487950654697,
+        "minimum_bearing_static_safety_factor": 59.56250619838511,
+        "minimum_bearing_life_hours": 2337677949.339132,
+        "fatigue_damage_per_input_history": 2.8112133239961853e-07,
+        "maximum_pin_static_utilization": 0.10145561414671907,
+        "maximum_pin_stiffness_relative_difference": 0.0,
+        "minimum_planet_bearing_static_safety_factor": 4.106886249430299,
+        "minimum_planet_bearing_basic_l10_hours": 564021.738919808,
+        "maximum_dc_bus_voltage_v": 43.193661295810806,
+        "all_couplings_converged": true,
+        "checks": {
+          "motor_speed": true,
+          "motor_peak_torque": true,
+          "motor_continuous_screen": true,
+          "brake_static_screen": true,
+          "contact_pressure_pa": true,
+          "angle_budget_rad": true,
+          "motor_temperature_k": true,
+          "gear_temperature_k": true,
+          "minimum_output_torsional_stiffness_n_m_per_rad": false,
+          "maximum_load_share_factor": false,
+          "fatigue_damage_per_input_history": true,
+          "maximum_pin_stiffness_relative_difference": true,
+          "minimum_planet_bearing_static_safety_factor": true,
+          "minimum_contact_safety_factor": true,
+          "minimum_bending_safety_factor": true,
+          "minimum_bearing_static_safety_factor": true,
+          "planet_pin_static": true,
+          "dc_bus_maximum_voltage": true
+        },
+        "check_details": {
+          "motor_speed": {
+            "status": "passed",
+            "actual": 46.756453468248665,
+            "threshold": 229.2,
+            "relation": "<=",
+            "scope": "电机代表工况最大转速，rad/s"
+          },
+          "motor_peak_torque": {
+            "status": "passed",
+            "actual": 0.40236663055493854,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "逐工况恒转矩—恒功率峰值包络利用率"
+          },
+          "motor_continuous_screen": {
+            "status": "passed",
+            "actual": 0.46122601964002785,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "按转速包络归一化的连续转矩RMS初筛，不替代温升校核"
+          },
+          "brake_static_screen": {
+            "status": "passed",
+            "actual": 3.0,
+            "threshold": 1.2142425439879034,
+            "relation": ">=",
+            "scope": "输入侧静态保持力矩，N·m；不含动态制动认证"
+          },
+          "contact_pressure_pa": {
+            "status": "passed",
+            "actual": 835872333.1319146,
+            "threshold": 1200000000.0,
+            "relation": "<=",
+            "scope": "当前离散局部Hertz峰压，Pa；须另查网格/相位收敛"
+          },
+          "angle_budget_rad": {
+            "status": "passed",
+            "actual": 0.0017430102011222698,
+            "threshold": 0.003490658503988659,
+            "relation": "<=",
+            "scope": "指定受载状态的未补偿确定性角度预算，rad"
+          },
+          "motor_temperature_k": {
+            "status": "passed",
+            "actual": 302.0944054354601,
+            "threshold": 353.15,
+            "relation": "<=",
+            "scope": "给定热参数的电机节点最高温度，K"
+          },
+          "gear_temperature_k": {
+            "status": "passed",
+            "actual": 300.78769106900677,
+            "threshold": 343.15,
+            "relation": "<=",
+            "scope": "给定热参数的传动节点最高温度，K"
+          },
+          "maximum_load_share_factor": {
+            "status": "failed",
+            "actual": 2.1447162096530747,
+            "threshold": 2.0,
+            "relation": "<=",
+            "scope": "有载工况最大均载系数；全零载时未定义"
+          },
+          "fatigue_damage_per_input_history": {
+            "status": "passed",
+            "actual": 2.8112133239961853e-07,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "给定热点标量应力谱的Miner损伤；不代表整关节服役寿命"
+          },
+          "maximum_pin_stiffness_relative_difference": {
+            "status": "passed",
+            "actual": 0.0,
+            "threshold": 0.05,
+            "relation": "<=",
+            "scope": "简支圆销平均弯剪刚度与系统最终采用kpin之最大相对差"
+          },
+          "minimum_contact_safety_factor": {
+            "status": "passed",
+            "actual": 1.4071414490665966,
+            "threshold": 1.0,
+            "relation": ">=",
+            "scope": "给定评级因子与材料限值的最小接触安全系数"
+          },
+          "minimum_bending_safety_factor": {
+            "status": "passed",
+            "actual": 2.2728487950654697,
+            "threshold": 1.0,
+            "relation": ">=",
+            "scope": "给定评级因子与材料限值的最小齿根安全系数"
+          },
+          "minimum_bearing_static_safety_factor": {
+            "status": "passed",
+            "actual": 59.56250619838511,
+            "threshold": 1.0,
+            "relation": ">=",
+            "scope": "输出双支承基本静安全；不含行星轴承"
+          },
+          "minimum_bearing_life_hours": {
+            "status": "not_configured",
+            "actual": 2337677949.339132,
+            "threshold": null,
+            "relation": ">=",
+            "scope": "输出双支承基本L10小时数；无摆动/润滑/微动修正"
+          },
+          "minimum_output_torsional_stiffness_n_m_per_rad": {
+            "status": "failed",
+            "actual": 11146.432740680712,
+            "threshold": 20000.0,
+            "relation": ">=",
+            "scope": "最终承载分支局部输出扭转刚度，N·m/rad"
+          },
+          "minimum_planet_bearing_static_safety_factor": {
+            "status": "passed",
+            "actual": 4.106886249430299,
+            "threshold": 2.0,
+            "relation": ">=",
+            "scope": "显式容量/系数下的行星轴承基本静安全"
+          },
+          "minimum_planet_bearing_basic_l10_hours": {
+            "status": "not_configured",
+            "actual": 564021.738919808,
+            "threshold": null,
+            "relation": ">=",
+            "scope": "行星相对行星架转速的基本L10小时数；无摆动/润滑修正"
+          },
+          "planet_pin_static": {
+            "status": "passed",
+            "actual": 0.10145561414671907,
+            "threshold": 1.0,
+            "relation": "<=",
+            "scope": "销弯曲/横剪/平均面压各自实际值×要求安全系数/许用值的最大值；不含局部/疲劳"
+          },
+          "dc_bus_maximum_voltage": {
+            "status": "passed",
+            "actual": 43.193661295810806,
+            "threshold": 48.0,
+            "relation": "<=",
+            "scope": "当前分段恒功率/理想电源/给定回馈吸收模型中的最高母线电压，V"
+          },
+          "dc_bus_minimum_voltage": {
+            "status": "not_evaluated",
+            "actual": 36.0,
+            "threshold": 30.0,
+            "relation": ">=",
+            "scope": "理想无限供能电源维持源电压下限；未评价真实电源欠压能力，不计为已通过的物理校核"
+          }
+        },
+        "physical_validation": false,
+        "vendor_system_validation": false,
+        "implementation": "新写NGW降阶系统实现，复用公开齿轮内核；非厂商整机等价重建",
+        "scope": "固定环零变位直齿单级NGW、准静态、小变形、周期平均协调；不含RV/谐波、完整FE、同步动力学、控制、润滑预测或实物认证",
+        "assessment_coverage": {
+          "output_bearing_life": "仅基本L10；小角摆动、微动和润滑修正未评估",
+          "hotspot_fatigue": "仅给定标量应力谱",
+          "planet_pin_strength": "简支圆销弯曲/横剪/平均面压与弯剪挠度初筛；局部销孔/配合/疲劳未评估",
+          "planet_bearing_life": "显式容量及相对行星架转速的基本L10/静安全；摆动/润滑修正未评估",
+          "ring_carrier_housing_strength": "未评估；未构造完整实体和FE边界",
+          "regenerative_bus_and_inverter": "分段母线电容能量及给定回馈吸收初筛；未模拟PWM/电源阻抗/真实驱动器包络",
+          "dynamics_and_resonance": "未评估；当前为周期平均准静态协调",
+          "manufacturing_interference": "仅外齿轮标准全齿高齿条根切风险初筛；内齿干涉、尖顶和刀具未评估",
+          "physical_validation": "未完成样机标定与试验"
+        },
+        "configured_checks_pass": false,
+        "check_scope": "仅对已配置约束的数值初筛；未配置强度/寿命/温升限值不自动视为已校核"
+      },
+      "pin_stiffness": {
+        "source": "pin_geometry",
+        "adopted_pin_stiffness_n_per_m": [
+          294372710.47851825,
+          297707470.9613503,
+          301065845.93275815
+        ],
+        "specified_input_n_per_m": null,
+        "specified_input_used": false,
+        "load_independent": true,
+        "planets": [
+          {
+            "planet_index": 0,
+            "adopted_pin_stiffness_n_per_m": 294372710.47851825,
+            "source_parameters": {
+              "diameter_m": 0.00598,
+              "support_span_m": 0.012,
+              "loaded_width_m": 0.005,
+              "young_modulus_pa": 210000000000.0,
+              "poisson_ratio": 0.3,
+              "shear_coefficient": 0.9,
+              "support_model": "simply_supported_centered_uniform"
+            },
+            "load_weighted_bending_compliance_m_per_n": 2.335819433148989e-09,
+            "load_weighted_shear_compliance_m_per_n": 1.0612345885177873e-09,
+            "span_to_diameter_ratio": 2.0066889632107023,
+            "short_pin_review_required": true
+          },
+          {
+            "planet_index": 1,
+            "adopted_pin_stiffness_n_per_m": 297707470.9613503,
+            "source_parameters": {
+              "diameter_m": 0.006,
+              "support_span_m": 0.012,
+              "loaded_width_m": 0.005,
+              "young_modulus_pa": 210000000000.0,
+              "poisson_ratio": 0.3,
+              "shear_coefficient": 0.9,
+              "support_model": "simply_supported_centered_uniform"
+            },
+            "load_weighted_bending_compliance_m_per_n": 2.304830549576928e-09,
+            "load_weighted_shear_compliance_m_per_n": 1.05417148275643e-09,
+            "span_to_diameter_ratio": 2.0,
+            "short_pin_review_required": true
+          },
+          {
+            "planet_index": 2,
+            "adopted_pin_stiffness_n_per_m": 301065845.93275815,
+            "source_parameters": {
+              "diameter_m": 0.00602,
+              "support_span_m": 0.012,
+              "loaded_width_m": 0.005,
+              "young_modulus_pa": 210000000000.0,
+              "poisson_ratio": 0.3,
+              "shear_coefficient": 0.9,
+              "support_model": "simply_supported_centered_uniform"
+            },
+            "load_weighted_bending_compliance_m_per_n": 2.2743538704902606e-09,
+            "load_weighted_shear_compliance_m_per_n": 1.0471786563953894e-09,
+            "span_to_diameter_ratio": 1.9933554817275747,
+            "short_pin_review_required": true
+          }
+        ],
+        "path_compliance_contribution_m_per_n": [
+          1.3588216086667106e-08,
+          1.3436008129333434e-08,
+          1.3286130107542601e-08
+        ],
+        "physical_validation": false,
+        "scope": "简支圆实销中央均布横载的功共轭平均弯剪刚度；销力=2Ft，路径柔度=4/kpin；未计销孔/配合/架板局部柔度",
+        "coupling": {
+          "all_converged": true,
+          "cases": [
+            {
+              "index": 0,
+              "label": "forward_01",
+              "converged": true,
+              "iterations": 10,
+              "path_residual_m": 1.6068507233875056e-11,
+              "force_relative_change": 4.147957170705408e-06,
+              "output_torque_balance_n_m": 5.551115123125783e-17
+            },
+            {
+              "index": 1,
+              "label": "forward_02",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6203687518928257e-09,
+              "force_relative_change": 4.865358330149439e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 2,
+              "label": "forward_03",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6175285347528274e-09,
+              "force_relative_change": 2.2208482347950474e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 3,
+              "label": "forward_04",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6028015705567451e-09,
+              "force_relative_change": 2.8262454806257536e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 4,
+              "label": "forward_05",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.611386595584147e-09,
+              "force_relative_change": 2.600827729620861e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 5,
+              "label": "forward_06",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6138325833565702e-09,
+              "force_relative_change": 1.3210857378963942e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 6,
+              "label": "forward_07",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.621124628322355e-09,
+              "force_relative_change": 5.967897455117893e-06,
+              "output_torque_balance_n_m": 4.440892098500626e-16
+            },
+            {
+              "index": 7,
+              "label": "forward_08",
+              "converged": true,
+              "iterations": 9,
+              "path_residual_m": 4.5687726235913066e-11,
+              "force_relative_change": 4.3209770932242855e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 8,
+              "label": "forward_09",
+              "converged": true,
+              "iterations": 9,
+              "path_residual_m": 4.7944140877312285e-11,
+              "force_relative_change": 6.610970313269112e-06,
+              "output_torque_balance_n_m": -1.1102230246251565e-16
+            },
+            {
+              "index": 9,
+              "label": "forward_10",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6214059783460813e-09,
+              "force_relative_change": 6.92861804540157e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 10,
+              "label": "forward_11",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6128966089585574e-09,
+              "force_relative_change": 1.0370995709291277e-06,
+              "output_torque_balance_n_m": -4.440892098500626e-16
+            },
+            {
+              "index": 11,
+              "label": "forward_12",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6054438271052919e-09,
+              "force_relative_change": 2.7561505282570483e-06,
+              "output_torque_balance_n_m": 8.881784197001252e-16
+            },
+            {
+              "index": 12,
+              "label": "forward_13",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.5932886654904062e-09,
+              "force_relative_change": 3.085002383914985e-06,
+              "output_torque_balance_n_m": -8.881784197001252e-16
+            },
+            {
+              "index": 13,
+              "label": "forward_14",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.61104112824909e-09,
+              "force_relative_change": 2.468786533799868e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 14,
+              "label": "forward_15",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6205753102350336e-09,
+              "force_relative_change": 3.366237770178994e-06,
+              "output_torque_balance_n_m": 4.440892098500626e-16
+            },
+            {
+              "index": 15,
+              "label": "forward_16",
+              "converged": true,
+              "iterations": 8,
+              "path_residual_m": 1.327995184058465e-10,
+              "force_relative_change": 9.596312795673929e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 16,
+              "label": "hold_forward",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.619974237749809e-09,
+              "force_relative_change": 4.539985176285902e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 17,
+              "label": "reverse_01",
+              "converged": true,
+              "iterations": 8,
+              "path_residual_m": 1.3272625908400966e-10,
+              "force_relative_change": 9.799182187600066e-06,
+              "output_torque_balance_n_m": -5.551115123125783e-17
+            },
+            {
+              "index": 18,
+              "label": "reverse_02",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6201135560078024e-09,
+              "force_relative_change": 3.099095849471357e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 19,
+              "label": "reverse_03",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6091053272693988e-09,
+              "force_relative_change": 2.589661681438755e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 20,
+              "label": "reverse_04",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.5861854102941648e-09,
+              "force_relative_change": 3.2083407602552766e-06,
+              "output_torque_balance_n_m": 8.881784197001252e-16
+            },
+            {
+              "index": 21,
+              "label": "reverse_05",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.5981294334136336e-09,
+              "force_relative_change": 2.978565651162388e-06,
+              "output_torque_balance_n_m": -8.881784197001252e-16
+            },
+            {
+              "index": 22,
+              "label": "reverse_06",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6145126109604525e-09,
+              "force_relative_change": 1.665045850360445e-06,
+              "output_torque_balance_n_m": -4.440892098500626e-16
+            },
+            {
+              "index": 23,
+              "label": "reverse_07",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6213637520053847e-09,
+              "force_relative_change": 4.000762667755896e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 24,
+              "label": "reverse_08",
+              "converged": true,
+              "iterations": 8,
+              "path_residual_m": 1.481972775814143e-10,
+              "force_relative_change": 7.600068709151836e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 25,
+              "label": "reverse_09",
+              "converged": true,
+              "iterations": 11,
+              "path_residual_m": 1.8732398452850415e-11,
+              "force_relative_change": 3.907238061750303e-06,
+              "output_torque_balance_n_m": 1.1102230246251565e-16
+            },
+            {
+              "index": 26,
+              "label": "reverse_10",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6198332943335336e-09,
+              "force_relative_change": 9.572015964052494e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 27,
+              "label": "reverse_11",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6111971075037014e-09,
+              "force_relative_change": 7.112009395315474e-07,
+              "output_torque_balance_n_m": -4.440892098500626e-16
+            },
+            {
+              "index": 28,
+              "label": "reverse_12",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6158321278625404e-09,
+              "force_relative_change": 2.3833373521349947e-06,
+              "output_torque_balance_n_m": 8.881784197001252e-16
+            },
+            {
+              "index": 29,
+              "label": "reverse_13",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6080426615550363e-09,
+              "force_relative_change": 2.7051332091449263e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 30,
+              "label": "reverse_14",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.61811691001512e-09,
+              "force_relative_change": 2.1030043749286298e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 31,
+              "label": "reverse_15",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6206789505801393e-09,
+              "force_relative_change": 5.191667095111505e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 32,
+              "label": "reverse_16",
+              "converged": true,
+              "iterations": 10,
+              "path_residual_m": 1.601596027020755e-11,
+              "force_relative_change": 4.053440981059051e-06,
+              "output_torque_balance_n_m": 0.0
+            },
+            {
+              "index": 33,
+              "label": "hold_reverse",
+              "converged": true,
+              "iterations": 6,
+              "path_residual_m": 1.6195631329876008e-09,
+              "force_relative_change": 2.8324871217699006e-06,
+              "output_torque_balance_n_m": 0.0
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "worst_checks": {
+    "motor_speed": {
+      "status": "passed",
+      "actual": 46.756453468248665,
+      "threshold": 229.2,
+      "relation": "<=",
+      "scope": "电机代表工况最大转速，rad/s",
+      "margin": 182.44354653175134,
+      "relative_margin": 0.7960015119186359,
+      "governing_location": {
+        "case_index": 7,
+        "label": "forward_08"
+      },
+      "scenario_id": "nominal",
+      "unevaluated_scenarios": []
+    },
+    "motor_peak_torque": {
+      "status": "passed",
+      "actual": 0.40236663055493854,
+      "threshold": 1.0,
+      "relation": "<=",
+      "scope": "逐工况恒转矩—恒功率峰值包络利用率",
+      "margin": 0.5976333694450615,
+      "relative_margin": 0.5976333694450615,
+      "governing_location": {
+        "case_index": 3,
+        "label": "forward_04"
+      },
+      "scenario_id": "nominal",
+      "unevaluated_scenarios": []
+    },
+    "motor_continuous_screen": {
+      "status": "passed",
+      "actual": 0.46122601964002785,
+      "threshold": 1.0,
+      "relation": "<=",
+      "scope": "按转速包络归一化的连续转矩RMS初筛，不替代温升校核",
+      "margin": 0.5387739803599721,
+      "relative_margin": 0.5387739803599721,
+      "governing_location": null,
+      "scenario_id": "nominal",
+      "unevaluated_scenarios": []
+    },
+    "brake_static_screen": {
+      "status": "passed",
+      "actual": 3.0,
+      "threshold": 1.2142425439879034,
+      "relation": ">=",
+      "scope": "输入侧静态保持力矩，N·m；不含动态制动认证",
+      "margin": 1.7857574560120966,
+      "relative_margin": 1.47067607279447,
+      "governing_location": null,
+      "scenario_id": "nominal",
+      "unevaluated_scenarios": []
+    },
+    "contact_pressure_pa": {
+      "status": "passed",
+      "actual": 866316386.6425488,
+      "threshold": 1200000000.0,
+      "relation": "<=",
+      "scope": "当前离散局部Hertz峰压，Pa；须另查网格/相位收敛",
+      "margin": 333683613.3574512,
+      "relative_margin": 0.278069677797876,
+      "governing_location": {
+        "mesh": "sun_planet",
+        "planet_index": 1,
+        "case_index": 20,
+        "label": "reverse_04"
+      },
+      "scenario_id": "path_offsets",
+      "unevaluated_scenarios": []
+    },
+    "angle_budget_rad": {
+      "status": "passed",
+      "actual": 0.0017430486837031547,
+      "threshold": 0.003490658503988659,
+      "relation": "<=",
+      "scope": "指定受载状态的未补偿确定性角度预算，rad",
+      "margin": 0.0017476098202855045,
+      "relative_margin": 0.5006533346898784,
+      "governing_location": {
+        "case_index": 20,
+        "label": "reverse_04"
+      },
+      "scenario_id": "sun_support_soft",
+      "unevaluated_scenarios": []
+    },
+    "motor_temperature_k": {
+      "status": "passed",
+      "actual": 302.0944054354601,
+      "threshold": 353.15,
+      "relation": "<=",
+      "scope": "给定热参数的电机节点最高温度，K",
+      "margin": 51.05559456453989,
+      "relative_margin": 0.14457197951165196,
+      "governing_location": null,
+      "scenario_id": "nominal",
+      "unevaluated_scenarios": []
+    },
+    "gear_temperature_k": {
+      "status": "passed",
+      "actual": 300.78769106900677,
+      "threshold": 343.15,
+      "relation": "<=",
+      "scope": "给定热参数的传动节点最高温度，K",
+      "margin": 42.36230893099321,
+      "relative_margin": 0.12345128640825648,
+      "governing_location": null,
+      "scenario_id": "nominal",
+      "unevaluated_scenarios": []
+    },
+    "maximum_load_share_factor": {
+      "status": "failed",
+      "actual": 2.7750181716261055,
+      "threshold": 2.0,
+      "relation": "<=",
+      "scope": "有载工况最大均载系数；全零载时未定义",
+      "margin": -0.7750181716261055,
+      "relative_margin": -0.38750908581305277,
+      "governing_location": {
+        "case_index": 0,
+        "label": "forward_01"
+      },
+      "scenario_id": "path_offsets",
+      "unevaluated_scenarios": []
+    },
+    "fatigue_damage_per_input_history": {
+      "status": "passed",
+      "actual": 2.8112133239961853e-07,
+      "threshold": 1.0,
+      "relation": "<=",
+      "scope": "给定热点标量应力谱的Miner损伤；不代表整关节服役寿命",
+      "margin": 0.9999997188786676,
+      "relative_margin": 0.9999997188786676,
+      "governing_location": null,
+      "scenario_id": "nominal",
+      "unevaluated_scenarios": []
+    },
+    "maximum_pin_stiffness_relative_difference": {
+      "status": "passed",
+      "actual": 0.0,
+      "threshold": 0.05,
+      "relation": "<=",
+      "scope": "简支圆销平均弯剪刚度与系统最终采用kpin之最大相对差",
+      "margin": 0.05,
+      "relative_margin": 1.0,
+      "governing_location": {
+        "planet_index": 0
+      },
+      "scenario_id": "nominal",
+      "unevaluated_scenarios": []
+    },
+    "minimum_contact_safety_factor": {
+      "status": "passed",
+      "actual": 1.3511427561180478,
+      "threshold": 1.0,
+      "relation": ">=",
+      "scope": "给定评级因子与材料限值的最小接触安全系数",
+      "margin": 0.3511427561180478,
+      "relative_margin": 0.3511427561180478,
+      "governing_location": {
+        "mesh": "sun_planet",
+        "planet_index": 1,
+        "gear_role": "pinion",
+        "case_index": 20,
+        "label": "reverse_04"
+      },
+      "scenario_id": "path_offsets",
+      "unevaluated_scenarios": []
+    },
+    "minimum_bending_safety_factor": {
+      "status": "passed",
+      "actual": 2.095547488653123,
+      "threshold": 1.0,
+      "relation": ">=",
+      "scope": "给定评级因子与材料限值的最小齿根安全系数",
+      "margin": 1.0955474886531231,
+      "relative_margin": 1.0955474886531231,
+      "governing_location": {
+        "mesh": "sun_planet",
+        "planet_index": 1,
+        "gear_role": "pinion",
+        "case_index": 20,
+        "label": "reverse_04"
+      },
+      "scenario_id": "path_offsets",
+      "unevaluated_scenarios": []
+    },
+    "minimum_bearing_static_safety_factor": {
+      "status": "passed",
+      "actual": 59.56250619838511,
+      "threshold": 1.0,
+      "relation": ">=",
+      "scope": "输出双支承基本静安全；不含行星轴承",
+      "margin": 58.56250619838511,
+      "relative_margin": 58.56250619838511,
+      "governing_location": {
+        "case_index": 7,
+        "label": "forward_08",
+        "bearing_index": 1
+      },
+      "scenario_id": "nominal",
+      "unevaluated_scenarios": []
+    },
+    "minimum_bearing_life_hours": {
+      "status": "not_configured",
+      "actual": 2337677949.339132,
+      "threshold": null,
+      "relation": ">=",
+      "scope": "输出双支承基本L10小时数；无摆动/润滑/微动修正",
+      "margin": null,
+      "relative_margin": null,
+      "governing_location": null,
+      "scenario_id": null,
+      "unevaluated_scenarios": [
+        "nominal",
+        "path_offsets",
+        "sun_support_soft",
+        "pin_sizes",
+        "combined"
+      ]
+    },
+    "minimum_output_torsional_stiffness_n_m_per_rad": {
+      "status": "failed",
+      "actual": 11146.432740680712,
+      "threshold": 20000.0,
+      "relation": ">=",
+      "scope": "最终承载分支局部输出扭转刚度，N·m/rad",
+      "margin": -8853.567259319288,
+      "relative_margin": -0.4426783629659644,
+      "governing_location": {
+        "case_index": 17,
+        "label": "reverse_01"
+      },
+      "scenario_id": "combined",
+      "unevaluated_scenarios": []
+    },
+    "minimum_planet_bearing_static_safety_factor": {
+      "status": "passed",
+      "actual": 3.7865146088302835,
+      "threshold": 2.0,
+      "relation": ">=",
+      "scope": "显式容量/系数下的行星轴承基本静安全",
+      "margin": 1.7865146088302835,
+      "relative_margin": 0.8932573044151417,
+      "governing_location": {
+        "case_index": 20,
+        "label": "reverse_04",
+        "planet_index": 1
+      },
+      "scenario_id": "path_offsets",
+      "unevaluated_scenarios": []
+    },
+    "minimum_planet_bearing_basic_l10_hours": {
+      "status": "not_configured",
+      "actual": 632418.0398846733,
+      "threshold": null,
+      "relation": ">=",
+      "scope": "行星相对行星架转速的基本L10小时数；无摆动/润滑修正",
+      "margin": null,
+      "relative_margin": null,
+      "governing_location": null,
+      "scenario_id": null,
+      "unevaluated_scenarios": [
+        "nominal",
+        "path_offsets",
+        "sun_support_soft",
+        "pin_sizes",
+        "combined"
+      ]
+    },
+    "planet_pin_static": {
+      "status": "passed",
+      "actual": 0.11003963003205784,
+      "threshold": 1.0,
+      "relation": "<=",
+      "scope": "销弯曲/横剪/平均面压各自实际值×要求安全系数/许用值的最大值；不含局部/疲劳",
+      "margin": 0.8899603699679421,
+      "relative_margin": 0.8899603699679421,
+      "governing_location": {
+        "case_index": 20,
+        "label": "reverse_04",
+        "planet_index": 1,
+        "stress_kind": "projected_pressure"
+      },
+      "scenario_id": "path_offsets",
+      "unevaluated_scenarios": []
+    },
+    "dc_bus_maximum_voltage": {
+      "status": "passed",
+      "actual": 43.193661295810806,
+      "threshold": 48.0,
+      "relation": "<=",
+      "scope": "当前分段恒功率/理想电源/给定回馈吸收模型中的最高母线电压，V",
+      "margin": 4.806338704189194,
+      "relative_margin": 0.10013205633727489,
+      "governing_location": null,
+      "scenario_id": "nominal",
+      "unevaluated_scenarios": []
+    },
+    "dc_bus_minimum_voltage": {
+      "status": "not_evaluated",
+      "actual": 36.0,
+      "threshold": 30.0,
+      "relation": ">=",
+      "scope": "理想无限供能电源维持源电压下限；未评价真实电源欠压能力，不计为已通过的物理校核",
+      "margin": null,
+      "relative_margin": null,
+      "governing_location": null,
+      "scenario_id": null,
+      "unevaluated_scenarios": [
+        "nominal",
+        "path_offsets",
+        "sun_support_soft",
+        "pin_sizes",
+        "combined"
+      ]
+    }
+  },
+  "all_scenarios_accepted": false,
+  "evaluated_scenario_count": 5,
+  "physical_validation": false,
+  "scope": "仅覆盖明确列出的有限确定性情景，不等于连续公差域最坏情况、统计可靠度或总成实物验证"
+}

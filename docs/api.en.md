@@ -49,6 +49,8 @@ In geometry mode, `planet_support.summary.system_stiffness_was_updated=true` den
 
 `analyze_joint(config) -> JointResult` evaluates one complete design and its duty states without modifying the input. `export_joint(result, output_dir, plots=False)` exports raw arrays, diagnostics, engineering parameters and a Chinese report. `compare_joint_designs(configs)` recalculates complete candidates; `results` retains calculation objects and `candidates` provides a serializable comparison. Pareto eligibility requires the configured checks to pass.
 
+`constraint_margins(result)` returns signed margins and traceable governing locations; normal export adds `constraint_margins.json`. Zero limits do not receive a percentage, and unevaluated/unconfigured checks have no margin. `analyze_joint_envelope(config, scenarios, *, required_checks)` adds the nominal design, recalculates explicit assembly/support scenarios and returns records, worst checks, acceptance and raw result objects. `export_joint_envelope` exports complete inputs, CSV, bilingual reports and hashes. Missing required checks, failed configured criteria or nonconvergence cannot yield acceptance. See the [scenario contract](design_envelope.en.md). Original single-design calculations and `JointResult` layout are unchanged.
+
 The complete current example is [dfki_pendulum_case.json](../examples/dfki_pendulum_case.json); [requirements](../examples/dfki_pendulum_requirements.json) identify published values, derived quantities, design assumptions and the unresolved supplier dimension.
 
 ## Main inputs

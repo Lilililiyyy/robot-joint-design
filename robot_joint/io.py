@@ -27,6 +27,9 @@ def export_joint(result, output_dir, *, plots=False):
     _write(root/'planet_support.json', result.planet_support)
     _write(root/'dc_bus.json', result.dc_bus)
     _write(root/'pin_stiffness.json', result.pin_stiffness)
+    from .design_envelope import constraint_margins
+    margins = constraint_margins(result)
+    _write(root/'constraint_margins.json', margins)
     from .engineering import export_engineering_parameters
     export_engineering_parameters(result, root)
     rows = []
@@ -60,15 +63,19 @@ def export_joint(result, output_dir, *, plots=False):
              f"|电机最高温度 / °C|{result.summary['maximum_motor_temperature_k']-273.15:.4f}|",
              f"|减速器最高温度 / °C|{result.summary['maximum_gear_temperature_k']-273.15:.4f}|", '',
              f"热计算模式：{result.summary['thermal_mode']}。", '',
-             '## 约束初筛', '', '|项目|实际值|比较|限值|状态|', '|---|---:|---|---:|---|']
+             '## 约束初筛', '', '|项目|实际值|比较|限值|相对裕量 / %|状态|', '|---|---:|---|---:|---:|---|']
     statuses = {'passed': '通过', 'failed': '未通过', 'not_configured': '未配置限值',
                 'not_evaluated': '缺少评价输入/未定义'}
     for name, detail in result.summary['check_details'].items():
         actual = '—' if detail['actual'] is None else f"{detail['actual']:.6g}"
         threshold = '—' if detail['threshold'] is None else f"{detail['threshold']:.6g}"
-        lines.append(f"|{name}|{actual}|{detail['relation']}|{threshold}|{statuses[detail['status']]}|")
+        margin = margins[name]['relative_margin']
+        margin_text = '—' if margin is None else f'{100*margin:.4g}'
+        lines.append(f"|{name}|{actual}|{detail['relation']}|{threshold}|{margin_text}|{statuses[detail['status']]}|")
     lines.extend(['', '未配置限值、缺少评价输入及未建模项不计入通过项目。给定热点谱的默认Miner损伤限值为1，'
-                  '只评价该输入谱，不等同整关节服役寿命。', '', '## 设计评估覆盖', '', '|项目|当前范围|', '|---|---|'])
+                  '只评价该输入谱，不等同整关节服役寿命。相对裕量按有符号裕量/限值绝对值计算；'
+                  '零限值不显示百分比。危险工况及构件位置见constraint_margins.json；累计指标不伪造单一工况。',
+                  '', '## 设计评估覆盖', '', '|项目|当前范围|', '|---|---|'])
     for name, scope in result.summary['assessment_coverage'].items():
         lines.append(f'|{name}|{scope}|')
     if result.pin_stiffness is not None:
@@ -118,9 +125,67 @@ def export_joint(result, output_dir, *, plots=False):
     if plots:
         from .plotting import plot_joint
         plot_joint(result, root)
-    manifest = {'version': '0.4.0', 'units': {'length': 'm', 'angle': 'rad', 'torque': 'N m',
+    manifest = {'version': '0.5.0', 'units': {'length': 'm', 'angle': 'rad', 'torque': 'N m',
                 'force': 'N', 'pressure': 'Pa', 'temperature': 'K', 'time': 's'},
                 'files': {p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                           for p in sorted(root.rglob('*')) if p.is_file() and p.name != 'manifest.json'}}
     _write(root/'manifest.json', manifest)
+    return root
+
+
+def export_joint_envelope(study, output_dir):
+    """导出有限情景、完整采用输入、约束裕量、危险位置和中英报告。"""
+    root = Path(output_dir)
+    root.mkdir(parents=True, exist_ok=True)
+    payload = {key: value for key, value in study.items() if key != 'results'}
+    _write(root/'study.json', payload)
+    _write(root/'base_input.json', study['base_input'])
+    for record, result in zip(study['scenarios'], study['results']):
+        _write(root/(record['id']+'_input.json'), result.inputs)
+    rows = []
+    for record in study['scenarios']:
+        for name, check in record['checks'].items():
+            rows.append({'scenario_id': record['id'], 'check': name, 'required': name in study['required_checks'],
+                **{key: check[key] for key in ('status', 'actual', 'threshold', 'relation', 'margin', 'relative_margin')},
+                'governing_location': json.dumps(check['governing_location'], ensure_ascii=False)})
+    with (root/'margins.csv').open('w', encoding='utf-8-sig', newline='') as stream:
+        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer.writeheader(); writer.writerows(rows)
+    labels = {'zh': ('有限装配与支承情景设计校核', '通过全部列出情景', '存在未通过或缺少必需校核的情景',
+        '情景', '已配置失败项', '必需但未完成项', '判定', '通过', '未通过',
+        '判据', '最不利情景', '实际值', '限值', '相对裕量 / %', '危险位置'),
+        'en': ('Finite assembly and support scenario study', 'All listed scenarios accepted',
+        'Some scenarios fail or lack required checks', 'Scenario', 'Failed configured checks',
+        'Required checks missing', 'Decision', 'Pass', 'Fail', 'Criterion', 'Governing scenario',
+        'Actual', 'Limit', 'Relative margin / %', 'Governing location')}
+    for language, words in labels.items():
+        lines = ['# '+words[0], '', words[1] if study['all_scenarios_accepted'] else words[2], '',
+            '|'+ '|'.join(words[3:7])+'|', '|---|---|---|---|']
+        for row in study['scenarios']:
+            lines.append('|'+ '|'.join([row['id'], ', '.join(row['failed_checks']) or '—',
+                ', '.join(row['required_checks_missing']) or '—', words[7] if row['accepted'] else words[8]])+'|')
+        lines += ['', '|'+ '|'.join(words[9:])+'|', '|---|---|---:|---:|---:|---|']
+        names = list(dict.fromkeys(study['required_checks']+
+            [name for name, check in study['worst_checks'].items() if check['status']=='failed']))
+        for name in names:
+            check = study['worst_checks'][name]
+            number = lambda value: '—' if value is None else f'{value:.7g}'
+            location = check['governing_location']
+            where = json.dumps(location, ensure_ascii=False) if location is not None else '—'
+            lines.append('|'+ '|'.join([name, check['scenario_id'] or '—', number(check['actual']),
+                number(check['threshold']), number(100*check['relative_margin']) if check['relative_margin'] is not None else '—', where])+'|')
+        lines += ['', ('裕量：上限取限值−实际，下限取实际−限值，再除以限值绝对值；负值表示超限。'
+            '未评价、未配置和零限值不构造百分比。所有完整输入保存在本目录，margins.csv保留每项判据及状态。'
+            if language=='zh' else 'Margin is limit minus actual for upper limits, and actual minus limit for lower limits, '
+            'normalized by the absolute limit. Negative values exceed the limit. Unevaluated, unconfigured and zero-limit '
+            'checks do not receive a percentage. Full inputs and every criterion are retained.'), '',
+            ('结果仅覆盖明确列出的有限确定性情景，不代表连续公差域最坏情况或失效概率。'
+             '情景假设需来自实际公差、测量或结构分析；销孔、配合、架板三维响应和总成实物验证仍需单独完成。'
+             if language=='zh' else 'This covers only the listed finite deterministic scenarios, not a continuous-domain '
+             'worst case or failure probability. Scenario assumptions need tolerances, measurements or structural evidence. '
+             'Local pin-hole, fit, carrier-plate response and physical assembly validation remain separate.'), '']
+        (root/('report.md' if language=='zh' else 'report.en.md')).write_text('\n'.join(lines), encoding='utf-8', newline='\n')
+    _write(root/'manifest.json', {'version': '0.5.0', 'files': {
+        path.name: hashlib.sha256(path.read_bytes()).hexdigest()
+        for path in root.iterdir() if path.is_file() and path.name != 'manifest.json'}})
     return root

@@ -2,7 +2,7 @@
 
 [中文](README.md) · [English](README.en.md)
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE) [![Version](https://img.shields.io/badge/version-0.4.0-blue)](https://github.com/Lilililiyyy/robot-joint-design/tree/v0.4.0)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE) [![Version](https://img.shields.io/badge/version-0.5.0-blue)](https://github.com/Lilililiyyy/robot-joint-design/tree/v0.5.0)
 
 自主开发的机器人关节模组设计项目，面向单级NGW行星传动关节，提供从任务载荷到齿轮接触、支承结构、机电匹配、精度和热性能的参数化计算。项目包含完整Python源码、双语图文案例与工程数据导出，可独立运行和接入设计流程。
 
@@ -28,9 +28,12 @@
 |机电与能量|驱动/回驱效率、转子惯量、电机转矩—转速包络、RMS电流、制动与再生母线初筛|
 |精度与热|承载角、侧隙和编码器误差预算、分段温升与周期热稳态|
 |寿命与选型|雨流循环、给定S-N曲线的累积损伤、约束筛选与有限候选Pareto比较|
+|设计裕量|约束余量与危险工况定位、有限装配/销参数/支承变化情景、必需校核缺失拦截|
 |工程输出|计算报告、JSON/CSV/NPZ、参数级CAD尺寸与BOM、论文风格的中英PNG/SVG/PDF图表|
 
 各模块通过统一的SI单位和函数接口连接。计算方法见[模型说明](docs/model.md)，输入、输出和接口见[API文档](docs/api.md)。
+
+用于实际模组时，先按[真实设计使用流程](docs/practical_workflow.md)准备任务、材料、采购件、结构与验收输入。普通计算报告显示有符号约束裕量；[有限情景校核](docs/design_envelope.md)进一步重算装配和支承变化，并定位超限或裕量最小的任务段、行星与齿轮副。未评价或未配置的必需项不会视为通过。
 
 ## 安装与使用
 
@@ -98,6 +101,16 @@ python -m examples.compare_pin_stiffness --output output/pin_comparison
 
 销模型仍是明确边界下的简支圆销弯剪模型；短粗销的销孔、配合和架板三维响应需要单独验证。参数、公式与接入方法见[行星支承](docs/planet_support.md)。
 
+**装配与支承变化下的设计裕量**
+
+[可编辑情景](examples/dfki_assembly_scenarios.json)在相同任务及验收限值下，分别改变路径误差、太阳支承刚度、逐销尺寸及其组合，逐个重算分载和两副齿面。结果见[有限情景报告](examples/results/design_envelope/report.md)。情景为明确的敏感性假设，不代表制造分布、失效概率或连续公差域的最坏点。
+
+名义方案通过，但本例假定的部分路径1 μm变化使最大均载系数达到2.775，组合情景最小输出刚度约11146 N·m/rad，分别超过2.0上限、低于20000下限。这些差异提示装配/支承要求应结合危险工况校核，不能只看名义参数。
+
+```bash
+python -m examples.design_envelope --output output/design_envelope
+```
+
 [完整图文案例](docs/examples.md)介绍各模块的输入、结果及设计取舍；[设计准则](docs/design_review.md)汇总判定要求和工程边界。
 
 ## 结果对标
@@ -123,6 +136,7 @@ python -m examples.compare_pin_stiffness --output output/pin_comparison
 
 ## 版本更新记录
 
+- **0.5.0**：增加约束裕量、危险工况/构件定位及有限装配/支承情景复算；必需校核缺失时阻止情景通过，补充真实模组输入与实施流程。
 - **0.4.0**：增加销几何/材料刚度的显式来源选项，接入分载与最终齿面、销、轴承校核；新增可复算尺寸比较及逐销来源记录，兼容原显式刚度路径。
 - **0.3.3**：统一接触压力色阶与图表样式，补充版本徽章、双语更新记录和后续计划。
 - **0.3.2**：完善独立项目说明，精简公开展示，集中呈现设计功能与正式结果。
@@ -140,13 +154,15 @@ python -m examples.compare_pin_stiffness --output output/pin_comparison
 |---|---|
 |接触与修形|增加参数化修形搜索，结合压力、TE与刚度开展多目标方案筛选|
 |结构与装配|接入轮缘、行星架及箱体凝聚柔度，完善配合、预紧与公差链分析|
-|工程标定|增加双向刚度、回差、摩擦、效率与热参数的试验数据接入|
+|工程标定|优先接入双向扭转、效率及温升实测，识别支承/损耗/热参数并保留测量基准|
+|采购与公差|接入实际轴承和材料数据；由尺寸链/结构模型映射装配误差，逐步扩展公差域校核|
 |驱动与服役|完善有限电源、吸收支路及保护边界，补充实际摆动轴承的服役评价|
 |模型扩展|在相应校核完成后扩展斜齿、多级传动与更完整的系统耦合|
 
 ## 文档与项目结构
 
 - [模型与公式](docs/model.md) · [API与单位](docs/api.md) · [图文案例](docs/examples.md)
+- [真实设计使用流程](docs/practical_workflow.md) · [设计裕量与有限情景](docs/design_envelope.md)
 - [接触分析](docs/contact_patterns.md) · [行星支承](docs/planet_support.md) · [再生母线](docs/dc_bus.md)
 - [设计准则](docs/design_review.md) · [结果对标](docs/validation.md) · [图表说明](docs/figures.md)
 - `robot_joint/`：关节系统与性能模块；`gear_contact/`：齿轮几何与接触模块。

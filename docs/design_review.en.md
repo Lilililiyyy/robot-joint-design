@@ -20,6 +20,8 @@ Joint design starts from the task and evaluates transmission loads, gear/support
 
 Results use `passed`, `failed`, `not_configured` and `not_evaluated`, retaining actual values and limits. Passing configured checks means meeting those inputs within the current model.
 
+Standard reports and `constraint_margins.json` also retain signed margins and traceable governing locations. [Finite scenario studies](design_envelope.en.md) keep duty and limits fixed while recalculating assembly/support changes and requiring named checks to be evaluated. A nominal pass does not replace these studies; finite points do not bound a continuous domain.
+
 ## Example design choices
 
 The 6:1 example selects `Kout≥20000 N·m/rad`, `Kγ≤2` and supplied-history `D≤1`. These are case-specific targets. Modification, stiffness, thermal parameters and allowable stresses are explicit assumptions.
