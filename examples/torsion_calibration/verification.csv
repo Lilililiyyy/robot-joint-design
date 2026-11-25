@@ -1,0 +1,7 @@
+run_id,flank,torque_n_m,angle_rad
+verification_01,positive,1.5,0.000466833333
+verification_01,positive,2.5,0.000534388889
+verification_01,positive,3.5,0.000593944444
+verification_01,negative,-1.5,-0.000198500000
+verification_01,negative,-2.5,-0.000260500000
+verification_01,negative,-3.5,-0.000314500000

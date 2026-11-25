@@ -14,4 +14,6 @@ from .dc_bus import dc_bus_screen
 from .contact_pattern import ContactPattern, build_contact_pattern, export_contact_pattern, interior_snapshot
 from .contact_display import contact_pass_data, member_contact_pass_data, instantaneous_contact_data, draw_contact_pass
 
-__version__ = '0.5.0'
+from .torsion_calibration import calibrate_torsion, compare_torsion_model
+
+__version__ = '0.6.0'

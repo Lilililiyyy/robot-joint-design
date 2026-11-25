@@ -51,6 +51,8 @@ In geometry mode, `planet_support.summary.system_stiffness_was_updated=true` den
 
 `constraint_margins(result)` returns signed margins and traceable governing locations; normal export adds `constraint_margins.json`. Zero limits do not receive a percentage, and unevaluated/unconfigured checks have no margin. `analyze_joint_envelope(config, scenarios, *, required_checks)` adds the nominal design, recalculates explicit assembly/support scenarios and returns records, worst checks, acceptance and raw result objects. `export_joint_envelope` exports complete inputs, CSV, bilingual reports and hashes. Missing required checks, failed configured criteria or nonconvergence cannot yield acceptance. See the [scenario contract](design_envelope.en.md). Original single-design calculations and `JointResult` layout are unchanged.
 
+`calibrate_torsion(fit_samples, verification_samples, *, absolute_torque_window_n_m, fixture_compliance_rad_per_n_m, verification_limit_rad)` fits loaded branches and evaluates independent runs. Each row supplies `run_id, flank, torque_n_m, angle_rad`. `compare_torsion_model(config, calibration)` recalculates the joint at the same torques and aligns one common angular zero using the fit runs. See the [measurement contract and commands](torsion_calibration.en.md).
+
 The complete current example is [dfki_pendulum_case.json](../examples/dfki_pendulum_case.json); [requirements](../examples/dfki_pendulum_requirements.json) identify published values, derived quantities, design assumptions and the unresolved supplier dimension.
 
 ## Main inputs

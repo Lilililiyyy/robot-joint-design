@@ -125,7 +125,8 @@ def export_joint(result, output_dir, *, plots=False):
     if plots:
         from .plotting import plot_joint
         plot_joint(result, root)
-    manifest = {'version': '0.5.0', 'units': {'length': 'm', 'angle': 'rad', 'torque': 'N m',
+    from . import __version__
+    manifest = {'version': __version__, 'units': {'length': 'm', 'angle': 'rad', 'torque': 'N m',
                 'force': 'N', 'pressure': 'Pa', 'temperature': 'K', 'time': 's'},
                 'files': {p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                           for p in sorted(root.rglob('*')) if p.is_file() and p.name != 'manifest.json'}}
@@ -185,7 +186,8 @@ def export_joint_envelope(study, output_dir):
              'worst case or failure probability. Scenario assumptions need tolerances, measurements or structural evidence. '
              'Local pin-hole, fit, carrier-plate response and physical assembly validation remain separate.'), '']
         (root/('report.md' if language=='zh' else 'report.en.md')).write_text('\n'.join(lines), encoding='utf-8', newline='\n')
-    _write(root/'manifest.json', {'version': '0.5.0', 'files': {
+    from . import __version__
+    _write(root/'manifest.json', {'version': __version__, 'files': {
         path.name: hashlib.sha256(path.read_bytes()).hexdigest()
         for path in root.iterdir() if path.is_file() and path.name != 'manifest.json'}})
     return root

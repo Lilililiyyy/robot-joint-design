@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "robot-joint-design"
-version = "0.5.0"
+version = "0.6.0"
 description = "单级NGW机器人关节模组参数化设计与准静态校核计算内核"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -17,6 +17,7 @@ plots = ["matplotlib>=3.6"]
 
 [project.scripts]
 robot-joint = "robot_joint.__main__:main"
+robot-joint-torsion = "robot_joint.torsion_cli:main"
 
 [tool.setuptools]
 packages = ["robot_joint", "gear_contact"]

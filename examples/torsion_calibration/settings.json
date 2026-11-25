@@ -1,0 +1,10 @@
+{
+  "data_kind": "synthetic",
+  "source": "解析合成。刚度正/负向18000/20000 N·m/rad，共同角零点130 µrad，两外推分支间隔500 µrad，串联夹具柔度5 µrad/(N·m)。独立留验点另加±2至4 µrad确定偏差。",
+  "absolute_torque_window_n_m": [
+    1.0,
+    4.0
+  ],
+  "fixture_compliance_rad_per_n_m": 5e-06,
+  "verification_limit_rad": 8e-06
+}

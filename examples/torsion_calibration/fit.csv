@@ -1,0 +1,9 @@
+run_id,flank,torque_n_m,angle_rad
+fit_01,positive,1,0.000442555556
+fit_01,positive,2,0.000499111111
+fit_01,positive,3,0.000559666667
+fit_01,positive,4,0.000624222222
+fit_01,negative,-1,-0.000177000000
+fit_01,negative,-2,-0.000228000000
+fit_01,negative,-3,-0.000283000000
+fit_01,negative,-4,-0.000342000000

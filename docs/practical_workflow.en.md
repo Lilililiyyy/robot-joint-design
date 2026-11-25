@@ -32,7 +32,7 @@ Retain each value's source, units and conditions. Treat unknowns as explicit ass
 |---|---|---|
 |Duty/contact|Complete duty, both LTCA meshes, sharing, reactions and raw arrays|Real boundary data and critical-state discretization checks|
 |Decisions|Margins, governing locations and finite support/assembly studies|Tolerance projection; continuous-domain and statistical methods are not implemented|
-|Measurement loop|Parameter interfaces and raw exports|Import/identify bidirectional torsion, efficiency and thermal data|
+|Measurement loop|[Bidirectional torsion CSV, fit, held-out verification and model comparison](torsion_calibration.en.md)|Use real runs to assess torsion, then import efficiency and temperature data|
 |Structure|Six-DOF and path-compliance interfaces|Real carrier/rim/housing models and reference verification|
 |Procurement|Parameter CAD/BOM and explicit ratings|Catalog parts, fits/preload, manufacturing and assembly drawings|
 |Service/dynamics|Basic L10, supplied hotspot fatigue and quasi-static stiffness|Oscillatory bearing damage, torsional dynamics and assembly endurance|

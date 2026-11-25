@@ -1,0 +1,97 @@
+{
+  "branches": {
+    "positive": {
+      "torque_range_n_m": [
+        1.0,
+        4.0
+      ],
+      "compliance_rad_per_n_m": 5.5555555399999984e-05,
+      "stiffness_n_m_per_rad": 18000.000050400005,
+      "zero_torque_intercept_rad": 0.0003800000005000001,
+      "fit": {
+        "sample_count": 4,
+        "bias_rad": -5.417889172854264e-20,
+        "rmse_rad": 2.000000000000007e-06,
+        "maximum_absolute_error_rad": 2.0000003000000908e-06
+      },
+      "verification": {
+        "sample_count": 3,
+        "bias_rad": 3.3333299999993707e-07,
+        "rmse_rad": 3.1091265225676365e-06,
+        "maximum_absolute_error_rad": 4.000000600000073e-06
+      }
+    },
+    "negative": {
+      "torque_range_n_m": [
+        -4.0,
+        -1.0
+      ],
+      "compliance_rad_per_n_m": 5e-05,
+      "stiffness_n_m_per_rad": 20000.0,
+      "zero_torque_intercept_rad": -0.00011999999999999999,
+      "fit": {
+        "sample_count": 4,
+        "bias_rad": -2.031708135064086e-20,
+        "rmse_rad": 2.000000000000001e-06,
+        "maximum_absolute_error_rad": 2.0000000000000486e-06
+      },
+      "verification": {
+        "sample_count": 3,
+        "bias_rad": -3.3333333333334145e-07,
+        "rmse_rad": 3.109126351029605e-06,
+        "maximum_absolute_error_rad": 3.999999999999989e-06
+      }
+    }
+  },
+  "zero_torque_branch_separation_rad": 0.0005000000005,
+  "zero_torque_branch_center_rad": 0.00013000000025000001,
+  "settings": {
+    "absolute_torque_window_n_m": [
+      1.0,
+      4.0
+    ],
+    "fixture_compliance_rad_per_n_m": 5e-06,
+    "verification_limit_rad": 8e-06
+  },
+  "verification": {
+    "sample_count": 6,
+    "bias_rad": -1.666667020890566e-13,
+    "rmse_rad": 3.109126436798622e-06,
+    "maximum_absolute_error_rad": 4.000000600000073e-06,
+    "within_limit": true
+  },
+  "scope": "指定承载窗口内的分支刚度和零扭矩外推间隔，留验量为修正后的输出角误差",
+  "data_kind": "synthetic",
+  "source": "解析合成。刚度正/负向18000/20000 N·m/rad，共同角零点130 µrad，两外推分支间隔500 µrad，串联夹具柔度5 µrad/(N·m)。独立留验点另加±2至4 µrad确定偏差。",
+  "model_comparison": {
+    "case_id": "dfki_pin_geometry",
+    "common_zero_offset_rad": 0.00013972930589117708,
+    "model_output_backlash_rad": 0.002617993877991494,
+    "adopted_pin_stiffness_n_per_m": [
+      297707470.9613503,
+      297707470.9613503,
+      297707470.9613503
+    ],
+    "evaluated_torque_count": 14,
+    "verification": {
+      "sample_count": 6,
+      "bias_rad": -1.2701677590377206e-09,
+      "rmse_rad": 0.0010078960593160225,
+      "maximum_absolute_error_rad": 0.0010458390392736505
+    },
+    "verification_by_flank": {
+      "positive": {
+        "sample_count": 3,
+        "bias_rad": -0.0010075012293284033,
+        "rmse_rad": 0.0010079604296002128,
+        "maximum_absolute_error_rad": 0.0010458390392736505
+      },
+      "negative": {
+        "sample_count": 3,
+        "bias_rad": 0.0010074986889928852,
+        "rmse_rad": 0.001007831684920497,
+        "maximum_absolute_error_rad": 0.0010402998331929857
+      }
+    }
+  }
+}

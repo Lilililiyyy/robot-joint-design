@@ -2,7 +2,7 @@
 
 [中文](README.md) · [English](README.en.md)
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE) [![Version](https://img.shields.io/badge/version-0.5.0-blue)](https://github.com/Lilililiyyy/robot-joint-design/tree/v0.5.0)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE) [![Version](https://img.shields.io/badge/version-0.6.0-blue)](https://github.com/Lilililiyyy/robot-joint-design/tree/v0.6.0)
 
 自主开发的机器人关节模组设计项目，面向单级NGW行星传动关节，提供从任务载荷到齿轮接触、支承结构、机电匹配、精度和热性能的参数化计算。项目包含完整Python源码、双语图文案例与工程数据导出，可独立运行和接入设计流程。
 
@@ -27,6 +27,7 @@
 |强度与支承|显式因子齿面/齿根评级、六自由度支承、轴承反力、销几何/材料刚度参与分载、销弯剪与行星轴承基本评级|
 |机电与能量|驱动/回驱效率、转子惯量、电机转矩—转速包络、RMS电流、制动与再生母线初筛|
 |精度与热|承载角、侧隙和编码器误差预算、分段温升与周期热稳态|
+|台架数据|双向扭矩—角度标定、夹具柔度修正、独立试次留验及同扭矩点模型对照|
 |寿命与选型|雨流循环、给定S-N曲线的累积损伤、约束筛选与有限候选Pareto比较|
 |设计裕量|约束余量与危险工况定位、有限装配/销参数/支承变化情景、必需校核缺失拦截|
 |工程输出|计算报告、JSON/CSV/NPZ、参数级CAD尺寸与BOM、论文风格的中英PNG/SVG/PDF图表|
@@ -113,6 +114,10 @@ python -m examples.design_envelope --output output/design_envelope
 
 [完整图文案例](docs/examples.md)介绍各模块的输入、结果及设计取舍；[设计准则](docs/design_review.md)汇总判定要求和工程边界。
 
+**双向扭转标定**
+
+导入两批台架试次，分别拟合正反向承载刚度，再用独立试次核对角误差。合成示例恢复了 18000/20000 N·m/rad 的预设刚度，留验最大误差约 4 µrad。用相同扭矩点复算名义设计，可查看各侧模型偏差。[CSV 接入、双语图及复算方法](docs/torsion_calibration.md)
+
 ## 结果对标
 
 采用18/77斜齿轮副与已保存的MASTA参考结果进行单副对标，比较几何、显式因子强度、传动误差、刚度及接触压力。
@@ -136,6 +141,7 @@ python -m examples.design_envelope --output output/design_envelope
 
 ## 版本更新记录
 
+- **0.6.0** 增加双向扭转标定、独立试次留验及同载荷模型对照。提供可编辑 CSV 和蓝红色双语复算图。
 - **0.5.0**：增加约束裕量、危险工况/构件定位及有限装配/支承情景复算；必需校核缺失时阻止情景通过，补充真实模组输入与实施流程。
 - **0.4.0**：增加销几何/材料刚度的显式来源选项，接入分载与最终齿面、销、轴承校核；新增可复算尺寸比较及逐销来源记录，兼容原显式刚度路径。
 - **0.3.3**：统一接触压力色阶与图表样式，补充版本徽章、双语更新记录和后续计划。
@@ -154,7 +160,7 @@ python -m examples.design_envelope --output output/design_envelope
 |---|---|
 |接触与修形|增加参数化修形搜索，结合压力、TE与刚度开展多目标方案筛选|
 |结构与装配|接入轮缘、行星架及箱体凝聚柔度，完善配合、预紧与公差链分析|
-|工程标定|优先接入双向扭转、效率及温升实测，识别支承/损耗/热参数并保留测量基准|
+|工程标定|用样机双向扭转数据验证承载刚度及角度基准，增加效率与温升数据接入和参数识别|
 |采购与公差|接入实际轴承和材料数据；由尺寸链/结构模型映射装配误差，逐步扩展公差域校核|
 |驱动与服役|完善有限电源、吸收支路及保护边界，补充实际摆动轴承的服役评价|
 |模型扩展|在相应校核完成后扩展斜齿、多级传动与更完整的系统耦合|
@@ -163,6 +169,7 @@ python -m examples.design_envelope --output output/design_envelope
 
 - [模型与公式](docs/model.md) · [API与单位](docs/api.md) · [图文案例](docs/examples.md)
 - [真实设计使用流程](docs/practical_workflow.md) · [设计裕量与有限情景](docs/design_envelope.md)
+- [双向静态扭转标定](docs/torsion_calibration.md)
 - [接触分析](docs/contact_patterns.md) · [行星支承](docs/planet_support.md) · [再生母线](docs/dc_bus.md)
 - [设计准则](docs/design_review.md) · [结果对标](docs/validation.md) · [图表说明](docs/figures.md)
 - `robot_joint/`：关节系统与性能模块；`gear_contact/`：齿轮几何与接触模块。

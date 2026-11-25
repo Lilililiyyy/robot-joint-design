@@ -22,6 +22,52 @@ def _keys(value, allowed, required, name):
         raise ValueError(name+'包含未知字段或缺少必要参数')
 
 
+def _prepare_transmission(values):
+    """校验传动输入并解析系统实际采用的刚度，供任务计算与静态试验共用。"""
+    try:
+        stage = PlanetaryStage(**values['stage'])
+    except TypeError as error:
+        raise ValueError('stage包含缺失或不支持的字段，首版仅支持零变位直齿单级NGW') from error
+    geometry = stage_geometry(stage)
+    pairs = gear_pairs(stage)
+    _keys(values['load_sharing'], {'initial_mesh_stiffness_n_per_m', 'pin_stiffness_n_per_m',
+          'sun_radial_stiffness_n_per_m', 'positive_path_gaps_m', 'negative_path_gaps_m',
+          'extra_compliance_m_per_n', 'pin_stiffness_source'}, {'initial_mesh_stiffness_n_per_m',
+          'sun_radial_stiffness_n_per_m'}, 'load_sharing')
+    if 'planet_support' in values:
+        _keys(values['planet_support'], {'pins', 'bearing_ratings'}, {'pins', 'bearing_ratings'}, 'planet_support')
+    pin_stiffness = resolve_pin_stiffness(stage.planet_count, values['load_sharing'],
+        pins=values.get('planet_support', {}).get('pins'))
+    effective_sharing = deepcopy(values['load_sharing'])
+    effective_sharing.pop('pin_stiffness_source', None)
+    if pin_stiffness['source'] == 'pin_geometry':
+        effective_sharing['pin_stiffness_n_per_m'] = pin_stiffness['adopted_pin_stiffness_n_per_m']
+    mesh = values['mesh']
+    _keys(mesh, {'material', 'phases', 'strips', 'elastic_mode', 'modifications', 'alignment_maps',
+          'sun_planet_misalignment_m', 'planet_ring_misalignment_m', 'coupling', 'iso_settings'},
+          {'material', 'modifications'}, 'mesh')
+    _keys(mesh.get('coupling', {}), {'maximum_iterations', 'force_relative_tolerance',
+          'path_tolerance_m', 'relaxation'}, set(), 'mesh.coupling')
+    _keys(mesh.get('alignment_maps', {}), {'sun_planet', 'planet_ring'}, set(), 'mesh.alignment_maps')
+    _keys(mesh['modifications'], {'positive', 'negative'}, {'positive', 'negative'}, 'mesh.modifications')
+    for direction in ('positive', 'negative'):
+        _keys(mesh['modifications'][direction], set(pairs), set(pairs), '工作面修形')
+        for pair_options in mesh['modifications'][direction].values():
+            _keys(pair_options, {'pinion', 'wheel'}, set(), '单副修形')
+    for pair in pairs.values():
+        if pair.transverse_contact_ratio <= 1:
+            raise ValueError('首版直齿模型要求两副端面重合度均大于1，以保证完整周期连续啮合')
+    return stage, geometry, pairs, effective_sharing, pin_stiffness
+
+
+def _output_torsion(sharing, support):
+    """合并齿轮路径与输出端串联结构的有符号转角及局部切线刚度。"""
+    twist = sharing['output_elastic_twist_rad'] + support['generalized_displacement'][5]
+    compliance = support['load_point_compliance'][5][5]
+    stiffness = 1 / (1/sharing['output_torsional_stiffness_n_m_per_rad'] + compliance)
+    return float(twist), float(stiffness)
+
+
 @dataclass
 class JointResult:
     """完整计算结果；cases中的contacts保留原接触数组，导出时另存NPZ。"""
@@ -58,39 +104,7 @@ def analyze_joint(config: dict) -> JointResult:
         raise ValueError('仅支持schema_version=1')
     if not isinstance(values['case_id'], str) or not values['case_id']:
         raise ValueError('case_id必须为非空字符串')
-    try:
-        stage = PlanetaryStage(**values['stage'])
-    except TypeError as error:
-        raise ValueError('stage包含缺失或不支持的字段，首版仅支持零变位直齿单级NGW') from error
-    geometry = stage_geometry(stage)
-    pairs = gear_pairs(stage)
-    _keys(values['load_sharing'], {'initial_mesh_stiffness_n_per_m', 'pin_stiffness_n_per_m',
-          'sun_radial_stiffness_n_per_m', 'positive_path_gaps_m', 'negative_path_gaps_m',
-          'extra_compliance_m_per_n', 'pin_stiffness_source'}, {'initial_mesh_stiffness_n_per_m',
-          'sun_radial_stiffness_n_per_m'}, 'load_sharing')
-    if 'planet_support' in values:
-        _keys(values['planet_support'], {'pins', 'bearing_ratings'}, {'pins', 'bearing_ratings'}, 'planet_support')
-    pin_stiffness = resolve_pin_stiffness(stage.planet_count, values['load_sharing'],
-        pins=values.get('planet_support', {}).get('pins'))
-    effective_sharing = deepcopy(values['load_sharing'])
-    effective_sharing.pop('pin_stiffness_source', None)
-    if pin_stiffness['source'] == 'pin_geometry':
-        effective_sharing['pin_stiffness_n_per_m'] = pin_stiffness['adopted_pin_stiffness_n_per_m']
-    mesh = values['mesh']
-    _keys(mesh, {'material', 'phases', 'strips', 'elastic_mode', 'modifications', 'alignment_maps',
-          'sun_planet_misalignment_m', 'planet_ring_misalignment_m', 'coupling', 'iso_settings'},
-          {'material', 'modifications'}, 'mesh')
-    _keys(mesh.get('coupling', {}), {'maximum_iterations', 'force_relative_tolerance',
-          'path_tolerance_m', 'relaxation'}, set(), 'mesh.coupling')
-    _keys(mesh.get('alignment_maps', {}), {'sun_planet', 'planet_ring'}, set(), 'mesh.alignment_maps')
-    _keys(mesh['modifications'], {'positive', 'negative'}, {'positive', 'negative'}, 'mesh.modifications')
-    for direction in ('positive', 'negative'):
-        _keys(mesh['modifications'][direction], set(pairs), set(pairs), '工作面修形')
-        for pair_options in mesh['modifications'][direction].values():
-            _keys(pair_options, {'pinion', 'wheel'}, set(), '单副修形')
-    for pair in pairs.values():
-        if pair.transverse_contact_ratio <= 1:
-            raise ValueError('首版直齿模型要求两副端面重合度均大于1，以保证完整周期连续啮合')
+    stage, geometry, pairs, effective_sharing, pin_stiffness = _prepare_transmission(values)
     segments = values['duty_segments']
     if not isinstance(segments, list) or not segments:
         raise ValueError('duty_segments必须为非空列表')
@@ -138,12 +152,10 @@ def analyze_joint(config: dict) -> JointResult:
             for name, pair in pairs.items():
                 ratings[name] = [rate_mesh(pair, force, values['mesh']['material'], values['rating'][name])
                                  for force in sharing['tangential_forces_n']]
-        gear_k = sharing['output_torsional_stiffness_n_m_per_rad']
-        compliance = np.asarray(support['load_point_compliance'])
-        total_k = 1 / (1/gear_k + compliance[5, 5])
+        twist, total_k = _output_torsion(sharing, support)
         precision = precision_budget(
-            output_elastic_twist_rad=sharing['output_elastic_twist_rad']+float(displacement[5]),
-            output_torsional_stiffness_n_m_per_rad=float(total_k), ratio=geometry['ratio'],
+            output_elastic_twist_rad=twist,
+            output_torsional_stiffness_n_m_per_rad=total_k, ratio=geometry['ratio'],
             **values['precision'])
         speeds = speed_map(stage, segment['output_speed_rad_s'])
         duration = segment['duration_s']

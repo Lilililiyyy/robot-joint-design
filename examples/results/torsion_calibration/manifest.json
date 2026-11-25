@@ -1,0 +1,31 @@
+{
+  "version": "0.6.0",
+  "inputs": {
+    "fit": {
+      "file": "fit.csv",
+      "sha256": "11e32a2be53a4a20700cf099ee5c02dffa4ce5e9a35bca8287b3a51a07b8a3fe"
+    },
+    "verification": {
+      "file": "verification.csv",
+      "sha256": "a7a5126257b0cb133f81afd1e51df64bfb65c3aef9d1d265cc65062d399526a0"
+    },
+    "settings": {
+      "file": "settings.json",
+      "sha256": "af55d256161bce5272b6ae1bfece1356eeb3b436413c032d08373ec534407297"
+    },
+    "model": {
+      "file": "dfki_pin_geometry.json",
+      "sha256": "9c287a159c713fbda1caf12a59d241a45e816e7f188b4199969948e14f5a1432"
+    }
+  },
+  "files": {
+    "calibration.json": "1251c0a81022656ef9ba2bff802714ae206dfaeee9e9e67761fb04ed916934b1",
+    "samples.csv": "08bbf857cd08a2e8453ebc5126007237a79bac89c240a6c46482d0bf01b6437e",
+    "torsion_en.pdf": "5001e078d7a8ae58bcc45187ef57d1377d0ca916129d78f21c74d83209e45bf0",
+    "torsion_en.png": "ad8d3d1c56c66b57dfe74bde55c491d4947cedc2ec57a06a679ae4daa73d191c",
+    "torsion_en.svg": "ad152965475dedcf1a369cb0548d5c75103d9c096ff9ee0e45a6005013cd27df",
+    "torsion_zh.pdf": "06b609488084286466d2acc182b368ce55d5c5d74cc7a5feae3304fca6694b01",
+    "torsion_zh.png": "f81a464397e639c21a4e2678d9955af9104b8e47fde27ddb6ed4ef7428946fb0",
+    "torsion_zh.svg": "7e183b3d74a434d13175da8013e0cfc01081ed4f554fd6b64d5f035fb844e507"
+  }
+}

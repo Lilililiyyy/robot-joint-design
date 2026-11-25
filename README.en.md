@@ -2,7 +2,7 @@
 
 [中文](README.md) · [English](README.en.md)
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE) [![Version](https://img.shields.io/badge/version-0.5.0-blue)](https://github.com/Lilililiyyy/robot-joint-design/tree/v0.5.0)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE) [![Version](https://img.shields.io/badge/version-0.6.0-blue)](https://github.com/Lilililiyyy/robot-joint-design/tree/v0.6.0)
 
 An independently developed robot joint design project for single-stage NGW planetary actuators. It connects task loads, gear contact, structural support, motor sizing, precision and thermal performance through parameterized calculations. Complete Python source, bilingual worked examples and engineering data exports support standalone use and integration into a design workflow.
 
@@ -27,6 +27,7 @@ An independently developed robot joint design project for single-stage NGW plane
 |Strength and support|Explicit-factor flank/root rating, six-degree-of-freedom support, bearing reactions, pin geometry/material stiffness in sharing, pin bending/shear and basic planet-bearing rating|
 |Motor and energy|Driving/backdriving efficiency, rotor inertia, torque–speed envelopes, RMS current, braking and regenerative-bus screening|
 |Precision and thermal|Loaded angle, backlash/encoder budgets, segmented temperature response and periodic thermal equilibrium|
+|Bench data|Bidirectional torque–angle calibration, fixture correction, held-out runs and model comparison|
 |Life and selection|Rainflow cycles, cumulative damage with supplied S-N curves, constraint screening and finite-candidate Pareto comparison|
 |Engineering outputs|Reports, JSON/CSV/NPZ, parameter-level CAD dimensions and BOM, bilingual publication-style PNG/SVG/PDF figures|
 
@@ -112,6 +113,10 @@ python -m examples.design_envelope --output output/design_envelope
 
 The [worked example](docs/examples.en.md) explains module inputs, results and design tradeoffs. [Design criteria](docs/design_review.en.md) summarize requirements and engineering boundaries.
 
+**Bidirectional torsion calibration**
+
+Fit both loaded branches, then verify angle errors on separate runs. The synthetic example recovers the prescribed 18000/20000 N·m/rad stiffnesses and gives about 4 µrad maximum held-out error. Recalculate the nominal model at identical torques to inspect each branch's residuals. [CSV inputs, figures and reproduction](docs/torsion_calibration.en.md)
+
 ## Result benchmarks
 
 An 18/77 helical mesh is compared with saved MASTA results for geometry, explicit-factor strength, transmission error, stiffness and contact pressure.
@@ -135,6 +140,7 @@ Outputs support design calculation and candidate selection. Manufacturing requir
 
 ## Version history
 
+- **0.6.0** adds bidirectional torsion calibration, held-out runs and same-load model comparison with editable CSV inputs and bilingual blue–red plots.
 - **0.5.0**: Added signed margins, governing states/components and finite assembly/support scenario studies; missing required checks block acceptance; documented real-module inputs and workflow.
 - **0.4.0**: Added an explicit pin geometry/material stiffness source, sharing and final mesh/pin/bearing checks, reproducible diameter comparisons and per-pin provenance; preserved direct stiffness inputs.
 - **0.3.3**: Unified contact-pressure colour scale and figure style; added version badge, bilingual history and roadmap.
@@ -153,11 +159,13 @@ The following are planned directions rather than fully implemented capabilities.
 |---|---|
 |Contact and modification|Parameterized modification search and multi-objective selection using pressure, TE and stiffness|
 |Structure and assembly|Condensed rim, carrier and housing compliance; fits, preload and tolerance-chain analysis|
-|Engineering calibration|Measured bidirectional stiffness, backlash, friction, efficiency and thermal-parameter inputs|
+|Engineering calibration|Verify loaded stiffness and angular references with hardware data, then add efficiency and temperature identification|
 |Drive and service|Finite-source, absorption and protection boundaries; actual oscillating-bearing duty assessment|
 |Model extensions|Helical gears, multi-stage transmissions and broader system coupling after appropriate verification|
 
 ## Documentation and structure
+
+- [Bidirectional static torsion calibration](docs/torsion_calibration.en.md)
 
 - [Model and equations](docs/model.en.md) · [API and units](docs/api.en.md) · [Worked example](docs/examples.en.md)
 - [Contact analysis](docs/contact_patterns.en.md) · [Planet support](docs/planet_support.en.md) · [Regenerative bus](docs/dc_bus.en.md)
