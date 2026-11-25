@@ -2,7 +2,7 @@
 
 [中文](README.md) · [English](README.en.md)
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE) [![Version](https://img.shields.io/badge/version-0.3.3-blue)](https://github.com/Lilililiyyy/robot-joint-design/tree/v0.3.3)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE) [![Version](https://img.shields.io/badge/version-0.4.0-blue)](https://github.com/Lilililiyyy/robot-joint-design/tree/v0.4.0)
 
 An independently developed robot joint design project for single-stage NGW planetary actuators. It connects task loads, gear contact, structural support, motor sizing, precision and thermal performance through parameterized calculations. Complete Python source, bilingual worked examples and engineering data exports support standalone use and integration into a design workflow.
 
@@ -24,7 +24,7 @@ An independently developed robot joint design project for single-stage NGW plane
 |Requirements and loads|Motion profiles, load inertia, gravity and acceleration torque, segmented duty histories|
 |Planetary transmission|Assembly conditions, ratio, clearances, individual planet loads, path errors and compliance coupling|
 |Gear contact|Internal/external LTCA, transmission error, tangent stiffness, local Hertz pressure, loaded flanks and full tooth-passage pressure maps|
-|Strength and support|Explicit-factor flank/root rating, six-degree-of-freedom support, bearing reactions, planet-pin bending/shear and basic planet-bearing rating|
+|Strength and support|Explicit-factor flank/root rating, six-degree-of-freedom support, bearing reactions, pin geometry/material stiffness in sharing, pin bending/shear and basic planet-bearing rating|
 |Motor and energy|Driving/backdriving efficiency, rotor inertia, torque–speed envelopes, RMS current, braking and regenerative-bus screening|
 |Precision and thermal|Loaded angle, backlash/encoder budgets, segmented temperature response and periodic thermal equilibrium|
 |Life and selection|Rainflow cycles, cumulative damage with supplied S-N curves, constraint screening and finite-candidate Pareto comparison|
@@ -89,6 +89,15 @@ The same duty drives motor-envelope, current, braking and periodic-temperature c
 
 An integrated candidate assumes a 6 mm planet pin, feeds its 297.707 MN/m bending/shear stiffness into the system, and includes planet bearings and a 4700 μF bus. Maximum pin load is about 118.889 N, minimum planet-bearing static safety about 4.206, and maximum bus voltage about 43.194 V. These results depend on the declared geometry, capacities, limits and electrical conditions.
 
+Pin stiffness can remain a direct input or use explicit `pin_stiffness_source="pin_geometry"` to calculate stiffness from shared/per-pin geometry and material before the system solve. The [diameter comparison](examples/results/pin_stiffness_feedback/report.en.md) recalculates 6 mm, all-4 mm and first-pin-4 mm designs: resizing all pins reduces minimum output stiffness to 17643.769 N·m/rad, below this example's 20000 limit. Resizing one pin redistributes loads. Adopted stiffness, final reactions, mesh/pin/bearing results and convergence diagnostics are retained.
+
+```bash
+python -m robot_joint examples/dfki_pin_geometry.json --output output/pin_geometry
+python -m examples.compare_pin_stiffness --output output/pin_comparison
+```
+
+The model remains a simply supported solid-pin bending/shear model with explicit boundary assumptions. Short-pin hole contact, fits and carrier-plate response require separate validation. See [planet support](docs/planet_support.en.md) for parameters and integration.
+
 The [worked example](docs/examples.en.md) explains module inputs, results and design tradeoffs. [Design criteria](docs/design_review.en.md) summarize requirements and engineering boundaries.
 
 ## Result benchmarks
@@ -114,15 +123,14 @@ Outputs support design calculation and candidate selection. Manufacturing requir
 
 ## Version history
 
-|Version|Main updates|
-|---|---|
-|**0.3.3**|Unified contact-pressure colour scale and figure style; version badge, bilingual history and roadmap|
-|0.3.2|Refined standalone project documentation and focused public presentation on design capabilities and results|
-|0.3.1|Completed tooth-passage and instantaneous contact maps and added a single-mesh pressure benchmark|
-|0.3.0|Added planet-pin, planet-bearing and regenerative-bus checks to the integrated design workflow|
-|0.2.0|Added design constraints, assessment coverage, strength benchmarks and bilingual publication-style figures|
-|0.1.2|Added the complete bilingual design example driven by published pendulum requirements|
-|0.1.0|Established NGW transmission, support, motor, precision, fatigue, thermal and parameter-level engineering outputs|
+- **0.4.0**: Added an explicit pin geometry/material stiffness source, sharing and final mesh/pin/bearing checks, reproducible diameter comparisons and per-pin provenance; preserved direct stiffness inputs.
+- **0.3.3**: Unified contact-pressure colour scale and figure style; added version badge, bilingual history and roadmap.
+- **0.3.2**: Refined standalone documentation and focused public presentation on design capabilities and results.
+- **0.3.1**: Completed tooth-passage and instantaneous contact maps and added a single-mesh pressure benchmark.
+- **0.3.0**: Added planet-pin, planet-bearing and regenerative-bus checks to the integrated design workflow.
+- **0.2.0**: Added design constraints, assessment coverage, strength benchmarks and bilingual publication-style figures.
+- **0.1.2**: Added the complete bilingual example driven by published pendulum requirements.
+- **0.1.0**: Established NGW transmission, support, motor, precision, fatigue, thermal and parameter-level engineering outputs.
 
 ## Roadmap
 

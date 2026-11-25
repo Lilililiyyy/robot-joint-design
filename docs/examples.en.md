@@ -129,7 +129,7 @@ Shared chart data are in [metrics.json](../examples/results/dfki_pendulum/metric
 
 The model covers a fixed-ring, sun-input, carrier-output, zero-shift spur NGW stage with small deformation, quasi-static response and cycle-mean coupling. New system modules have analytical/equation and numerical checks, but no vendor whole-system benchmark or hardware validation. RV/harmonic drives, full FE, measured hysteresis, control, electromagnetic and lubrication prediction are outside this release. Existing single-mesh comparisons do not certify the whole joint.
 
-See the [model](../docs/model.en.md) and [API contract](../docs/api.en.md). The license is [AGPL-3.0-only](../LICENSE); see [source and license notices](../THIRD_PARTY_NOTICES.md). This page provides the complete physical-requirement-based walkthrough and nine paired figure sets. See the [validation record](validation.en.md) for single-mesh software comparisons and public references, and the [project roadmap](../README.en.md#release-history-and-next-steps) for calibration priorities.
+See the [model](../docs/model.en.md) and [API contract](../docs/api.en.md). The license is [AGPL-3.0-only](../LICENSE); see [source and license notices](../THIRD_PARTY_NOTICES.md). This page provides the complete physical-requirement-based walkthrough and nine paired figure sets. See the [validation record](validation.en.md) for single-mesh software comparisons and public references, and the [project roadmap](../README.en.md#roadmap) for calibration priorities.
 
 
 ## Contact results and integrated design
@@ -143,3 +143,12 @@ The [integrated input](../examples/dfki_with_screens.json) uses the assumed 6 mm
 ```bash
 python -m robot_joint examples/dfki_with_screens.json --output output/integrated --plots
 ```
+
+The original integrated input retains manually specified pin stiffness. The new [geometry-source input](../examples/dfki_pin_geometry.json) selects `pin_stiffness_source="pin_geometry"`, resolves each pin's stiffness from its supplied parameters, then solves the same 34 duty states. Its 714 original response arrays match equivalent manual input exactly. The [diameter comparison](../examples/results/pin_stiffness_feedback/report.en.md) also recalculates all-pin and first-pin resizing, including sharing, pressure, pin bending and bearing static safety. The all-4 mm design fails this example's output-stiffness limit.
+
+```bash
+python -m robot_joint examples/dfki_pin_geometry.json --output output/pin_geometry
+python -m examples.compare_pin_stiffness --output output/pin_comparison
+```
+
+This is a reproducible comparison within the same reduced model. Short-pin 3D support compliance and physical joint-assembly validation remain separate work.

@@ -26,6 +26,7 @@ def export_joint(result, output_dir, *, plots=False):
     # 无选项时明确写null，防止同一输出目录残留上次已配置的校核文件。
     _write(root/'planet_support.json', result.planet_support)
     _write(root/'dc_bus.json', result.dc_bus)
+    _write(root/'pin_stiffness.json', result.pin_stiffness)
     from .engineering import export_engineering_parameters
     export_engineering_parameters(result, root)
     rows = []
@@ -70,9 +71,23 @@ def export_joint(result, output_dir, *, plots=False):
                   '只评价该输入谱，不等同整关节服役寿命。', '', '## 设计评估覆盖', '', '|项目|当前范围|', '|---|---|'])
     for name, scope in result.summary['assessment_coverage'].items():
         lines.append(f'|{name}|{scope}|')
+    if result.pin_stiffness is not None:
+        stiffness = result.pin_stiffness
+        mode = '由销几何与材料计算平均弯剪刚度' if stiffness['source'] == 'pin_geometry' else '直接采用显式销刚度'
+        lines.extend(['', '## 系统采用的销刚度', '', mode+'。输入请求保存在input.json，实际采用值与来源保存在pin_stiffness.json。', '',
+                      '|行星|采用刚度 / MN/m|短粗销需复核|', '|---|---:|---|'])
+        for pin in stiffness['planets']:
+            review = pin['short_pin_review_required']
+            lines.append(f"|{pin['planet_index']+1}|{pin['adopted_pin_stiffness_n_per_m']/1e6:.6g}|"
+                         f"{'是' if review else '否' if review is False else '未配置销几何'}|")
+        if stiffness['source'] == 'pin_geometry' and stiffness['specified_input_n_per_m'] is not None:
+            lines.extend(['', '本例显式选择几何来源，原输入中的pin_stiffness_n_per_m仅保留记录，未参与分载。'])
+        lines.extend(['', '线性销刚度在分载前一次确定，之后执行原有齿面/系统位移协调；未新增销刚度外层迭代。'])
     if result.planet_support is not None:
+        feedback = (result.pin_stiffness is not None and result.pin_stiffness['source'] == 'pin_geometry')
         lines.extend(['', '## 行星销与行星轴承', '',
-            '按已收敛销反力独立检查，未自动回写路径刚度。短粗销三维接触、支承板、局部配合和销疲劳仍需单独验证。', '',
+            ('已在分载前采用销参数刚度，按最终收敛销反力继续校核。' if feedback else '按已收敛销反力独立检查，本配置采用显式路径刚度。')+
+            '短粗销三维接触、支承板、局部配合和销疲劳仍需单独验证。', '',
             '|行星|销平均弯剪刚度 / MN/m|与系统kpin之比|最大弯曲 / MPa|最大中心挠度 / μm|静校核|', '|---|---:|---:|---:|---:|---|'])
         for pin in result.planet_support['pins']:
             lines.append(f"|{pin['planet_index']+1}|{pin['equivalent_pin_stiffness_n_per_m']/1e6:.6g}|"
@@ -103,7 +118,7 @@ def export_joint(result, output_dir, *, plots=False):
     if plots:
         from .plotting import plot_joint
         plot_joint(result, root)
-    manifest = {'version': '0.3.3', 'units': {'length': 'm', 'angle': 'rad', 'torque': 'N m',
+    manifest = {'version': '0.4.0', 'units': {'length': 'm', 'angle': 'rad', 'torque': 'N m',
                 'force': 'N', 'pressure': 'Pa', 'temperature': 'K', 'time': 's'},
                 'files': {p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                           for p in sorted(root.rglob('*')) if p.is_file() and p.name != 'manifest.json'}}

@@ -24,7 +24,9 @@ Results use `passed`, `failed`, `not_configured` and `not_evaluated`, retaining 
 
 The 6:1 example selects `Kout≥20000 N·m/rad`, `Kγ≤2` and supplied-history `D≤1`. These are case-specific targets. Modification, stiffness, thermal parameters and allowable stresses are explicit assumptions.
 
-Assumed 4/6 mm planet pins both meet the supplied static-strength criteria under identical loads, but their mean bending/shear stiffnesses are 71.225/297.707 MN/m. The integrated candidate selects 6 mm and feeds calculated stiffness back into the system for a new load-sharing solve.
+Assumed 4/6 mm planet pins both meet the supplied static-strength criteria under identical loads, but their mean bending/shear stiffnesses are 71.225/297.707 MN/m. The integrated candidate selects 6 mm. The explicit `pin_geometry` option now determines shared/per-pin stiffness before recalculating sharing and both meshes, then checks pins and bearings with final reactions. Existing direct stiffness inputs remain compatible.
+
+The [reproducible diameter comparison](../examples/results/pin_stiffness_feedback/report.en.md) distinguishes all-pin and single-pin changes and retains complete inputs and adopted values. A stiffness ratio of 1, manual-input equivalence and converged residuals are local analytical/numerical checks. With L/d=2 or 3, these examples do not replace pin-hole, fit, carrier-plate or joint-assembly validation.
 
 The bus compares capacitance and absorption with a 36 V source, 48 V upper limit and supplied inverter efficiency. The integrated candidate uses 4700 μF and reaches about 43.194 V. See [planet support](planet_support.en.md) and the [bus model](dc_bus.en.md).
 

@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 
 from robot_joint import analyze_joint
-from robot_joint.planet_support import assess_planet_support
+from robot_joint.planet_support import assess_planet_support, resolve_pin_stiffness
 from gear_contact.io import write_json
 
 
@@ -73,6 +73,22 @@ def run(base, cases, assumptions, provenance, output):
     if not isinstance(candidate_options, list) or not candidate_options:
         raise ValueError('设计假设须给出非空candidates列表')
     used_ids = set()
+    if not cases:
+        raise ValueError('销校核需要非空的已收敛工况')
+    if base['load_sharing'].get('pin_stiffness_source') == 'pin_geometry' and any(
+            'pin_stiffness_n_per_m' not in case['sharing'] for case in cases):
+        raise ValueError('几何刚度来源的已有结果必须保留实际采用值，不能退回未采用的原请求刚度')
+    adopted_stiffness = None
+    for case in cases:
+        value = case['sharing'].get('pin_stiffness_n_per_m',
+            base['load_sharing'].get('pin_stiffness_n_per_m'))
+        if value is None:
+            raise ValueError('结果缺少实际采用的销刚度，不能用来源不明的刚度作一致性比较')
+        current = resolve_pin_stiffness(base['stage']['planet_count'],
+            {'pin_stiffness_n_per_m': value})['adopted_pin_stiffness_n_per_m']
+        if adopted_stiffness is not None and current != adopted_stiffness:
+            raise ValueError('已有结果逐工况采用的销刚度不一致，不能合并为同一固定刚度设计')
+        adopted_stiffness = current
     for candidate in candidate_options:
         name = candidate['id']
         if not isinstance(name, str) or not name or any(c not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-' for c in name) or name in used_ids:
@@ -80,7 +96,7 @@ def run(base, cases, assumptions, provenance, output):
         used_ids.add(name)
         result = assess_planet_support(cases, base['duty_segments'], pins=candidate['pins'],
             bearing_ratings=candidate['bearing_ratings'],
-            specified_pin_stiffness_n_per_m=base['load_sharing']['pin_stiffness_n_per_m'])
+            specified_pin_stiffness_n_per_m=adopted_stiffness)
         write_json(folder/(name+'.json'), result)
         candidates.append({'id': name, 'pins': result['pins'], 'summary': result['summary'],
                            'planet_bearings': result['planet_bearings']})

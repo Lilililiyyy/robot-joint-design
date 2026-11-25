@@ -13,7 +13,7 @@ from .electromechanical import motor_duty
 from .thermal import thermal_response
 from .fatigue import rainflow_cycles, sn_damage
 from .precision import precision_budget
-from .planet_support import assess_planet_support
+from .planet_support import assess_planet_support, resolve_pin_stiffness
 from .dc_bus import dc_bus_screen
 
 
@@ -35,6 +35,7 @@ class JointResult:
     summary: dict
     planet_support: dict | None = None
     dc_bus: dict | None = None
+    pin_stiffness: dict | None = None
 
 
 def analyze_joint(config: dict) -> JointResult:
@@ -65,8 +66,16 @@ def analyze_joint(config: dict) -> JointResult:
     pairs = gear_pairs(stage)
     _keys(values['load_sharing'], {'initial_mesh_stiffness_n_per_m', 'pin_stiffness_n_per_m',
           'sun_radial_stiffness_n_per_m', 'positive_path_gaps_m', 'negative_path_gaps_m',
-          'extra_compliance_m_per_n'}, {'initial_mesh_stiffness_n_per_m', 'pin_stiffness_n_per_m',
+          'extra_compliance_m_per_n', 'pin_stiffness_source'}, {'initial_mesh_stiffness_n_per_m',
           'sun_radial_stiffness_n_per_m'}, 'load_sharing')
+    if 'planet_support' in values:
+        _keys(values['planet_support'], {'pins', 'bearing_ratings'}, {'pins', 'bearing_ratings'}, 'planet_support')
+    pin_stiffness = resolve_pin_stiffness(stage.planet_count, values['load_sharing'],
+        pins=values.get('planet_support', {}).get('pins'))
+    effective_sharing = deepcopy(values['load_sharing'])
+    effective_sharing.pop('pin_stiffness_source', None)
+    if pin_stiffness['source'] == 'pin_geometry':
+        effective_sharing['pin_stiffness_n_per_m'] = pin_stiffness['adopted_pin_stiffness_n_per_m']
     mesh = values['mesh']
     _keys(mesh, {'material', 'phases', 'strips', 'elastic_mode', 'modifications', 'alignment_maps',
           'sun_planet_misalignment_m', 'planet_ring_misalignment_m', 'coupling', 'iso_settings'},
@@ -119,7 +128,9 @@ def analyze_joint(config: dict) -> JointResult:
                     bearing_options['spacing_m'], bearing_options.get('load_offset_m', 0),
                     bearing_options.get('axial_share', 0.5))
         sharing, contacts = coupled_planet_contacts(stage, segment['output_torque_n_m'],
-                    values['load_sharing'], values['mesh'], support_displacement=displacement)
+                    effective_sharing, values['mesh'], support_displacement=displacement)
+        sharing['pin_stiffness_n_per_m'] = list(pin_stiffness['adopted_pin_stiffness_n_per_m'])
+        sharing['pin_stiffness_source'] = pin_stiffness['source']
         ratings = {}
         if 'rating' in values:
             if set(values['rating']) != set(pairs):
@@ -144,6 +155,15 @@ def analyze_joint(config: dict) -> JointResult:
                       'sharing': sharing, 'contacts': contacts, 'ratings': ratings,
                       'support': support, 'bearing_reactions': bearing, 'precision': precision,
                       'speeds': speeds, 'kinematic_exposure': exposure})
+    pin_stiffness['coupling'] = {
+        'all_converged': all(case['sharing']['coupling']['converged'] for case in cases),
+        'cases': [{'index': case['index'], 'label': case['label'],
+            'converged': case['sharing']['coupling']['converged'],
+            'iterations': case['sharing']['coupling']['iterations'],
+            'path_residual_m': case['sharing']['coupling']['path_residual_m'],
+            'force_relative_change': case['sharing']['coupling']['history'][-1]['force_relative_change'],
+            'output_torque_balance_n_m': case['sharing']['diagnostics']['output_torque_balance_n_m']}
+            for case in cases]}
     bearings = []
     for index, rating in enumerate(bearing_options['ratings']):
         bearings.append(bearing_duty_life(
@@ -170,9 +190,11 @@ def analyze_joint(config: dict) -> JointResult:
         fatigue['scope'] = '调用方给定热点应力历程上的有限寿命模型；不代表所有齿轮、轴承和结构的寿命'
     planet_support = None
     if 'planet_support' in values:
-        _keys(values['planet_support'], {'pins', 'bearing_ratings'}, {'pins', 'bearing_ratings'}, 'planet_support')
         planet_support = assess_planet_support(cases, segments, **values['planet_support'],
-            specified_pin_stiffness_n_per_m=values['load_sharing']['pin_stiffness_n_per_m'])
+            specified_pin_stiffness_n_per_m=pin_stiffness['adopted_pin_stiffness_n_per_m'])
+        if pin_stiffness['source'] == 'pin_geometry':
+            planet_support['summary']['system_stiffness_was_updated'] = True
+            planet_support['scope'] = '销参数刚度已用于系统分载/LTCA协调；按最终销反力做静强度与基本L10校核，非样机验证'
     dc_bus = None
     if 'dc_bus' in values:
         bus_required = {'capacitance_f', 'source_voltage_v', 'minimum_voltage_v', 'maximum_voltage_v',
@@ -259,7 +281,7 @@ def analyze_joint(config: dict) -> JointResult:
               'minimum_bearing_static_safety_factor': '输出双支承基本静安全；不含行星轴承',
               'minimum_bearing_life_hours': '输出双支承基本L10小时数；无摆动/润滑/微动修正',
               'minimum_output_torsional_stiffness_n_m_per_rad': '最终承载分支局部输出扭转刚度，N·m/rad',
-              'maximum_pin_stiffness_relative_difference': '简支圆销平均弯剪刚度与系统给定kpin之最大相对差；不自动回写分载刚度',
+              'maximum_pin_stiffness_relative_difference': '简支圆销平均弯剪刚度与系统最终采用kpin之最大相对差',
               'minimum_planet_bearing_static_safety_factor': '显式容量/系数下的行星轴承基本静安全',
               'minimum_planet_bearing_basic_l10_hours': '行星相对行星架转速的基本L10小时数；无摆动/润滑修正'}
     for name, metric in {**metric_names, **lower_metrics}.items():
@@ -323,7 +345,7 @@ def analyze_joint(config: dict) -> JointResult:
     summary['configured_checks_pass'] = all(checks.values())
     summary['check_scope'] = '仅对已配置约束的数值初筛；未配置强度/寿命/温升限值不自动视为已校核'
     return JointResult(values, geometry, cases, motor, thermal, bearings, fatigue, summary,
-                       planet_support=planet_support, dc_bus=dc_bus)
+                       planet_support=planet_support, dc_bus=dc_bus, pin_stiffness=pin_stiffness)
 
 
 def compare_joint_designs(configs):

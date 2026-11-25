@@ -1,0 +1,14 @@
+{
+  "files": {
+    "source_input.json": "b02cce1ea60f8d40e0aa79be56b35f3286f11a2040454d2010c1e7b0b2d8995a",
+    "summary.json": "16a6ba5cff3fdd30e5bcdf19eb4d4a661f036ea67eb1771fddc9fdce7b9337e6",
+    "comparison.npz": "29e7757066fbb96ba639ee54e27a81ffd0c3ce6366e999c7ed411d739d19a4d5",
+    "sharing.csv": "58e499bd3cd6fb9d89d8981c0faf6e7afd77e9e00866ff0ba9d9708771c8ba1a",
+    "report.md": "7f7a9840b4a316a433dc2d851bab0ba0db66f61964ce9b57d464cd6990e4c492",
+    "report.en.md": "04c69c52e0c1d046cd90fce653c1f9f949af7f188c483dfd33b0b63c52f503b0",
+    "manual_reference_input.json": "5b38015da0b993a86c5e363af37429f8b735b34ce8d6e627adaefd88087155f4",
+    "geometry_reference_input.json": "15a86f94cc247415f2086f4ecdf0d0b6d5e67c16b04063267ac3375a88957ea4",
+    "all_smaller_input.json": "c28961d7d27f43f1a1baa0df3a8848ea42bdc88ceec3945acda311b7f12a7659",
+    "first_smaller_input.json": "4bf5779d5d031148a428ee36b312e3d12506c4a04cb94a3d9f2de3a2408ac4d2"
+  }
+}

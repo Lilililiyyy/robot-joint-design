@@ -1,6 +1,7 @@
 """新写行星销简支梁静强度、弯剪挠度与行星轴承基本评级初筛。
 
-使用已求得的销横向反力，不修改NGW路径刚度或重新分载。内部量为SI。
+销校核使用最终横向反力；显式刚度来源解析可在分载前从销参数取得kpin。
+全部内部量采用SI，不将中心最大挠度的倒数用作系统广义刚度。
 """
 from __future__ import annotations
 
@@ -130,6 +131,64 @@ def _per_planet(value, count, name):
     if not isinstance(value, list) or len(value) != count or not all(isinstance(v, dict) for v in value):
         raise ValueError(name+'须为统一参数对象或逐行星参数列表')
     return deepcopy(value)
+
+
+def resolve_pin_stiffness(planet_count, sharing, *, pins=None):
+    """解析系统采用的逐销切向刚度及来源，不修改输入或求解任何载荷。
+
+    缺省specified沿用显式标量/逐销数组；pin_geometry采用已有销参数与
+    pin_response零载下的平均弯剪柔度。该线性柔度与载荷幅值无关；零载
+    只用来提取现有闭式公式，并非用零载替代最终强度/轴承校核。
+    """
+    if isinstance(planet_count, bool) or not isinstance(planet_count, int) or planet_count < 1:
+        raise ValueError('行星数必须为正整数')
+    if not isinstance(sharing, dict):
+        raise ValueError('load_sharing必须为参数对象')
+    source = sharing.get('pin_stiffness_source', 'specified')
+    if not isinstance(source, str) or source not in ('specified', 'pin_geometry'):
+        raise ValueError('pin_stiffness_source仅支持specified或pin_geometry')
+    specified = deepcopy(sharing.get('pin_stiffness_n_per_m'))
+    records = []
+    if source == 'specified' or 'pin_stiffness_n_per_m' in sharing:
+        raw = np.asarray(specified)
+        if raw.dtype.kind not in 'iuf':
+            raise ValueError('显式销刚度必须为正有限实数')
+        adopted = np.asarray(raw, dtype=float)
+        if adopted.ndim == 0:
+            adopted = np.full(planet_count, float(adopted))
+        if adopted.shape != (planet_count,) or not np.all(np.isfinite(adopted)) or np.any(adopted <= 0):
+            raise ValueError('显式销刚度须为正有限标量或与行星数一致的数组')
+    if source == 'specified':
+        records = [{'planet_index': j, 'adopted_pin_stiffness_n_per_m': float(value),
+                    'source_parameters': None, 'short_pin_review_required': None}
+                   for j, value in enumerate(adopted)]
+    else:
+        options = _per_planet(pins, planet_count, '几何刚度模式的销参数')
+        geometry_fields = ('diameter_m', 'support_span_m', 'loaded_width_m', 'young_modulus_pa',
+                           'poisson_ratio', 'shear_coefficient')
+        adopted = []
+        for j, parameters in enumerate(options):
+            try:
+                response = pin_response([0.0, 0.0], **parameters)
+            except TypeError as error:
+                raise ValueError(f'行星{j+1}销参数包含未知字段或缺少必要参数') from error
+            value = response['equivalent_pin_stiffness_n_per_m']
+            _scalar(value, f'行星{j+1}采用销刚度N/m', positive=True)
+            adopted.append(value)
+            records.append({'planet_index': j, 'adopted_pin_stiffness_n_per_m': value,
+                'source_parameters': {**{key: parameters[key] for key in geometry_fields},
+                    'support_model': parameters.get('support_model', 'simply_supported_centered_uniform')},
+                'load_weighted_bending_compliance_m_per_n': response['load_weighted_bending_compliance_m_per_n'],
+                'load_weighted_shear_compliance_m_per_n': response['load_weighted_shear_compliance_m_per_n'],
+                'span_to_diameter_ratio': response['diagnostics']['span_to_diameter_ratio'],
+                'short_pin_review_required': response['diagnostics']['short_pin_review_required']})
+    return {'source': source, 'adopted_pin_stiffness_n_per_m': list(map(float, adopted)),
+            'specified_input_n_per_m': specified, 'specified_input_used': source == 'specified',
+            'load_independent': True, 'planets': records,
+            'path_compliance_contribution_m_per_n': [4/float(k) for k in adopted],
+            'physical_validation': False,
+            'scope': ('显式销切向刚度；采用值直接进入既有路径柔度4/kpin' if source == 'specified' else
+                '简支圆实销中央均布横载的功共轭平均弯剪刚度；销力=2Ft，路径柔度=4/kpin；未计销孔/配合/架板局部柔度')}
 
 
 def assess_planet_support(cases, duty_segments, *, pins, bearing_ratings,

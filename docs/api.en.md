@@ -4,7 +4,7 @@
 
 ## Optional pin, planet-bearing and bus checks
 
-`planet_support={pins,bearing_ratings}` runs only when explicitly configured. See [pins and planet bearings](planet_support.en.md) for parameters and formulas. Pin utilization is the maximum `actual stress×required safety factor/allowable`; `planet_pin_static` requires a value ≤1 and enters overall screening. Calculated mean bending/shear pin stiffness only diagnoses consistency with system input: static strength does not establish stiffness agreement or update load sharing. Configured planet-bearing static safety defaults to ≥1. Basic L10 enters acceptance only with an explicit life requirement.
+`planet_support={pins,bearing_ratings}` runs only when explicitly configured. See [pins and planet bearings](planet_support.en.md) for parameters and formulas. Pin utilization is the maximum `actual stress×required safety factor/allowable`; `planet_pin_static` requires a value ≤1 and enters overall screening. Explicit stiffness remains the default. Selecting `load_sharing.pin_stiffness_source="pin_geometry"` calculates stiffness first, coordinates sharing/LTCA, then checks final reactions. Configured planet-bearing static safety defaults to ≥1. Basic L10 enters acceptance only with an explicit life requirement.
 
 `dc_bus` is passed to `dc_bus_screen` using `motor.segments[*].electrical_power_w`, retaining motor losses and rotor inertia rather than treating negative mechanical power as regenerated electrical power. `dc_bus_maximum_voltage` compares the calculated peak with the configured upper limit and enters screening. `dc_bus_minimum_voltage` stays `not_evaluated` because the ideal unlimited supply enforces the floor; it is not a real undervoltage check. See the [bus model](dc_bus.en.md).
 
@@ -31,6 +31,19 @@ result = analyze_joint(config)
 These pin and bus inputs are new design assumptions, not physical-product specifications. `JointResult` adds `planet_support=None` and `dc_bus=None` after its original nine positional fields, preserving old construction. Configured options return complete result objects. Export writes `planet_support.json` and `dc_bus.json`; missing options produce JSON null, preventing stale optional results. Summary adds pin static utilization, relative stiffness difference, planet-bearing basic static safety/L10 hours and peak bus voltage. Missing inputs yield null metrics and `not_evaluated` check details.
 
 Additional `design_limits` are `maximum_pin_stiffness_relative_difference` (upper bound, diagnostic unless explicitly limited), `minimum_planet_bearing_static_safety_factor` (lower bound, configured bearings default to 1), and `minimum_planet_bearing_basic_l10_hours` (explicit lower bound only). None establishes oscillatory bearing service life or physical stiffness calibration.
+
+## Pin stiffness source and adopted values
+
+`resolve_pin_stiffness(planet_count, sharing, *, pins=None)` resolves per-pin stiffness and provenance without solving loads or modifying inputs. `sharing.pin_stiffness_source` accepts:
+
+- `"specified"` (default): a positive finite scalar or per-planet `pin_stiffness_n_per_m` array is required; the existing numerical path is preserved.
+- `"pin_geometry"`: complete `planet_support={pins,bearing_ratings}` is required in `analyze_joint`. Shared/per-planet pin geometry, material and allowables are supported. Numeric stiffness may be omitted; if supplied, it is validated and retained in `specified_input_n_per_m` with `specified_input_used=false`.
+
+See the [complete input](../examples/dfki_pin_geometry.json). Dimensions are m, E is Pa, and adopted tangential stiffness is N/m. Linear mean bending/shear stiffness is determined before the existing iteration; force-change, path-residual and iteration-limit criteria remain unchanged.
+
+`JointResult` appends optional `pin_stiffness=None` after the existing optional fields, preserving positional construction. The main workflow returns the record and exports `pin_stiffness.json`: source, adopted values, original explicit input, each pin's parameters/compliance/warnings, and `coupling.cases` with final convergence, iteration count, path residual in m, relative force change and output-torque residual in N·m. Each `case.sharing` and the BOM retain adopted values; `result.inputs` retains the original request.
+
+In geometry mode, `planet_support.summary.system_stiffness_was_updated=true` denotes pre-solve adoption, not a new feedback iteration. Standalone `assess_planet_support` remains post-processing. A ratio of 1 is an integration check; short-pin applicability and physical validation remain separate. Direct low-level `coupled_planet_contacts` calls accept resolved numeric stiffness only; use `analyze_joint` for geometry selection.
 
 ## Entry points
 

@@ -2,7 +2,7 @@
 
 [中文](README.md) · [English](README.en.md)
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE) [![Version](https://img.shields.io/badge/version-0.3.3-blue)](https://github.com/Lilililiyyy/robot-joint-design/tree/v0.3.3)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/) [![License](https://img.shields.io/badge/License-AGPL--3.0--only-blue.svg)](LICENSE) [![Version](https://img.shields.io/badge/version-0.4.0-blue)](https://github.com/Lilililiyyy/robot-joint-design/tree/v0.4.0)
 
 自主开发的机器人关节模组设计项目，面向单级NGW行星传动关节，提供从任务载荷到齿轮接触、支承结构、机电匹配、精度和热性能的参数化计算。项目包含完整Python源码、双语图文案例与工程数据导出，可独立运行和接入设计流程。
 
@@ -24,7 +24,7 @@
 |需求与载荷|运动轨迹、负载惯量、重力及加速转矩、分段任务载荷谱|
 |行星传动|齿数装配、速比、空间间隙、逐行星载荷分配、路径误差与柔度协调|
 |齿轮接触|内外两副LTCA、传动误差、切线刚度、局部Hertz压力、正反工作面和完整齿通过程压力图|
-|强度与支承|显式因子齿面/齿根评级、六自由度支承、轴承反力、行星销弯剪与行星轴承基本评级|
+|强度与支承|显式因子齿面/齿根评级、六自由度支承、轴承反力、销几何/材料刚度参与分载、销弯剪与行星轴承基本评级|
 |机电与能量|驱动/回驱效率、转子惯量、电机转矩—转速包络、RMS电流、制动与再生母线初筛|
 |精度与热|承载角、侧隙和编码器误差预算、分段温升与周期热稳态|
 |寿命与选型|雨流循环、给定S-N曲线的累积损伤、约束筛选与有限候选Pareto比较|
@@ -89,6 +89,15 @@ export_joint(result, "output/pendulum")
 
 集成方案采用假定6 mm行星销，将弯剪刚度297.707 MN/m反馈至系统，并加入行星轴承及4700 μF母线：最大销载约118.889 N，最小行星轴承静安全约4.206，最高母线电压约43.194 V。以上结果取决于案例中明确给定的几何、容量、限值与电气条件。
 
+销刚度可继续直接输入，也可显式选择`pin_stiffness_source="pin_geometry"`，由共享或逐销几何与材料参数计算后参与系统求解。[尺寸比较](examples/results/pin_stiffness_feedback/report.md)重新计算6 mm、全部4 mm及仅第一销4 mm方案：全部减径使最小输出刚度降至17643.769 N·m/rad，未满足本例20000下限；单销减径使载荷重新分配。各方案保存实际采用刚度、最终反力、齿面/销/轴承结果及收敛诊断。
+
+```bash
+python -m robot_joint examples/dfki_pin_geometry.json --output output/pin_geometry
+python -m examples.compare_pin_stiffness --output output/pin_comparison
+```
+
+销模型仍是明确边界下的简支圆销弯剪模型；短粗销的销孔、配合和架板三维响应需要单独验证。参数、公式与接入方法见[行星支承](docs/planet_support.md)。
+
 [完整图文案例](docs/examples.md)介绍各模块的输入、结果及设计取舍；[设计准则](docs/design_review.md)汇总判定要求和工程边界。
 
 ## 结果对标
@@ -114,15 +123,14 @@ export_joint(result, "output/pendulum")
 
 ## 版本更新记录
 
-|版本|主要更新|
-|---|---|
-|**0.3.3**|统一接触压力色阶与图表样式，补充版本徽章、双语更新记录和后续计划|
-|0.3.2|完善独立项目说明，精简公开展示，集中呈现设计功能与正式结果|
-|0.3.1|完善整齿通过程与瞬时接触图，增加单副接触压力结果对标|
-|0.3.0|加入行星销、行星轴承及再生母线校核，并接入集成设计流程|
-|0.2.0|增加设计约束、校核覆盖、标准强度对标和论文式双语图表|
-|0.1.2|加入公开摆台需求驱动的完整中英设计案例|
-|0.1.0|建立NGW传动、支承、机电、精度、疲劳、热及参数级工程输出|
+- **0.4.0**：增加销几何/材料刚度的显式来源选项，接入分载与最终齿面、销、轴承校核；新增可复算尺寸比较及逐销来源记录，兼容原显式刚度路径。
+- **0.3.3**：统一接触压力色阶与图表样式，补充版本徽章、双语更新记录和后续计划。
+- **0.3.2**：完善独立项目说明，精简公开展示，集中呈现设计功能与正式结果。
+- **0.3.1**：完善整齿通过程与瞬时接触图，增加单副接触压力结果对标。
+- **0.3.0**：加入行星销、行星轴承及再生母线校核，并接入集成设计流程。
+- **0.2.0**：增加设计约束、校核覆盖、标准强度对标和论文式双语图表。
+- **0.1.2**：加入公开摆台需求驱动的完整中英设计案例。
+- **0.1.0**：建立NGW传动、支承、机电、精度、疲劳、热及参数级工程输出。
 
 ## 后续计划
 

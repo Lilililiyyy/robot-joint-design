@@ -2,9 +2,33 @@
 
 [中文](planet_support.md) · [English](planet_support.en.md)
 
-该模块继续落实设计审查中的销强度与行星轴承检查。它读取当前系统已经收敛的逐行星销反力，计算一个明确支承模型下的静应力、弯剪挠度及行星轴承基本评级。**该后处理不回写NGW中的销刚度，也不自动重新分载。**
+该模块根据明确的销支承模型计算静应力、弯剪挠度及行星轴承基本评级。独立后处理`assess_planet_support`只读取已收敛反力；主流程`analyze_joint`另外支持显式选择由销几何与材料确定系统刚度，再重算NGW分载及两副LTCA。
 
 也可在主配置中显式添加`planet_support={pins,bearing_ratings}`，由`analyze_joint`在分载完成后调用同一接口；销静强度失败及行星轴承静安全失败进入总体初筛。刚度一致性和基本L10只有明确配置相应限值时参与判定。见[可选主流程接口](api.md#可选销行星轴承与母线校核)。
+
+## 选择系统刚度来源
+
+- `load_sharing.pin_stiffness_source`缺省或设为`"specified"`：沿用已有`pin_stiffness_n_per_m`标量或逐行星数组，添加销校核不会自动改变它。
+- 显式设为`"pin_geometry"`：从`planet_support.pins`共享对象或逐行星列表计算平均弯剪刚度。`planet_support`仍需包含销许用值及`bearing_ratings`，用于最终反力下的校核。
+
+```python
+config["load_sharing"]["pin_stiffness_source"] = "pin_geometry"
+config["load_sharing"].pop("pin_stiffness_n_per_m", None)
+result = analyze_joint(config)
+print(result.pin_stiffness["adopted_pin_stiffness_n_per_m"])
+```
+
+线弹性销柔度与载荷幅值无关，因此在分载前计算一次`kpin=1/(Cb,avg+Cs,avg)`，然后执行既有齿面/系统协调，无需新增销刚度外层迭代。销反力为`2Ft`，功共轭路径柔度保持`4/kpin`；不要再把同一销挠度加入路径误差或额外凝聚柔度。
+
+`input.json`保留原请求；`pin_stiffness.json`记录逐行星采用值、几何材料来源、弯剪柔度、短粗销提示和逐工况最终收敛诊断。几何模式中若仍提供显式刚度，该值须合法但仅留存、不参与求解；BOM及后处理使用实际采用值。几何模式下刚度一致性比值为1只证明接入一致，不能证明模型已物理标定。
+
+可复算输入见[dfki_pin_geometry.json](../examples/dfki_pin_geometry.json)。[尺寸与分载比较](../examples/results/pin_stiffness_feedback/report.md)重新计算等值手工回填、几何来源、全部变径和单销变径四个方案；每个方案均用最终反力继续计算齿面、销及轴承结果：
+
+```bash
+python -m examples.compare_pin_stiffness --output output/pin_stiffness_feedback
+```
+
+`--input`替换完整设计，`--smaller-diameter-m`指定比较销径，`--raw-output`可另存四个方案的全部原响应。默认结果包含全部派生输入、逐行星CSV、NPZ与SHA-256清单。
 
 ## 载荷与参考坐标
 
@@ -78,7 +102,7 @@ python -m examples.check_planet_support --input examples/dfki_pendulum_case.json
 |与系统给定300 MN/m之比|0.2374|0.9924|
 |给定许用值的静校核|通过|通过|
 
-6 mm方案的数值接近原系统假定刚度，仍不能证明实际支承刚度已标定；两方案的L/d仅为3和2，需要三维接触与支承检查。若采用4 mm销，应将适用结构模型得到的刚度显式输入系统并重新求解分载，不能仅保留原300 MN/m。
+以上表格是同一载荷下的历史后处理比较，没有重分载。6 mm方案的数值接近原系统假定刚度，仍不能证明实际支承刚度已标定；两方案的L/d仅为3和2，需要三维接触与支承检查。改变销径后的系统结果应使用上述`pin_geometry`选项或等值显式回填重新求解，见[重分载比较](../examples/results/pin_stiffness_feedback/report.md)。
 
 两方案故意保持演示轴承容量相同以隔离销径影响，因此基本轴承输出相同：最小静安全约4.206，基本L10约6.32×10⁵ h。这个大数值只属于所给公式/容量/载荷任务，不能解释为实际摆动轴承寿命；现实改销径须重选轴承并重算。
 

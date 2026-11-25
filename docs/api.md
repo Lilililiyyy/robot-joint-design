@@ -4,7 +4,7 @@
 
 ## 可选销、行星轴承与母线校核
 
-`planet_support={pins,bearing_ratings}`只在显式配置时计算；参数及公式见[销与行星轴承](planet_support.md)。销的静强度利用率取各项`实际应力×要求安全系数/许用值`最大值，`planet_pin_static`要求不大于1并参与总体初筛。计算得到的销平均弯剪刚度只对照系统输入；静强度通过不表示刚度一致，不自动回写分载。行星轴承缺省静安全要求1；基本L10只在指定寿命下限时参与判定。
+`planet_support={pins,bearing_ratings}`只在显式配置时计算；参数及公式见[销与行星轴承](planet_support.md)。销的静强度利用率取各项`实际应力×要求安全系数/许用值`最大值，`planet_pin_static`要求不大于1并参与总体初筛。默认销刚度仍由显式输入给定；选择`load_sharing.pin_stiffness_source="pin_geometry"`后，先由销几何和材料计算刚度，再协调分载/LTCA，最后使用最终反力校核。行星轴承缺省静安全要求1；基本L10只在指定寿命下限时参与判定。
 
 `dc_bus`直接传入`dc_bus_screen`，使用`motor.segments[*].electrical_power_w`，保留电机损耗和转子惯性影响，不以负机械功率替代回馈电功率。`dc_bus_maximum_voltage`用当前模型最高电压与输入上限比较并参与总体初筛；`dc_bus_minimum_voltage`因理想无限供能电源假设而保持`not_evaluated`，不冒称真实欠压校核。母线详细模型见[母线说明](dc_bus.md)。
 
@@ -28,7 +28,20 @@ config.setdefault("design_limits", {})["maximum_pin_stiffness_relative_differenc
 result = analyze_joint(config)
 ```
 
-这里的销参数和母线参数均是新增设计假设，不能解释为原实物规格。`JointResult`在原9个位置字段之后新增`planet_support=None`和`dc_bus=None`，旧构造接口保留；显式配置时返回完整对象。导出另存`planet_support.json`与`dc_bus.json`，缺配写JSON null防止旧文件残留。summary增加销静利用率、销刚度相对差、行星轴承基本静安全/小时寿命及最高母线电压；缺配的指标为null、相关check_details为`not_evaluated`。
+这里的销参数和母线参数均是新增设计假设，不能解释为原实物规格。`JointResult`在原9个位置字段后保留`planet_support=None`和`dc_bus=None`，末尾增加`pin_stiffness=None`，旧构造接口保留。主流程始终返回实际刚度记录。导出另存`planet_support.json`、`dc_bus.json`及`pin_stiffness.json`；缺配的可选结果写JSON null防止旧文件残留。summary增加销静利用率、销刚度相对差、行星轴承基本静安全/小时寿命及最高母线电压；缺配指标为null、相关check_details为`not_evaluated`。
+
+## 销刚度来源与采用值
+
+`resolve_pin_stiffness(planet_count, sharing, *, pins=None)`解析逐销刚度与来源，不求解载荷，不修改输入。`sharing.pin_stiffness_source`支持：
+
+- `"specified"`（缺省）：`pin_stiffness_n_per_m`必须为正有限标量或长度等于行星数的数组，保持原直接输入路径。
+- `"pin_geometry"`：必须提供完整`planet_support={pins,bearing_ratings}`；`pins`可为共享对象或逐行星参数列表。`pin_stiffness_n_per_m`可省略；若提供，仍校验合法性并保存于`specified_input_n_per_m`，但`specified_input_used=false`。
+
+销几何、E/ν及剪切系数见[完整输入](../examples/dfki_pin_geometry.json)。尺寸采用m，E采用Pa，采用刚度为切向N/m。线性平均弯剪刚度与载荷幅值无关，在分载前确定；后续两副齿面与系统仍按原力变化、路径残差及最大迭代数要求协调。
+
+`result.pin_stiffness`与导出同名JSON含`source`、`adopted_pin_stiffness_n_per_m`、原显式输入、`planets`逐销来源/柔度/提示及`coupling.cases`逐工况收敛状态、次数、路径残差m、相对力变化和输出扭矩残差N·m。每个`case.sharing`也记录采用值与来源，BOM使用采用值；`result.inputs`保留原请求。
+
+几何模式下`planet_support.summary.system_stiffness_was_updated=true`表示分载前采用几何刚度，不表示后处理增加了反馈迭代。独立`assess_planet_support`仍只做后处理。刚度一致性比值1是接入检查，短粗销适用性、三维支承和实物标定分别评价。直接调用低层`coupled_planet_contacts`时须先解析来源并仅传入数值刚度，几何选项应通过`analyze_joint`使用。
 
 ## 调用流程
 

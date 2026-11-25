@@ -60,6 +60,8 @@ def coupled_planet_contacts(stage, torque, sharing, mesh, *, support_displacemen
     g0=δn/cosα−Ft/(kn*cos²α)构造下一次系统线性化；不将切线
     刚度错误地当作非线性割线。模型不求同步啮合相位的整机动态响应。
     """
+    if sharing.get('pin_stiffness_source', 'specified') != 'specified':
+        raise ValueError('低层齿面协调只接受已解析的销刚度；请使用analyze_joint，或先resolve_pin_stiffness并传入采用值')
     pairs = gear_pairs(stage)
     n = stage.planet_count
     c = math.cos(stage.pressure_angle_rad)

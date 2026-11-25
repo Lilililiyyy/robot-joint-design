@@ -2,9 +2,33 @@
 
 [中文](planet_support.md) · [English](planet_support.en.md)
 
-This module implements the pin-strength and planet-bearing items from the design review. It reads already-converged planet-pin reactions and evaluates static stress, bending/shear deflection and basic planet-bearing ratings under an explicit support model. **This post-processing does not overwrite the NGW pin stiffness or automatically recalculate load sharing.**
+This module evaluates pin stress, bending/shear deflection and basic planet-bearing ratings under an explicit support model. Standalone `assess_planet_support` reads converged reactions. The main `analyze_joint` workflow also offers an explicit geometry-derived stiffness option before recalculating NGW sharing and both meshes' LTCA.
 
 Alternatively, explicitly add `planet_support={pins,bearing_ratings}` to the main configuration. After load sharing, `analyze_joint` calls the same interface; pin static failure and planet-bearing static failure enter overall screening. Stiffness consistency and basic L10 enter acceptance only with their explicit limits. See the [optional main-workflow API](api.en.md#optional-pin-planet-bearing-and-bus-checks).
+
+## Selecting the system stiffness source
+
+- Omit `load_sharing.pin_stiffness_source` or select `"specified"` to retain the existing positive scalar/per-planet `pin_stiffness_n_per_m` input. Adding pin checks alone does not change it.
+- Select `"pin_geometry"` to calculate stiffness from shared or per-planet `planet_support.pins`. Complete pin allowables and `bearing_ratings` remain required for final checks.
+
+```python
+config["load_sharing"]["pin_stiffness_source"] = "pin_geometry"
+config["load_sharing"].pop("pin_stiffness_n_per_m", None)
+result = analyze_joint(config)
+print(result.pin_stiffness["adopted_pin_stiffness_n_per_m"])
+```
+
+Linear compliance is load independent, so `kpin=1/(Cb,avg+Cs,avg)` is calculated once before the existing system/mesh iteration. Pin force remains `2Ft` and its work-conjugate path compliance remains `4/kpin`. Do not add the same displacement to gaps or condensed compliance again.
+
+`input.json` retains the request. `pin_stiffness.json` records adopted values, geometry/material provenance, bending/shear compliance, short-pin warnings and final convergence diagnostics. An explicit numeric stiffness supplied in geometry mode is validated and retained but unused. BOM and downstream checks use adopted values. A stiffness ratio of 1 in geometry mode establishes integration consistency, not physical calibration.
+
+See the [editable input](../examples/dfki_pin_geometry.json) and [recalculated comparison](../examples/results/pin_stiffness_feedback/report.en.md). Four complete designs compare manual equivalent input, the geometry source, all pins resized and one pin resized:
+
+```bash
+python -m examples.compare_pin_stiffness --output output/pin_stiffness_feedback
+```
+
+`--input` replaces the design, `--smaller-diameter-m` selects the comparison diameter, and `--raw-output` optionally saves all raw responses. Default results include derived inputs, per-planet CSV, NPZ and a SHA-256 manifest. The prior fixed-load table below remains historical post-processing; the new comparison recalculates loads and checks.
 
 ## Loads and reference frames
 
@@ -78,7 +102,7 @@ The comparison uses 4 mm and 6 mm pins, each with 12 mm support span, 5 mm loade
 |Ratio to system input of 300 MN/m|0.2374|0.9924|
 |Static criteria using supplied allowables|Pass|Pass|
 
-The 6 mm value is close to the originally assumed system stiffness, but this does not calibrate real support compliance. Both candidates have short spans, L/d=3 and 2, requiring 3D contact/support review. Adopting the 4 mm pin requires explicitly feeding an appropriate structural stiffness into the system and recalculating sharing; retaining 300 MN/m without reconciliation is insufficient.
+The fixed-load table above is historical post-processing without a new sharing solve. The 6 mm value is close to the originally assumed stiffness, but does not calibrate physical support compliance. Both candidates have L/d=3 and 2, requiring 3D contact/support review. Use the explicit `pin_geometry` option or an equivalent numeric input to recalculate after resizing; see the [new sharing comparison](../examples/results/pin_stiffness_feedback/report.en.md).
 
 Illustrative bearing capacities are deliberately held equal to isolate pin-diameter sensitivity, so basic bearing outputs coincide: minimum static safety is about 4.206 and basic L10 about 6.32×10⁵ h. This large value belongs only to the specified formula/capacity/load duty, not physical oscillatory-bearing life. A real diameter change requires bearing reselection and recalculation.
 

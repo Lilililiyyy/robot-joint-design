@@ -84,5 +84,11 @@ def candidate_configs(base):
         config['case_id'] = 'dfki_pendulum_'+name
     for key in ('positive_path_gaps_m','negative_path_gaps_m'):
         configs[1]['load_sharing'][key] = [3*v for v in base['load_sharing'][key]]
-    configs[2]['load_sharing']['pin_stiffness_n_per_m'] = [v*.3 for v in base['load_sharing']['pin_stiffness_n_per_m']]
+    from robot_joint.planet_support import resolve_pin_stiffness
+    adopted = resolve_pin_stiffness(base['stage']['planet_count'], base['load_sharing'],
+        pins=base.get('planet_support', {}).get('pins'))['adopted_pin_stiffness_n_per_m']
+    configs[2]['load_sharing']['pin_stiffness_n_per_m'] = [v*.3 for v in adopted]
+    if base['load_sharing'].get('pin_stiffness_source') == 'pin_geometry':
+        # 本候选明确比较外部给定柔度，不让几何模式忽略刚度缩放。
+        configs[2]['load_sharing']['pin_stiffness_source'] = 'specified'
     return configs

@@ -129,7 +129,7 @@ export_joint(result, "output/pendulum")
 
 适用固定内齿圈、太阳输入、行星架输出的零变位直齿单级NGW，准静态、小变形、周期平均协调。新写系统层已有方程、解析和数值验证，尚未完成厂商总成对标或样机试验；不含RV/谐波、完整FE、真实迟滞、控制、电磁和润滑预测。公开单副内核的原版对标基础不能推广成整关节认证。
 
-详细公式与接口见[模型说明](../docs/model.md)、[接口说明](../docs/api.md)。许可证为[AGPL-3.0-only](../LICENSE)，复用源码见[来源与许可证](../THIRD_PARTY_NOTICES.md)。本页完整介绍真实需求参照案例与9组双语图表。单副专业软件对标与独立公开参考核验见[验证说明](validation.md)；后续实测标定计划见[项目主页](../README.md#更新记录与后续计划)。
+详细公式与接口见[模型说明](../docs/model.md)、[接口说明](../docs/api.md)。许可证为[AGPL-3.0-only](../LICENSE)，复用源码见[来源与许可证](../THIRD_PARTY_NOTICES.md)。本页完整介绍真实需求参照案例与9组双语图表。单副专业软件对标与独立公开参考核验见[验证说明](validation.md)；后续实测标定计划见[项目主页](../README.md#后续计划)。
 
 
 ## 完整接触结果与集成设计
@@ -143,3 +143,12 @@ export_joint(result, "output/pendulum")
 ```bash
 python -m robot_joint examples/dfki_with_screens.json --output output/integrated --plots
 ```
+
+原集成输入保留手工给定的销刚度。新增[几何来源输入](../examples/dfki_pin_geometry.json)使用`pin_stiffness_source="pin_geometry"`，由实际输入的销参数先计算逐销刚度，再求解相同34个任务状态；等值手工回填与该入口的714份原响应数组一致。[尺寸比较](../examples/results/pin_stiffness_feedback/report.md)还重算全部销或仅第一销减径后的分载、齿面压力、销弯曲及轴承静安全；全部4 mm方案未满足本例输出刚度下限。
+
+```bash
+python -m robot_joint examples/dfki_pin_geometry.json --output output/pin_geometry
+python -m examples.compare_pin_stiffness --output output/pin_comparison
+```
+
+这属于同一降阶模型的可复算设计比较；短粗销的三维支承柔度及关节总成实物验证仍需单独完成。

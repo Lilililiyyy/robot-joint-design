@@ -52,6 +52,7 @@ def _parameters(result: "JointResult") -> dict:
         "gear_radii_m": _gear_radii(stage),
         "face_width_m": stage["face_width_m"],
         "planet_support": deepcopy(inputs.get("planet_support")),
+        "pin_stiffness": json_value(getattr(result, "pin_stiffness", None)),
         "dc_bus": deepcopy(inputs.get("dc_bus")),
         "bearings": {
             "spacing_m": spacing,
@@ -106,7 +107,12 @@ def _bom_rows(result: "JointResult") -> list[dict]:
            "固定内齿圈，未提供轮缘和壳体实体尺寸")
     append("carrier", "行星架", 1, {"planet_count": count},
            "仅已知行星数量与计算布局，未提供架板厚度、销孔尺寸及连接结构")
-    pin_spec = {"tangential_stiffness_n_per_m": deepcopy(inputs["load_sharing"]["pin_stiffness_n_per_m"])}
+    adopted = getattr(result, "pin_stiffness", None)
+    if adopted is not None and adopted['source'] == 'pin_geometry':
+        pin_spec = {"tangential_stiffness_n_per_m": deepcopy(adopted['adopted_pin_stiffness_n_per_m']),
+                    "stiffness_source": 'pin_geometry'}
+    else:
+        pin_spec = {"tangential_stiffness_n_per_m": deepcopy(inputs["load_sharing"]["pin_stiffness_n_per_m"])}
     if "planet_support" in inputs:
         pin_spec["static_design"] = deepcopy(inputs["planet_support"]["pins"])
     append("planet_pin", "行星销", count, pin_spec,
